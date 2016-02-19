@@ -1,0 +1,5 @@
+mongo/mongo.conf
+data/journal
+data/mongod.lock
+data/local*
+session
