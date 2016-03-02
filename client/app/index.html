@@ -11,52 +11,102 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
     <!-- endbuild -->
+
   </head>
-  <body ng-app="clientApp">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+  <body ng-app="myApp">
+    <header class="header">
+    <a href="http://www.fitmonster.cz">
+      <img href="http://www.fitmonster.cz" align="middle" src="img/monster.png" width="160px"></img>
+    </a>
+    </header>
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
+  <div id="wrap">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="table-h1">
+          <i class="fa fa-male fa-fw"></i>
+          <br>Muži
+        </h1>
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+      <div ng-controller="athletesCtrl"> 
 
-            <a class="navbar-brand" href="#/">client</a>
+         <div class="center-block col-md-4" style="float: none;">
+          <i class="fa fa-search"></i> 
+          <input type = "text" ng-model = "searchName">
+      </div>
+
+      <table class="table">
+      <thead>
+        <tr id="tr-head">
+          <td>Place</td>
+          <td>Name</td>
+          <td>Gym</td>
+          <td>Score</td>
+         </tr>
+        </thead> 
+        <tbody ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName">
+        <tr class="tr" data-toggle="collapse" data-placement="bottom" data-target="#bio">
+          <td class="td1">{{ athlete.place }}</td>
+          <td class="td2">{{ athlete.name }}</td>
+          <td class="td3">{{ athlete.gym }}</td>
+          <td class="td4">{{ athlete.score }}</td>
+          <div id="bio" class="collapse">
+          <div class="row">
+            <div class="col-sm-12">
+            Athlete BIO:  
+            </div>
+            <div class="col-sm-6">
+              {{athlete.name}}
+            </div>
           </div>
+      </div>
+        </tr>
+        </tbody>
+      </table>
+      </div>
+      </div>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+      <div class="col-sm-6">
+        <h1 class="table-h1b">
+          <i class="fa fa-female fa-fw"></i>
+          <br>Ženy
+        </h1>
 
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-          </div>
-        </div>
+        <div ng-controller="athletesCtrl"> 
+
+            <div class="center-block col-md-4" style="float: none;">
+              <i class="fa fa-search"></i> 
+              <input type = "text" ng-model = "searchName">
+            </div>
+
+      <table class="table">
+      <thead>
+        <tr id="tr-head">
+          <td>Place</td>
+          <td>Name</td>
+          <td>Gym</td>
+          <td>Score</td>
+         </tr>
+        </thead> 
+        <tbody ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName">
+        <tr class="tr">
+          <td class="td1">{{ athlete.place }}</td>
+          <td class="td2">{{ athlete.name }}</td>
+          <td class="td3">{{ athlete.gym }}</td>
+          <td class="td4">{{ athlete.score }}</td>
+        </tr>
+        </tbody>
+      </table>
       </div>
     </div>
+   </div>
+  </div>
 
-    <div class="container">
-    <div ng-view=""></div>
-    </div>
-
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
+<footer>2016 Fit Monster Team, z.s.</footer>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -81,13 +131,16 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/less/dist/less.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <!-- modules -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
+        <!-- endbuild -->
+
+        <!-- Controllers -->
+        <script src="scripts/controllers/athletesCtrl.js"></script>
         <!-- endbuild -->
 </body>
 </html>

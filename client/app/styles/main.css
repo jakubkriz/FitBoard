@@ -1,83 +1,82 @@
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
+@bcgr-clr: #929292;
+@tr-top: #e6e6e6;
+@tr-btm: #d9d9d9;
+
+
+/* body */
 
 body {
   padding: 0;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
+/* header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 60px;
 }
 
-/* Custom page footer */
+/* footer */
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
+/* table */
+
+.table-h1 {
+
+  text-align: center;
+  font-size: 40px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+.tr {
+  background-color: @bcgr-clr;
+  background: -webkit-linear-gradient(@tr-top, @tr-btm); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(@tr-top, @tr-btm); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(@tr-top, @tr-btm); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(@tr-top, @tr-btm); /* Standard syntax (must be last) */
+  margin: 20px;
+  border-radius: 10px;
+  vertical-align: middle;
+}
+.td1 {
+  background-color: #3399ff;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px 0px 0px 10px;
+  vertical-align: middle;
+}
+.td2 {
+  font-size: 20px;
+  padding: 10px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.td3 {
+  text-align: center;
+  border-left-style: solid;
+  border-left-width: thin;
+  border-left-color: #666666;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: auto;
+  vertical-align: middle;
+}
+.td4 {
+  text-align: center;
+  border-left-style: solid;
+  border-left-width: thin;
+  border-left-color: #666666;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: auto;
+  vertical-align: middle;
 }

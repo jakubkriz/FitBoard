@@ -1,0 +1,187 @@
+/* less */
+
+/* main color */
+
+@red: #e54343;
+@blue: #152e48;
+
+/* borders*/
+@light-grey: #e5e5e5;
+@grey: #666666;
+
+.border-radius (@radius: 15px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius:    @radius;
+  border-radius:         @radius;
+}
+.border-left-radius (@radius-left: 15px 0px 0px 15px) {
+  -webkit-border-radius: @radius-left;
+  -moz-border-radius:    @radius-left;
+  border-radius:         @radius-left;
+}
+.border-right-radius (@radius-right: 0px 15px 15px 0px) {
+  -webkit-border-radius: @radius-right;
+  -moz-border-radius:    @radius-right;
+  border-radius:         @radius-right;
+}
+.border-left {
+    height: 80%;
+    border-left-style: solid;
+    border-left-width: thin;
+    border-left-color: @grey;
+}
+
+/* rows */
+.tr-bcg(@top: #e6e6e6, @btm: #d9d9d9) {
+  background-color: @top;
+  background: -webkit-linear-gradient(@top, @btm); /* For Safari 5.1 to 6.0 */
+  background:  -o-linear-gradient(@top, @btm); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(@top, @btm); /* For Firefox 3.6 to 15 */
+  background:  linear-gradient(@top, @btm); /* Standard syntax (must be last) */
+}
+.tr-bcg-hover(@top-hvr: #e6e6e6, @btm-hvr: #d9d9d9) {
+  background-color: @top-hvr;
+  background: -webkit-linear-gradient(@btm-hvr, @top-hvr); /* For Safari 5.1 to 6.0 */
+  background:  -o-linear-gradient(@btm-hvr, @top-hvr); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(@btm-hvr, @top-hvr); /* For Firefox 3.6 to 15 */
+  background:  linear-gradient(@btm-hvr, @top-hvr); /* Standard syntax (must be last) */
+}
+
+
+/* icons */
+
+i.fa.fa-female {
+  color: @red;
+}
+
+i.fa.fa-male {
+  color: @blue;
+}
+
+i.fa.fa-search {
+  color: @light-grey;
+}
+
+/* body */
+
+body {
+  height: 100%;
+  padding: 20px;
+}
+
+/* header */
+.header {
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 60px;
+}
+
+/* Wrapper for page content */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 10px auto;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* footer */
+footer {
+  height: 60px;
+  position: static;
+  padding-top: 10px;
+  color: #777;
+  border-top: 1px solid @light-grey;
+  text-align: center;
+}
+
+/* input */
+input{
+  margin-left: 5px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: @light-grey;
+}
+
+/* table */
+
+.table-h1 {
+  color: @blue;
+  text-align: center;
+  font-size: 40px;
+}
+
+.table-h1b {
+  color: @red;
+  text-align: center;
+  font-size: 40px;
+}
+
+.table {
+  margin-bottom: 3px;
+  margin-left: 0px;
+  margin-right: 20px;
+}
+
+table td {
+    border-top: none !important;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0px 3px; 
+}
+
+#tr-head {
+  font-size: 12px;
+  text-align: center;
+}
+
+.tr {
+  .tr-bcg;
+  .border-radius;
+  padding: 0px;
+  vertical-align: middle;
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+    &:hover {
+      .tr-bcg-hover;
+    }
+
+    .td1 {
+      background-color: #3399ff;
+      text-align: center;
+      font-size: 26px;
+      padding: 5px 0px 5px 0px;
+      .border-left-radius;
+      width: 10%;
+      vertical-align: middle;
+    }
+
+    .td2 {
+      font-size: 20px;
+      width: 40%;
+      padding-left: 20px;
+      vertical-align: middle;
+    }
+
+    .td3 {
+      text-align: center;
+      .border-left;
+      font-size: 15px;
+      width: 30%;
+      vertical-align: middle;
+}
+
+    .td4 {
+      text-align: center;
+      .border-left;
+      .border-right-radius;
+      font-size: 20px;
+      width: 20%;
+      vertical-align: middle;
+}}
