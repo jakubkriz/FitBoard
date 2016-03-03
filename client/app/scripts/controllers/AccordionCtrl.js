@@ -1,2 +1,3 @@
-app.controller('AccordionCtrl', function ($scope) {
-  $scope.oneAtATime = true;
+angular.controller('CollapseCtrl', function ($scope) {
+  $scope.isCollapsed = false;
+});

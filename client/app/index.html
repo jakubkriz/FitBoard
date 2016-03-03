@@ -39,7 +39,7 @@
           <input type = "text" ng-model = "searchName">
       </div>
 
-      <table class="table">
+      <table class="table" ng-controller="CollapseCtrl">
       <thead>
         <tr id="tr-head">
           <td>Place</td>
@@ -49,22 +49,36 @@
          </tr>
         </thead> 
         <tbody ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName">
-        <tr class="tr" data-toggle="collapse" data-placement="bottom" data-target="#bio">
+        <tr class="tr" ng-click="isCollapsed = !isCollapsed">
           <td class="td1">{{ athlete.place }}</td>
           <td class="td2">{{ athlete.name }}</td>
           <td class="td3">{{ athlete.gym }}</td>
           <td class="td4">{{ athlete.score }}</td>
-          <div id="bio" class="collapse">
-          <div class="row">
-            <div class="col-sm-12">
-            Athlete BIO:  
-            </div>
-            <div class="col-sm-6">
-              {{athlete.name}}
-            </div>
-          </div>
-      </div>
         </tr>
+        <tr class="trBio" uib-collapse="isCollapsed">
+          <td class="trBio" colspan="4">
+          <div class="row">
+          <div class="tdBio1 col-xs-4">Gym: <b>{{ athlete.gym }}</b><br>
+              Věk: <b>{{ athlete.age }}</b> <br>
+              Výška: <b>{{ athlete.height }}</b> <br>
+              Váha: <b>{{ athlete.weight }}</b> <br>
+              Let v Crossfitu: <b>{{ athlete.yInC }}</b>
+          </div>
+          <div class="tdBio2 col-xs-4">Clean & Jerk: <b>{{ athlete.cj }}</b> <br>
+              Snatch: <b>{{ athlete.snatch }}</b> <br>
+              Deadlift: <b>{{ athlete.deadlift }}</b> <br>
+              Front Squat: <b>{{ athlete.frontSquat }}</b> <br>
+              Back Squat: <b>{{ athlete.backSquat }}</b> <br>
+          </div>
+          <div class="tdBio3 col-xs-4">Fran: <b>{{ athlete.fran }}</b> <br>
+              Helen: <b>{{ athlete.helen }}</b> <br>
+              Grace: <b>{{ athlete.grace }}</b> <br>
+              Sprint 400m: <b>{{ athlete.sprint }}</b> <br>
+              1K row: <b>{{ athlete.row }}</b>
+          </div>
+          </div>
+          </td>
+          </tr>
         </tbody>
       </table>
       </div>
@@ -83,7 +97,7 @@
               <input type = "text" ng-model = "searchName">
             </div>
 
-      <table class="table">
+      <table class="table" ng-controller="CollapseCtrl">
       <thead>
         <tr id="tr-head">
           <td>Place</td>
@@ -93,12 +107,34 @@
          </tr>
         </thead> 
         <tbody ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName">
-        <tr class="tr">
-          <td class="td1">{{ athlete.place }}</td>
+        <tr class="tr" ng-click="isCollapsed = !isCollapsed">
+          <td class="td1" >{{ athlete.place }}</td>
+          <td></td>
           <td class="td2">{{ athlete.name }}</td>
           <td class="td3">{{ athlete.gym }}</td>
+          <td></td>
           <td class="td4">{{ athlete.score }}</td>
         </tr>
+        <tr class="trBio" uib-collapse="isCollapsed">
+          <td class="tdBio1" colspan="2">Gym: <b>{{ athlete.gym }}</b><br>
+              Věk: <b>{{ athlete.age }}</b> <br>
+              Výška: <b>{{ athlete.height }}</b> <br>
+              Váha: <b>{{ athlete.weight }}</b> <br>
+              Let v Crossfitu: <b>{{ athlete.yInC }}</b>
+          </td>
+          <td class="tdBio2" colspan="2">Clean & Jerk: <b>{{ athlete.cj }}</b> <br>
+              Snatch: <b>{{ athlete.snatch }}</b> <br>
+              Deadlift: <b>{{ athlete.deadlift }}</b> <br>
+              Front Squat: <b>{{ athlete.frontSquat }}</b> <br>
+              Back Squat: <b>{{ athlete.backSquat }}</b> <br>
+          </td>
+          <td class="tdBio3" colspan="2">Fran: <b>{{ athlete.fran }}</b> <br>
+              Helen: <b>{{ athlete.helen }}</b> <br>
+              Grace: <b>{{ athlete.grace }}</b> <br>
+              Sprint 400m: <b>{{ athlete.sprint }}</b> <br>
+              1K row: <b>{{ athlete.row }}</b>
+          </td>
+          </tr>
         </tbody>
       </table>
       </div>
@@ -132,6 +168,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/less/dist/less.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -141,6 +178,7 @@
 
         <!-- Controllers -->
         <script src="scripts/controllers/athletesCtrl.js"></script>
+        <script src="scripts/controllers/CollapseCtrl.js"></script>
         <!-- endbuild -->
 </body>
 </html>

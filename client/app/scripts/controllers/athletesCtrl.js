@@ -9,6 +9,20 @@ app.controller('athletesCtrl', ['$scope',function($scope) {
 				gym: 'inependent',
 				score: 125,
 				place: 1,
+				age: "24",
+				height: "175 cm",
+				weight: "80 kg",
+				yInC: "5y",
+				cj: "90 kg",
+				snatch: "75 kg",
+				deadlift: "150 kg",
+				frontSquat: "150 kg",
+				backSquat: "160 kg",
+				fran: "3:14",
+				helen: "132",
+				grace: "2:15",
+				sprint: "1:30",
+				row: "4:00"
 
 			},
 			{
