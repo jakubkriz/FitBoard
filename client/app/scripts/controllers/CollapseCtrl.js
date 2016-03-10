@@ -1,3 +1,5 @@
 app.controller('CollapseCtrl', function ($scope) {
-  $scope.isCollapsed = true;
+  $scope.isCollapsed = false;
+  $scope.oneAtATime = true;
+  $scope.isOpen=false;
 });

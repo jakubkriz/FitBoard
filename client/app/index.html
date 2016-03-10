@@ -2,13 +2,31 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>FIT Monster LeaderBoard</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- stylesheet -->
@@ -18,131 +36,113 @@
 
   </head>
   <body ng-app="myApp">
-    <header class="header">
+  <!-- header --> 
+    <header class="header" >
+    <div class="logo" id="nav">
+    <div class="shing">
     <a href="http://www.fitmonster.cz">
-      <img href="http://www.fitmonster.cz" align="middle" src="img/monster.png" width="160px"></img>
+      <img href="http://www.fitmonster.cz" src="img/monster.png" width="160px"></img>
     </a>
+    </div>
+    </div>
     </header>
 
-  <div id="wrap">
-    <div class="row">
-      <div class="col-sm-6">
-        <h1 class="table-h1">
-          <i class="fa fa-male fa-fw"></i>
-          <br>Muži
+  <div id="container" ng-controller="athletesCtrl">
+
+    <!-- Menu -->
+    <div class="col-centered">
+        <h1>
+          <br>MENS
         </h1>
 
-      <div ng-controller="athletesCtrl"> 
+         <div class="col-md-1" id="custom-search-input">
+                <input type="text" class="search-query form-control" placeholder="Search" ng-model = "searchName"/>
+                      <div id="search-icon"><span class="glyphicon glyphicon-search"></span></div>
+          </div>
+          </div>
 
-         <div class="center-block col-md-4" style="float: none;">
-          <i class="fa fa-search"></i> 
-          <input type = "text" ng-model = "searchName">
+  <!-- table -->
+<div class="col-lg-7 col-centered" id="leaderBoard">
+
+  <div class="clearfix">
+  <!-- ng-repeat -->
+      <div class="row" id="mainRow" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName" ng-click="isCollapsed = !isCollapsed">
+        <!-- place -->
+          <div class="col-xs-1" id="place" ng-class-odd="#place" ng-class-even="#place-even">#{{$index + 1}}</div>
+        <!-- photo -->
+          <div class="col-xs-2" id="photo"></div>
+        <!-- name -->
+          <div class="col-xs-5" id="name">{{ athlete.name }}</div>
+        <!-- border -->
+          <div id="border"></div>
+        <!-- gym -->
+          <div class="col-xs-2" id="gym">{{ athlete.gym }}</div>
+        <!-- score -->
+          <div class="col-xs-2" id="score">{{ athlete.score }}</div>
+          <!-- bio --
+            <div class="clearfix">
+                  <div class="row" id="bio" uib-collapse="isCollapsed">
+                      <div class="col-xs-4">Gym: <b>{{ athlete.gym }}</b><br>
+                          Věk: <b>{{ athlete.age }}</b> <br>
+                          Výška: <b>{{ athlete.height }}</b> <br>
+                          Váha: <b>{{ athlete.weight }}</b> <br>
+                          Let v Crossfitu: <b>{{ athlete.yInC }}</b>
+                      </div>
+                      <div class="col-xs-4">Clean & Jerk: <b>{{ athlete.cj }}</b> <br>
+                          Snatch: <b>{{ athlete.snatch }}</b> <br>
+                          Deadlift: <b>{{ athlete.deadlift }}</b> <br>
+                          Front Squat: <b>{{ athlete.frontSquat }}</b> <br>
+                          Back Squat: <b>{{ athlete.backSquat }}</b> <br>
+                      </div>
+                      <div class="col-xs-4">Fran: <b>{{ athlete.fran }}</b> <br>
+                          Helen: <b>{{ athlete.helen }}</b> <br>
+                          Grace: <b>{{ athlete.grace }}</b> <br>
+                          Sprint 400m: <b>{{ athlete.sprint }}</b> <br>
+                          1K row: <b>{{ athlete.row }}</b>
+                      </div>
+                  </div>
+             </div>
+              <!-- bio --> 
+
       </div>
-
-      <table class="table" ng-controller="CollapseCtrl">
-      <thead>
-        <tr id="tr-head">
-          <td>Place</td>
-          <td>Name</td>
-          <td>Gym</td>
-          <td>Score</td>
-         </tr>
-        </thead> 
-        <tbody ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName">
-        <tr class="tr" ng-click="isCollapsed = !isCollapsed">
-          <td class="td1">{{ athlete.place }}</td>
-          <td class="td2">{{ athlete.name }}</td>
-          <td class="td3">{{ athlete.gym }}</td>
-          <td class="td4">{{ athlete.score }}</td>
-        </tr>
-        <tr class="trBio" uib-collapse="isCollapsed">
-          <td class="trBio" colspan="4">
-          <div class="row">
-          <div class="tdBio1 col-xs-4">Gym: <b>{{ athlete.gym }}</b><br>
+      <!-- ng-repeat -->
+  </div>
+</div>
+<!-- table -->
+</div>
+<!--
+        <div class="leaderBoard col-md-6 col-centered">
+          <div class="row span12 col-centered" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName">
+            <div class="span2 place">{{athlete.place}}</div>
+            <div class="row mainRow" ng-click="isCollapsed = !isCollapsed">
+              <div class="span5 name">{{athlete.name}}</div>
+              <div class="span3 gym">{{athlete.gym}}</div>
+          <div class="row trBio" uib-collapse="isCollapsed">
+          <div class="tdBio1 span2">Gym: <b>{{ athlete.gym }}</b><br>
               Věk: <b>{{ athlete.age }}</b> <br>
               Výška: <b>{{ athlete.height }}</b> <br>
               Váha: <b>{{ athlete.weight }}</b> <br>
               Let v Crossfitu: <b>{{ athlete.yInC }}</b>
           </div>
-          <div class="tdBio2 col-xs-4">Clean & Jerk: <b>{{ athlete.cj }}</b> <br>
+          <div class="tdBio2 span2">Clean & Jerk: <b>{{ athlete.cj }}</b> <br>
               Snatch: <b>{{ athlete.snatch }}</b> <br>
               Deadlift: <b>{{ athlete.deadlift }}</b> <br>
               Front Squat: <b>{{ athlete.frontSquat }}</b> <br>
               Back Squat: <b>{{ athlete.backSquat }}</b> <br>
           </div>
-          <div class="tdBio3 col-xs-4">Fran: <b>{{ athlete.fran }}</b> <br>
+          <div class="tdBio3 span2">Fran: <b>{{ athlete.fran }}</b> <br>
               Helen: <b>{{ athlete.helen }}</b> <br>
               Grace: <b>{{ athlete.grace }}</b> <br>
               Sprint 400m: <b>{{ athlete.sprint }}</b> <br>
               1K row: <b>{{ athlete.row }}</b>
           </div>
           </div>
-          </td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-      </div>
-
-      <div class="col-sm-6">
-        <h1 class="table-h1b">
-          <i class="fa fa-female fa-fw"></i>
-          <br>Ženy
-        </h1>
-
-        <div ng-controller="athletesCtrl"> 
-
-            <div class="center-block col-md-4" style="float: none;">
-              <i class="fa fa-search"></i> 
-              <input type = "text" ng-model = "searchName">
             </div>
-
-      <table class="table" ng-controller="CollapseCtrl">
-      <thead>
-        <tr id="tr-head">
-          <td>Place</td>
-          <td>Name</td>
-          <td>Gym</td>
-          <td>Score</td>
-         </tr>
-        </thead> 
-        <tbody ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName">
-        <tr class="tr" ng-click="isCollapsed = !isCollapsed">
-          <td class="td1" >{{ athlete.place }}</td>
-          <td></td>
-          <td class="td2">{{ athlete.name }}</td>
-          <td class="td3">{{ athlete.gym }}</td>
-          <td></td>
-          <td class="td4">{{ athlete.score }}</td>
-        </tr>
-        <tr class="trBio" uib-collapse="isCollapsed">
-          <td class="tdBio1" colspan="2">Gym: <b>{{ athlete.gym }}</b><br>
-              Věk: <b>{{ athlete.age }}</b> <br>
-              Výška: <b>{{ athlete.height }}</b> <br>
-              Váha: <b>{{ athlete.weight }}</b> <br>
-              Let v Crossfitu: <b>{{ athlete.yInC }}</b>
-          </td>
-          <td class="tdBio2" colspan="2">Clean & Jerk: <b>{{ athlete.cj }}</b> <br>
-              Snatch: <b>{{ athlete.snatch }}</b> <br>
-              Deadlift: <b>{{ athlete.deadlift }}</b> <br>
-              Front Squat: <b>{{ athlete.frontSquat }}</b> <br>
-              Back Squat: <b>{{ athlete.backSquat }}</b> <br>
-          </td>
-          <td class="tdBio3" colspan="2">Fran: <b>{{ athlete.fran }}</b> <br>
-              Helen: <b>{{ athlete.helen }}</b> <br>
-              Grace: <b>{{ athlete.grace }}</b> <br>
-              Sprint 400m: <b>{{ athlete.sprint }}</b> <br>
-              1K row: <b>{{ athlete.row }}</b>
-          </td>
-          </tr>
-        </tbody>
-      </table>
+            <div class="span2 score">{{athlete.score}}</div>
+          </div>
       </div>
     </div>
-   </div>
-  </div>
-
-<footer>2016 Fit Monster Team, z.s.</footer>
+-->
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -169,6 +169,8 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/less/dist/less.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="bower_components/matchHeight/dist/jquery.matchHeight.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

@@ -1,45 +1,32 @@
 /* less */
+@import url(https://fonts.googleapis.com/css?family=Exo:400,500,300,600,700);
 
 /* main color */
 
 @red: #e54343;
 @blue: #152e48;
 
-/* borders*/
-@light-grey: #e5e5e5;
-@grey: #666666;
+/* colors */
+@body: #F5F5F5;
+@white: white;
+@light-grey: #ecf0f1;
+@grey: #909090;
+@silver: #F4F7F8;
+@middleRow: #2C3E50;
+@middleRow-hover: #EB5055;
+@place: #2C3E50;
+@score: #2C3E50;
 
-.border-radius (@radius: 15px) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius:    @radius;
-  border-radius:         @radius;
-}
-.border-left-radius (@radius-left: 15px 0px 0px 15px) {
-  -webkit-border-radius: @radius-left;
-  -moz-border-radius:    @radius-left;
-  border-radius:         @radius-left;
-}
-.border-right-radius (@radius-right: 0px 15px 15px 0px) {
-  -webkit-border-radius: @radius-right;
-  -moz-border-radius:    @radius-right;
-  border-radius:         @radius-right;
-}
-.border-left {
-    height: 80%;
-    border-left-style: solid;
-    border-left-width: thin;
-    border-left-color: @grey;
-}
 
 /* rows */
-.tr-bcg(@top: #e6e6e6, @btm: #d9d9d9) {
+.mR-bcg(@top: @light-grey, @btm: @silver) {
   background-color: @top;
   background: -webkit-linear-gradient(@top, @btm); /* For Safari 5.1 to 6.0 */
   background:  -o-linear-gradient(@top, @btm); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(@top, @btm); /* For Firefox 3.6 to 15 */
   background:  linear-gradient(@top, @btm); /* Standard syntax (must be last) */
 }
-.tr-bcg-hover(@top-hvr: #e6e6e6, @btm-hvr: #d9d9d9) {
+.mR-bcg-hover(@top-hvr: @light-grey, @btm-hvr: @silver) {
   background-color: @top-hvr;
   background: -webkit-linear-gradient(@btm-hvr, @top-hvr); /* For Safari 5.1 to 6.0 */
   background:  -o-linear-gradient(@btm-hvr, @top-hvr); /* For Opera 11.1 to 12.0 */
@@ -47,6 +34,21 @@
   background:  linear-gradient(@btm-hvr, @top-hvr); /* Standard syntax (must be last) */
 }
 
+/*
+.vertical-align(@position: relative) {
+  position: @position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+*/
+
+/* fonts */
+
+* {
+  font-family: 'Exo', sans-serif;
+}
 
 /* icons */
 
@@ -66,28 +68,105 @@ i.fa.fa-search {
 
 body {
   height: 100%;
-  padding: 20px;
+  padding: 0px;
+  background-color: @body;
 }
 
 /* header */
 .header {
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: 60px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-/* Wrapper for page content */
-#wrap {
-  min-height: 100%;
-  height: auto;
-  /* Negative indent footer by its height */
-  margin: 10px auto;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
+/* fonts */
+
+h1 {
+  color: @blue;
+  text-align: center;
+  font-size: 40px;
 }
+
+/* menu */
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}   
+
+/* logo */
+
+.logo {
+    display: inline-block;
+    width: auto;
+    cursor: pointer;
+}
+
+.shing {
+  position: relative;
+}
+
+.shing::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  content: '';
+
+  box-shadow: inset 0 2px #FFF;
+  background: -50px center no-repeat;
+  background-image: linear-gradient(125deg,rgba(255,255,255,0) 30%,#FFF 30%,#FFF 50%,rgba(255,255,255,0) 50%);
+  background-clip: padding-box;
+  opacity: .3;
+  transition: background-position 0.3s;
+}
+
+.shing:hover:after {
+  background-position: 180px center;
+}
+
+/* search */
+
+input.search-query.form-control {
+  background-color: @body;
+}
+
+#custom-search-input {
+        margin-right: auto;
+        margin-left: auto;
+        float:none;
+        position: relative;
+        margin-top: 10px;
+        padding: 0;
+    }
+ 
+    #custom-search-input .search-query {
+        padding-right: 3px;
+        padding-right: 4px \9;
+        padding-left: 3px;
+        padding-left: 4px \9;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+ 
+        margin-bottom: 0;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+    }
+
+#search-icon {
+    color:@red;
+    float: right;
+    position: absolute;
+    z-index: 3;
+    right: 5px;
+    top: 25%;
+  }
 
 /* footer */
 footer {
+  clear: both;
   height: 60px;
   position: static;
   padding-top: 10px;
@@ -96,117 +175,89 @@ footer {
   text-align: center;
 }
 
-/* input */
-input{
-  margin-left: 5px;
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: @light-grey;
+/* leaderBoard */
+
+#leaderBoard {
+  margin-top: 40px;
 }
 
-/* table */
-
-.table-h1 {
-  color: @blue;
-  text-align: center;
-  font-size: 40px;
-}
-
-.table-h1b {
-  color: @red;
-  text-align: center;
-  font-size: 40px;
-}
-
-.table {
-  margin-bottom: 3px;
-  margin-left: 0px;
-  margin-right: 20px;
-}
-
-table td {
-    border-top: none !important;
-}
-
-table {
-    border-collapse: separate;
-    border-spacing: 0px 3px; 
-}
-
-#tr-head {
-  font-size: 12px;
-  text-align: center;
-}
-
-.tr {
-  .tr-bcg;
-  .border-radius;
-  padding: 0px;
-  vertical-align: middle;
-  margin-bottom: 10px;
+#mainRow {
+  padding: 30px 0px;
+  border-bottom: 1px solid @silver;
+  opacity: 1;
+  background-color: @place;
   cursor: pointer;
+  vertical-align: middle;
 
-    &:hover {
-      .tr-bcg-hover;
-    }
-
-    .td1 {
-      background-color: #3399ff;
-      text-align: center;
-      font-size: 26px;
-      padding: 5px 0px 5px 0px;
-      .border-left-radius;
-      vertical-align: middle;
-    }
-
-    .td2 {
-      font-size: 20px;
-      padding-left: 20px;
-      vertical-align: middle;
-    }
-
-    .td3 {
-      text-align: center;
-      .border-left;
-      font-size: 15px;
-      vertical-align: middle;
+  &:hover {
+    background-color: @middleRow-hover;
+  }
 }
 
-    .td4 {
-      text-align: center;
-      .border-left;
-      .border-right-radius;
-      font-size: 20px;
-      vertical-align: middle;
-}}
-
-/* athlete bio */
-.trBio {
-  background: @light-grey;
-  .border-radius;
-  padding: 0px;
+#place {
+  font-weight: bold;
+  font-size: 1.5em;
   vertical-align: middle;
-  width: 100%;
-  margin-bottom: 10px;
+  color: @silver;
 
-  .tdBio1 {
-      .border-left-radius;
-      font-size: 15px;
-      width: 33%;
-      padding-left: 20px;
-      margin-left: 5px;
-      vertical-align: middle;
-    }
-    .tdBio2 {
-      font-size: 15px;
-      width: 33%;
-      vertical-align: middle;
-    }
-    .tdBio3 {
-      .border-right-radius;
-      font-size: 15px;
-      width: 33%;
-      vertical-align: middle;
-    }
+  #place-even {
+    background-color: @red;
+  }
+
+}
+
+#middleRow {
+  width: 70%;
+  background-color: @middleRow;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+  cursor: pointer;
+  vertical-align: middle;
+
+  &:hover {
+    background-color: @middleRow-hover;
+  }
+}
+
+#photo {
+  vertical-align: middle;
+}
+
+#name {
+  vertical-align: middle;
+  text-align: left;
+  font-size: 2vh;
+  font-weight: 500;
+  color: @silver;
+
+}
+
+#border {
+  background-color: @silver;
+  position: absolute;
+  vertical-align: middle;
+  width: 1px;
+  height: 60%;
+  margin: 0px;
+  padding: 0px;
+  right: 40%;
+}
+
+#gym {
+  vertical-align: middle;
+  font-size: 1.5vh;
+  font-weight: 300;
+  text-align: left;
+  padding-left: 10px !important;
+  color: @silver;
+
+}
+
+#score {
+  vertical-align: middle;
+  color: @silver;
+  font-size: 1.5em;
+  text-align: right;
+  padding-right: 3% !important;
+  z-index: 3;
 }
