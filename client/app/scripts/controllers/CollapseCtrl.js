@@ -1,5 +1,9 @@
+/* globals app */
+
 app.controller('CollapseCtrl', function ($scope) {
-  $scope.isCollapsed = false;
-  $scope.oneAtATime = true;
-  $scope.isOpen=false;
+	'use strict';
+
+	$scope.isCollapsed = false;
+	$scope.oneAtATime = true;
+	$scope.isOpen=false;
 });

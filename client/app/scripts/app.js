@@ -1,20 +1,18 @@
-var app = angular.module('myApp', ['ngAnimate', 'ui.bootstrap']);
+/* exported app*/
 
+var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
+.config(function($routeProvider) {
+	'use strict';
+    $routeProvider
+      .when('/lb', {
+        templateUrl: 'views/LeaderBoard.html',
+        controller: 'LeaderBoardCtrl'
+      });
 
-/* equal height */
+//	$routeProvider.otherwise({redirectTo:'/main'});
 
-$('#mainRow').each(function() {
-                        $(this).children('#place, #photo, #name, #gym, #border, #score').matchHeight({
-    						property: 'ax-height',
-                        });
-                    });
-
-/* 1st place 
-
-$(document).ready(function() {
-	$('#place').addClass(function() {
-		if ({{athlete.place}} ==== 1) {
-			return ".fplace";
-		};
-	});
-});*/
+//    $locationProvider.html5Mode({
+//		enabled: true,
+//  		requireBase: false
+//	});
+});

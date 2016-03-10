@@ -1,0 +1,102 @@
+<!-- header --> 
+<header class="header" >
+	<div class="logo" id="nav">
+		<div class="shing">
+			<a href="http://www.fitmonster.cz">
+				<img href="http://www.fitmonster.cz" src="img/monster.png" width="160px"></img>
+			</a>
+		</div>
+	</div>
+</header>
+
+<div id="container" ng-controller="LeaderBoardCtrl">
+	<!-- Menu -->
+	<div class="col-centered">
+		<h1><br>MENS</h1>
+
+		<div class="col-md-1" id="custom-search-input">
+				<input type="text" class="search-query form-control" placeholder="Search" ng-model = "searchName"/>
+				<div id="search-icon">
+					<span class="glyphicon glyphicon-search"></span>
+				</div>
+		</div>
+	</div>
+
+	<!-- Table -->
+	<div class="col-lg-7 col-centered" id="leaderBoard">
+		<!-- ng-repeat -->
+		<div class="row" id="mainRow" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName" ng-click="isCollapsed = !isCollapsed">
+			<!-- place -->
+			<div class="col-xs-1" id="place" ng-class-odd="#place" ng-class-even="#place-even">#{{$index + 1}}</div>
+			<!-- photo -->
+			<div class="col-xs-2" id="photo"></div>
+			<!-- name -->
+			<div class="col-xs-5" id="name">{{ athlete.name }}</div>
+			<!-- border -->
+			<div id="border"></div>
+			<!-- gym -->
+			<div class="col-xs-2" id="gym">{{ athlete.gym }}</div>
+			<!-- score -->
+			<div class="col-xs-2" id="score">{{ athlete.score }}</div>
+			<!-- bio --
+			<div class="clearfix">
+				<div class="row" id="bio" uib-collapse="isCollapsed">
+					<div class="col-xs-4">Gym: <b>{{ athlete.gym }}</b><br>
+						Věk: <b>{{ athlete.age }}</b> <br>
+						Výška: <b>{{ athlete.height }}</b> <br>
+						Váha: <b>{{ athlete.weight }}</b> <br>
+						Let v Crossfitu: <b>{{ athlete.yInC }}</b>
+					</div>
+					<div class="col-xs-4">Clean & Jerk: <b>{{ athlete.cj }}</b> <br>
+						Snatch: <b>{{ athlete.snatch }}</b> <br>
+						Deadlift: <b>{{ athlete.deadlift }}</b> <br>
+						Front Squat: <b>{{ athlete.frontSquat }}</b> <br>
+						Back Squat: <b>{{ athlete.backSquat }}</b> <br>
+					</div>
+					<div class="col-xs-4">Fran: <b>{{ athlete.fran }}</b> <br>
+						Helen: <b>{{ athlete.helen }}</b> <br>
+						Grace: <b>{{ athlete.grace }}</b> <br>
+						Sprint 400m: <b>{{ athlete.sprint }}</b> <br>
+						1K row: <b>{{ athlete.row }}</b>
+					</div>
+				</div>
+			</div-->
+		</div>
+		<!-- ng-repeat -->
+	</div>
+	<!-- Table -->
+</div>
+
+<!--
+		<div class="leaderBoard col-md-6 col-centered">
+			<div class="row span12 col-centered" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName">
+			<div class="span2 place">{{athlete.place}}</div>
+			<div class="row mainRow" ng-click="isCollapsed = !isCollapsed">
+				<div class="span5 name">{{athlete.name}}</div>
+				<div class="span3 gym">{{athlete.gym}}</div>
+			<div class="row trBio" uib-collapse="isCollapsed">
+			<div class="tdBio1 span2">Gym: <b>{{ athlete.gym }}</b><br>
+				Věk: <b>{{ athlete.age }}</b> <br>
+				Výška: <b>{{ athlete.height }}</b> <br>
+				Váha: <b>{{ athlete.weight }}</b> <br>
+				Let v Crossfitu: <b>{{ athlete.yInC }}</b>
+			</div>
+			<div class="tdBio2 span2">Clean & Jerk: <b>{{ athlete.cj }}</b> <br>
+				Snatch: <b>{{ athlete.snatch }}</b> <br>
+				Deadlift: <b>{{ athlete.deadlift }}</b> <br>
+				Front Squat: <b>{{ athlete.frontSquat }}</b> <br>
+				Back Squat: <b>{{ athlete.backSquat }}</b> <br>
+			</div>
+			<div class="tdBio3 span2">Fran: <b>{{ athlete.fran }}</b> <br>
+				Helen: <b>{{ athlete.helen }}</b> <br>
+				Grace: <b>{{ athlete.grace }}</b> <br>
+				Sprint 400m: <b>{{ athlete.sprint }}</b> <br>
+				1K row: <b>{{ athlete.row }}</b>
+			</div>
+			</div>
+			</div>
+			<div class="span2 score">{{athlete.score}}</div>
+			</div>
+		</div>
+	</div>
+-->
