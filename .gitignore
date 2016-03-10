@@ -4,3 +4,7 @@ data/journal
 data/mongod.lock
 data/local*
 session
+
+*.sublime-workspace
+
+*.sublime-project
