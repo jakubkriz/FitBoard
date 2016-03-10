@@ -25,22 +25,24 @@
 	<!-- Table -->
 	<div class="col-lg-7 col-centered" id="leaderBoard">
 		<!-- ng-repeat -->
-		<div class="row" id="mainRow" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName" ng-click="isCollapsed = !isCollapsed">
-			<!-- place -->
-			<div class="col-xs-1" id="place" ng-class-odd="#place" ng-class-even="#place-even">#{{$index + 1}}</div>
-			<!-- photo -->
-			<div class="col-xs-2" id="photo"></div>
-			<!-- name -->
-			<div class="col-xs-5" id="name">{{ athlete.name }}</div>
-			<!-- border -->
-			<div id="border"></div>
-			<!-- gym -->
-			<div class="col-xs-2" id="gym">{{ athlete.gym }}</div>
-			<!-- score -->
-			<div class="col-xs-2" id="score">{{ athlete.score }}</div>
-			<!-- bio --
-			<div class="clearfix">
-				<div class="row" id="bio" uib-collapse="isCollapsed">
+		<div id="mainRow" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName" ng-click="isCollapsed = !isCollapsed">
+			<div class="row">
+				<!-- place -->
+				<div class="col-xs-1" id="place" ng-class-odd="'place'" ng-class-even="'place-even'">#{{$index + 1}}</div>
+				<!-- photo -->
+				<div class="col-xs-2" id="photo"></div>
+				<!-- name -->
+				<div class="col-xs-5" id="name">{{ athlete.name }}</div>
+				<!-- border -->
+				<div id="border"></div>
+				<!-- gym -->
+				<div class="col-xs-2" id="gym">{{ athlete.gym }}</div>
+				<!-- score -->
+				<div class="col-xs-2" id="score">{{ athlete.score }}</div>
+			</div>
+			<!-- bio -->
+			<div uib-collapse="isCollapsed">
+				<div class="row" id="bio">
 					<div class="col-xs-4">Gym: <b>{{ athlete.gym }}</b><br>
 						Věk: <b>{{ athlete.age }}</b> <br>
 						Výška: <b>{{ athlete.height }}</b> <br>
@@ -60,7 +62,7 @@
 						1K row: <b>{{ athlete.row }}</b>
 					</div>
 				</div>
-			</div-->
+			</div>
 		</div>
 		<!-- ng-repeat -->
 	</div>

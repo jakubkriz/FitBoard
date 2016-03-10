@@ -5,8 +5,12 @@ angular.module('myApp')
 	$scope.sortType     = 'score'; // set the default sort type
 	$scope.sortReverse  = true;  // set the default sort order
 	$scope.searchName   = '';
-	
 
+	// Colapse support
+	$scope.isCollapsed = true;
+	$scope.oneAtATime = true;
+	$scope.isOpen=false;
+	
 	$scope.athletes = [
 			{
 				name: 'Athlete Name',
