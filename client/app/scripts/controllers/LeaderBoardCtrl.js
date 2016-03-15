@@ -16,7 +16,9 @@ angular.module('myApp')
 				name: 'Athlete Name',
 				sex: 'men',
 				category: 'elite',
+				photo: 'img/men.png',
 				gym: 'independent',
+				photo: 'img/men.png',
 				score: 125,
 				age: '24',
 				height: '175 cm',
@@ -38,6 +40,7 @@ angular.module('myApp')
 				sex: 'men',
 				category: 'elite',
 				gym: 'independent2',
+				photo: 'img/proile.jpg',
 				score: 125,
 				age: '24',
 				height: '175 cm',
@@ -57,52 +60,58 @@ angular.module('myApp')
 			{
 				name: 'Frantisek Heriban',
 				gym: 'The gym',
-				score: 66,
+				photo: 'img/men.png',
+				score: 66
 
 			},
 			{
 				name: 'Michal Dovrtel',
 				gym: 'inependent',
-				score: 125,
+				photo: 'img/men.png',
+				score: 125
 
 			},
 			{
 				name: 'Adam Ohral',
 				gym: 'Fit Monster Team',
-				score: 80,
+				photo: 'img/men.png',
+				score: 80
 
 			},
 			{
 				name: 'Michal Dovrtel',
 				gym: 'inependent',
-				score: 125,
+				photo: 'img/men.png',
+				score: 125
 
 			},
 			{
 				name: 'Adam Ohral',
 				gym: 'Fit Monster Team',
-				score: 80,
+				photo: 'img/men.png',
+				score: 80
 
 			},
 			{
 				name: 'Frantisek Heriban',
 				gym: 'The gym',
-				score: 66,
+				photo: 'img/men.png',
+				score: 66
 
 			},
 			{
 				name: 'Michal Dovrtel',
 				gym: 'inependent',
-				score: 125,
+				photo: 'img/men.png',
+				score: 125
 
 			},
 			{
 				name: 'Adam Ohral',
 				gym: 'Fit Monster Team',
-				score: 80,
+				photo: 'img/men.png',
+				score: 80
 
 			}
 		];
-	
-
 	}]);
