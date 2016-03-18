@@ -10,23 +10,26 @@
 </header>
 
 <!-- Navigation -->
-<div class="col-centered nav"  ng-controller="LeaderBoardCtrl">
-	<div class="btn-group" id="category">
-		<button type="button" class="btn btn-category">ELITE</button>
-		<button type="button" class="btn btn-category">MASTERS</button>
-		<button type="button" class="btn btn-category">OPEN</button>
-	</div>
-	<div class="btn-group" id="sex">
-		<button type="button" class="btn btn-category">MENS</button>
-		<button type="button" class="btn btn-category">WOMENS</button>
-	</div>
-</div>
+<div class="nav"  ng-controller="LeaderBoardCtrl">
+
+
+	<div class="toggle_radio">
+		<div id="toggle_slider"></div>
+    	<button class="cat-button" id="first">ELITE</button>
+    	<button class="cat-button" id="second">MASTERS</button>
+    	<button class="cat-button" id="third">OPEN</button>
+    </div>
+
+    <div class="sex-radio">
+    	<img id="men" src="img/men.png">
+    	<img id="women" src="img/women.png">
+    </div>
 
 
 <div id="container" ng-controller="LeaderBoardCtrl">
 	<!-- Info -->
 	<div class="col-centered">
-		<h1><br>MENS</h1>
+		<div id="sex"></div>
 
 		<div class="col-md-1" id="custom-search-input">
 				<input type="text" class="search-query form-control" placeholder="Search" ng-model = "searchName"/>

@@ -114,4 +114,25 @@ angular.module('myApp')
 
 			}
 		];
+
+// category button animation
+$( '#first' ).click(function() {
+  $( '#toggle_slider' ).animate({ 'left': '0px' }, 400 );
+});
+
+$( '#second' ).click(function() {
+  $( '#toggle_slider' ).animate({ 'left': '120px' }, 400 );
+});
+ 
+$( '#third' ).click(function(){
+  $( '#toggle_slider' ).animate({ 'left': '240px' }, 400 );
+});
+
+// sex button
+
+//$('#men').click(function() {
+//	$(this).animate ({width: "70%", 400})
+//	$('#').html('<h1><MENS</h1>')
+//	});
+
 	}]);
