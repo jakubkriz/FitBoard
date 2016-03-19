@@ -1,4 +1,5 @@
-<!-- header --> 
+
+<!-- header -->
 <header class="header" >
 	<div class="logo" id="nav">
 		<div class="shing">
@@ -15,14 +16,14 @@
 
 	<div class="toggle_radio">
 		<div id="toggle_slider"></div>
-    	<button class="cat-button" id="first">ELITE</button>
-    	<button class="cat-button" id="second">MASTERS</button>
-    	<button class="cat-button" id="third">OPEN</button>
+    	<button class="cat-button" id="elite" ng-click="showCategory = 'elite'">ELITE</button>
+    	<button class="cat-button" id="masters" ng-click="showCategory = 'masters'">MASTERS</button>
+    	<button class="cat-button" id="open" ng-click="showCategory = 'open'">OPEN</button>
     </div>
 
     <div class="sex-radio">
-    	<img id="men" src="img/men.png">
-    	<img id="women" src="img/women.png">
+    	<img id="male" src="img/man.png">
+    	<img id="female" src="img/woman.png">
     </div>
 
 
@@ -32,7 +33,7 @@
 		<div id="sex"></div>
 
 		<div class="col-md-1" id="custom-search-input">
-				<input type="text" class="search-query form-control" placeholder="Search" ng-model = "searchName"/>
+				<input type="text" class="search-query form-control" placeholder="Search" ng-model="searchName"/>
 				<div id="search-icon">
 					<span class="glyphicon glyphicon-search"></span>
 				</div>
@@ -42,7 +43,7 @@
 	<!-- Table -->
 	<div class="col-lg-7 col-centered" id="leaderBoard">
 		<!-- ng-repeat -->
-		<div id="mainRow" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName" ng-click="isCollapsed = !isCollapsed">
+		<div id="mainRow" ng-repeat="athlete in filteredAthletes | orderBy:sortType:sortReverse | filter:searchName | filter:showCategory" ng-click="isCollapsed = !isCollapsed">
 			<div class="row">
 				<!-- place -->
 				<div class="col-xs-1 place">#{{$index + 1}}</div>
