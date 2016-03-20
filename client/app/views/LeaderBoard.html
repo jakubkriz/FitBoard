@@ -13,25 +13,31 @@
 <!-- Navigation -->
 <div class="nav"  ng-controller="LeaderBoardCtrl">
 
-
+<!-- Category -->
 	<div class="toggle_radio">
 		<div id="toggle_slider"></div>
     	<button class="cat-button" id="elite" ng-click="showCategory = 'elite'">ELITE</button>
     	<button class="cat-button" id="masters" ng-click="showCategory = 'masters'">MASTERS</button>
     	<button class="cat-button" id="open" ng-click="showCategory = 'open'">OPEN</button>
     </div>
-
+<!-- Sex -->
     <div class="sex-radio">
     	<img id="male" src="img/man.png">
     	<img id="female" src="img/woman.png">
     </div>
 
+<!-- Workout -->
+	<div class="workout-list">
+	</div>
+
+</div>
 
 <div id="container" ng-controller="LeaderBoardCtrl">
 	<!-- Info -->
 	<div class="col-centered">
-		<div id="sex"></div>
+		<div id="info"></div>
 
+		<!-- search -->
 		<div class="col-md-1" id="custom-search-input">
 				<input type="text" class="search-query form-control" placeholder="Search" ng-model="searchName"/>
 				<div id="search-icon">
@@ -125,7 +131,7 @@
 								<td><b>{{ athlete.helen }}</b></td>
 							</tr>
 							<tr>
-								<td>Geace:</td>
+								<td>Grace:</td>
 								<td><b>{{ athlete.grace }}</b></td>
 							</tr>
 							<tr>

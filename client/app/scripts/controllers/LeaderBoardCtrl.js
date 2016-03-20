@@ -182,11 +182,14 @@ angular.module('myApp')
 
 
 // sex button
+$('#men').click(function() {
+	$(this).animate ({width: '40px', height: '40px'}, 500);
+	$('#sex').html('<h1><MENS</h1>');
+	});
 
-// $('#men').click(function() {
-// 	$(this).animate ({width: "70%", 400})
-// 	$('#').html('<h1><MENS</h1>')
-// 	});
-
+$('#women').click(function() {
+	$(this).animate ({width: '40px', height: '40px'}, 500);
+	$('#sex').html('<h1><WOMENS</h1>');
+	});
 
 }]);
