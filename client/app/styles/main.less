@@ -66,23 +66,6 @@
     font-family: 'Exo', sans-serif;
 }
 
-/* icons */
-
-i.fa.fa-female
-{
-    color: @red;
-}
-
-i.fa.fa-male
-{
-    color: @blue;
-}
-
-i.fa.fa-search
-{
-    color: @light-grey;
-}
-
 /* body */
 
 body
@@ -91,9 +74,18 @@ body
     padding: 0;
 
     background-color: @body;
-    background-image: url('bcg.jpg');
 }
 
+.body
+{
+    padding: 0 0 50px 0;
+
+    background: url(bcg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;
+}
 /* header */
 .header
 {
@@ -111,7 +103,7 @@ footer
     clear: both;
 
     height: 60px;
-    margin-top: 30px;
+    margin-top: 0;
     padding-top: 10px;
 
     text-align: center;
@@ -188,10 +180,9 @@ h1
     cursor: pointer;
     text-align: center;
 
+    color: @dark-grey;
     border: 1px solid @dark-grey;
     background-color: transparent;
-    color: @dark-grey;
-
     &:hover,
     &:focus,
     &:active
@@ -223,7 +214,6 @@ h1
 {
     position: relative;
 
-
     width: 160px;
     height: 80px;
     margin: 20px auto;
@@ -238,8 +228,14 @@ h1
     width: 80px;
     height: 80px;
 
+    cursor: pointer;
+
     border: 5px solid @male;
     border-radius: 100%;
+    &:hover
+    {
+        opacity: .5;
+    }
 }
 
 #female
@@ -250,15 +246,20 @@ h1
     width: 80px;
     height: 80px;
 
+    cursor: pointer;
+
     border: 5px solid @female;
     border-radius: 100%;
+    &:hover
+    {
+        opacity: .5;
+    }
 }
 
 /* workout */
 .workout-list
 {
     position: relative;
-
 
     width: 160px;
     height: 80px;
@@ -490,20 +491,20 @@ input.search-query.form-control
 /* bio table */
 #column
 {
-	margin-left: auto;
-	padding-top: 20px;
+    margin-left: auto;
+    padding-top: 20px;
 
-	text-align: center;
+    text-align: center;
 }
 
 td
 {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 
 table
 {
-	margin: auto;
+    margin: auto;
+
     color: @silver;
 }
-

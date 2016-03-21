@@ -5,7 +5,7 @@ angular.module('myApp')
 	$scope.athletes = [
 			{
 				name: 'Athlete Name',
-				sex: 'men',
+				sex: 'default',
 				category: 'elite',
 				photo: 'img/man.png',
 				gym: 'independent',
@@ -27,7 +27,7 @@ angular.module('myApp')
 			},
 			{
 				name: 'Michal Dovrtel',
-				sex: 'male',
+				sex: 'default',
 				category: 'elite',
 				gym: 'independent2',
 				photo: 'img/profile.jpg',
@@ -72,6 +72,7 @@ angular.module('myApp')
 				gym: 'independent'
 			},
 			{
+				sex: 'default',
 				name: 'Frantisek Heriban',
 				gym: 'The gym',
 				photo: 'img/man.png',
@@ -79,6 +80,7 @@ angular.module('myApp')
 				score: 66
 			},
 			{
+				sex: 'default',
 				name: 'Michal Dovrtel',
 				gym: 'inependent',
 				category: 'open',
@@ -87,6 +89,7 @@ angular.module('myApp')
 
 			},
 			{
+				sex: 'default',
 				name: 'Adam Ohral',
 				gym: 'Fit Monster Team',
 				category: 'open',
@@ -95,6 +98,7 @@ angular.module('myApp')
 
 			},
 			{
+				sex: 'default',
 				name: 'Michal Dovrtel',
 				gym: 'inependent',
 				category: 'masters',
@@ -103,6 +107,7 @@ angular.module('myApp')
 
 			},
 			{
+				sex: 'default',
 				name: 'Adam Ohral',
 				gym: 'Fit Monster Team',
 				category: 'masters',
@@ -111,6 +116,7 @@ angular.module('myApp')
 
 			},
 			{
+				sex: 'default',
 				name: 'Frantisek Heriban',
 				gym: 'The gym',
 				category: 'masters',
@@ -119,6 +125,7 @@ angular.module('myApp')
 
 			},
 			{
+				sex: 'default',
 				name: 'Michal Dovrtel',
 				gym: 'inependent',
 				category: 'masters',
@@ -127,6 +134,7 @@ angular.module('myApp')
 
 			},
 			{
+				sex: 'default',
 				name: 'Adam Ohral',
 				gym: 'Fit Monster Team',
 				category: 'masters',
@@ -145,51 +153,41 @@ angular.module('myApp')
 	$scope.oneAtATime = true;
 	$scope.isOpen=false;
 
-	$scope.selectedCategory = '';
-	$scope.filteredAthletes = $scope.athletes;
+	$scope.showCategory = 'elite';
+	$scope.sex = 'default';
+	$scope.info = 'MENS';
 
+	
 
-// $(document).ready(function () {
-// 	$( '#elite' ).click(function() {
-// 		$( '#toggle_slider' ).animate({ 'left': '0px' }, 400 );
-// $scope.showCategory = 'elite';
-// 	});
+// division toggle
+ // $(document).ready(function () {
+	// $( '#elite' ).click(function() {
+	// 	$( '#toggle_slider' ).animate({ 'left': '0px' }, 400 );
+ // $scope.showCategory = 'elite';
+	// });
 
-// 	$( '#masters' ).click(function() {
-// 		$( '#toggle_slider' ).animate({ 'left': '120px' }, 400 );
-// $scope.showCategory = 'masters';
-// 	});
+	// $( '#masters' ).click(function() {
+	// 	$( '#toggle_slider' ).animate({ 'left': '120px' }, 400 );
+ // $scope.showCategory = 'masters';
+	// });
 
-// 	$( '#open' ).click(function(){
-// 		$( '#toggle_slider' ).animate({ 'left': '240px' }, 400 );
-// $scope.showCategory = 'open';
-// 	});
-// });
-
-
-// $scope.categoryClickHandler = function(cat) {
-//   $scope.selectedCategory = cat;
-
-// 	$scope.filteredAthletes = $scope.athletes.filter(function(ath) {
-// 		if ($scope.selectedCategory === '') {
-// 			return true;
-// 		} else {
-// 			return ath.category === $scope.selectedCategory;
-// 		}
-// 	});
-// };
+	// $( '#open' ).click(function(){
+	// 	$( '#toggle_slider' ).animate({ 'left': '240px' }, 400 );
+ // $scope.showCategory = 'open';
+	// });
+ // });
 
 
 
-// sex button
-$('#men').click(function() {
-	$(this).animate ({width: '40px', height: '40px'}, 500);
-	$('#sex').html('<h1><MENS</h1>');
-	});
-
-$('#women').click(function() {
-	$(this).animate ({width: '40px', height: '40px'}, 500);
-	$('#sex').html('<h1><WOMENS</h1>');
-	});
+//sex toggle
+	// $scope.sex = function(id) {
+	// 	if (id === 'male') {
+	// 		$('#male').animate({'width':'40px', 'height':'40px'},500);
+	// 		return '<h1>MENS</h1>';
+	// 	} else if (id === 'female') {
+	// 		$('#female').animate({'width':'40px', 'height':'40px'},500);
+	// 		return '<h1>WOMENS</h1>';
+	// 	}
+	// };
 
 }]);
