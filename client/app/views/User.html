@@ -1,7 +1,16 @@
+<div ng-controller="UserCtrl">
 <!-- Panel top -->
 <div class="panel-top">
-	<div class="photo">
-		<img ng-src="{{ ahtlete.img }}">
+	<div class="user-name">
+		<h4>{{ user.name }}</h4>
+	</div>
+	<div class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
+		<img id="nav-icon" ng-src="{{user.photo}}" uib-dropdown-toggle>
+		<ul uib-dropdown-menu class="dropdown-menu" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
+            <li><a href="#">My profile</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+          </ul>
 	</div>
 </div>
 
@@ -10,4 +19,9 @@
 	<div class="nav-logo" id="nav-logo">
 		<img src="img/monster.png" width="100px">	
 	</div>
+	<button class="menu-btn"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</button>
+	<button class="menu-btn"><span class="glyphicon glyphicon-dashboard"></span> Events</button>
+	<button class="menu-btn"><span class="glyphicon glyphicon-dashboard"></span> Qualification</button>
+	<button class="menu-btn"><span class="glyphicon glyphicon-dashboard"></span> My profile</button>
+</div>
 </div>

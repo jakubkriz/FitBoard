@@ -1,4 +1,4 @@
-angular.module('myApp')
+angular.module('FitBoard')
 	.controller('LeaderBoardCtrl', ['$scope',function($scope) {
 	'use strict';
 
@@ -158,7 +158,6 @@ angular.module('myApp')
 	$scope.info = 'MENS';
 
 	
-
 // division toggle
  // $(document).ready(function () {
 	// $( '#elite' ).click(function() {

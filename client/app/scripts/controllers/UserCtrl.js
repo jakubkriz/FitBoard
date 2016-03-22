@@ -1,10 +1,10 @@
-angular.module('myApp')
+angular.module('FitBoard')
 	.controller('UserCtrl', ['$scope',function($scope) {
 	'use strict';
 
-	$scope.athletes = [
+	$scope.user = 
 		{
-					name: 'Michal Dovrtel',
+					name: 'Michal Dovrtěl',
 					sex: 'male',
 					category: 'elite',
 					gym: 'independent2',
@@ -24,5 +24,10 @@ angular.module('myApp')
 					grace: '2:15',
 					sprint: '1:30',
 					row: '4:00'
-				}];
+				};
+
+	$scope.status = {
+    isopen: false
+  };
+
 }]);

@@ -1,6 +1,6 @@
 /* exported app*/
 
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
+var app = angular.module('FitBoard', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
 .config(function($routeProvider) {
 	'use strict';
     $routeProvider
