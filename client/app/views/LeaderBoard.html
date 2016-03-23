@@ -22,21 +22,21 @@
     </div>
 <!-- Sex -->
     <div class="sex-radio">
-    	<img id="male" ng-click="sex = 'default'" src="img/man.png">
-    	<img id="female" ng-click="sex = 'female'" src="img/woman.png">
+    	<img id="male" ng-click="sex = 'default'; iconStyle={'border':'2px solid #20dd9b'}" src="img/man.png">
+    	<img id="female" ng-click="sex = 'female'; iconStyle={'border':'2px solid #f62459'}" src="img/woman.png">
     </div>
 <!-- Workout -->
 	<div class="workout-list">
-<!-- Sex Header -->
-		<h1 ng-bind-html="sexHeaderHtml"></h1>
 	</div>
 </div>
 
 <div id="container">
 	<!-- Info -->
 	<div class="col-centered">
-		<div id="info"><h1 ng-bind-html="info"></h1></div>
-
+		<div id="sexHeader">
+		<!-- Sex Header -->
+			<h1 ng-bind-html="sexHeaderHtml"></h1>
+		</div>
 		<!-- search -->
 		<div class="col-md-1" id="custom-search-input">
 				<input type="text" class="search-query form-control" placeholder="Search" ng-model="searchName"/>
@@ -54,7 +54,7 @@
 				<!-- place -->
 				<div class="col-xs-1 place">#{{$index + 1}}</div>
 				<!-- photo -->
-				<div class="col-xs-2 photo"><img id="icon" ng-src="{{ athlete.photo }}"></div>
+				<div class="col-xs-2 photo"><img id="icon" ng-style="iconStyle" ng-src="{{ athlete.photo }}"></div>
 				<!-- name -->
 				<div class="col-xs-5 name">{{ athlete.name }}</div>
 				<!-- border -->
