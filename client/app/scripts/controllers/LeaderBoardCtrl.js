@@ -1,6 +1,61 @@
-angular.module('FitBoard')
-	.controller('LeaderBoardCtrl', ['$scope',function($scope) {
+var board = angular.module('FitBoard');
+
+board.controller('LeaderBoardCtrl', function($scope) {
 	'use strict';
+
+	$scope.sortType     = 'score'; // set the default sort type
+	$scope.sortReverse  = true;  // set the default sort order
+	$scope.searchName   = '';
+
+	// Colapse support
+	$scope.isCollapsed = true;
+	$scope.oneAtATime = true;
+	$scope.isOpen=false;
+
+	$scope.showCategory = 'elite';
+	$scope.sex = 'default';
+
+	$scope.$watch('sex', function() {
+		if ($scope.sex === 'default') {
+			$scope.sexHeaderHtml = 'MEN';
+		} else {
+			$scope.sexHeaderHtml = 'WOMEN';
+		}
+	}, 'true');
+
+
+
+
+// division toggle
+ // $(document).ready(function () {
+	// $( '#elite' ).click(function() {
+	// 	$( '#toggle_slider' ).animate({ 'left': '0px' }, 400 );
+	// });
+
+	// $( '#masters' ).click(function() {
+	// 	$( '#toggle_slider' ).animate({ 'left': '120px' }, 400 );
+	// });
+
+	// $( '#open' ).click(function(){
+	// 	$( '#toggle_slider' ).animate({ 'left': '240px' }, 400 );
+	// });
+ // });
+
+
+
+//sex toggle
+	// $scope.sex = function(id) {
+	// 	if (id === 'male') {
+	// 		$('#male').animate({'width':'40px', 'height':'40px'},500);
+	// 		return '<h1>MENS</h1>';
+	// 	} else if (id === 'female') {
+	// 		$('#female').animate({'width':'40px', 'height':'40px'},500);
+	// 		return '<h1>WOMENS</h1>';
+	// 	}
+	// };
+
+
+////////////////////////// Athletes array ////////////////////////////////////
 
 	$scope.athletes = [
 			{
@@ -143,50 +198,4 @@ angular.module('FitBoard')
 
 			}
 		];
-
-	$scope.sortType     = 'score'; // set the default sort type
-	$scope.sortReverse  = true;  // set the default sort order
-	$scope.searchName   = '';
-
-	// Colapse support
-	$scope.isCollapsed = true;
-	$scope.oneAtATime = true;
-	$scope.isOpen=false;
-
-	$scope.showCategory = 'elite';
-	$scope.sex = 'default';
-	$scope.info = 'MENS';
-
-	
-// division toggle
- // $(document).ready(function () {
-	// $( '#elite' ).click(function() {
-	// 	$( '#toggle_slider' ).animate({ 'left': '0px' }, 400 );
- // $scope.showCategory = 'elite';
-	// });
-
-	// $( '#masters' ).click(function() {
-	// 	$( '#toggle_slider' ).animate({ 'left': '120px' }, 400 );
- // $scope.showCategory = 'masters';
-	// });
-
-	// $( '#open' ).click(function(){
-	// 	$( '#toggle_slider' ).animate({ 'left': '240px' }, 400 );
- // $scope.showCategory = 'open';
-	// });
- // });
-
-
-
-//sex toggle
-	// $scope.sex = function(id) {
-	// 	if (id === 'male') {
-	// 		$('#male').animate({'width':'40px', 'height':'40px'},500);
-	// 		return '<h1>MENS</h1>';
-	// 	} else if (id === 'female') {
-	// 		$('#female').animate({'width':'40px', 'height':'40px'},500);
-	// 		return '<h1>WOMENS</h1>';
-	// 	}
-	// };
-
-}]);
+});
