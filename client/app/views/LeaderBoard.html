@@ -22,8 +22,8 @@
     </div>
 <!-- Sex -->
     <div class="sex-radio">
-    	<img id="male" ng-click="sex = 'default'; iconStyle={'border':'2px solid #20dd9b'}" src="img/man.png">
-    	<img id="female" ng-click="sex = 'female'; iconStyle={'border':'2px solid #f62459'}" src="img/woman.png">
+    	<img id="male" ng-click="sex = 'default'" src="img/man.png">
+    	<img id="female" ng-click="sex = 'female'" src="img/woman.png">
     </div>
 <!-- Workout -->
 	<div class="workout-list">
@@ -54,7 +54,12 @@
 				<!-- place -->
 				<div class="col-xs-1 place">#{{$index + 1}}</div>
 				<!-- photo -->
-				<div class="col-xs-2 photo"><img id="icon" ng-style="iconStyle" ng-src="{{ athlete.photo }}"></div>
+				<div ng-if="athlete.sex == 'default'" >
+					<div class="col-xs-2 photo"><img id="icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo }}"></div>
+				</div>
+				<div ng-if="athlete.sex == 'female'" >
+					<div class="col-xs-2 photo"><img id="icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ athlete.photo }}"></div>
+				</div>
 				<!-- name -->
 				<div class="col-xs-5 name">{{ athlete.name }}</div>
 				<!-- border -->
