@@ -16,14 +16,14 @@
 <!-- Category -->
 	<div class="toggle_radio">
 		<div id="toggle_slider"></div>
-    	<button class="cat-button" id="elite" ng-click="showCategory = 'elite'">ELITE</button>
-    	<button class="cat-button" id="masters" ng-click="showCategory = 'masters'">MASTERS</button>
-    	<button class="cat-button" id="open" ng-click="showCategory = 'open'">OPEN</button>
-    </div>
+  	<button class="cat-button transformable" ng-class="{'current':eliteCat}" id="elite" ng-click="category = 'elite'; eliteCat = true; mastersCat = false; openCat = false">ELITE</button>
+  	<button class="cat-button transformable" ng-class="{'current':mastersCat}" id="masters" ng-click="category = 'masters'; eliteCat = false; mastersCat = true; openCat = false">MASTERS</button>
+  	<button class="cat-button transformable" ng-class="{'current':openCat}" id="open" ng-click="category = 'open'; eliteCat = false; mastersCat = false; openCat = true">OPEN</button>
+  </div>
 <!-- Sex -->
     <div class="sex-radio">
-    	<img id="male" ng-click="sex = 'default'" src="img/man.png">
-    	<img id="female" ng-click="sex = 'female'" src="img/woman.png">
+    	<img class="transformable" ng-class="{'scale':scaleMale}" id="male" ng-click="sex = 'default'; scaleMale = false; scaleFemale = true" src="img/man.png">
+    	<img class="transformable" ng-class="{'scale':scaleFemale}" id="female" ng-click="sex = 'female'; scaleMale = true; scaleFemale = false" src="img/woman.png">
     </div>
 <!-- Workout -->
 	<div class="workout-list">
@@ -49,7 +49,7 @@
 	<!-- Table -->
 	<div class="col-lg-7 col-centered" id="leaderBoard">
 		<!-- ng-repeat -->
-		<div id="mainRow" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:showCategory | filter:sex" ng-click="isCollapsed = !isCollapsed">
+		<div id="mainRow" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed">
 			<div class="row">
 				<!-- place -->
 				<div class="col-xs-1 place">#{{$index + 1}}</div>
