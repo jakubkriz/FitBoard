@@ -35,6 +35,26 @@
             transform: translateY(-50%);
 }
 
+/* Main */
+
+.main
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+
+    width: 80%;
+    height: 100%;
+    margin: 55px 0 0 20%;
+    padding: 0;
+    @media only screen and (max-width: 425px)
+    {
+        width: 100%;
+        margin-left: 0;
+    }
+}
 
 /* navigation panels */
 .panel-top
@@ -42,28 +62,62 @@
     position: fixed;
     z-index: 1000;
     right: 0;
-    left: 0;
 
-    width: 100%;
+    width: 80%;
     height: 55px;
 
     background-color: @panel-top;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+    @media only screen and (max-width: 425px)
+    {
+        width: 100%;
+    }
 }
 
 .panel-left
 {
     position: fixed;
-    z-index: 1030;
-    top: 0;
-    bottom: 0;
 
-    width: 240px;
+    width: 20%;
     height: 100%;
+    margin: 0;
+    padding: 0;
 
     background-color: @panel-left;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+    @media only screen and (max-width: 425px)
+    {
+        display: none;
+    }
 }
+
+/* mobile menu */
+
+.mobile-menu
+{
+    left: 20px;
+
+    display: none;
+
+    margin-top: 4px;
+
+    .vertical-align;
+    @media only screen and (max-width: 425px)
+    {
+        font-size: 3rem;
+
+        display: inline-block;
+
+        color: @silver;
+    }
+}
+
+.dropdown-mobile
+{
+    position: absolute;
+    left: -20px;
+}
+
 
 /* logo */
 .nav-logo
@@ -75,18 +129,23 @@
     text-align: center;
 }
 
+#logo
+{
+    width: 100px;
+}
+
 /* Top nav */
 
 .nav-photo
 {
     position: absolute;
     right: 20px;
+
     display: inline-block;
 
     width: 40px;
     height: 40px;
     margin-top: 5px;
-
 }
 
 #nav-icon
@@ -99,42 +158,53 @@
 
     border: 2px solid @male;
     border-radius: 100%;
-
-    &:hover {
-        opacity: .5;
+    &:hover
+    {
         cursor: pointer;
+
+        opacity: .5;
     }
 }
 
-.user-name {
-    display: inline-block;
+.user-name
+{
     right: 100px;
+
+    display: inline-block;
+
     .vertical-align;
 }
 
-h4 {
+h4
+{
     color: @silver;
 }
 
-.dropdown-menu {
-
+.dropdown-nav
+{
     position: absolute;
-    margin-top: 10px;
     left: -120px;
+
+    margin-top: 10px;
+    @media only screen and (max-width: 425px)
+    {
+        left: -100px;
+    }
 }
 
 /* Left nav */
 
-.menu-btn{
+.menu-btn
+{
     font-size: 1.5rem;
     font-weight: 600;
 
     position: relative;
     top: 0;
-    padding-left: 70px;
 
     width: 100%;
     height: 100px;
+    padding-left: 70px;
 
     cursor: pointer;
     text-align: left;
@@ -148,11 +218,30 @@ h4 {
         background: @hoki;
     }
     &:focus,
-    &:active {
+    &:active
+    {
         font-size: 1.7rem;
+
+        color: @panels;
+        border-right: 0;
         outline: 0 none;
         background: @body;
-        border-right: 0;
-        color: @panels;
     }
+    @media only screen and (max-width: 1024px)
+    {
+        padding-left: 50px;
+    }
+    @media only screen and (max-width: 768px)
+    {
+        padding-left: 20px;
+    }
+    @media only screen and (max-width: 425px)
+    {
+        display: none;
+    }
+}
+
+.btn-wrapper
+{
+    margin-top: 50px;
 }
