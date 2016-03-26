@@ -1,6 +1,6 @@
 /* exported app*/
 
-var app = angular.module('FitBoard', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngSanitize', 'ui.router']);
+var app = angular.module('FitBoard', ['ui.router', 'ui.bootstrap', 'ngSanitize']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 	'use strict';
