@@ -2,10 +2,16 @@ angular.module('FitBoard')
 	.controller('UserCtrl', ['$scope',function($scope) {
 	'use strict';
 
+//dropdown controller
+	$scope.status = {
+	isopen: false
+	};
+
+//User
 	$scope.user = 
 		{
 					name: 'Michal Dovrtěl',
-					sex: 'male',
+					sex: 'default',
 					category: 'elite',
 					gym: 'independent2',
 					photo: 'img/profile.jpg',
@@ -25,9 +31,5 @@ angular.module('FitBoard')
 					sprint: '1:30',
 					row: '4:00'
 				};
-
-	$scope.status = {
-    isopen: false
-  };
 
 }]);

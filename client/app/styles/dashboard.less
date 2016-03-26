@@ -23,7 +23,6 @@
 @score: #2c3e50;
 @male: @niagara;
 @female: @radical-red;
-@categoryBtn-hover: @easy-red;
 
 .vertical-align(@position: absolute)
 {
@@ -210,7 +209,8 @@ h4
     text-align: left;
 
     color: @silver;
-    border: 1px solid @dark-grey;
+    border: 0.5px solid @dark-grey;
+    border-left: 0;
     background-color: transparent;
     &:hover,
     {
@@ -244,4 +244,8 @@ h4
 .btn-wrapper
 {
     margin-top: 50px;
+}
+
+.icon {
+	padding-right: 20px;
 }

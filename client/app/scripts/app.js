@@ -2,23 +2,63 @@
 
 var app = angular.module('FitBoard', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngSanitize', 'ui.router']);
 
-app.config(function($routeProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
 	'use strict';
-    $routeProvider
-      .when('/lb', {
-        templateUrl: 'views/LeaderBoard.html',
-        controller: 'LeaderBoardCtrl'
-      });
-      $routeProvider
-      .when('/user', {
-        templateUrl: 'views/User.html',
-        controller: 'UserCtrl'
-      });
 
-//	$routeProvider.otherwise({redirectTo:'/main'});
+	$urlRouterProvider.otherwise('404');
 
-//    $locationProvider.html5Mode({
-//		enabled: true,
-//  		requireBase: false
-//	});
+	$stateProvider
+	  .state('404', {
+	  	url: '/404',
+		templateUrl: 'views/404.html',
+	  });
+
+	$stateProvider
+	  .state('lb', {
+	  	url: '/lb',
+		templateUrl: 'views/LeaderBoard.html',
+		controller: 'LeaderBoardCtrl'
+	  });
+
+	  $stateProvider
+		.state('user', {
+		url: '/user',
+		templateUrl: 'views/user/User.html',
+		controller: 'UserCtrl'
+	  });
+			$stateProvider
+			.state('user.dashboard', {
+			url: '/dash',
+			templateUrl: 'views/user/User.dashboard.html',
+			controller: 'UserCtrl'
+		  });
+
+			$stateProvider
+			.state('user.events', {
+			url: '/events',
+			templateUrl: 'views/user/User.events.html',
+			controller: 'UserCtrl'
+		  });
+
+			$stateProvider
+			.state('user.qual', {
+			url: '/qual',
+			templateUrl: 'views/user/User.qual.html',
+			controller: 'UserCtrl'
+		  });
+
+			$stateProvider
+			.state('user.profile', {
+			url: '/profile',
+			templateUrl: 'views/user/User.profile.html',
+			controller: 'UserCtrl'
+		  });
+
+			$stateProvider
+			.state('user.admin', {
+			url: '/admin',
+			templateUrl: 'views/user/User.admin.html',
+			controller: 'UserCtrl'
+		  });
+
 });
