@@ -163,7 +163,7 @@ h1
     height: 50px;
 
     color: @silver;
-    background: @categoryBtn-hover;
+
 }
 
 .cat-button
@@ -191,6 +191,27 @@ h1
         outline: 0 none;
         background: @categoryBtn-hover;
     }
+
+}
+
+.transformable {
+    -webkit-transition: all 400ms ease-in-out;
+    -moz-transition: all 400ms ease-in-out;
+    -o-transition: all 400ms ease-in-out;
+    -ms-transition: all 400ms ease-in-out;
+    transition: all 400ms ease-in-out;
+}
+
+#male.scale, #female.scale {
+    -webkit-transform: scale(0.7,0.7);
+    -moz-transform: scale(0.7,0.7);
+    -o-transform: scale(0.7,0.7);
+    -ms-transform: scale(0.7,0.7);
+    transform: scale(0.7,0.7);
+}
+
+#elite.current, #masters.current, #open.current {
+    background: @categoryBtn-hover;
 }
 
 #elite

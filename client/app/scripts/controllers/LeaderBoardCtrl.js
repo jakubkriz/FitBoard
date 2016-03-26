@@ -9,11 +9,17 @@ board.controller('LeaderBoardCtrl', function($scope) {
 
 	// Colapse support
 	$scope.isCollapsed = true;
-	$scope.oneAtATime = true;
-	$scope.isOpen=false;
+	$scope.oneAtATime  = true;
+	$scope.isOpen      = false;
 
-	$scope.showCategory = 'elite';
-	$scope.sex = 'default';
+	// Initialization
+	$scope.category 	 = 'elite';
+	$scope.sex				 = 'default';
+	$scope.scaleMale	 = false;
+	$scope.scaleFemale = true;
+	$scope.eliteCat 	 = true;
+	$scope.mastersCat  = false;
+	$scope.openCat 		 = false;
 
 	$scope.$watch('sex', function() {
 		if ($scope.sex === 'default') {
