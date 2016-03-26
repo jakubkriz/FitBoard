@@ -15,7 +15,8 @@
     "ui-bootstrap": "^1.2.1",
     "angular-bootstrap": "^1.2.1",
     "angular-ui-grid": "^3.1.1",
-    "matchHeight": "^0.7.0"
+    "matchHeight": "^0.7.0",
+    "angular-ui-router": "^0.2.18"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
