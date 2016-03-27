@@ -1,11 +1,11 @@
 /* exported app*/
-
 var app = angular.module('FitBoard', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngSanitize', 'ui.router', 'ui.grid']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 	'use strict';
 
 	$urlRouterProvider.otherwise('404');
+	$urlRouterProvider.when('', '/user');
 
 	$stateProvider
 	  .state('404', {
@@ -23,34 +23,34 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	  $stateProvider
 		.state('user', {
 		url: '/user',
-		templateUrl: 'views/user/User.html',
+		templateUrl: 'views/User/User.html',
 		controller: 'UserCtrl'
 	  });
 			$stateProvider
 			.state('user.dashboard', {
 			url: '/dash',
-			templateUrl: 'views/user/User.dashboard.html',
+			templateUrl: 'views/User/User.dashboard.html',
 			controller: 'UserCtrl'
 		  });
 
 			$stateProvider
 			.state('user.events', {
 			url: '/events',
-			templateUrl: 'views/user/User.events.html',
+			templateUrl: 'views/User/User.events.html',
 			controller: 'UserCtrl'
 		  });
 
 			$stateProvider
 			.state('user.qual', {
 			url: '/qual',
-			templateUrl: 'views/user/User.qual.html',
+			templateUrl: 'views/User/User.qual.html',
 			controller: 'UserCtrl'
 		  });
 
 			$stateProvider
 			.state('user.profile', {
 			url: '/profile',
-			templateUrl: 'views/user/User.profile.html',
+			templateUrl: 'views/User/User.profile.html',
 			controller: 'UserCtrl'
 		  });
 
@@ -59,6 +59,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			url: '/admin',
 			templateUrl: 'views/user/User.admin.html',
 			controller: 'AdminCtrl'
+
 		  });
 
 });
