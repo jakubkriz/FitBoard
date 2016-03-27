@@ -6,6 +6,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	'use strict';
 
 	$urlRouterProvider.otherwise('404');
+	$urlRouterProvider.when('', '/user');
 
 	$stateProvider
 	  .state('404', {
