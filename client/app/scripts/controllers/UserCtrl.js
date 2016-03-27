@@ -1,8 +1,9 @@
-angular.module('FitBoard')
-	.controller('UserCtrl', ['$scope',function($scope) {
+var user = angular.module('FitBoard');
+
+user.controller('UserCtrl', function($scope) {
 	'use strict';
 
-	$scope.user = 
+	$scope.user =
 		{
 					name: 'Michal Dovrtěl',
 					sex: 'male',
@@ -30,4 +31,4 @@ angular.module('FitBoard')
     isopen: false
   };
 
-}]);
+});
