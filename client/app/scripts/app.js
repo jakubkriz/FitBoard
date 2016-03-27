@@ -1,5 +1,5 @@
 /* exported app*/
-var app = angular.module('FitBoard', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngSanitize', 'ui.router', 'ui.grid']);
+var app = angular.module('FitBoard', ['ngAnimate', 'ui.bootstrap', 'ngSanitize', 'ui.router', 'ui.grid']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 	'use strict';
@@ -57,7 +57,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			$stateProvider
 			.state('user.admin', {
 			url: '/admin',
-			templateUrl: 'views/user/User.admin.html',
+			templateUrl: 'views/User/User.admin.html',
 			controller: 'AdminCtrl'
 
 		  });
