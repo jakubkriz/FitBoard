@@ -77,7 +77,8 @@ body
 }
 
 .body
-{
+{   
+    height: 100%;
     padding: 0 0 50px 0;
 
     background: url(bcg.jpg) no-repeat center center fixed;
@@ -98,12 +99,10 @@ body
 /* footer */
 footer
 {
-    position: static;
+    position: relative;
 
-    clear: both;
-
+    width: 100%;
     height: 60px;
-    margin-top: 0;
     padding-top: 10px;
 
     text-align: center;
@@ -112,23 +111,31 @@ footer
     border-top: 1px solid @grey;
 }
 
+/* form */
+
 .container
 {
-    padding-right: 15px;
-    padding-left: 15px;
+    position: relative;
+    min-height: 100%;
+    height: auto !important;
+    margin-bottom: auto;
     margin-right: auto;
     margin-left: auto;
-
-    border: 1px solid #ccc;
-    background-color: #f2f2f2;
-    -webkit-box-shadow: 0 2px 2px 1px rgba(0,0,0,.2);
-            box-shadow: 0 2px 2px 1px rgba(0,0,0,.2);
+    padding: 40px;
 }
 
-.form-signin {
+.form-signin
+{
+    overflow:auto;
+    padding-bottom:150px;
     max-width: 330px;
-    padding: 15px;
     margin: 0 auto;
+    padding: 15px;
+}
+
+.form-signin-heading
+{
+    text-align: center;
 }
 
 /* fonts */
