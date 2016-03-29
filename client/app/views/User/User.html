@@ -1,0 +1,59 @@
+<!-- Panel top -->
+<div class="panel-top">
+	<!-- mobile -->
+	<div class="mobile-menu" uib-dropdown on-toggle="toggled(open)">
+		<span id="mobile" class="glyphicon glyphicon-menu-hamburger" uib-dropdown-toggle></span>
+			<ul uib-dropdown-menu class="dropdown-mobile" aria-labelledby="mobile">
+				<li><a href="#"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+				<li class="divider"></li>
+				<li><a href="#"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>
+				<li class="divider"></li>
+				<li><a href="#"><span class="glyphicon glyphicon-check"></span> Qualification</a></li>
+				<li class="divider"></li>
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span> My profile</a></li>
+			</ul>
+	</div>
+	<!-- navigation -->
+	<div class="user-name">
+		<h4>{{ user.name }}</h4>
+	</div>
+
+		<div ng-if="user.sex == 'default'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
+			<img id="nav-icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ user.photo }}" uib-dropdown-toggle>
+
+			<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
+				<li><a href="#">My profile</a></li>
+				<li class="divider"></li>
+				<li><a href="#">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+			</ul>
+		</div>
+
+		<div ng-if="user.sex == 'female'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
+			<img id="nav-icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ user.photo }}" uib-dropdown-toggle>
+
+			<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
+				<li><a href="#">My profile</a></li>
+				<li class="divider"></li>
+				<li><a href="#">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+		  </ul>
+		</div>
+
+</div>
+
+<!-- Panel left -->
+<div class="panel-left clearfix">
+	<div class="nav-logo" id="nav-logo">
+		<img id="logo" src="img/monster.png">
+	</div>
+	<div class="btn-wrapper">
+		<button class="menu-btn" ui-sref=".dashboard"><span class="icon glyphicon glyphicon-dashboard"></span>Dashboard</button>
+		<button class="menu-btn" ui-sref=".events"><span class="icon glyphicon glyphicon-calendar"></span>Events</button>
+		<button class="menu-btn" ui-sref=".qual"><span class="icon glyphicon glyphicon-check"></span>Qualification</button>
+		<button class="menu-btn" ui-sref=".profile"><span class="icon glyphicon glyphicon-user"></span>My profile</button>
+		<button class="menu-btn" ui-sref=".admin"><span class="icon glyphicon glyphicon-king"></span>Admin</button>
+	</div>
+	<!-- <footer><div class="col-centered">FIT Monster 2016</div></footer> -->
+</div>
+
+<!-- MAIN -->
+<div class="main" ui-view></div>

@@ -33,11 +33,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
     <link rel="stylesheet/less" type="text/css" href="styles/dashboard.less" />
+    <link rel="stylesheet/less" type="text/css" href="styles/admin.less" />
+
     <!-- endbuild -->
 
   </head>
   <body ng-app="FitBoard">
-     <div ng-view></div>
+     <div ui-view></div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -66,6 +68,7 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
     <script src="bower_components/matchHeight/dist/jquery.matchHeight.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -76,6 +79,8 @@
         <!-- Controllers -->
         <script src="scripts/controllers/LeaderBoardCtrl.js"></script>
         <script src="scripts/controllers/UserCtrl.js"></script>
+        <script src="scripts/controllers/AdminCtrl.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>

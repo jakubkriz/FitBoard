@@ -139,7 +139,7 @@ admin.controller('AdminCtrl', function($scope) {
 				tShirt: 'S',
 				gym: 'independent',
 				age: 23
-			},
+	   	},
 			{
 				name: 'Aneta Mala',
 				sex: 'female',
@@ -149,11 +149,11 @@ admin.controller('AdminCtrl', function($scope) {
 				tShirt: 'S',
 				gym: 'independent',
 				age: 23
-			},
+   		},
 			{
 				name: 'Aneta Druha',
 				sex: 'female',
-				email: 'athl@gmail.com',
+	  		email: 'athl@gmail.com',
 				category: 'elite',
 				tShirt: 'S',
 				telephone: '773773773',
@@ -173,13 +173,13 @@ admin.controller('AdminCtrl', function($scope) {
 			{
 				sex: 'default',
 				name: 'Michal Dovrtel',
-				telephone: '773773773',
+	  		telephone: '773773773',
 				category: 'open',
 				email: 'athl@gmail.com',
 				tShirt: 'M',
 				gym: 'independent',
 				age: 23
-			},
+   		},
 			{
 				sex: 'default',
 				name: 'Adam Ohral',
@@ -189,7 +189,7 @@ admin.controller('AdminCtrl', function($scope) {
 				tShirt: 'XXXL',
 				gym: 'independent',
 				age: 23
-			},
+  		},
 			{
 				sex: 'default',
 				name: 'Michal Dovrtel',
@@ -199,7 +199,7 @@ admin.controller('AdminCtrl', function($scope) {
 				tShirt: 'M',
 				gym: 'independent',
 				age: 23
-			},
+  		},
 			{
 				sex: 'default',
 				name: 'Adam Ohral',
@@ -209,7 +209,7 @@ admin.controller('AdminCtrl', function($scope) {
 				tShirt: 'XS',
 				gym: 'independent',
 				age: 23
-			},
+  		},
 			{
 				sex: 'default',
 				name: 'Frantisek Heriban',
@@ -219,7 +219,7 @@ admin.controller('AdminCtrl', function($scope) {
 				tShirt: 'S',
 				gym: 'independent',
 				age: 23
-			},
+  		},
 			{
 				sex: 'default',
 				name: 'Michal Dovrtel',
@@ -229,7 +229,7 @@ admin.controller('AdminCtrl', function($scope) {
 				tShirt: 'M',
 				gym: 'independent',
 				age: 23
-			},
+  		},
 			{
 				sex: 'default',
 				name: 'Adam Ohral',
@@ -239,6 +239,6 @@ admin.controller('AdminCtrl', function($scope) {
 				tShirt: 'M',
 				gym: 'independent',
 				age: 23
-			}
+		  }
 		];
 });
