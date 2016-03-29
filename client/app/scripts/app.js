@@ -8,20 +8,27 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	//$urlRouterProvider.when('', 'reg');
 
 	$stateProvider
-	  .state('reg', {
-	  	url: '',
+	  .state('login', {
+		url: '',
+		templateUrl: 'views/login.html',
+		controller: 'loginCtrl'
+	  });
+
+	$stateProvider
+	 .state('reg', {
+	  	url: '/reg',
 		templateUrl: 'views/registration.html',
 	  });
 
 	$stateProvider
 	  .state('404', {
-	  	url: '/404',
+		url: '/404',
 		templateUrl: 'views/404.html',
 	  });
 
 	$stateProvider
 	  .state('lb', {
-	  	url: '/lb',
+		url: '/lb',
 		templateUrl: 'views/LeaderBoard.html',
 		controller: 'LeaderBoardCtrl'
 	  });
