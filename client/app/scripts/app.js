@@ -1,5 +1,5 @@
 /* exported app*/
-var app = angular.module('FitBoard', ['ngAnimate', 'ui.bootstrap', 'ngSanitize', 'ui.router', 'ui.grid']);
+var app = angular.module('FitBoard', ['ngAnimate', 'ui.bootstrap', 'ngSanitize', 'ui.router', 'ui.grid', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.pinning', 'ui.grid.selection', 'ui.grid.moveColumns', 'ui.grid.exporter', 'ui.grid.importer']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 	'use strict';
@@ -76,3 +76,5 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		  });
 
 });
+
+

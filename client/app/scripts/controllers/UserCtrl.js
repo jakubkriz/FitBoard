@@ -1,7 +1,11 @@
-angular.module('FitBoard')
-	.controller('UserCtrl', ['$scope',function($scope) {
+var user = angular.module('FitBoard');
+
+user.controller('UserCtrl', function($scope) {
 	'use strict';
 
+<<<<<<< HEAD
+	$scope.user =
+=======
 //dropdown controller
 	$scope.status = {
 	isopen: false
@@ -9,6 +13,7 @@ angular.module('FitBoard')
 
 //User
 	$scope.user = 
+>>>>>>> 4d3e80bcecc3ac0a25e3e5837f579a37d6b33f03
 		{
 					name: 'Michal Dovrtěl',
 					sex: 'default',
@@ -32,4 +37,12 @@ angular.module('FitBoard')
 					row: '4:00'
 				};
 
+<<<<<<< HEAD
+	$scope.status = {
+    isopen: false
+  };
+
+});
+=======
 }]);
+>>>>>>> 4d3e80bcecc3ac0a25e3e5837f579a37d6b33f03
