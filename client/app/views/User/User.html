@@ -30,7 +30,7 @@
 
 		<div ng-if="user.sex == 'female'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
 			<img id="nav-icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ user.photo }}" uib-dropdown-toggle>
-			
+
 			<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
 				<li><a href="#">My profile</a></li>
 				<li class="divider"></li>
@@ -43,7 +43,7 @@
 <!-- Panel left -->
 <div class="panel-left clearfix">
 	<div class="nav-logo" id="nav-logo">
-		<img id="logo" src="img/monster.png">	
+		<img id="logo" src="img/monster.png">
 	</div>
 	<div class="btn-wrapper">
 		<button class="menu-btn" ui-sref=".dashboard"><span class="icon glyphicon glyphicon-dashboard"></span>Dashboard</button>
