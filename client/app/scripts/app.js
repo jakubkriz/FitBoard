@@ -5,7 +5,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	'use strict';
 
 	$urlRouterProvider.otherwise('404');
-	$urlRouterProvider.when('', '/user');
+	//$urlRouterProvider.when('', 'reg');
+
+	$stateProvider
+	  .state('reg', {
+	  	url: '',
+		templateUrl: 'views/registration.html',
+	  });
 
 	$stateProvider
 	  .state('404', {
