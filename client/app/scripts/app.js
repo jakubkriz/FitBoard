@@ -18,6 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 .state('reg', {
 	  	url: '/reg',
 		templateUrl: 'views/registration.html',
+		controller: 'registrationCtrl'
 	  });
 
 	$stateProvider
