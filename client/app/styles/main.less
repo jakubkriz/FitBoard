@@ -111,6 +111,12 @@ footer
     border-top: 1px solid @grey;
 }
 
+.sticky-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
 /* form */
 
 .container
@@ -118,7 +124,6 @@ footer
     position: relative;
     min-height: 100%;
     height: auto !important;
-    margin-bottom: auto;
     margin-right: auto;
     margin-left: auto;
     padding: 40px;
@@ -128,9 +133,11 @@ footer
 {
     overflow:auto;
     padding-bottom:150px;
-    max-width: 500px;
+    max-width: 220px;
     margin: 0 auto;
     padding: 15px;
+
+    box-shadow: @dark-grey;
 }
 
 .form-signin-heading
