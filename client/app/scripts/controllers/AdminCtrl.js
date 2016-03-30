@@ -22,6 +22,13 @@ admin.controller('AdminCtrl', function($scope) {
   //   return row.id;
   // };
 
+  $scope.deleteRow = function(row) {
+    var index = $scope.gridOptions.data.indexOf(row.entity);
+    $scope.gridOptions.data.splice(index, 1);
+  };
+
+
+
   $scope.gridOptions.columnDefs = [
   	{ name:'full name', field: 'name', enableCellEdit:false},
 	  { name:'email', field: 'email', enableCellEdit:false},
@@ -31,7 +38,8 @@ admin.controller('AdminCtrl', function($scope) {
 	  { name:'t-shirt', field: 'tShirt', enableCellEdit: true, enableFiltering:false },
 	  { name:'payment', type:'boolean'},
 	  { name:'qualified', type:'boolean'},
-	  { name:'position', enableFiltering:false},
+	  { name:'position', type:'number', enableFiltering:false},
+    { name: 'edit', enableCellEdit: false,  cellTemplate: '<button class="btn btn-danger" ng-click="athletesGrid.appScope.deleteRow(row)">X</button>' }
 ///////////////////////////////////////////////////////////
     // { name:'id', width:50 },
     // { name:'name', width:100 },
