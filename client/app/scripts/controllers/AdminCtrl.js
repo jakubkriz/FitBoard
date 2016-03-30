@@ -22,43 +22,68 @@ admin.controller('AdminCtrl', function($scope) {
   //   return row.id;
   // };
 
-  $scope.deleteRow = function(row) {
-    var index = $scope.gridOptions.data.indexOf(row.entity);
-    $scope.gridOptions.data.splice(index, 1);
-  };
+ //  $scope.deleteRow = function(row) {
+	// var index = $scope.gridOptions.data.indexOf(row.entity);
+	// $scope.gridOptions.data.splice(index, 1);
+ //  };
+
+$scope.Delete = function(row) {
+	debugger;
+            var index = $scope.gridOptions.data.indexOf(row.entity);
+            $scope.gridOptions.data.splice(index, 1);
+        };
 
 
 
   $scope.gridOptions.columnDefs = [
-  	{ name:'full name', field: 'name', enableCellEdit:false},
-	  { name:'email', field: 'email', enableCellEdit:false},
-	  { name:'telephone', enableCellEdit:false, enableFiltering:false },
-	  { name:'sex', field: 'sex', enableCellEdit:false},
-	  { name:'category', field: 'category', enableCellEdit:false},
-	  { name:'t-shirt', field: 'tShirt', enableCellEdit: true, enableFiltering:false },
-	  { name:'payment', type:'boolean'},
-	  { name:'qualified', type:'boolean'},
-	  { name:'position', type:'number', enableFiltering:false},
-    { name: 'edit', enableCellEdit: false,  cellTemplate: '<button class="btn btn-danger" ng-click="athletesGrid.appScope.deleteRow(row)">X</button>' }
-///////////////////////////////////////////////////////////
-    // { name:'id', width:50 },
-    // { name:'name', width:100 },
-    // { name:'age', width:100, enableCellEdit: true, aggregationType:uiGridConstants.aggregationTypes.avg, treeAggregationType: uiGridGroupingConstants.aggregation.AVG },
-    // { name:'address.street', width:150, enableCellEdit: true },
-    // { name:'address.city', width:150, enableCellEdit: true },
-    // { name:'address.state', width:50, enableCellEdit: true },
-    // { name:'address.zip', width:50, enableCellEdit: true },
-    // { name:'company', width:100, enableCellEdit: true },
-    // { name:'email', width:100, enableCellEdit: true },
-    // { name:'phone', width:200, enableCellEdit: true },
-    // { name:'about', width:300, enableCellEdit: true },
-    // { name:'friends[0].name', displayName:'1st friend', width:150, enableCellEdit: true },
-    // { name:'friends[1].name', displayName:'2nd friend', width:150, enableCellEdit: true },
-    // { name:'friends[2].name', displayName:'3rd friend', width:150, enableCellEdit: true },
-// !!!// { name:'agetemplate',field:'age', width:150, cellTemplate: '<div class="ui-grid-cell-contents"><span>Age 2:{{COL_FIELD}}</span></div>' },
-    // { name:'Is Active',field:'isActive', width:150, type:'boolean' },
-    // { name:'Join Date',field:'registered', cellFilter:'date', width:150, type:'date', enableFiltering:false },
-    // { name:'Month Joined',field:'registered', cellFilter: 'date:"MMMM"', filterCellFiltered:true, sortCellFiltered:true, width:150, type:'date' }
+		{ 	name:'full name', 
+			field: 'name', 
+			enableCellEdit:false
+		},
+		{ 	name:'email', 
+			field: 'email', 
+			enableCellEdit:false
+		},
+		{ 	name:'birthday', 
+			enableCellEdit:true, 
+			enableFiltering:false,
+			type: 'date',
+			field: 'birthday'
+		},
+		{ 	name:'telephone', 
+			enableCellEdit:false, 
+			enableFiltering:false 
+		},
+		{ 	name:'sex', 
+			field: 'sex', 
+			enableCellEdit:false
+		},
+		{ 	name:'category', 
+			field: 'category', 
+			enableCellEdit:false
+		},
+		{ 	name:'t-shirt', 
+			field: 'tShirt', 
+			enableCellEdit: true, 
+			enableFiltering:false 
+		},
+		{ 	name:'payment', 
+			type:'boolean',
+			cellTemplate: '<input type="checkbox" value="paid">' 
+		},
+		{ 	name:'qualified', 
+			type:'boolean',
+			cellTemplate: '<input type="checkbox" value="paid">' 
+		},
+		{ 	name:'position', 
+			type:'number', 
+			enableFiltering:false
+		},
+		{ 	name: 'edit', 
+//			enableCellEdit: false,
+//			cellTemplate: '<button class="btn primary" ng-click="Delete(row)">Delete Me</button>' 
+			cellTemplate: '<button class="btn primary" ngclick="alert(1)">Delete Me</button>' 
+		}
   ];
 
   // $scope.callsPending = 0;
@@ -100,21 +125,6 @@ admin.controller('AdminCtrl', function($scope) {
 
   // };
 
-// var columns = [
-	// { name: 'full name' },
-	// { name: 'email' },
-	// { name: 'telephone' },
- //  { name: 'sex' }
- //  { name: 'category' }
- //  { name: 't-shirt' }
-// 	  { name:'full name', field: 'name', enableCellEdit:false},
-// 	  { name:'email', field: 'email', enableCellEdit:false},
-// 	  { name:'telephone', field: 'telephone', enableCellEdit:false},
-// 	  { name:'sex', field: 'sex', enableCellEdit:false},
-// 	  { name:'category', field: 'category', enableCellEdit:false},
-// 	  { name:'t-shirt', field: 'tShirt'},
-// ];
-
 ////////////////////////// Athletes  ////////////////////////////////////
 
 	$scope.athletes = [
@@ -126,7 +136,9 @@ admin.controller('AdminCtrl', function($scope) {
 				category: 'elite',
 				tShirt: 'M',
 				gym: 'independent',
-				age: 23
+				age: 23,
+				birthday: '12.12.1990'
+
 			},
 			{
 				name: 'Michal Dovrtel',
@@ -136,7 +148,8 @@ admin.controller('AdminCtrl', function($scope) {
 				email: 'athl@gmail.com',
 				tShirt: 'M',
 				gym: 'independent',
-				age: 23
+				age: 23,
+				birthday: '12.12.1990'
 			},
 			{
 				name: 'Aneta Velika',
@@ -146,8 +159,9 @@ admin.controller('AdminCtrl', function($scope) {
 				telephone: '773773773',
 				tShirt: 'S',
 				gym: 'independent',
-				age: 23
-	   	},
+				age: 23,
+				birthday: '12.12.1990'
+		},
 			{
 				name: 'Aneta Mala',
 				sex: 'female',
@@ -156,17 +170,19 @@ admin.controller('AdminCtrl', function($scope) {
 				telephone: '773773773',
 				tShirt: 'S',
 				gym: 'independent',
-				age: 23
-   		},
+				age: 23,
+				birthday: '12.12.1990'
+		},
 			{
 				name: 'Aneta Druha',
 				sex: 'female',
-	  		email: 'athl@gmail.com',
+			email: 'athl@gmail.com',
 				category: 'elite',
 				tShirt: 'S',
 				telephone: '773773773',
 				gym: 'independent',
-				age: 23
+				age: 23,
+				birthday: '12.12.1990'
 			},
 			{
 				sex: 'default',
@@ -176,18 +192,20 @@ admin.controller('AdminCtrl', function($scope) {
 				category: 'open',
 				tShirt: 'S',
 				gym: 'independent',
-				age: 23
+				age: 23,
+				birthday: '12.12.1990'
 			},
 			{
 				sex: 'default',
 				name: 'Michal Dovrtel',
-	  		telephone: '773773773',
+			telephone: '773773773',
 				category: 'open',
 				email: 'athl@gmail.com',
 				tShirt: 'M',
 				gym: 'independent',
-				age: 23
-   		},
+				age: 23,
+				birthday: '12.12.1990'
+		},
 			{
 				sex: 'default',
 				name: 'Adam Ohral',
@@ -196,8 +214,9 @@ admin.controller('AdminCtrl', function($scope) {
 				email: 'athl@gmail.com',
 				tShirt: 'XXXL',
 				gym: 'independent',
-				age: 23
-  		},
+				age: 23,
+				birthday: '12.12.1990'
+		},
 			{
 				sex: 'default',
 				name: 'Michal Dovrtel',
@@ -206,8 +225,9 @@ admin.controller('AdminCtrl', function($scope) {
 				email: 'athl@gmail.com',
 				tShirt: 'M',
 				gym: 'independent',
-				age: 23
-  		},
+				age: 23,
+				birthday: '12.12.1990'
+		},
 			{
 				sex: 'default',
 				name: 'Adam Ohral',
@@ -216,8 +236,9 @@ admin.controller('AdminCtrl', function($scope) {
 				email: 'athl@gmail.com',
 				tShirt: 'XS',
 				gym: 'independent',
-				age: 23
-  		},
+				age: 23,
+				birthday: '12.12.1990'
+		},
 			{
 				sex: 'default',
 				name: 'Frantisek Heriban',
@@ -226,8 +247,9 @@ admin.controller('AdminCtrl', function($scope) {
 				email: 'athl@gmail.com',
 				tShirt: 'S',
 				gym: 'independent',
-				age: 23
-  		},
+				age: 23,
+				birthday: '12.12.1990'
+		},
 			{
 				sex: 'default',
 				name: 'Michal Dovrtel',
@@ -236,8 +258,9 @@ admin.controller('AdminCtrl', function($scope) {
 				email: 'athl@gmail.com',
 				tShirt: 'M',
 				gym: 'independent',
-				age: 23
-  		},
+				age: 23,
+				birthday: '12.12.1990'
+		},
 			{
 				sex: 'default',
 				name: 'Adam Ohral',
@@ -246,7 +269,8 @@ admin.controller('AdminCtrl', function($scope) {
 				email: 'athl@gmail.com',
 				tShirt: 'M',
 				gym: 'independent',
-				age: 23
+				age: 23,
+				birthday: '12.12.1990'
 		  }
 		];
 });
