@@ -77,7 +77,7 @@ body
 }
 
 .body
-{   
+{
     height: 100%;
     padding: 0 0 50px 0;
 
@@ -606,4 +606,16 @@ table
     margin: auto;
 
     color: @silver;
+}
+
+
+.registration-messages {
+  transition:1s linear all;
+}
+.registration-messages.ng-active {
+  // messages are visible
+  color: @radical-red;
+}
+.registration-messages.ng-inactive {
+  // messages are hidden
 }

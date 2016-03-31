@@ -28,6 +28,9 @@
 				<div class="col-md-4 col-xs-offset-2">
 						<label for="email" class="sr-only">Email</label>
 						<input type="email" ng-model="athlete.email" uib-tooltip="@" id="email" class="form-control" placeholder="Email" required>
+					  <div ng-messages="emailErrors" class="registration-messages" role="alert">
+					    <div ng-message="emailAlreadyExists">This email address already exists.</div>
+					  </div>
 				</div>
 				<div class="col-md-4">
 						<label for="phone" class="sr-only">Telephone</label>
@@ -66,13 +69,16 @@
 
 			<div class="clearfix col-md-6 col-xs-offset-3 wrap">
 				<div class="checkbox wrap">
-					<input type="checkbox" value="remember-me" required> <span style="color: #ff0000;">*</span>I agree with <span style="text-decoration: underline;"><a title="Podmínky" href="http://fitmonster.cz/conditions/">terms&condition</a></span> of FIT Monster Team, z.s.
+					<input type="checkbox" value="remember-me" required> <span style="color: #ff0000;">*</span>I agree with <span style="text-decoration: underline;"><a title="Podmínky" href="http://fitmonster.cz/conditions/">terms&conditions</a></span> of FIT Monster Team, z.s.
 				</div>
 			</div>
-				
 
-				
+
+
 				<button class="btn btn-lg btn-primary btn-block" type="submit">REGISTER</button>
+				<div ng-messages="serverErrors" class="registration-messages" role="alert">
+					<div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
+				</div>
 		</form>
 	</div>
 

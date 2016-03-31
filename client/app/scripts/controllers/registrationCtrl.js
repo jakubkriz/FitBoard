@@ -7,7 +7,22 @@ user.controller('registrationCtrl', function($scope) {
 	    $scope.dt = null;
 	};
 
-	$scope.dateOptions = {
+
+  $scope.status = 400;
+  // if ($api.getHttpStatus() == 400) {}
+  if ($scope.status === 400) {
+    $scope.emailErrors = {
+      emailAlreadyExists: true
+    };
+  }
+  // if ($api.getHttpStatus() == 500) {}
+ $scope.serverErrors = {
+    internal: false, //500
+    unavailable: true //503
+  };
+
+
+  $scope.dateOptions = {
 		formatYear: 'yyyy',
 		maxDate: new Date(),
 		startingDay: 1
@@ -31,7 +46,7 @@ user.controller('registrationCtrl', function($scope) {
 
 
 	$scope.athlete = {
-		
+
 		firstName: '',
 		lastName: '',
 		email: '',
