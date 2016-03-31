@@ -4,7 +4,6 @@ var admin = angular.module('FitBoard');
 admin.controller('AdminCtrl', function($scope) {
 	'use strict';
 
-
   $scope.gridOptions = {};
   // $scope.gridOptions.data = 'myData';
   $scope.gridOptions.data = 'athletes';
@@ -27,11 +26,10 @@ admin.controller('AdminCtrl', function($scope) {
 	// $scope.gridOptions.data.splice(index, 1);
  //  };
 
-$scope.Delete = function(row) {
-	debugger;
-            var index = $scope.gridOptions.data.indexOf(row.entity);
-            $scope.gridOptions.data.splice(index, 1);
-        };
+	$scope.Delete = function(row) {
+		            var index = $scope.gridOptions.data.indexOf(row.entity);
+		            $scope.gridOptions.data.splice(index, 1);
+	};
 
 
 
@@ -137,6 +135,7 @@ $scope.Delete = function(row) {
 				tShirt: 'M',
 				gym: 'independent',
 				age: 23,
+				mailSend: 1,
 				birthday: '12.12.1990'
 
 			},

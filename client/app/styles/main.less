@@ -149,6 +149,43 @@ footer
     margin-top: 20px;
 }
 
+.full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+
+.cat-form
+{
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    position: absolute;
+    top: 0;
+
+    width: 120px;
+    height: 50px;
+
+    cursor: pointer;
+    text-align: center;
+
+    color: @dark-grey;
+    border: 1px solid @dark-grey;
+    background-color: transparent;
+    &:hover,
+    &:focus,
+    &:active
+    {
+        color: @silver;
+        outline: 0 none;
+        background: @categoryBtn-hover;
+    }
+}
 /* fonts */
 
 h1
