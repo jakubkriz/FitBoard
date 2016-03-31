@@ -51,17 +51,17 @@
 				</div>
 			</div>
 
-			<div class="col-md-6 col-xs-offset-3 wrap">
-				<div class="toogle_radio">
-					<button class="cat-form" ng-value="elite" ng-model="athlete.category" ng-class="{'current':eliteCat}" id="elite" ng-click="category = 'elite'; eliteCat = true; mastersCat = false; openCat = false">ELITE</button>
-					<button class="cat-form" ng-value="masters" ng-model="athlete.category" ng-class="{'current':mastersCat}" id="masters" ng-click="category = 'masters'; eliteCat = false; mastersCat = true; openCat = false">MASTERS</button>
-					<button class="cat-form" ng-value="open" ng-model="athlete.category" ng-class="{'current':openCat}" id="open" ng-click="category = 'open'; eliteCat = false; mastersCat = false; openCat = true">OPEN</button>
+			<div class="nav">
+				<div class="toggle_radio">
+					<button class="cat-button" ng-class="{'current':eliteCat}" id="elite" ng-click="category = 'elite'; eliteCat = true; mastersCat = false; openCat = false; athlete.category = 'elite'">ELITE</button>
+					<button class="cat-button" ng-class="{'current':mastersCat}" id="masters" ng-click="category = 'masters'; eliteCat = false; mastersCat = true; openCat = false; athlete.category = 'masters'">MASTERS</button>
+					<button class="cat-button" ng-class="{'current':openCat}" id="open" ng-click="category = 'open'; eliteCat = false; mastersCat = false; openCat = true; athlete.category = 'open'">OPEN</button>
 				</div>
-			</div>
 
-			<div class="sex-radio">
-				<img class="transformable" ng-class="{'scale':scaleMale}" id="male" ng-click="sex = 'default'; scaleMale = false; scaleFemale = true" src="img/man.png">
-				<img class="transformable" ng-class="{'scale':scaleFemale}" id="female" ng-click="sex = 'female'; scaleMale = true; scaleFemale = false" src="img/woman.png">
+				<div class="sex-radio">
+					<img class="transformable" ng-class="{'scale':scaleMale}" id="male" ng-click="sex = 'default'; scaleMale = false; scaleFemale = true; athlete.sex = 'default'" src="img/man.png">
+					<img class="transformable" ng-class="{'scale':scaleFemale}" id="female" ng-click="sex = 'female'; scaleMale = true; scaleFemale = false; athlete.sex = 'female'" src="img/woman.png">
+				</div>
 			</div>
 
 			<div class="clearfix col-md-6 col-xs-offset-3 wrap">
