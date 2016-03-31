@@ -12,80 +12,83 @@
 
 	<h1>Registration</h1>
 
-	<div class="col-xs-4 col-xs-offset-4">
-		<form>
+	<div class="col-xs-6 col-xs-offset-3">
+		<form id="athlete">
 			<div class="row wrap">
-				<div class="col-sm-6">
-						<label for="firstName" class="sr-only">Forename</label>
-						<input type="text" id="firstName" class="form-control" placeholder="Forename" required autofocus="">
+				<div class="col-md-4 col-xs-offset-2">
+						<label for="firstName" class="sr-only">First Name</label>
+						<input type="text" ng-model="athlete.firstName" id="firstName" class="form-control" placeholder="First Name" required autofocus="">
 				</div>
-				<div class="col-sm-6">
-						<label for="lastName" class="sr-only">Surname</label>
-						<input type="text" id="lastName" class="form-control" placeholder="Surname" required>
+				<div class="col-md-4">
+						<label for="lastName" class="sr-only">Last Name</label>
+						<input type="text" ng-model="athlete.lastName" id="lastName" class="form-control" placeholder="Last Name" required>
 				</div>
 			</div>
 			<div class="row wrap">
-				<div class="col-sm-6">
-						<label for="email" class="sr-only" role="alert" >Email</label>
-						<input type="email" id="email" class="form-control" placeholder="Email" required>
-						<div ng-messages="email.$error" role="alert">
-  <div ng-if="emailAlreadyExists">
-    <div ng-message="required">Please enter something</div>
-  </div>
-</div>
+				<div class="col-md-4 col-xs-offset-2">
+						<label for="email" class="sr-only">Email</label>
+						<input type="email" ng-model="athlete.email" uib-tooltip="@" id="email" class="form-control" placeholder="Email" required>
+					  <div ng-messages="emailErrors" class="registration-messages" role="alert">
+					    <div ng-message="emailAlreadyExists">This email address already exists.</div>
+					  </div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-md-4">
 						<label for="phone" class="sr-only">Telephone</label>
-						<input type="text" id="phone" class="form-control" placeholder="Telephone number" required>
+						<input type="text" ng-model="athlete.phone" uib-tooltip="+420" id="phone" class="form-control" placeholder="Telephone number" required>
 				</div>
 			</div>
 
 			<div class="row wrap">
-				<div class="col-sm-6">
+				<div class="col-md-4 col-xs-offset-2">
 						<label for="gym" class="sr-only">Gym</label>
-						<input type="text" id="gym" class="form-control" placeholder="Gym" required>
+						<input type="text" ng-model="athlete.gym" uib-tooltip="Oterwise put independent" id="gym" class="form-control" placeholder="Gym" required>
+				</div>
+
+				<div class="col-md-4">
+					<p class="input-group">
+						<input type="text" placeholder="Birthday" uib-tooltip="dd.mm.yyyy" class="form-control" uib-datepicker-popup="{{format}}" popup-placement="bottom-right" ng-model="athlete.bDay" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+					</p>
 				</div>
 			</div>
 
-			<div class="row wrap">
-				<div class="col-sm-6">
-					<label for="birthday"> <span style="color: #ff0000;">*</span>Birthday</label>
-					<input type="date" id="birthday" name="birthday" placeholder="yyyy-MM-dd" required>
+			<div class="nav">
+				<div class="toggle_radio">
+					<button class="cat-button" ng-class="{'current':eliteCat}" id="elite" ng-click="category = 'elite'; eliteCat = true; mastersCat = false; openCat = false; athlete.category = 'elite'">ELITE</button>
+					<button class="cat-button" ng-class="{'current':mastersCat}" id="masters" ng-click="category = 'masters'; eliteCat = false; mastersCat = true; openCat = false; athlete.category = 'masters'">MASTERS</button>
+					<button class="cat-button" ng-class="{'current':openCat}" id="open" ng-click="category = 'open'; eliteCat = false; mastersCat = false; openCat = true; athlete.category = 'open'">OPEN</button>
 				</div>
-				<div class="col-sm-6">
-					<label for="sex"> <span style="color: #ff0000;">*</span>Sex: </label><br>
-						<select id="sex" name="sex" required>
-							<option value="default">Male</option>
-							<option value="female">Female</option>
-						</select>
+
+				<div class="sex-radio">
+					<img class="transformable" ng-class="{'scale':scaleMale}" id="male" ng-click="sex = 'default'; scaleMale = false; scaleFemale = true; athlete.sex = 'default'" src="img/man.png">
+					<img class="transformable" ng-class="{'scale':scaleFemale}" id="female" ng-click="sex = 'female'; scaleMale = true; scaleFemale = false; athlete.sex = 'female'" src="img/woman.png">
 				</div>
 			</div>
 
-			<div class="row wrap">
-				<div class="col-sm-6">
-					<label for="category"> <span style="color: #ff0000;">*</span>Category: </label><br>
-						<select id="category" name="category" required>
-							<option value="elite">Elite</option>
-							<option value="open">Open</option>
-							<option value="masters">Masters</option>
-						</select>
-				</div>
-				<div class="col-sm-6">
-					<label for="shirt"> <span style="color: #ff0000;">*</span>T-shirt: </label><br>
-						<select id="shirt" name="shirt" required>
-							<option value="s">S</option>
-							<option value="m">M</option>
-							<option value="l">L</option>
-							<option value="xl">XL</option>
-						</select>
-				</div>
-			</div>
-
+			<div class="clearfix col-md-6 col-xs-offset-3 wrap">
 				<div class="checkbox wrap">
 					<input type="checkbox" value="remember-me" required> <span style="color: #ff0000;">*</span>I agree with <span style="text-decoration: underline;"><a title="Podmínky" href="http://fitmonster.cz/conditions/">terms&conditions</a></span> of FIT Monster Team, z.s.
 				</div>
+			</div>
+
+
+
 				<button class="btn btn-lg btn-primary btn-block" type="submit">REGISTER</button>
+				<div ng-messages="serverErrors" class="registration-messages" role="alert">
+					<div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
+				</div>
 		</form>
 	</div>
 
-<footer class="sticky-footer"><div class="col-centered">FIT Monster 2016</div></footer>
+<div>
+<p>{{ athlete.firstName}}</p>
+<p>{{ athlete.lastName}}</p>
+<p>{{ athlete.email}}</p>
+<p>{{ athlete.phone}}</p>
+<p>{{ athlete.gym}}</p>
+<p>{{ athlete.bDay | date: 'dd.MM.yyyy' }}</p>
+<p>{{ athlete.category}}</p>
+<p>{{ athlete.sex}}</p>
+</div>
