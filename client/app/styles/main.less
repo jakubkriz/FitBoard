@@ -146,7 +146,8 @@ footer
 }
 
 .wrap {
-    margin-top: 20px;
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .full button span {
@@ -154,37 +155,40 @@ footer
     border-radius: 32px;
     color: black;
   }
-  .partially button span {
+.partially button span {
     background-color: orange;
     border-radius: 32px;
     color: black;
   }
 
-.cat-form
-{
-    font-size: 1.5rem;
-    font-weight: 600;
-
-    position: absolute;
-    top: 0;
-
-    width: 120px;
+.shirt {
+    color: @silver;
+    width: 50px;
     height: 50px;
+    background: none;
+    border: none;
+    fill: @dark-grey;
 
-    cursor: pointer;
-    text-align: center;
-
-    color: @dark-grey;
-    border: 1px solid @dark-grey;
-    background-color: transparent;
     &:hover,
     &:focus,
-    &:active
-    {
-        color: @silver;
-        outline: 0 none;
-        background: @categoryBtn-hover;
+    &:active {
+        fill: @easy-red;
+        width: 55px;
+        height: 55px;
     }
+}
+
+#s.current,
+#m.current,
+#l.current,
+#xl.current {
+    fill: @easy-red;
+    width: 60px;
+    height: 60px;
+}
+
+.inline{
+    display: inline-block;
 }
 /* fonts */
 
@@ -203,7 +207,7 @@ h1
 {
     float: none;
 
-    margin: 20px auto;
+    margin: 10px auto;
 
     text-align: center;
 }
@@ -289,6 +293,7 @@ h1
 #masters.current,
 #open.current
 {
+    color: @silver;
     background: @categoryBtn-hover;
 }
 

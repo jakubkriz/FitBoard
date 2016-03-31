@@ -10,12 +10,12 @@
 		</div>
 	</header>
 
-	<h1>Registration</h1>
+	<h1 class="wrap">Registration</h1>
 
-	<div class="col-xs-6 col-xs-offset-3">
-		<form id="athlete">
+	<div class="col-md-6 col-md-offset-3 wrap">
+		<form id="athlete" ng-submit="submit()">
 			<div class="row wrap">
-				<div class="col-md-4 col-xs-offset-2">
+				<div class="col-md-4 col-md-offset-2">
 						<label for="firstName" class="sr-only">First Name</label>
 						<input type="text" ng-model="athlete.firstName" id="firstName" class="form-control" placeholder="First Name" required autofocus="">
 				</div>
@@ -25,7 +25,7 @@
 				</div>
 			</div>
 			<div class="row wrap">
-				<div class="col-md-4 col-xs-offset-2">
+				<div class="col-md-4 col-md-offset-2">
 						<label for="email" class="sr-only">Email</label>
 						<input type="email" ng-model="athlete.email" uib-tooltip="@" id="email" class="form-control" placeholder="Email" required>
 					  <div ng-messages="emailErrors" class="registration-messages" role="alert">
@@ -39,7 +39,7 @@
 			</div>
 
 			<div class="row wrap">
-				<div class="col-md-4 col-xs-offset-2">
+				<div class="col-md-4 col-md-offset-2">
 						<label for="gym" class="sr-only">Gym</label>
 						<input type="text" ng-model="athlete.gym" uib-tooltip="Oterwise put independent" id="gym" class="form-control" placeholder="Gym" required>
 				</div>
@@ -54,11 +54,11 @@
 				</div>
 			</div>
 
-			<div class="nav">
+			<div class="col-centered">
 				<div class="toggle_radio">
-					<button class="cat-button" ng-class="{'current':eliteCat}" id="elite" ng-click="category = 'elite'; eliteCat = true; mastersCat = false; openCat = false; athlete.category = 'elite'">ELITE</button>
-					<button class="cat-button" ng-class="{'current':mastersCat}" id="masters" ng-click="category = 'masters'; eliteCat = false; mastersCat = true; openCat = false; athlete.category = 'masters'">MASTERS</button>
-					<button class="cat-button" ng-class="{'current':openCat}" id="open" ng-click="category = 'open'; eliteCat = false; mastersCat = false; openCat = true; athlete.category = 'open'">OPEN</button>
+					<button class="cat-button transformable" ng-model="athlete.category" ng-class="{'current':eliteCat}" id="elite" ng-click="eliteCat = true; mastersCat = false; openCat = false; athlete.category = 'elite'">ELITE</button>
+					<button class="cat-button transformable" ng-model="athlete.category" ng-class="{'current':mastersCat}" id="masters" ng-click="eliteCat = false; mastersCat = true; openCat = false; athlete.category = 'masters'">MASTERS</button>
+					<button class="cat-button transformable" ng-model="athlete.category" ng-class="{'current':openCat}" id="open" ng-click="eliteCat = false; mastersCat = false; openCat = true; athlete.category = 'open'">OPEN</button>
 				</div>
 
 				<div class="sex-radio">
@@ -67,28 +67,36 @@
 				</div>
 			</div>
 
-			<div class="clearfix col-md-6 col-xs-offset-3 wrap">
-				<div class="checkbox wrap">
-					<input type="checkbox" value="remember-me" required> <span style="color: #ff0000;">*</span>I agree with <span style="text-decoration: underline;"><a title="Podmínky" href="http://fitmonster.cz/conditions/">terms&conditions</a></span> of FIT Monster Team, z.s.
+			<div class="col-centered wrap">
+				<div class="inline">
+					<button id="s" class="shirt transformable" ng-class="{'current':sShirt}" ng-click="sShirt = true; mShirt = false; lShirt = false; xlShirt = false; athlete.shirt = 's'" svg-shirt></button><p>S</p>
+				</div>
+				<div class="inline">
+					<button id="m" class="shirt transformable" ng-class="{'current':mShirt}" ng-click="sShirt = false; mShirt = true; lShirt = false; xlShirt = false; athlete.shirt = 'm'" svg-shirt></button><p>M</p>
+				</div>
+				<div class="inline">
+					<button id="l" class="shirt transformable" ng-class="{'current':lShirt}" ng-click="sShirt = false; mShirt = false; lShirt = true; xlShirt = false; athlete.shirt = 'l'" svg-shirt></button><p>L</p>
+				</div>
+				<div class="inline">
+					<button id="xl" class="shirt transformable" ng-class="{'current':xlShirt}" ng-click="sShirt = false; mShirt = false; lShirt = false; xlShirt = true; athlete.shirt = 'xl'" svg-shirt></button><p>XL</p>
 				</div>
 			</div>
 
+			<div class="col-md-6 col-md-offset-3">
+				<div class="checkbox">
+					<input type="checkbox" ng-model="athlete.terms" ng-model="valid = 'true'" required> <span style="color: #ff0000;">*</span>I agree with <span style="text-decoration: underline;"><a title="Podmínky" href="http://fitmonster.cz/conditions/">terms&conditions</a></span> of FIT Monster Team, z.s.
+				</div>
+			</div>
 
-
-				<button class="btn btn-lg btn-primary btn-block" type="submit">REGISTER</button>
+			<div class="col-md-8 col-md-offset-2 wrap">
+				<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="modal()">REGISTER</button>
 				<div ng-messages="serverErrors" class="registration-messages" role="alert">
 					<div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
 				</div>
+			</div>
 		</form>
 	</div>
 
 <div>
-<p>{{ athlete.firstName}}</p>
-<p>{{ athlete.lastName}}</p>
-<p>{{ athlete.email}}</p>
-<p>{{ athlete.phone}}</p>
-<p>{{ athlete.gym}}</p>
-<p>{{ athlete.bDay | date: 'dd.MM.yyyy' }}</p>
-<p>{{ athlete.category}}</p>
-<p>{{ athlete.sex}}</p>
+<pre>list={{list}}</pre>
 </div>
