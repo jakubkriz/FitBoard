@@ -5,5 +5,7 @@ user.controller('registrationCtrl', function($scope) {
 
 	//$scope.singleselect = null;
 
+  // if ($api.getHttpStatus() == 400) {}
+  $scope.emailAlreadyExists = true;
 
 });
