@@ -43,12 +43,15 @@ sub init {
 }
 
 sub addUser {
-	my ($self, $login, $passwd_nc, $email) = @_;
+	my ($self, $env, $login, $passwd_nc, $data) = @_;
 
 	# Crypt passwd
 	my $password = $self->getPasswd($passwd_nc);
 
-	my ($e) = $self->data->store({login => $login, password => $password, email => $email});
+	$data->{login} = $login;
+	$data->{password} = $password;
+
+	my ($e) = $self->data->store($data);
 	return ($e ? $login : 0);
 }
 
@@ -68,6 +71,16 @@ sub checkUser {
 	}else{
 		return 0;
 	}
+}
+
+sub checkUserExistence {
+	my ($self, $env, $login) = @_;
+
+	return 0 unless $login;
+	# Check user
+	my $user = $self->data->get( undef, {login => $login} );
+
+	return $user?1:0;
 }
 
 sub getPasswd {

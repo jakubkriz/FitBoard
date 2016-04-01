@@ -28,7 +28,7 @@
 				<div class="col-md-4 col-md-offset-2">
 						<label for="email" class="sr-only">Email</label>
 						<input type="email" ng-model="athlete.email" uib-tooltip="@" id="email" class="form-control" placeholder="Email" ng-required="true">
-					  <div ng-messages="emailErrors" class="registration-messages" role="alert">
+					  <div ng-messages="errors" class="registration-messages" role="alert">
 					    <div ng-message="emailAlreadyExists">This email address already exists.</div>
 					  </div>
 				</div>
@@ -46,9 +46,9 @@
 
 				<div class="col-md-4">
 					<p class="input-group">
-						<input type="text" placeholder="Birthday" uib-tooltip="dd.mm.yyyy" class="form-control" uib-datepicker-popup="{{format}}" popup-placement="bottom-right" ng-model="athlete.bDay" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+						<input type="text" placeholder="Birthday" uib-tooltip="dd.mm.yyyy" class="form-control" uib-datepicker-popup="{{format}}" popup-placement="bottom-right" ng-model="athlete.bDay" is-open="dateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
 						<span class="input-group-btn">
-							<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+							<button type="button" class="btn btn-default" ng-click="dateOpened = true;"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
 					</p>
 				</div>
@@ -56,29 +56,29 @@
 
 			<div class="col-centered">
 				<div class="toggle_radio">
-					<button class="cat-button transformable" ng-class="{'current':eliteCat}" id="elite" ng-click="eliteCat = true; mastersCat = false; openCat = false; athlete.category = 'elite'">ELITE</button>
-					<button class="cat-button transformable" ng-class="{'current':mastersCat}" id="masters" ng-click="eliteCat = false; mastersCat = true; openCat = false; athlete.category = 'masters'">MASTERS</button>
-					<button class="cat-button transformable" ng-class="{'current':openCat}" id="open" ng-click="eliteCat = false; mastersCat = false; openCat = true; athlete.category = 'open'">OPEN</button>
+					<button class="cat-button transformable" ng-class="{'current':athlete.category === 'elite'}" id="elite" ng-click="athlete.category = 'elite';">ELITE</button>
+					<button class="cat-button transformable" ng-class="{'current':athlete.category === 'masters'}" id="masters" ng-click="athlete.category = 'masters';">MASTERS</button>
+					<button class="cat-button transformable" ng-class="{'current':athlete.category === 'open'}" id="open" ng-click="athlete.category = 'open';">OPEN</button>
 				</div>
 
 				<div class="sex-radio">
-					<img class="transformable" ng-class="{'scale':scaleMale}" id="male" ng-click="sex = 'default'; scaleMale = false; scaleFemale = true; athlete.sex = 'default'" src="img/man.png">
-					<img class="transformable" ng-class="{'scale':scaleFemale}" id="female" ng-click="sex = 'female'; scaleMale = true; scaleFemale = false; athlete.sex = 'female'" src="img/woman.png">
+					<img class="transformable" ng-class="{'scale':athlete.sex === 'male'}" id="male" ng-click="athlete.sex = 'male'" src="img/man.png">
+					<img class="transformable" ng-class="{'scale':athlete.sex === 'female'}" id="female" ng-click="athlete.sex = 'female'" src="img/woman.png">
 				</div>
 			</div>
 
 			<div class="col-centered wrap">
 				<div class="inline">
-					<button id="s" class="shirt transformable" ng-class="{'current':sShirt}" ng-click="sShirt = true; mShirt = false; lShirt = false; xlShirt = false; athlete.shirt = 's'" svg-shirt></button><p>S</p>
+					<button id="s" class="shirt transformable" ng-class="{'current':athlete.shirt === 's'}" ng-click="athlete.shirt = 's'" svg-shirt></button><p>S</p>
 				</div>
 				<div class="inline">
-					<button id="m" class="shirt transformable" ng-class="{'current':mShirt}" ng-click="sShirt = false; mShirt = true; lShirt = false; xlShirt = false; athlete.shirt = 'm'" svg-shirt></button><p>M</p>
+					<button id="m" class="shirt transformable" ng-class="{'current':athlete.shirt === 'm'}" ng-click="athlete.shirt = 'm'" svg-shirt></button><p>M</p>
 				</div>
 				<div class="inline">
-					<button id="l" class="shirt transformable" ng-class="{'current':lShirt}" ng-click="sShirt = false; mShirt = false; lShirt = true; xlShirt = false; athlete.shirt = 'l'" svg-shirt></button><p>L</p>
+					<button id="l" class="shirt transformable" ng-class="{'current':athlete.shirt === 'l'}" ng-click="athlete.shirt = 'l'" svg-shirt></button><p>L</p>
 				</div>
 				<div class="inline">
-					<button id="xl" class="shirt transformable" ng-class="{'current':xlShirt}" ng-click="sShirt = false; mShirt = false; lShirt = false; xlShirt = true; athlete.shirt = 'xl'" svg-shirt></button><p>XL</p>
+					<button id="xl" class="shirt transformable" ng-class="{'current':athlete.shirt === 'xl'}" ng-click="athlete.shirt = 'xl'" svg-shirt></button><p>XL</p>
 				</div>
 			</div>
 
@@ -90,29 +90,9 @@
 
 			<div class="col-md-8 col-md-offset-2 wrap">
 				<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="modal()">REGISTER</button>
-				<div ng-messages="serverErrors" class="registration-messages" role="alert">
+				<div ng-messages="errors" class="registration-messages" role="alert">
 					<div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
 				</div>
 			</div>
 		</form>
 	</div>
-
-<div>
-<pre>list={{list}}</pre>
-	
-		<p>$scope.athlete</p>
-				<p>firstName: {{ athlete.firstName }} </p>
-				<p>lastName: {{ athlete.lastName }} </p>
-				<p>email: {{ athlete.email }} </p>
-				<p>phone: {{ athlete.phone }} </p>
-				<p>gym: {{ athlete.gym }} </p>
-				<p>bDay: {{ athlete.bDay }} </p>
-				<p>sex: {{ athlete.sex }} </p>
-				<p>category: {{ athlete.category }} </p>
-				<p>shirt: {{ athlete.shirt }} </p>
-				<p>terms: {{ athlete.terms }} </p>
-				<p>registred: {{ athlete.registred }} </p>
-				<p>qualFee: {{ athlete.qualFee }} </p>
-				<p>qualified: {{ athlete.qualified }} </p>
-				<p>startFee: {{ athlete.startFee }} </p>
-</div>
