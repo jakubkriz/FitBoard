@@ -1,5 +1,163 @@
-/*
+/* Leaderboard */
 
-Co pujde presunout z main.less a tyka se jen leaderboardu bych dal sem
+@import (less) 'mixins.less';
 
-*/
+/* leaderBoard */
+
+#leaderBoard
+{
+    margin-top: 40px;
+    padding: 0;
+}
+
+#mainRow
+{
+    position: relative;
+
+    cursor: pointer;
+    .border-radius;
+
+    opacity: 1;
+    border-bottom: 1px solid @silver;
+    .mainRow;
+
+    .paddingMainRow;
+    &:hover,
+    &:focus,
+	&:active
+    {
+        .categoryBtn-hover
+    }
+}
+
+.place
+{
+    font-size: 1.4em;
+    font-weight: bold;
+
+    position: absolute;
+    left: -8px;
+
+    width: 10%;
+    margin-top: auto;
+
+    color: @silver;
+}
+
+.photo
+{
+    position: absolute;
+    left: 10%;
+
+    width: 40px;
+    height: 40px;
+    margin-top: 0;
+    margin-left: 5px;
+    padding: 0 10px;
+
+    opacity: 1;
+}
+
+#icon
+{
+    left: 0;
+
+    width: 40px;
+    height: 40px;
+    margin-top: -5px;
+
+    opacity: 1;
+    border: 2px solid @male;
+    border-radius: 100%;
+}
+
+.name
+{
+    font-size: 1.3em;
+    font-weight: 500;
+
+    left: 23%;
+
+    margin-top: auto;
+    margin-left: 10px;
+
+    text-align: left;
+
+    color: @silver;
+}
+
+#border
+{
+    position: absolute;
+    right: 37%;
+
+    width: 1px;
+    height: 40px;
+    margin-top: -5px;
+
+    background-color: @silver;
+}
+
+.gym
+{
+    font-size: .7em;
+    font-weight: 300;
+
+    position: absolute;
+    right: 20%;
+
+    margin-top: 7px;
+
+    text-align: left;
+
+    color: @silver;
+}
+
+.score
+{
+    font-size: 1.5em;
+
+    position: absolute;
+    right: -5px;
+
+    margin-top: auto;
+
+    text-align: right;
+
+    color: @silver;
+}
+
+/* bio collapse */
+.bio
+{
+    position: relative;
+
+    margin-top: 20px;
+    padding-top: 30px;
+
+    text-align: center;
+
+    color: @silver;
+    border-top: 1px dashed @silver;
+}
+
+/* bio table */
+#column
+{
+    margin-left: auto;
+    padding-top: 20px;
+
+    text-align: center;
+}
+
+td
+{
+    padding-left: 20px;
+}
+
+table
+{
+    margin: auto;
+
+    color: @silver;
+}
