@@ -20,6 +20,7 @@ requires 'Plack::Middleware::LogDispatch';
 requires 'Plack::Middleware::Session','>=0.25';
 requires 'Plack::Middleware::Session::Cookie';
 requires 'Plack::Middleware::Static';
+requires 'Plack::Session::Store::MongoDB';
 requires 'Plack::Session','>=0.23';
 requires 'Plack::Session::State::Cookie','>=0.23';
 requires 'Plack::Session::Store::DBI','>=0.10';

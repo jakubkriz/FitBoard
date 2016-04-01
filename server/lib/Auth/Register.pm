@@ -54,7 +54,7 @@ sub POST {
 			my $rtrn = $mail->sendMail({
 				list => [
 					join("::", $email, $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}),
-					join("::", $self->const->get("EmailBcc"), $data->{firstName}."a", $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}),
+					join("::", $self->const->get("EmailBcc"), $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}),
 				],
 				from => $self->const->get("EmailBcc"),
 				subject => 'Registrace Fit Monster 2016',
