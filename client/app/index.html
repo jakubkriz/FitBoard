@@ -29,12 +29,13 @@
     <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
     <!-- endbower -->
     <!-- endbuild -->
-    <!-- stylesheet -->
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
-    <link rel="stylesheet/less" type="text/css" href="styles/dashboard.less" />
-    <link rel="stylesheet/less" type="text/css" href="styles/admin.less" />
 
+    <!-- build:less styles/styles.css -->
+    <link rel="stylesheet/less" href="styles/main.less" />
+    <link rel="stylesheet/less" href="styles/dashboard.less" />
+    <link rel="stylesheet/less" href="styles/admin.less" />
     <!-- endbuild -->
 
   </head>
@@ -75,8 +76,7 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js(.) scripts/main.js -->
-    <!-- bower:js -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <!-- modules -->
     <script src="scripts/app.js"></script>
     

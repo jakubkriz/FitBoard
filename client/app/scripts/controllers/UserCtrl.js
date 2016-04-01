@@ -1,6 +1,4 @@
-var user = angular.module('FitBoard');
-
-user.controller('UserCtrl', function($scope) {
+angular.module('FitBoard').controller('UserCtrl', function($scope) {
 	'use strict';
 
 

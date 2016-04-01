@@ -1,7 +1,4 @@
-var admin = angular.module('FitBoard');
-
-// admin.controller('AdminCtrl', function($scope, $http, $timeout, $interval, uiGridConstants, uiGridGroupingConstants) {
-admin.controller('AdminCtrl', function($scope) {
+angular.module('FitBoard').controller('AdminCtrl', function($scope) {
 	'use strict';
 
   $scope.gridOptions = {};

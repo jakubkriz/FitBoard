@@ -1,6 +1,4 @@
-var board = angular.module('FitBoard');
-
-board.controller('LeaderBoardCtrl', function($scope) {
+angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 	'use strict';
 
 	$scope.sortType     = 'score'; // set the default sort type

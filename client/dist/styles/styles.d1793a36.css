@@ -1,0 +1,575 @@
+/* less */
+@import url(https://fonts.googleapis.com/css?family=Exo:400,500,300,600,700);
+/* main color */
+/* colors */
+/* rows */
+.paddingMainRow {
+  padding: 20px 0 20px 0;
+}
+/* fonts */
+* {
+  font-family: 'Exo', sans-serif;
+}
+/* body */
+body {
+  height: 100%;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+.body {
+  height: 100%;
+  padding: 0 0 50px 0;
+  background: url(bcg.ac19d837.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/* header */
+.header {
+  margin-bottom: 10px;
+  padding-top: 30px;
+  text-align: center;
+}
+/* footer */
+footer {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  padding-top: 10px;
+  text-align: center;
+  color: #777;
+  border-top: 1px solid #909090;
+}
+.sticky-footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+/* form */
+.container {
+  position: relative;
+  min-height: 100%;
+  height: auto !important;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 40px;
+}
+.form-signin {
+  overflow: auto;
+  padding-bottom: 150px;
+  max-width: 220px;
+  margin: 0 auto;
+  padding: 15px;
+  box-shadow: #b9b9b9;
+}
+.form-signin-heading {
+  text-align: center;
+}
+.wrap {
+  margin-top: 10px;
+  padding: 10px;
+}
+.full button span {
+  background-color: limegreen;
+  border-radius: 32px;
+  color: black;
+}
+.partially button span {
+  background-color: orange;
+  border-radius: 32px;
+  color: black;
+}
+.shirt {
+  color: #f4f7f8;
+  width: 50px;
+  height: 50px;
+  background: none;
+  border: none;
+  fill: #b9b9b9;
+}
+.shirt:hover,
+.shirt:focus,
+.shirt:active {
+  fill: #eb5055;
+  width: 55px;
+  height: 55px;
+}
+#s.current,
+#m.current,
+#l.current,
+#xl.current {
+  fill: #eb5055;
+  width: 60px;
+  height: 60px;
+}
+.inline {
+  display: inline-block;
+}
+/* fonts */
+h1 {
+  font-size: 40px;
+  text-align: center;
+  color: #152e48;
+}
+/* navigation */
+.col-centered {
+  float: none;
+  margin: 10px auto;
+  text-align: center;
+}
+.nav {
+  margin-top: 30px;
+}
+/* toggle_radio */
+.toggle_radio {
+  position: relative;
+  overflow: hidden;
+  width: 360px;
+  height: 50px;
+  margin: 4px auto;
+  padding: 0 !important;
+  background: #f5f5f5;
+}
+#toggle_slider {
+  position: absolute;
+  left: 0;
+  width: 120px;
+  height: 50px;
+  color: #f4f7f8;
+}
+.cat-button {
+  font-size: 1.5rem;
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 50px;
+  cursor: pointer;
+  text-align: center;
+  color: #b9b9b9;
+  border: 1px solid #b9b9b9;
+  background-color: transparent;
+}
+.cat-button:hover,
+.cat-button:focus,
+.cat-button:active {
+  color: #f4f7f8;
+  outline: 0 none;
+  background: #eb5055;
+}
+.transformable {
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -ms-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+#male.scale,
+#female.scale {
+  -webkit-transform: scale(0.7, 0.7);
+  -moz-transform: scale(0.7, 0.7);
+  -ms-transform: scale(0.7, 0.7);
+  -o-transform: scale(0.7, 0.7);
+  transform: scale(0.7, 0.7);
+}
+#elite.current,
+#masters.current,
+#open.current {
+  color: #f4f7f8;
+  background: #eb5055;
+}
+#elite {
+  left: 0;
+}
+#masters {
+  left: 120px;
+}
+#open {
+  left: 240px;
+}
+/* sex radio */
+.sex-radio {
+  position: relative;
+  width: 160px;
+  height: 80px;
+  margin: 20px auto;
+  padding: 0 !important;
+}
+#male {
+  position: absolute;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  border: 5px solid #20dd9b;
+  border-radius: 100%;
+}
+#male:hover {
+  opacity: .5;
+}
+#female {
+  position: absolute;
+  left: 80px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  border: 5px solid #f62459;
+  border-radius: 100%;
+}
+#female:hover {
+  opacity: .5;
+}
+/* workout */
+.workout-list {
+  position: relative;
+  width: 160px;
+  height: 80px;
+  margin: 20px auto;
+  padding: 0 !important;
+}
+/* logo */
+.logo {
+  display: inline-block;
+  width: auto;
+  cursor: pointer;
+}
+.shing {
+  position: relative;
+}
+.shing::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  transition: background-position 0.3s;
+  opacity: .3;
+  background: -50px center no-repeat;
+  background-image: linear-gradient(125deg, rgba(255, 255, 255, 0) 30%, #fff 30%, #fff 50%, rgba(255, 255, 255, 0) 50%);
+  background-clip: padding-box;
+  box-shadow: inset 0 2px #fff;
+}
+.shing:hover:after {
+  background-position: 180px center;
+}
+/* search */
+input.search-query.form-control {
+  background-color: #f5f5f5;
+}
+#custom-search-input {
+  position: relative;
+  float: none;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
+}
+#custom-search-input .search-query {
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  padding-right: 3px;
+  padding-right: 4px \9;
+  padding-left: 3px;
+  padding-left: 4px \9;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+#search-icon {
+  position: absolute;
+  z-index: 3;
+  top: 25%;
+  right: 5px;
+  float: right;
+  color: #e54343;
+}
+/* leaderBoard */
+#leaderBoard {
+  margin-top: 40px;
+  padding: 0;
+}
+#mainRow {
+  position: relative;
+  cursor: pointer;
+  opacity: 1;
+  border-bottom: 1px solid #f4f7f8;
+  background-color: #67809f;
+  padding: 20px 0 20px 0;
+}
+#mainRow:hover {
+  background-color: #eb5055;
+}
+.place {
+  font-size: 1.4em;
+  font-weight: bold;
+  position: absolute;
+  left: -8px;
+  width: 10%;
+  margin-top: auto;
+  color: #f4f7f8;
+}
+.photo {
+  position: absolute;
+  left: 10%;
+  width: 40px;
+  height: 40px;
+  margin-top: 0;
+  margin-left: 5px;
+  padding: 0 10px;
+  opacity: 1;
+}
+#icon {
+  left: 0;
+  width: 40px;
+  height: 40px;
+  margin-top: -5px;
+  opacity: 1;
+  border: 2px solid #20dd9b;
+  border-radius: 100%;
+}
+.name {
+  font-size: 1.3em;
+  font-weight: 500;
+  left: 23%;
+  margin-top: auto;
+  margin-left: 10px;
+  text-align: left;
+  color: #f4f7f8;
+}
+#border {
+  position: absolute;
+  right: 37%;
+  width: 1px;
+  height: 40px;
+  margin-top: -5px;
+  background-color: #f4f7f8;
+}
+.gym {
+  font-size: .7em;
+  font-weight: 300;
+  position: absolute;
+  right: 20%;
+  margin-top: 7px;
+  text-align: left;
+  color: #f4f7f8;
+}
+.score {
+  font-size: 1.5em;
+  position: absolute;
+  right: -5px;
+  margin-top: auto;
+  text-align: right;
+  color: #f4f7f8;
+}
+/* bio collapse */
+.bio {
+  position: relative;
+  margin-top: 20px;
+  padding-top: 30px;
+  text-align: center;
+  color: #f4f7f8;
+  border-top: 1px dashed #f4f7f8;
+}
+/* bio table */
+#column {
+  margin-left: auto;
+  padding-top: 20px;
+  text-align: center;
+}
+td {
+  padding-left: 20px;
+}
+table {
+  margin: auto;
+  color: #f4f7f8;
+}
+.registration-messages {
+  transition: 1s linear all;
+}
+.registration-messages.ng-active {
+  color: #f62459;
+}
+
+/* DASHBOARD */
+/* main color */
+/* colors */
+/* Main */
+.main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 80%;
+  height: 100%;
+  margin: 55px 0 0 20%;
+  padding: 0;
+}
+@media only screen and (max-width: 425px) {
+  .main {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+/* navigation panels */
+.panel-top {
+  position: fixed;
+  z-index: 1000;
+  right: 0;
+  width: 80%;
+  height: 55px;
+  background-color: #2b3031;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+@media only screen and (max-width: 425px) {
+  .panel-top {
+    width: 100%;
+  }
+}
+.panel-left {
+  position: fixed;
+  width: 20%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #2b3031;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+@media only screen and (max-width: 425px) {
+  .panel-left {
+    display: none;
+  }
+}
+/* mobile menu */
+.mobile-menu {
+  left: 20px;
+  display: none;
+  margin-top: 4px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+@media only screen and (max-width: 425px) {
+  .mobile-menu {
+    font-size: 3rem;
+    display: inline-block;
+    color: #f4f7f8;
+  }
+}
+.dropdown-mobile {
+  position: absolute;
+  left: -20px;
+}
+/* logo */
+.nav-logo {
+  float: none;
+  margin: 20px auto;
+  text-align: center;
+}
+#logo {
+  width: 100px;
+}
+/* Top nav */
+.nav-photo {
+  position: absolute;
+  right: 20px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+}
+#nav-icon {
+  z-index: 1000;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #20dd9b;
+  border-radius: 100%;
+}
+#nav-icon:hover {
+  cursor: pointer;
+  opacity: .5;
+}
+.user-name {
+  right: 100px;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+h4 {
+  color: #f4f7f8;
+}
+.dropdown-nav {
+  position: absolute;
+  left: -120px;
+  margin-top: 10px;
+}
+@media only screen and (max-width: 425px) {
+  .dropdown-nav {
+    left: -100px;
+  }
+}
+/* Left nav */
+.menu-btn {
+  font-size: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  padding-left: 70px;
+  cursor: pointer;
+  text-align: left;
+  color: #f4f7f8;
+  border: 0.5px solid #b9b9b9;
+  border-left: 0;
+  background-color: transparent;
+}
+.menu-btn:hover {
+  outline: 0 none;
+  background: #67809f;
+}
+.menu-btn:focus,
+.menu-btn:active {
+  font-size: 1.7rem;
+  color: #2b3031;
+  border-right: 0;
+  outline: 0 none;
+  background: #f5f5f5;
+}
+@media only screen and (max-width: 1024px) {
+  .menu-btn {
+    padding-left: 50px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .menu-btn {
+    padding-left: 20px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .menu-btn {
+    display: none;
+  }
+}
+.btn-wrapper {
+  margin-top: 50px;
+}
+.icon {
+  padding-right: 20px;
+}
+
+/* ADMIN */
+/* main color */
+/* colors */
+/* UI grid */
+.athletesGrid {
+  width: 90%;
+  height: 500px;
+}

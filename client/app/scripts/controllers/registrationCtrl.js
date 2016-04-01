@@ -1,6 +1,4 @@
-var user = angular.module('FitBoard');
-
-user.controller('registrationCtrl', function($scope, $uibModal, Api) {
+angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibModal, Api) {
 	'use strict';
 
 	// Clean errors

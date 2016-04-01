@@ -28,6 +28,7 @@ requires 'Plack::Util::Accessor';
 requires 'YAML::AppConfig','>=0.19';
 requires 'parent','>= 0.225';
 requires 'MIME::Base64';
+requires 'Mail::Bulkmail';
 
 requires 'Plack::Middleware::FormatOutput','>=0.05';
 requires 'Plack::Middleware::ParseContent','>=0.04';
