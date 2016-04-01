@@ -62,8 +62,8 @@
 				</div>
 
 				<div class="sex-radio">
-					<img class="transformable" ng-class="{'scale':athlete.sex === 'male'}" id="male" ng-click="athlete.sex = 'male'" src="img/man.png">
-					<img class="transformable" ng-class="{'scale':athlete.sex === 'female'}" id="female" ng-click="athlete.sex = 'female'" src="img/woman.png">
+					<img class="transformable" ng-class="{'scale':athlete.sex !== 'male'}" id="male" ng-click="athlete.sex = 'male'" src="img/man.png">
+					<img class="transformable" ng-class="{'scale':athlete.sex !== 'female'}" id="female" ng-click="athlete.sex = 'female'" src="img/woman.png">
 				</div>
 			</div>
 
