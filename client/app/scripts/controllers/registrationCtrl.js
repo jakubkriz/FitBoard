@@ -30,13 +30,15 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 	};
 	$scope.setDefault();
 
-	$scope.dateOpened = false;
 	$scope.format = 'dd.MM.yyyy';
-	$scope.altInputFormats = ['M!/d!/yyyy'];
 
 	// Submit registration
 	$scope.submit = function() {
 		if ($scope.athlete.terms === true) {
+
+			var bDay = $scope.athlete.bDay;
+			$scope.athlete.bDay = bDay.toLocaleDateString('en-GB');
+
 			Api.register(
 				$scope.athlete,
 				function(resp){ // OK
@@ -59,6 +61,7 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 					}
 				},
 				function(resp){ //ERROR
+					$scope.athlete.bDay = bDay;
 					if (resp.status === 400){
 						$scope.errors.emailAlreadyExists = true; //400
 					}else if(resp.status === 503){
