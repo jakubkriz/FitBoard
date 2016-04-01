@@ -2,6 +2,7 @@ package Event::Store;
 
 use IDGen;
 use MongoDB;
+use MongoDB::Connection;
 
 use Log;
 
