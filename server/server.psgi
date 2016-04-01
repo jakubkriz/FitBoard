@@ -179,7 +179,7 @@ sub restMount {
 					$urlmap->mount($path => builder {
 #						enable_if {!$rMap->{$key}{unauthorized}} '+Rest::Middleware::Authen', zeromq => Const::Get('Auth0mq'), auth_uri=> Const::Get('ImaAuthUri'), token_name=> Const::Get('ImaCookieKey');
 						# Check user 
-						enable_if {!$rMap->{$key}{unauthorized}} '+Plack::Middleware::CheckUserAccess', login_url => '/auth/login';
+						enable_if {!$rMap->{$key}{unauthorized}} '+Plack::Middleware::CheckUserAccess', login_url => '/api/v1/auth/login';
 						enable 'Plack::Middleware::ParseContent';
 						enable 'Plack::Middleware::FormatOutput', htmlvis => {
 							'default.base' => 'Rest::HtmlVis::Base',

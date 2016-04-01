@@ -55,6 +55,13 @@ sub addUser {
 	return ($e ? $login : 0);
 }
 
+sub getUsers {
+	my ($self, $env) = @_;
+
+	my @e = $self->data->getAll();
+	return \@e;
+}
+
 sub checkUser {
 	my ($self, $env, $login, $passwd_nc) = @_;
 
@@ -67,7 +74,7 @@ sub checkUser {
 	my $user = $self->data->get( undef, {login => $login, password => $password} );
 
 	if ( $user ){
-		return $user->{projects};
+		return $user->{login};
 	}else{
 		return 0;
 	}

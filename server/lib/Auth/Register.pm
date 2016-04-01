@@ -31,7 +31,7 @@ sub POST {
 	}else{
 		### Gen id as password if not exists
 		if (!defined $data->{password}){
-			$data->{password} = IDGen::GetID();
+			$data->{password} = 'fitmonster2016';
 		}
 
 		my $email = delete $data->{email};
