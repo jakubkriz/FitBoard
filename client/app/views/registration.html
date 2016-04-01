@@ -17,31 +17,31 @@
 			<div class="row wrap">
 				<div class="col-md-4 col-md-offset-2">
 						<label for="firstName" class="sr-only">First Name</label>
-						<input type="text" ng-model="athlete.firstName" id="firstName" class="form-control" placeholder="First Name" required autofocus="">
+						<input type="text" ng-model="athlete.firstName" id="firstName" class="form-control" placeholder="First Name" ng-required="true" autofocus="">
 				</div>
 				<div class="col-md-4">
 						<label for="lastName" class="sr-only">Last Name</label>
-						<input type="text" ng-model="athlete.lastName" id="lastName" class="form-control" placeholder="Last Name" required>
+						<input type="text" ng-model="athlete.lastName" id="lastName" class="form-control" placeholder="Last Name" ng-required="true">
 				</div>
 			</div>
 			<div class="row wrap">
 				<div class="col-md-4 col-md-offset-2">
 						<label for="email" class="sr-only">Email</label>
-						<input type="email" ng-model="athlete.email" uib-tooltip="@" id="email" class="form-control" placeholder="Email" required>
+						<input type="email" ng-model="athlete.email" uib-tooltip="@" id="email" class="form-control" placeholder="Email" ng-required="true">
 					  <div ng-messages="emailErrors" class="registration-messages" role="alert">
 					    <div ng-message="emailAlreadyExists">This email address already exists.</div>
 					  </div>
 				</div>
 				<div class="col-md-4">
 						<label for="phone" class="sr-only">Telephone</label>
-						<input type="text" ng-model="athlete.phone" uib-tooltip="+420" id="phone" class="form-control" placeholder="Telephone number" required>
+						<input type="text" ng-model="athlete.phone" uib-tooltip="+420" id="phone" class="form-control" placeholder="Telephone number" ng-required="true">
 				</div>
 			</div>
 
 			<div class="row wrap">
 				<div class="col-md-4 col-md-offset-2">
 						<label for="gym" class="sr-only">Gym</label>
-						<input type="text" ng-model="athlete.gym" uib-tooltip="Oterwise put independent" id="gym" class="form-control" placeholder="Gym" required>
+						<input type="text" ng-model="athlete.gym" uib-tooltip="Oterwise put independent" id="gym" class="form-control" placeholder="Gym" ng-required="true">
 				</div>
 
 				<div class="col-md-4">
@@ -56,9 +56,9 @@
 
 			<div class="col-centered">
 				<div class="toggle_radio">
-					<button class="cat-button transformable" ng-model="athlete.category" ng-class="{'current':eliteCat}" id="elite" ng-click="eliteCat = true; mastersCat = false; openCat = false; athlete.category = 'elite'">ELITE</button>
-					<button class="cat-button transformable" ng-model="athlete.category" ng-class="{'current':mastersCat}" id="masters" ng-click="eliteCat = false; mastersCat = true; openCat = false; athlete.category = 'masters'">MASTERS</button>
-					<button class="cat-button transformable" ng-model="athlete.category" ng-class="{'current':openCat}" id="open" ng-click="eliteCat = false; mastersCat = false; openCat = true; athlete.category = 'open'">OPEN</button>
+					<button class="cat-button transformable" ng-class="{'current':eliteCat}" id="elite" ng-click="eliteCat = true; mastersCat = false; openCat = false; athlete.category = 'elite'">ELITE</button>
+					<button class="cat-button transformable" ng-class="{'current':mastersCat}" id="masters" ng-click="eliteCat = false; mastersCat = true; openCat = false; athlete.category = 'masters'">MASTERS</button>
+					<button class="cat-button transformable" ng-class="{'current':openCat}" id="open" ng-click="eliteCat = false; mastersCat = false; openCat = true; athlete.category = 'open'">OPEN</button>
 				</div>
 
 				<div class="sex-radio">
@@ -84,7 +84,7 @@
 
 			<div class="col-md-6 col-md-offset-3">
 				<div class="checkbox">
-					<input type="checkbox" ng-model="athlete.terms" ng-model="valid = 'true'" required> <span style="color: #ff0000;">*</span>I agree with <span style="text-decoration: underline;"><a title="Podmínky" href="http://fitmonster.cz/conditions/">terms&conditions</a></span> of FIT Monster Team, z.s.
+					<input type="checkbox" ng-model="athlete.terms" ng-model="valid = 'true'" ng-required="true"> <span style="color: #ff0000;">*</span>I agree with <span style="text-decoration: underline;"><a title="Podmínky" href="http://fitmonster.cz/conditions/">terms&conditions</a></span> of FIT Monster Team, z.s.
 				</div>
 			</div>
 
@@ -99,4 +99,20 @@
 
 <div>
 <pre>list={{list}}</pre>
+	
+		<p>$scope.athlete</p>
+				<p>firstName: {{ athlete.firstName }} </p>
+				<p>lastName: {{ athlete.lastName }} </p>
+				<p>email: {{ athlete.email }} </p>
+				<p>phone: {{ athlete.phone }} </p>
+				<p>gym: {{ athlete.gym }} </p>
+				<p>bDay: {{ athlete.bDay }} </p>
+				<p>sex: {{ athlete.sex }} </p>
+				<p>category: {{ athlete.category }} </p>
+				<p>shirt: {{ athlete.shirt }} </p>
+				<p>terms: {{ athlete.terms }} </p>
+				<p>registred: {{ athlete.registred }} </p>
+				<p>qualFee: {{ athlete.qualFee }} </p>
+				<p>qualified: {{ athlete.qualified }} </p>
+				<p>startFee: {{ athlete.startFee }} </p>
 </div>
