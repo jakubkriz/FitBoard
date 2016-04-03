@@ -30,6 +30,15 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 	};
 	$scope.setDefault();
 
+	$scope.dateOptions = {
+		formatYear: 'yyyy',
+		maxDate: new Date(2017, 1, 1),
+//		minDate: new Date(),
+		startingDay: 1
+	};
+	$scope.datePattern=/^[0-9]{2}.[0-9]{2}.[0-9]{4}$/i
+
+	$scope.altInputFormats = ['d!.M!.yyyy'];
 	$scope.format = 'dd.MM.yyyy';
 
 	// Submit registration
@@ -37,7 +46,12 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 		if ($scope.athlete.terms === true) {
 
 			var bDay = $scope.athlete.bDay;
-			$scope.athlete.bDay = bDay.toLocaleDateString('en-GB');
+			if ($scope.athlete.bDay){
+				$scope.athlete.bDay = bDay.toLocaleDateString('en-GB');
+			}else{
+				athleteForm.bDay.$error.date = true;
+				return '';
+			}
 
 			Api.register(
 				$scope.athlete,
@@ -62,12 +76,16 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 				},
 				function(resp){ //ERROR
 					$scope.athlete.bDay = bDay;
-					if (resp.status === 400){
-						$scope.errors.emailAlreadyExists = true; //400
+					if (resp.status === 400 && resp.statusText === 'Bad email'){
+						$scope.errors.emailError = true;
+					}else if(resp.status === 400 && resp.statusText === 'User exists'){
+						$scope.errors.emailAlreadyExists = true;
+					}else if(resp.status === 400 && resp.statusText === 'Bad request'){
+						$scope.errors.badRequest = true;
 					}else if(resp.status === 503){
-						$scope.errors.unavailable = true; //503
+						$scope.errors.unavailable = true;
 					}else{
-						$scope.errors.internal =  true; //500
+						$scope.errors.internal =  true;
 					}
 				}
 			);

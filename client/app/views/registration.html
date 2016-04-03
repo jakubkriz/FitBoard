@@ -13,7 +13,7 @@
 	<h1 class="wrap">Registration</h1>
 
 	<div class="col-md-6 col-md-offset-3 wrap">
-		<form id="athlete" ng-submit="submit()">
+		<form id="athlete" name="athleteForm" ng-submit="submit()">
 			<div class="row wrap">
 				<div class="col-md-4 col-md-offset-2">
 						<label for="firstName" class="sr-only">First Name</label>
@@ -30,6 +30,7 @@
 						<input type="email" ng-model="athlete.email" uib-tooltip="@" id="email" class="form-control" placeholder="Email" ng-required="true">
 					  <div ng-messages="errors" class="registration-messages" role="alert">
 					    <div ng-message="emailAlreadyExists">This email address already exists.</div>
+					    <div ng-message="emailError">Bad Email.</div>
 					  </div>
 				</div>
 				<div class="col-md-4">
@@ -46,10 +47,13 @@
 
 				<div class="col-md-4">
 					<p class="input-group">
-						<input type="text" placeholder="Birthday" uib-tooltip="dd.mm.yyyy" class="form-control" uib-datepicker-popup="{{format}}" popup-placement="bottom-right" ng-model="athlete.bDay" is-open="dateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+						<input type="text" ng-pattern='datePattern' placeholder="Birthday" uib-tooltip="dd.mm.yyyy" class="form-control ng-valid-date ng-valid ng-valid-required" uib-datepicker-popup="{{format}}" popup-placement="bottom-right" ng-model="athlete.bDay" name="bDay" is-open="dateOpened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" required/>
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="dateOpened = true;"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
+						<div ng-messages="athleteForm.bDay.$error" class="registration-messages" role="alert">
+							<div ng-message="date">Please feel in form dd.mm.yyyy (ex. 1.1.1990)</div>
+						</div>
 					</p>
 				</div>
 			</div>
@@ -90,8 +94,13 @@
 
 			<div class="col-md-8 col-md-offset-2 wrap">
 				<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="modal()">REGISTER</button>
+				<div ng-messages="athleteForm.$error" class="registration-messages" role="alert">
+					<div ng-message="required">Please feel all required items.</div>
+				</div>
+
 				<div ng-messages="errors" class="registration-messages" role="alert">
 					<div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
+					<div ng-message="badRequest">Empty Formular. Try again.</div>
 				</div>
 			</div>
 		</form>
