@@ -22,11 +22,15 @@ sub GET {
 sub POST {
 	my ($self, $env, $params, $data) = @_;
 
+	if (!$data || ref $data ne 'HASH'){
+		HTTP::Exception::400->throw(message=>"Bad request");
+	}
+
+	### Clean email
+	my $login = clean_email($data->{email});
+
 	### Check if usr exists
-	if (
-		defined $data->{email} 
-		&& (my $projects = $self->auth->checkUserExistence($env, $data->{email}))
-	){
+	if ($self->auth->checkUserExistence($env, $data->{email})){
 		HTTP::Exception::400->throw(message=>"User exists");
 	}else{
 		### Gen id as password if not exists
@@ -72,6 +76,19 @@ sub POST {
 	}
 
 	return { registered => undef };
+}
+
+sub clean_email {
+	my ($email) = @_;
+
+	if ($email && $email =~ /.+\@.+\..+/){
+		$email =~ s/\s//g;
+		$email =~ s/\@\@/\@/g;
+	}else{
+		HTTP::Exception::400->throw(message=>"Bad email");
+	}
+
+	return $email;
 }
 
 ### Return form for gray pages

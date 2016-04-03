@@ -19,7 +19,7 @@ sub GET {
 	my $link = ();
 	foreach my $u (@$users) {
 		push (@$link, {
-			href => '/api/v1/auth/user/'.$u->{login},
+			href => '/api/v1/auth/user/'.($u->{login}||''),
 			title => $u->{login},
 			rel => 'Auth::User::Id'
 		});
