@@ -87,15 +87,13 @@ sub store {
 }
 
 sub update {
-	my ($self, $id, $data) = @_;
+	my ($self, $constr, $data) = @_;
 
-	return unless defined $id;
+	return unless $constr;
 
 	$data->{modified} = time();
 
-	### Set Constrain
-	my $constr;
-	$constr->{_id} = $id;
+#	$constr->{_id} = $id;
 
 	return $_[0]->getConn->update($constr, $data, {safe => 1});
 }

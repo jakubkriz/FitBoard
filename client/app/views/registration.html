@@ -93,15 +93,23 @@
 			</div>
 
 			<div class="col-md-8 col-md-offset-2 wrap">
+				<div ng-show="athleteForm.$submitted">
+					<div ng-messages="athleteForm.$error" class="registration-messages" role="alert">
+						<div ng-message="required">Please feel all required items.</div>
+					</div>
+					<div ng-messages="athleteForm" class="registration-messages" role="alert">
+						<div ng-message="$invalid">Please fix all error in formular.</div>
+					</div>
+					<div ng-messages="errors" class="registration-messages" role="alert">
+						<div ng-message="emailAlreadyExists">This email address already exists.</div>
+					</div>
+					<div ng-messages="errors" class="registration-messages" role="alert">
+						<div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
+						<div ng-message="badRequest">Empty Formular. Try again.</div>
+						<div ng-message="internal">Internal server error.</div>
+					</div>
+				</div>
 				<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="modal()">REGISTER</button>
-				<div ng-messages="athleteForm.$error" class="registration-messages" role="alert">
-					<div ng-message="required">Please feel all required items.</div>
-				</div>
-
-				<div ng-messages="errors" class="registration-messages" role="alert">
-					<div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
-					<div ng-message="badRequest">Empty Formular. Try again.</div>
-				</div>
 			</div>
 		</form>
 	</div>

@@ -44,23 +44,33 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 	// Submit registration
 	$scope.submit = function() {
 		if ($scope.athlete.terms === true) {
-
-			var bDay = $scope.athlete.bDay;
-			if ($scope.athlete.bDay){
-				$scope.athlete.bDay = bDay.toLocaleDateString('en-GB');
+			function clone(obj) {
+			    if (null == obj || "object" != typeof obj) return obj;
+			    var copy = obj.constructor();
+			    for (var attr in obj) {
+			        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+			    }
+			    return copy;
+			}
+			var athl = clone($scope.athlete);
+			if (athl.bDay){
+				athl.bDay = athl.bDay.toLocaleDateString('en-GB');
 			}else{
 				athleteForm.bDay.$error.date = true;
 				return '';
 			}
 
+			// Clean errors
+			$scope.errors.emailError = false;
+			$scope.errors.emailAlreadyExists = false;
+			$scope.errors.badRequest = false;
+			$scope.errors.unavailable = false;
+			$scope.errors.internal =  false;
+
 			Api.register(
-				$scope.athlete,
+				athl,
 				function(resp){ // OK
 					if (resp){
-						// Clean errors
-						$scope.errors.emailAlreadyExists = false; //400
-						$scope.errors.internal = false; //500
-						$scope.errors.unavailable = false; //503
 
 						// Show modal page
 						$uibModal.open({
@@ -71,16 +81,19 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 							backdrop: 'static',
 							keyboard: false
 						});
-						$scope.setDefault();
+//						$scope.setDefault();
 					}
 				},
 				function(resp){ //ERROR
-					$scope.athlete.bDay = bDay;
-					if (resp.status === 400 && resp.statusText === 'Bad email'){
+
+					if (resp.status === 400 && resp.data[0] === 'Bad email'){
+						athleteForm.$invalid = true;
 						$scope.errors.emailError = true;
-					}else if(resp.status === 400 && resp.statusText === 'User exists'){
+					}else if(resp.status === 400 && resp.data[0] === 'User exists'){
+						athleteForm.$invalid = true;
 						$scope.errors.emailAlreadyExists = true;
-					}else if(resp.status === 400 && resp.statusText === 'Bad request'){
+					}else if(resp.status === 400 && resp.data[0] === 'Bad request'){
+						athleteForm.$invalid = true;
 						$scope.errors.badRequest = true;
 					}else if(resp.status === 503){
 						$scope.errors.unavailable = true;

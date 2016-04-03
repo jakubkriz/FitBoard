@@ -55,6 +55,15 @@ sub addUser {
 	return ($e ? $login : 0);
 }
 
+sub updateUser {
+	my ($self, $env, $login, $data) = @_;
+
+	$data->{login} = $login;
+
+	my ($e) = $self->data->update({login => $login}, $data);
+	return ($e ? $login : 0);
+}
+
 sub getUsers {
 	my ($self, $env) = @_;
 

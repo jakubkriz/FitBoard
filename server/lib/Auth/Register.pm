@@ -55,7 +55,7 @@ sub POST {
 			}
 
 			# BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}}
-			my $rtrn = $mail->sendMail({
+			my $rtrn = eval{$mail->sendMail({
 				list => [
 					join("::", $email, $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}),
 					join("::", $self->const->get("EmailBcc"), $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}),
@@ -63,11 +63,13 @@ sub POST {
 				from => $self->const->get("EmailBcc"),
 				subject => 'Registrace Fit Monster 2016',
 				message => $msg
-			});
-			if (!$rtrn){
+			})};
+			my $err = $@;
+			if ($err){
 				use Data::Dumper;
-				print STDERR "ERR: ".Dumper($rtrn);
-#				my $id = $self->auth->addUser($env, $email, delete $data->{password}, $data );
+				print STDERR "ERR: ".Dumper($err);
+				$data->{emailError} = $err;
+				my $id = $self->auth->updateUser($env, $email, $data );
 			}
 
 			### Return ok
