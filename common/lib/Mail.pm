@@ -24,6 +24,8 @@ use Mail::Bulkmail::Server;
 use Mail::Bulkmail::DummyServer;
 use Mail::Bulkmail::Dynamic;
 
+use utf8;
+
 my $dataDir;
 
 sub new {

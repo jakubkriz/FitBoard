@@ -10,6 +10,10 @@ use Plack::Session;
 use MIME::Base64;
 use IDGen;
 
+use utf8;
+
+use open IO => ':encoding(utf8)';
+
 use Mail;
 
 use HTTP::Exception qw(3XX);
@@ -21,6 +25,9 @@ sub GET {
 
 sub POST {
 	my ($self, $env, $params, $data) = @_;
+
+use Data::Dumper;
+print STDERR "DATA: ".Dumper($data, utf8::decode($data->{lastName}));
 
 	if (!$data || ref $data ne 'HASH'){
 		HTTP::Exception::400->throw(message=>"Bad request");
