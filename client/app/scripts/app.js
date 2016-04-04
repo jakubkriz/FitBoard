@@ -49,6 +49,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	  });
 
 	  $stateProvider
+	  .state('roster', {
+		url: '/roster',
+		templateUrl: 'views/roster.html',
+		controller: 'rosterCtrl'
+	  });
+
+	  $stateProvider
 		.state('user', {
 		url: '/user',
 		templateUrl: 'views/User/User.html',

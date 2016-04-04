@@ -10,6 +10,8 @@
 	</div>
 </header>
 
+<h1 class="wrap">Roster</h1>
+
 <!-- Navigation -->
 <div class="nav">
 
@@ -25,10 +27,6 @@
     	<img class="transformable" ng-class="{'scale':scaleMale}" id="male" ng-click="sex = 'default'; scaleMale = false; scaleFemale = true" src="img/man.png">
     	<img class="transformable" ng-class="{'scale':scaleFemale}" id="female" ng-click="sex = 'female'; scaleMale = true; scaleFemale = false" src="img/woman.png">
     </div>
-<!-- Workout -->
-	<div class="workout-list">
-	</div>
-</div>
 
 <div id="container">
 	<!-- Info -->
@@ -49,10 +47,8 @@
 	<!-- Table -->
 	<div class="col-lg-7 col-centered" id="leaderBoard">
 		<!-- ng-repeat -->
-		<div class="mainRow" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed">
+		<div class="mainRow" id="noPointer" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex">
 			<div class="row">
-				<!-- place -->
-				<div class="col-xs-1 place">#{{$index + 1}}</div>
 				<!-- photo -->
 				<div ng-if="athlete.sex == 'default'" >
 					<div class="col-xs-2 photo"><img id="icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo }}"></div>
@@ -66,90 +62,6 @@
 				<div id="border"></div>
 				<!-- gym -->
 				<div class="col-xs-2 gym">{{ athlete.gym }}</div>
-				<!-- score -->
-				<div class="col-xs-2 score">{{ athlete.score }}</div>
-			</div>
-			<!-- bio -->
-			<div uib-collapse="isCollapsed">
-				<div class="row bio">
-					<div col-xs-12>
-						<b>ATHLETE BIO</b>
-					</div>
-				</div>
-				<div class="row bio">
-					<div class="col-md-4" id="column">
-						<table>
-							<tr>
-								<td>Gym:</td>
-								<td><b>{{ athlete.gym }}</b></td>
-							</tr>
-							<tr>
-								<td>Age:</td>
-								<td><b>{{ athlete.age }}</b></td>
-							</tr>
-							<tr>
-								<td>Height:</td>
-								<td><b>{{ athlete.height }}</b></td>
-							</tr>
-							<tr>
-								<td>Weight:</td>
-								<td><b>{{ athlete. weight }}</b></td>
-							</tr>
-							<tr>
-								<td>Years in CF:</td>
-								<td><b>{{ athlete.yInC }}</b></td>
-							</tr>
-						</table>
-						</div>
-					<div class="col-md-4" id="column">
-						<table>
-							<tr>
-								<td>Clean & Jerk:</td>
-								<td><b>{{ athlete.cj }}</b></td>
-							</tr>
-							<tr>
-								<td>Snatch:</td>
-								<td><b>{{ athlete.snatch }}</b></td>
-							</tr>
-							<tr>
-								<td>Deadlift:</td>
-								<td><b>{{ athlete.deadlift }}</b></td>
-							</tr>
-							<tr>
-								<td>Front Squat:</td>
-								<td><b>{{ athlete.frontSquat }}</b></td>
-							</tr>
-							<tr>
-								<td>Back Squat:</td>
-								<td><b>{{ athlete.backSquat }}</b></td>
-							</tr>
-						</table>
-						</div>
-					<div class="col-md-4" id="column">
-						<table>
-							<tr>
-								<td>Fran:</td>
-								<td><b>{{ athlete.fran }}</b></td>
-							</tr>
-							<tr>
-								<td>Helen:</td>
-								<td><b>{{ athlete.helen }}</b></td>
-							</tr>
-							<tr>
-								<td>Grace:</td>
-								<td><b>{{ athlete.grace }}</b></td>
-							</tr>
-							<tr>
-								<td>Sprint 400m:</td>
-								<td><b>{{ athlete.sprint }}</b></td>
-							</tr>
-							<tr>
-								<td>1K row:</td>
-								<td><b>{{ athlete.row }}</b></td>
-							</tr>
-						</table>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!-- ng-repeat -->
