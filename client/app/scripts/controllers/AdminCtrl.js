@@ -2,8 +2,7 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
 	'use strict';
 
   $scope.gridOptions = {};
-  // $scope.gridOptions.data = 'myData';
-  $scope.gridOptions.data = 'athletes';
+  $scope.gridOptions.data = $scope.athletes;
   $scope.gridOptions.enableColumnResizing = true;
   $scope.gridOptions.enableFiltering = true;
   $scope.gridOptions.enableGridMenu = true;
@@ -18,66 +17,59 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
   //   return row.id;
   // };
 
- //  $scope.deleteRow = function(row) {
-	// var index = $scope.gridOptions.data.indexOf(row.entity);
-	// $scope.gridOptions.data.splice(index, 1);
- //  };
-
-	$scope.Delete = function(row) {
-		            var index = $scope.gridOptions.data.indexOf(row.entity);
-		            $scope.gridOptions.data.splice(index, 1);
-	};
-
-
+  $scope.deleteRow = function(row) {
+    var index = $scope.gridOptions.data.indexOf(row.entity);
+    $scope.gridOptions.data.splice(index, 1);
+  };
 
   $scope.gridOptions.columnDefs = [
-		{ 	name:'full name', 
-			field: 'name', 
+		{ 	name:'full name',
+			field: 'name',
 			enableCellEdit:false
 		},
-		{ 	name:'email', 
-			field: 'email', 
+		{ 	name:'email',
+			field: 'email',
 			enableCellEdit:false
 		},
-		{ 	name:'birthday', 
-			enableCellEdit:true, 
+		{ 	name:'birthday',
+			enableCellEdit:true,
 			enableFiltering:false,
 			type: 'date',
 			field: 'birthday'
 		},
-		{ 	name:'telephone', 
-			enableCellEdit:false, 
-			enableFiltering:false 
-		},
-		{ 	name:'sex', 
-			field: 'sex', 
-			enableCellEdit:false
-		},
-		{ 	name:'category', 
-			field: 'category', 
-			enableCellEdit:false
-		},
-		{ 	name:'t-shirt', 
-			field: 'tShirt', 
-			enableCellEdit: true, 
-			enableFiltering:false 
-		},
-		{ 	name:'payment', 
-			type:'boolean',
-			cellTemplate: '<input type="checkbox" value="paid">' 
-		},
-		{ 	name:'qualified', 
-			type:'boolean',
-			cellTemplate: '<input type="checkbox" value="paid">' 
-		},
-		{ 	name:'position', 
-			type:'number', 
+		{ 	name:'telephone',
+			enableCellEdit:false,
 			enableFiltering:false
 		},
-		{ 	name: 'edit', 
-//			enableCellEdit: false,
-//			cellTemplate: '<button class="btn primary" ng-click="Delete(row)">Delete Me</button>' 
-			cellTemplate: '<button class="btn primary" ngclick="alert(1)">Delete Me</button>' 
+		{ 	name:'sex',
+			field: 'sex',
+			enableCellEdit:false
+		},
+		{ 	name:'category',
+			field: 'category',
+			enableCellEdit:false
+		},
+		{ 	name:'t-shirt',
+			field: 'tShirt',
+			enableCellEdit: true,
+			enableFiltering:false
+		},
+		{ 	name:'payment',
+			type:'boolean',
+			cellTemplate: '<input type="checkbox" value="paid">'
+		},
+		{ 	name:'qualified',
+			type:'boolean',
+			cellTemplate: '<input type="checkbox" value="paid">'
+		},
+		{ 	name:'position',
+			type:'number',
+			enableFiltering:false
+		},
+		{ 	name: 'edit',
+ 				enableCellEdit: false,
+				cellTemplate: '<button class="btn primary" ng-click="grid.appScope.deleteRow(row)">Delete</button>'
+
 		}
   ];
 
