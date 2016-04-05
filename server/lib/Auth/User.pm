@@ -12,20 +12,36 @@ use MIME::Base64;
 use HTTP::Exception qw(3XX);
 
 sub GET {
-	my ($self, $env) = @_;
+	my ($self, $env, $id) = @_;
 
-	my $users = $self->auth->getUsers($env);
+	my $userid = $env->{'rest.userid'};
+	use Data::Dumper;
+	print STDERR "ID: ".Dumper($env->{'rest.userid'});
+
+	if ($userid){
+		my $user = $self->auth->getUser($env, $userid);
+		use Data::Dumper;
+		print STDERR "USERL ".Dumper($user);
+		if ($user){
+			return $user;
+		}else{
+			HTTP::Exception::404->throw(message=>"Not found");			
+		}
+	}else{
+
+		my $users = $self->auth->getUsers($env);
+		
+		my $link = ();
+		foreach my $u (@$users) {
+			push (@$link, {
+				href => '/api/v1/auth/user/'.($u->{login}||''),
+				title => $u->{login},
+				rel => 'Auth::User::Id'
+			});
+		}
 	
-	my $link = ();
-	foreach my $u (@$users) {
-		push (@$link, {
-			href => '/api/v1/auth/user/'.($u->{login}||''),
-			title => $u->{login},
-			rel => 'Auth::User::Id'
-		});
+		return {link => $link};
 	}
-	
-	return {link => $link};
 }
 
 sub POST {

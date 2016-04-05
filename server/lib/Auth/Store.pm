@@ -64,6 +64,19 @@ sub updateUser {
 	return ($e ? $login : 0);
 }
 
+sub getUser {
+	my ($self, $env, $user) = @_;
+
+	# Check user
+	my $user = $self->data->get( undef, {login => $user} );
+
+	if ( $user ){
+		return $user;
+	}else{
+		return 0;
+	}
+}
+
 sub getUsers {
 	my ($self, $env) = @_;
 
