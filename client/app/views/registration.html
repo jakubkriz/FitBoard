@@ -1,16 +1,26 @@
 
 	<!-- header -->
 	<header class="header" >
-		<div class="logo" id="nav">
-			<div class="shing">
-				<a href="http://www.fitmonster.cz">
-					<img href="http://www.fitmonster.cz" src="img/monster.png" width="160px"></img>
-				</a>
-			</div>
-		</div>
+		<a href="http://www.fitmonster.cz">
+			<div class="logo" id="nav">
+				<div class="shing">
+					<img src="img/monster.png" width="160px"></img>
+				</div>
+			</div>		
+		</a>
 	</header>
 
 	<h1 class="wrap">Registration</h1>
+
+	<div class="col-centered">
+		<span class="glyphicon glyphicon-question-sign" uib-tooltip="help" ng-click="isCollapsed = !isCollapsed"></span>
+		<div uib-collapse="isCollapsed">
+			<p>Please check your spam folder after you submit the form<br>
+			You should expecting confirmation email.</p>
+			<p>For registration without problems we recommended using Google Chrome or Opera</p>
+			<p>Check if you type your birthday in right format ex. 01.01.1990</p>
+		</div>
+	</div>
 
 	<div class="col-md-6 col-md-offset-3 wrap">
 		<form id="athlete" name="athleteForm" ng-submit="submit()">
@@ -52,7 +62,7 @@
 							<button type="button" class="btn btn-default" ng-click="dateOpened = true;"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
 						<div ng-messages="athleteForm.bDay.$error" class="registration-messages" role="alert">
-							<div ng-message="date">Please feel in form dd.mm.yyyy (ex. 1.1.1990)</div>
+							<div ng-message="date">Please feel in form dd.mm.yyyy (ex. 01.01.1990)</div>
 						</div>
 					</p>
 				</div>

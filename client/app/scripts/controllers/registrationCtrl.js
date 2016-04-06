@@ -113,4 +113,7 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 		}
 	};
 
+	//help button collapse support
+	$scope.isCollapsed = true;
+
 });
