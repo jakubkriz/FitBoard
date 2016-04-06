@@ -1,3 +1,19 @@
+/* global athleteForm*/
+
+function clone(obj) {
+	'use strict';
+    if (null === obj || 'object' !== typeof obj){
+    	return obj;
+    }
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)){
+        	copy[attr] = obj[attr];
+        }
+    }
+    return copy;
+}
+
 angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibModal, Api) {
 	'use strict';
 
@@ -36,7 +52,7 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 //		minDate: new Date(),
 		startingDay: 1
 	};
-	$scope.datePattern=/^[0-9]{2}.[0-9]{2}.[0-9]{4}$/i
+	$scope.datePattern=/^[0-9]{2}.[0-9]{2}.[0-9]{4}$/i;
 
 	$scope.altInputFormats = ['d!.M!.yyyy'];
 	$scope.format = 'dd.MM.yyyy';
@@ -44,14 +60,6 @@ angular.module('FitBoard').controller('registrationCtrl', function($scope, $uibM
 	// Submit registration
 	$scope.submit = function() {
 		if ($scope.athlete.terms === true) {
-			function clone(obj) {
-			    if (null == obj || "object" != typeof obj) return obj;
-			    var copy = obj.constructor();
-			    for (var attr in obj) {
-			        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-			    }
-			    return copy;
-			}
 			var athl = clone($scope.athlete);
 			if (athl.bDay){
 				athl.bDay = athl.bDay.toLocaleDateString('en-GB');
