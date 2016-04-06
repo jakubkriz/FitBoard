@@ -7,8 +7,6 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 
 	// Colapse support
 	$scope.isCollapsed = true;
-	$scope.oneAtATime  = true;
-	$scope.isOpen      = false;
 
 	// Initialization
 	$scope.category 	 = 'elite';

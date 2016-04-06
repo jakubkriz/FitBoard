@@ -49,7 +49,7 @@
 	<!-- Table -->
 	<div class="col-lg-7 col-centered" id="leaderBoard">
 		<!-- ng-repeat -->
-		<div class="mainRow" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed">
+		<div ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}">
 			<div class="row">
 				<!-- place -->
 				<div class="col-xs-1 place">#{{$index + 1}}</div>
