@@ -1,8 +1,4 @@
 #!/usr/bin/perl -T
-#-----------------------------------------------------
-#  The BEE Project test environment
-#-----------------------------------------------------
-# To see COPYRIGHT, LICENSE and WARRANTY information read the perldoc documentation bellow.
 
 use v5.10.0;
 use strict;
@@ -25,15 +21,15 @@ use base 'Test::Class';
 use Test::More;
 use IDGen;
 
-sub test1_random : Test(3) {
-	can_ok('IDGen', 'GetID', 'GetIDC');
+sub test1_random : Test(2) {
+	can_ok('IDGen', 'GetID');
 
 	my %id;
 	my $i;
 	my $n = 10000;
 	for (1..$n) {
 		$i = IDGen::GetID();
-		if ($i !~ /^[A-Za-z][0-9A-Za-z]{8,12}$/) {
+		if ($i !~ /^[0-9A-Za-z]{8,19}$/) {
 			diag("Wrong form of GetID result '$i' in $_ pass");
 			undef $i;
 			last;
@@ -43,22 +39,6 @@ sub test1_random : Test(3) {
 			last;
 		} else {
 			$id{$i} = undef;
-		}
-	}
-	ok($i, "test GetID() ($n passes)");
-	
-	for (1..$n) {
-		$i = IDGen::GetIDC();
-		if ($i !~ /^[a-z][0-9a-z]{10,20}$/) {
-			diag("Wrong form of GetID result '$i' in $_ pass");
-			undef $i;
-			last;
-		} elsif (exists $id{lc($i)}) {
-			diag("Duplicate GetID result '$i' in $_ pass");
-			undef $i;
-			last;
-		} else {
-			$id{lc($i)} = undef;
 		}
 	}
 	ok($i, "test GetID() ($n passes)");
