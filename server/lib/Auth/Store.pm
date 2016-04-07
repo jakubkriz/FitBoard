@@ -102,6 +102,21 @@ sub checkUser {
 	}
 }
 
+sub checkAdminUser {
+	my ($self, $env, $login) = @_;
+
+	return 0 unless $login;
+
+	# Check user
+	my $user = $self->data->get( undef, {'$and' => [{login => $login},{admin => 1}]}  );
+
+	if ( $user ){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
 sub checkUserExistence {
 	my ($self, $env, $login) = @_;
 
