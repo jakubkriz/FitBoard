@@ -127,7 +127,7 @@ sub _prepareBulk {
 	my $goodfile = $logDir.'/good';
 
 	my $bulk = Mail::Bulkmail::Dynamic->new(
-		"merge_keys"    => [qw(BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}})],
+		"merge_keys"    => [qw(BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}} {{athlete.gym}})],
 		"global_merge"  => {
 #			'{{dashboards}}' => $data->{dashboardList},
 		},

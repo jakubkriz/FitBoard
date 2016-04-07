@@ -26,9 +26,6 @@ sub GET {
 sub POST {
 	my ($self, $env, $params, $data) = @_;
 
-use Data::Dumper;
-print STDERR "DATA: ".Dumper($data, utf8::decode($data->{lastName}));
-
 	if (!$data || ref $data ne 'HASH'){
 		HTTP::Exception::400->throw(message=>"Bad request");
 	}
@@ -64,8 +61,8 @@ print STDERR "DATA: ".Dumper($data, utf8::decode($data->{lastName}));
 			# BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}}
 			my $rtrn = eval{$mail->sendMail({
 				list => [
-					join("::", $email, $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}),
-					join("::", $self->const->get("EmailBcc"), $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}),
+					join("::", $email, $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}, $data->{gym}),
+					join("::", $self->const->get("EmailBcc"), $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}, $data->{gym}),
 				],
 				from => $self->const->get("EmailBcc"),
 				subject => 'Registrace Fit Monster 2016',
