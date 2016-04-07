@@ -15,13 +15,9 @@ sub GET {
 	my ($self, $env, $id) = @_;
 
 	my $userid = $env->{'rest.userid'};
-	use Data::Dumper;
-	print STDERR "ID: ".Dumper($env->{'rest.userid'});
 
 	if ($userid){
 		my $user = $self->auth->getUser($env, $userid);
-		use Data::Dumper;
-		print STDERR "USERL ".Dumper($user);
 		if ($user){
 			return $user;
 		}else{
