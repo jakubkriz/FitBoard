@@ -18,14 +18,14 @@
 <!-- Category -->
 	<div class="toggle_radio">
 		<div id="toggle_slider"></div>
-  	<button class="cat-button transformable" ng-class="{'current':eliteCat}" id="elite" ng-click="category = 'elite'; eliteCat = true; mastersCat = false; openCat = false">ELITE</button>
-  	<button class="cat-button transformable" ng-class="{'current':mastersCat}" id="masters" ng-click="category = 'masters'; eliteCat = false; mastersCat = true; openCat = false">MASTERS</button>
-  	<button class="cat-button transformable" ng-class="{'current':openCat}" id="open" ng-click="category = 'open'; eliteCat = false; mastersCat = false; openCat = true">OPEN</button>
+  	<button class="cat-button transformable" ng-class="{'current':category==='elite'}" id="elite" ng-click="category = 'elite'">ELITE</button>
+  	<button class="cat-button transformable" ng-class="{'current':category==='masters'}" id="masters" ng-click="category = 'masters'">MASTERS</button>
+  	<button class="cat-button transformable" ng-class="{'current':category==='open'}" id="open" ng-click="category = 'open'">OPEN</button>
   	</div>
 <!-- Sex -->
     <div class="sex-radio">
-    	<img class="transformable" ng-class="{'scale':scaleMale}" id="male" ng-click="sex = 'default'; scaleMale = false; scaleFemale = true" src="img/man.png">
-    	<img class="transformable" ng-class="{'scale':scaleFemale}" id="female" ng-click="sex = 'female'; scaleMale = true; scaleFemale = false" src="img/woman.png">
+    	<img class="transformable" ng-class="{'scale':sex!=='male'}" id="male" ng-click="sex = 'male'" src="img/man.png">
+    	<img class="transformable" ng-class="{'scale':sex!=='female'}" id="female" ng-click="sex = 'female'" src="img/woman.png">
     </div>
 
 <div id="container">
@@ -33,7 +33,7 @@
 	<div class="col-centered">
 		<div id="sexHeader">
 		<!-- Sex Header -->
-			<h1 ng-bind-html="sexHeaderHtml"></h1>
+			<h1>{{sex==='male'?'MEN':'WOMEN'}}</h1>
 		</div>
 		<!-- search -->
 		<div class="col-md-1" id="custom-search-input">
@@ -47,17 +47,17 @@
 	<!-- Table -->
 	<div class="col-lg-7 col-centered" id="leaderBoard">
 		<!-- ng-repeat -->
-		<div class="mainRow" id="noPointer" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex">
+		<div class="mainRow" id="noPointer" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category:true | filter:sex:true">
 			<div class="row">
 				<!-- photo -->
-				<div ng-if="athlete.sex == 'default'" >
-					<div class="col-xs-2 photo"><img id="icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo }}"></div>
+				<div ng-if="athlete.sex == 'male'" >
+					<div class="col-xs-2 photo"><img id="icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo||'img/man.png' }}"></div>
 				</div>
 				<div ng-if="athlete.sex == 'female'" >
-					<div class="col-xs-2 photo"><img id="icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ athlete.photo }}"></div>
+					<div class="col-xs-2 photo"><img id="icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ athlete.photo||'img/woman.png' }}"></div>
 				</div>
 				<!-- name -->
-				<div class="col-xs-5 name">{{ athlete.name }}</div>
+				<div class="col-xs-5 name">{{ athlete.lastName }} {{ athlete.firstName }}</div>
 				<!-- border -->
 				<div id="border"></div>
 				<!-- gym -->

@@ -41,8 +41,14 @@
 
   </head>
   <body ng-app="FitBoard">
-     <div ui-view></div>
-
+    <div ng-controller="MainCtrl">
+        <div ng-messages="errors" class="registration-messages"  role="alert">
+            <div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
+            <div ng-message="badRequest">Empty form. Try again.</div>
+            <div ng-message="internal">Internal server error.</div>
+        </div>
+        <div ui-view></div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -82,6 +88,7 @@
     <script src="scripts/app.js"></script>
     
     <!-- Controllers -->
+    <script src="scripts/controllers/MainCtrl.js"></script>
     <script src="scripts/controllers/LeaderBoardCtrl.js"></script>
     <script src="scripts/controllers/UserCtrl.js"></script>
     <script src="scripts/controllers/AdminCtrl.js"></script>
