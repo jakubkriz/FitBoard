@@ -63,7 +63,7 @@ sub setError {
 	$data->{status} = 'ERROR';
 	$data->{msg} = $error;
 	$data->{end} = Time::HiRes::time();;
-	eval {$self->data->update($id, $data)};
+	eval {$self->data->update({'_id'=>$id}, {'$set' => $data})};
 	my $serr = $@ if $@;
 	if ($serr) {
 		# Just print error, bacause save the status is not so importent
@@ -141,7 +141,7 @@ sub sendMail {
 
 	$data->{status} = 'OK';
 	$data->{end} = Time::HiRes::time();;
-	eval {$self->data->update($id, $data)};
+	eval {$self->data->update({'_id'=>$id}, {'$set' => $data})};
 	my $se = $@ if $@;
 	if ($se) {
 		# Just print error, bacause save the status is not so importent

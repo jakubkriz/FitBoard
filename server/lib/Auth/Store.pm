@@ -58,7 +58,11 @@ sub addUser {
 sub updateUser {
 	my ($self, $env, $login, $data) = @_;
 
-	$data->{login} = $login;
+	if (defined $data->{'$set'}){
+		$data->{'$set'}{login} = $login;
+	}else{
+		$data->{login} = $login;
+	}
 
 	my ($e) = $self->data->update({login => $login}, $data);
 	return ($e ? $login : 0);
@@ -84,13 +88,6 @@ sub getAllUsers {
 	my $resp = $self->data->getAll( $constr, $proj, $sort );
 
 	return $resp;
-}
-
-sub getUsers {
-	my ($self, $env) = @_;
-
-	my @e = $self->data->getAll();
-	return \@e;
 }
 
 sub checkUser {
