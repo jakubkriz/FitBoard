@@ -10,22 +10,36 @@ use Plack::Session;
 use MIME::Base64;
 
 use HTTP::Exception qw(3XX);
+use HTTP::Exception qw(4XX);
+use HTTP::Exception qw(5XX);
 
 sub GET {
 	my ($self, $env, $id) = @_;
 
+	my $login = $env->{'psgix.session'}{user_id};
+	my $login_info = $self->auth->getUser($env, $login);
+
 	my $userid = $env->{'rest.userid'};
 
 	if ($userid){
-		my $user = $self->auth->getUser($env, $userid);
+		my $user;
+		if (defined $login_info->{admin} || $userid eq $login){
+			$user = $self->auth->getUser($env, $userid);
+		}
+
 		if ($user){
 			return $user;
 		}else{
-			HTTP::Exception::404->throw(message=>"Not found");			
+			HTTP::Exception::404->throw(message=>"Not found");
 		}
 	}else{
 
-		my $users = $self->auth->getUsers($env);
+		my $users = [];
+		if ($login_info->{admin}){
+			$users = $self->auth->getAllUsers($env);
+		}else{
+			$users = $self->auth->getAllUsers($env,{login=>$login});
+		}
 		
 		my $link = ();
 		foreach my $u (@$users) {
@@ -40,8 +54,47 @@ sub GET {
 	}
 }
 
-sub POST {
+sub PUT {
 	my ($self, $env, $params, $data) = @_;
+
+	my $userid = $env->{'rest.userid'};
+	return HTTP::Exception::405->throw(message=>"Bad request") unless $userid;
+
+	if ($data->{login} ne $userid){
+		HTTP::Exception::400->throw(message=>"Login can't be changed. Drop and create new user.");
+	}
+
+	my $pswd = delete $data->{password};
+
+	### Update user data
+	$self->auth->updateUser($env, $userid, { '$set' => $data });
+
+	$data->{password} = $pswd;
+	return $data
+}
+
+### Return form for gray pages
+sub GET_FORM {
+	my ($class, $env, $params) = @_;
+
+	if (!$env->{'rest.userid'}){
+		return {
+			GET => undef,
+	#		PUT => {
+	#			default => $params->get('content')
+	#		},
+			# POST => {
+			# 	default => "---\nemail: email"."\nxyz: xyz"
+			# }
+		}
+	}else{
+		return {
+			GET => undef,
+			PUT => {
+				default => $params->get('content')
+			}
+		}
+	}
 }
 
 1;

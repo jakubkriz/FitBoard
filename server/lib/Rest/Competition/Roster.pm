@@ -9,6 +9,7 @@ use Plack::Util::Accessor qw();
 use Plack::Session;
 use MIME::Base64;
 use IDGen;
+use boolean;
 
 use utf8;
 
@@ -28,6 +29,8 @@ sub GET {
 		next unless defined $query->{$param};
 		push @filter_params, {$param=>$query->{$param}};
 	}
+	push @filter_params, {"registred" => boolean::true};
+
 	if (@filter_params){
 		$filter = {'$and' => \@filter_params};
 	}

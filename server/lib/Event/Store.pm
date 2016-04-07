@@ -90,11 +90,27 @@ sub update {
 
 	return unless $constr;
 
+	if (defined $data->{'$set'}){
+		$data->{'$set'}{modified} = time();
+	}else{
+		$data->{modified} = time();
+	}
+
+#	$constr->{_id} = $id;
+
+	return $_[0]->getConn->update_one($constr, $data, {safe => 1});
+}
+
+sub updateAll {
+	my ($self, $constr, $data) = @_;
+
+	return unless $constr;
+
 	$data->{modified} = time();
 
 #	$constr->{_id} = $id;
 
-	return $_[0]->getConn->update($constr, $data, {safe => 1});
+	return $_[0]->getConn->update_many($constr, $data, {safe => 1});
 }
 
 sub get {
