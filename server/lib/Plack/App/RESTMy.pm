@@ -56,7 +56,7 @@ sub idToLink {
 }
 
 sub refToUrl {
-	my ($self, $ref, $params) = @_;
+	my ($self, $env, $ref, $params) = @_;
 	my $refToUrl = $self->const->get("RefToUrl");
 	if (exists $refToUrl->{$ref}){
 		my $pl = $refToUrl->{$ref}{placeholders};
@@ -65,6 +65,8 @@ sub refToUrl {
 			foreach my $key (keys %$pl){
 				if ($params->{$key}){
 					$url =~ s/$pl->{$key}/$params->{$key}/;
+				}elsif ($env->{$key}){
+					$url =~ s/$pl->{$key}/$env->{$key}/;
 				}else{
 					die 'Set placeholder '.$key;
 				}
