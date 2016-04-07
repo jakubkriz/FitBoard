@@ -29,7 +29,7 @@ requires 'YAML::AppConfig','>=0.19';
 requires 'parent','>= 0.225';
 requires 'MIME::Base64';
 requires 'Mail::Bulkmail';
-requires 'MongoDB';
+requires 'MongoDB','>= 1.2.3';
 
 requires 'Plack::Middleware::FormatOutput','>=0.05';
 requires 'Plack::Middleware::ParseContent','>=0.04';
