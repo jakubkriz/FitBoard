@@ -23,7 +23,7 @@
 	</div>
 
 	<div class="col-md-6 col-md-offset-3 wrap">
-		<form id="athlete" name="athleteForm" ng-submit="submit()">
+		<form id="athlete" name="athleteForm">
 			<div class="row wrap">
 				<div class="col-md-4 col-md-offset-2">
 						<label for="firstName" class="sr-only">First Name</label>
@@ -119,7 +119,7 @@
 						<div ng-message="internal">Internal server error.</div>
 					</div>
 				</div>
-				<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="modal()">REGISTER</button>
+				<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="submit()">REGISTER</button>
 			</div>
 		</form>
 	</div>
