@@ -2,7 +2,6 @@ package Event::Store;
 
 use IDGen;
 use MongoDB;
-use MongoDB::Connection;
 
 use Log;
 
@@ -36,7 +35,7 @@ sub new {
 sub init {
 	my ($self) = @_;
 	return $self if $mongo;
-	$mongo = MongoDB::Connection->new(host => $self->const->get('Md_IP'), port => $self->const->get('Md_Port'));
+	$mongo = MongoDB::MongoClient->new(host => ($self->const->get('Md_IP').':'.$self->const->get('Md_Port')));
 }
 
 sub setDB {
