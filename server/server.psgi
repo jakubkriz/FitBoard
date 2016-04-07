@@ -121,7 +121,7 @@ builder {
 };
 
 sub restMount {
-	my ($const, $urlmap, $uri, $rMap, $param) = @_;
+	my ($const, $urlmap, $uri, $rMap, $htmlvis) = @_;
 	foreach my $key (sort keys %{$rMap}) {
 		if (exists $rMap->{$key}{file}){
 			my $staticPath = '';
@@ -164,6 +164,20 @@ sub restMount {
 		}elsif (exists $rMap->{$key}{class} or exists $rMap->{$key}{ref} or exists $rMap->{$key}{resources} ){
 			my $mainKey = 'api';
 			my $path = $uri."".$key;
+
+			### Set format output by config
+			my $htmlvis_local = defined $htmlvis ? $htmlvis : {
+				'default.baseurl' => '/cs/vendor/',
+			};
+			if (exists $rMap->{$key}{"~FormatOutput"}){
+				$htmlvis_local = $rMap->{$key}{"~FormatOutput"};
+			}
+			if (exists $rMap->{$key}{"FormatOutput"}){
+				for my $viskey (keys %{$rMap->{$key}{"FormatOutput"}}){
+					$htmlvis_local->{$viskey} = $rMap->{$key}{"FormatOutput"}{$viskey};	
+				}
+			}
+
 			if($rMap->{$key}{class}){
 				#print STDERR "mounting $rMap->{$key}{class} to $path\n";
 				die "Path $path ends with slash which can prevent correct function of Rest::Client" if $path =~ /.\/$/; # problem: looking for '/app/aql/' in 'http://host/app/aql' would fail
@@ -181,13 +195,8 @@ sub restMount {
 						# Check user 
 						enable_if {!$rMap->{$key}{unauthorized}} '+Plack::Middleware::CheckUserAccess', login_url => '/api/v1/auth/login';
 						enable 'Plack::Middleware::ParseContent';
-						enable 'Plack::Middleware::FormatOutput', htmlvis => {
-							'default.base' => 'Rest::HtmlVis::Base',
-							'default.baseurl' => '/cs/vendor/',
-							'login' => 'Rest::HtmlVis::Login',
-							'logout' => 'Rest::HtmlVis::Logout',
-							'tag' => 'Rest::HtmlVis::Tag',
-						};
+						enable 'Plack::Middleware::FormatOutput', htmlvis => $htmlvis_local;
+						enable "Runtime";
 
 						$module->new($const)->to_app;
 					},
@@ -197,7 +206,7 @@ sub restMount {
 
 			}
 				if(exists $rMap->{$key}{resources} ) {
-					restMount($const, $urlmap,$path,$rMap->{$key}{resources},$param);		
+					restMount($const, $urlmap,$path,$rMap->{$key}{resources},$htmlvis);		
 			}
 			
 		}
