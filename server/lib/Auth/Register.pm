@@ -17,6 +17,8 @@ use open IO => ':encoding(utf8)';
 use Mail;
 
 use HTTP::Exception qw(3XX);
+use HTTP::Exception qw(4XX);
+use HTTP::Exception qw(5XX);
 
 sub GET {
 	my ($self, $env) = @_;
