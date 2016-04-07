@@ -198,7 +198,7 @@ sub restMount {
 						enable 'Plack::Middleware::FormatOutput', htmlvis => $htmlvis_local;
 						enable "Runtime";
 
-						$module->new($const)->to_app;
+						$module->new($const, $rMap->{$key})->to_app;
 					},
 					const=>$params,
 				);
