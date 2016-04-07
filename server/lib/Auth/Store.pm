@@ -68,10 +68,10 @@ sub getUser {
 	my ($self, $env, $user) = @_;
 
 	# Check user
-	my $user = $self->data->get( undef, {login => $user} );
+	my $resp = $self->data->get( undef, {login => $user} );
 
-	if ( $user ){
-		return $user;
+	if ( $resp ){
+		return $resp;
 	}else{
 		return 0;
 	}
