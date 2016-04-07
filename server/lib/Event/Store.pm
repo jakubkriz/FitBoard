@@ -113,15 +113,14 @@ sub get {
 }
 
 sub getAll {
-	my ($self, $constr, $sort) = @_;
+	my ($self, $constr, $proj, $sort) = @_;
 
+	$constr = $constr ? $constr : {};
 	$sort = $sort ? $sort : {};
+	$proj = $proj ? $proj : {};
 
-	if ($constr){
-		return $_[0]->getConn->find($constr, {_id=>0})->sort($sort)->all;
-	}else{
-		return $_[0]->getConn->find({}, {_id=>0})->all;
-	}
+	my @rtrn = $_[0]->getConn->find($constr, $proj)->sort($sort)->all;
+	return \@rtrn;
 }
 
 sub delete {

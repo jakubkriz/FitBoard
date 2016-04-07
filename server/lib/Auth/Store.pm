@@ -77,6 +77,15 @@ sub getUser {
 	}
 }
 
+sub getAllUsers {
+	my ($self, $env, $constr, $proj, $sort) = @_;
+
+	# Check user
+	my $resp = $self->data->getAll( $constr, $proj, $sort );
+
+	return $resp;
+}
+
 sub getUsers {
 	my ($self, $env) = @_;
 
