@@ -14,7 +14,7 @@ angular.module('FitBoard').controller('UserCtrl', function($scope) {
 					sex: 'default',
 					category: 'elite',
 					gym: 'independent2',
-					photo: 'img/profile.jpg',
+					photo: 'img/man.png',
 					score: 125,
 					age: '24',
 					height: '175 cm',

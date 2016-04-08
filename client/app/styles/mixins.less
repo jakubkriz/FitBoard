@@ -14,6 +14,7 @@
 @silver: #f4f7f8;
 @hoki: #67809f;
 @panels: #2b3031;
+@panels-gradient: #242829;
 @blue-pastel: #3779BE;
 @blue-pastel-gradient: #3471b2;
 @flash-green: #24F657;
@@ -43,6 +44,22 @@
 	background:    -moz-linear-gradient(@top-button 50%, @btm-button 50%); /* For Firefox 3.6 to 15 */
 	background:         linear-gradient(@top-button 50%, @btm-button 50%); /* Standard syntax (must be last) */
 	background-color: @top-button;
+}
+.user-menuBtn(@top-panel: @panels, @btm-panel: @panels-gradient) 
+{
+	background: -webkit-linear-gradient(@top-panel 50%, @btm-panel 50%); /* For Safari 5.1 to 6.0 */
+	background:      -o-linear-gradient(@top-panel 50%, @btm-panel 50%); /* For Opera 11.1 to 12.0 */
+	background:    -moz-linear-gradient(@top-panel 50%, @btm-panel 50%); /* For Firefox 3.6 to 15 */
+	background:         linear-gradient(@top-panel 50%, @btm-panel 50%); /* Standard syntax (must be last) */
+	background-color: @top-panel;
+}
+.user-menuBtn-hover(@top-panel: @panels-gradient, @btm-panel: @panels) 
+{
+	background: -webkit-linear-gradient(@top-panel 50%, @btm-panel 50%); /* For Safari 5.1 to 6.0 */
+	background:      -o-linear-gradient(@top-panel 50%, @btm-panel 50%); /* For Opera 11.1 to 12.0 */
+	background:    -moz-linear-gradient(@top-panel 50%, @btm-panel 50%); /* For Firefox 3.6 to 15 */
+	background:         linear-gradient(@top-panel 50%, @btm-panel 50%); /* Standard syntax (must be last) */
+	background-color: @top-panel;
 }
 
 
