@@ -49,14 +49,14 @@ sub GET {
 		};
 	}
 
-	return { users => $userList, link => $link };
+	return { users => $userList, link => $link, form=>GET_FORM($env, $query)};
 }
 
 sub GET_FORM {
-	my ($class, $env, $params) = @_;
+	my ($env, $params) = @_;
 
 	return {
-		GET => {
+		get => {
 			params => [
 				{
 					name =>'category',
@@ -71,7 +71,6 @@ sub GET_FORM {
 					default=>($params->{'sex'}||'')
 				},
 			],
-			sex => {}
 		},
 	}	
 }

@@ -28,6 +28,7 @@ sub GET {
 		}
 
 		if ($user){
+			$user->{form} = GET_FORM($env, $user);
 			return $user;
 		}else{
 			HTTP::Exception::404->throw(message=>"Not found");
@@ -75,23 +76,17 @@ sub PUT {
 
 ### Return form for gray pages
 sub GET_FORM {
-	my ($class, $env, $params) = @_;
+	my ($env, $content) = @_;
 
-	if (!$env->{'rest.userid'}){
+	if ($env->{'rest.userid'}){
 		return {
-			GET => undef,
-	#		PUT => {
-	#			default => $params->get('content')
-	#		},
-			# POST => {
-			# 	default => "---\nemail: email"."\nxyz: xyz"
-			# }
-		}
-	}else{
-		return {
-			GET => undef,
-			PUT => {
-				default => $params->get('content')
+			get => undef,
+			put => {
+				params => [{
+					type => 'textarea',
+					name => 'DATA',
+					default => $content
+				}]
 			}
 		}
 	}
