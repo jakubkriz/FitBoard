@@ -29,7 +29,7 @@ sub GET {
 		next unless defined $query->{$param};
 		push @filter_params, {$param=>$query->{$param}};
 	}
-	push @filter_params, {"registred" => boolean::true};
+	push @filter_params, {"registred" => 1};
 
 	if (@filter_params){
 		$filter = {'$and' => \@filter_params};
