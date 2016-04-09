@@ -22,6 +22,13 @@
 
 /* colors */
 @body: #f5f5f5;
+@mainRow-hover: @blue-pastel;
+@panel-left: @panels;
+@panel-top: @panels;
+@place: #2c3e50;
+@score: #2c3e50;
+@male: @niagara;
+@female: @radical-red;
 .mainRow(@top-mR: @brown-grey, @btm-mR: @brown-grey-gradient) 
 {
 	background: -webkit-linear-gradient(@top-mR 50%, @btm-mR 50%); /* For Safari 5.1 to 6.0 */
@@ -30,13 +37,14 @@
 	background:         linear-gradient(@top-mR 50%, @btm-mR 50%); /* Standard syntax (must be last) */
 	background-color: @top-mR;
 }
-@mainRow-hover: @blue-pastel;
-@panel-left: @panels;
-@panel-top: @panels;
-@place: #2c3e50;
-@score: #2c3e50;
-@male: @niagara;
-@female: @radical-red;
+.categoryBtn(@top-button: @blue-pastel-gradient, @btm-button: @blue-pastel) 
+{
+	background: -webkit-linear-gradient(@top-button 50%, @btm-button 50%); /* For Safari 5.1 to 6.0 */
+	background:      -o-linear-gradient(@top-button 50%, @btm-button 50%); /* For Opera 11.1 to 12.0 */
+	background:    -moz-linear-gradient(@top-button 50%, @btm-button 50%); /* For Firefox 3.6 to 15 */
+	background:         linear-gradient(@top-button 50%, @btm-button 50%); /* Standard syntax (must be last) */
+	background-color: @top-button;
+}
 .categoryBtn-hover(@top-button: @blue-pastel, @btm-button: @blue-pastel-gradient) 
 {
 	background: -webkit-linear-gradient(@top-button 50%, @btm-button 50%); /* For Safari 5.1 to 6.0 */
@@ -65,12 +73,32 @@
 
 /* directives */
 
-.paddingMainRow
+
+// padding
+.padding200
 {
 	padding: 20px 0 20px 0;
 }
 
+.padding400
+{
+	padding: 40px 0 40px 0;
+}
 
+.padding020 {
+	padding: 0 20px 0 20px
+}
+
+// margin
+.margin030 {
+	margin: 0 30px 0 30px;
+}
+
+.margin300 {
+	margin: 30px 0 30px 0;
+}
+
+//align
 .vertical-align(@position: absolute)
 {
 	position: @position;
@@ -81,12 +109,29 @@
 			transform: translateY(-50%);
 }
 
+
+// border
 .border-radius{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
 
+// cursor
 #noPointer {
 	cursor: default;
+}
+
+// glyphs
+.glyph2rem{
+	font-size: 2rem;
+}
+
+.glyph4rem{
+	font-size: 4rem;
+}
+
+.glyphicon.glyphicon-question-sign {
+	font-size: 3rem;
+	cursor: pointer;
 }

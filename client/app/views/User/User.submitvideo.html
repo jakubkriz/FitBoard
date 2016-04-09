@@ -1,16 +1,7 @@
-<script src="bower_components/iframe-resizer/src/iframeResizer.contentWindow.js"></script>
-
 <div class="content-wrap">
 	<h1>Qualification to FM2016</h1>
 
 	<div class="col-md-10 col-md-offset-1 qual-wrap">
-
-		<div class="col-xs-6 col-centered col-min">
-			<button ui-sref="user.submitvideo"class="submit-qual">
-				<span class="glyphicon glyphicon-facetime-video"></span>
-				<span class="submit-text">Submit video</span>
-			</button>
-		</div>
 
 		<div class="row col-md-10 col-md-offset-1 padding400 padding020">
 			<div class="col-md-6 padding200">
@@ -36,22 +27,21 @@
 			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur vitae diam non enim vestibulum interdum. Nullam sapien sem, ornare ac, nonummy non, lobortis a enim. Nullam eget nisl. Etiam quis quam. Fusce wisi. Praesent in mauris eu tortor porttitor accumsan. Sed convallis magna eu sem. Fusce suscipit libero eget elit. Nullam lectus justo, vulputate eget mollis sed, tempor sed magna. Integer imperdiet lectus quis justo.</p>
 		</div>
 
-		<div class="col-md-12 padding400 padding020">
-			<div class="col-md-4 col-centered">
-				<div class="col-md-6 inline">
-					<button class="glyph4rem standarts"><i class="fa fa-book"></i><p class="labeltext">standarts</p></button>
+		<div class="col-md-6 col-centered">
+			<form id="submitvideo" name="qualvideoForm">
+				<div class="col-md-10 col-centered">
+					<label for="16.1" class="">Put the URL adress of your video here:</label>
+					<input type="text" ng-model="athlete.16.1" id="16.1" class="form-control" placeholder="http://" ng-required="true" autofocus="">
 				</div>
-				<div class="col-md-6 inline">
-					<button class="glyph4rem standarts"><i class="fa fa-table"></i><p class="labeltext">scoresheet</p></button>
+				<div class="col-md-4 col-centered">
+					<label for="score_16.1" class=""></label>
+					<input type="text" ng-model="athlete.score_16.1" id="score_16.1" class="form-control" uib-tooltip="not required" placeholder="Your score" ng-required="false">
 				</div>
-			</div>
-		</div>
-
-		<div class="col-md-12 padding400 padding020">
-			<div class="col-md-10 col-centered h_iframe">
-			<img class="ratio" src="http://placehold.it/16x9"/>
-				<iframe src="https://www.youtube.com/embed/PxQVf7J-Bgs" frameborder="0" allowfullscreen></iframe>
-			</div>
+			<button ui-sref="user.submitvideo"class="submit-qual">
+				<span class="glyphicon glyphicon-facetime-video"></span>
+				<span class="submit-text" type="submit" ng-click="submit()">Confirm video</span>
+			</button>
+			</form>
 		</div>
 	</div>
 </div>

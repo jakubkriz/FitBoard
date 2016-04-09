@@ -9,7 +9,7 @@ angular.module('FitBoard').controller('rosterCtrl', function($scope, Api) {
 	$scope.category      = 'elite';
 	$scope.sex           = 'male';
 
-	Api.getRoster("fitmonster2016", 
+	Api.getRoster('fitmonster2016', 
 		function(data){
 			$scope.athletes = data.data.users;
 		},
@@ -20,6 +20,6 @@ angular.module('FitBoard').controller('rosterCtrl', function($scope, Api) {
 				$scope.errors.internal =  true;
 			}
 		}
-	)
+	);
 
 });

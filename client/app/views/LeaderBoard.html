@@ -33,7 +33,7 @@
 <div id="container">
 	<!-- Info -->
 	<div class="col-centered">
-		<div id="sexHeader">
+		<div class="animate" id="sexHeader">
 		<!-- Sex Header -->
 			<h1 ng-bind-html="sexHeaderHtml"></h1>
 		</div>
@@ -46,10 +46,11 @@
 		</div>
 	</div>
 
+
 	<!-- Table -->
 	<div class="col-lg-7 col-centered" id="leaderBoard">
 		<!-- ng-repeat -->
-		<div ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}">
+		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}">
 			<div class="row">
 				<!-- place -->
 				<div class="col-xs-1 place">#{{$index + 1}}</div>

@@ -12,7 +12,8 @@ var app = angular.module('FitBoard', [
 	'ui.grid.moveColumns',
 	'ui.grid.exporter',
 	'ui.grid.importer',
-	'ngMessages'
+	'ngMessages',
+	'ngIframeResizer'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -61,41 +62,48 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl: 'views/User/User.html',
 		controller: 'UserCtrl'
 	  });
-			$stateProvider
-			.state('user.dashboard', {
-			url: '/dash',
-			templateUrl: 'views/User/User.dashboard.html',
-			controller: 'UserCtrl'
-		  });
+				$stateProvider
+				.state('user.dashboard', {
+				url: '/dash',
+				templateUrl: 'views/User/User.dashboard.html',
+				controller: 'UserCtrl'
+			  });
 
-			$stateProvider
-			.state('user.events', {
-			url: '/events',
-			templateUrl: 'views/User/User.events.html',
-			controller: 'UserCtrl'
-		  });
+				$stateProvider
+				.state('user.events', {
+				url: '/events',
+				templateUrl: 'views/User/User.events.html',
+				controller: 'UserCtrl'
+			  });
 
-			$stateProvider
-			.state('user.qual', {
-			url: '/qual',
-			templateUrl: 'views/User/User.qual.html',
-			controller: 'UserCtrl'
-		  });
+				$stateProvider
+				.state('user.qual', {
+				url: '/qual',
+				templateUrl: 'views/User/User.qual.html',
+				controller: 'UserCtrl'
+			  });
 
-			$stateProvider
-			.state('user.profile', {
-			url: '/profile',
-			templateUrl: 'views/User/User.profile.html',
-			controller: 'UserCtrl'
-		  });
+						$stateProvider
+						.state('user.submitvideo', {
+						url: '/submitvideo',
+						templateUrl: 'views/User/User.submitvideo.html',
+						controller: 'UserCtrl'
+					  });
 
-			$stateProvider
-			.state('user.admin', {
-			url: '/admin',
-			templateUrl: 'views/User/User.admin.html',
-			controller: 'AdminCtrl'
+				$stateProvider
+				.state('user.profile', {
+				url: '/profile',
+				templateUrl: 'views/User/User.profile.html',
+				controller: 'UserCtrl'
+			  });
 
-		  });
+				$stateProvider
+				.state('user.admin', {
+				url: '/admin',
+				templateUrl: 'views/User/User.admin.html',
+				controller: 'AdminCtrl'
+
+			  });
 
 });
 

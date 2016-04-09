@@ -17,7 +17,8 @@
     "matchHeight": "^0.7.0",
     "angular-ui-router": "^0.2.18",
     "pdfmake": "^0.1.20",
-    "angular-messages": "^1.5.3"
+    "angular-messages": "^1.5.3",
+    "ng-iframe-resizer": "^0.0.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0",
