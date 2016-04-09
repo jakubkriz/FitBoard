@@ -53,7 +53,7 @@ sub GET {
 			});
 		}
 	
-		return {link => $link};
+		return {link => $link, count=>scalar @$users};
 	}
 }
 
