@@ -13,6 +13,9 @@ use HTTP::Exception qw(3XX);
 use HTTP::Exception qw(4XX);
 use HTTP::Exception qw(5XX);
 
+use YAML::Syck;
+$YAML::Syck::ImplicitUnicode = 1;
+
 sub GET {
 	my ($self, $env, $id) = @_;
 
@@ -28,7 +31,6 @@ sub GET {
 		}
 
 		if ($user){
-			$user->{form} = GET_FORM($env, $user);
 			return $user;
 		}else{
 			HTTP::Exception::404->throw(message=>"Not found");
@@ -76,17 +78,19 @@ sub PUT {
 
 ### Return form for gray pages
 sub GET_FORM {
-	my ($env, $content) = @_;
+	my ($class, $env, $content, $par) = @_;
 
 	if ($env->{'rest.userid'}){
 		return {
 			get => undef,
 			put => {
-				params => [{
-					type => 'textarea',
-					name => 'DATA',
-					default => $content
-				}]
+				params => {
+					DATA => {
+						type => 'textarea',
+						name => 'DATA',
+						default => $content
+					}
+				}
 			}
 		}
 	}
