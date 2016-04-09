@@ -55,6 +55,13 @@ sub addUser {
 	return ($e ? $login : 0);
 }
 
+sub removeUser {
+	my ($self, $env, $login) = @_;
+
+	my ($e) = $self->data->delete(undef, {login=>$login});
+	return ($e ? 1 : 0);
+}
+
 sub updateUser {
 	my ($self, $env, $login, $data) = @_;
 

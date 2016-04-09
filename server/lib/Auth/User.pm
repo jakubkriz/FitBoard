@@ -76,6 +76,17 @@ sub PUT {
 	return $data
 }
 
+sub DELETE {
+	my ($self, $env, $params, $data) = @_;
+
+	my $userid = $env->{'rest.userid'};
+	return HTTP::Exception::405->throw(message=>"Bad request") unless $userid;
+
+	my $ret = $self->auth->removeUser($env, $userid);
+
+	return $ret;
+}
+
 ### Return form for gray pages
 sub GET_FORM {
 	my ($class, $env, $content, $par) = @_;
@@ -83,6 +94,9 @@ sub GET_FORM {
 	if ($env->{'rest.userid'}){
 		return {
 			get => undef,
+			delete => {
+				params => {}
+			},
 			put => {
 				params => {
 					DATA => {
