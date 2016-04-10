@@ -15,11 +15,11 @@
 	</div>
 	<!-- navigation -->
 	<div class="user-name">
-		<h4>{{ user.name }}</h4>
+		<h4>{{ athlete.name }}</h4>
 	</div>
 
-		<div ng-if="user.sex == 'default'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
-			<img id="nav-icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ user.photo }}" uib-dropdown-toggle>
+		<div ng-if="athlete.sex == 'default'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
+			<img id="nav-icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo }}" uib-dropdown-toggle>
 
 			<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
 				<li><a ui-sref=".profile">My profile</a></li>
@@ -28,8 +28,8 @@
 			</ul>
 		</div>
 
-		<div ng-if="user.sex == 'female'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
-			<img id="nav-icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ user.photo }}" uib-dropdown-toggle>
+		<div ng-if="athlete.sex == 'female'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
+			<img id="nav-icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ athlete.photo }}" uib-dropdown-toggle>
 
 			<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
 				<li><a href="#">My profile</a></li>

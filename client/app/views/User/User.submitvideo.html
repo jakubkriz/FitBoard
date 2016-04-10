@@ -27,20 +27,20 @@
 			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur vitae diam non enim vestibulum interdum. Nullam sapien sem, ornare ac, nonummy non, lobortis a enim. Nullam eget nisl. Etiam quis quam. Fusce wisi. Praesent in mauris eu tortor porttitor accumsan. Sed convallis magna eu sem. Fusce suscipit libero eget elit. Nullam lectus justo, vulputate eget mollis sed, tempor sed magna. Integer imperdiet lectus quis justo.</p>
 		</div>
 
-		<div class="col-md-6 col-centered">
+		<div class="col-md-6 col-md-offset-3 text-align margintop">
 			<form id="submitvideo" name="qualvideoForm">
 				<div class="col-md-10 col-centered">
-					<label for="16.1" class="">Put the URL adress of your video here:</label>
-					<input type="text" ng-model="athlete.16.1" id="16.1" class="form-control" placeholder="http://" ng-required="true" autofocus="">
+					<label for="16.1">Put the URL adress of your video here:</label>
+					<input type="text" ng-model="athlete.qual161" id="qual161" class="form-control" placeholder="http://" ng-required="true" autofocus="">
 				</div>
 				<div class="col-md-4 col-centered">
 					<label for="score_16.1" class=""></label>
-					<input type="text" ng-model="athlete.score_16.1" id="score_16.1" class="form-control" uib-tooltip="not required" placeholder="Your score" ng-required="false">
+					<input type="text" ng-model="athlete.score161" id="score161" class="form-control" uib-tooltip="not required" placeholder="Your score" ng-required="false">
 				</div>
-			<button ui-sref="user.submitvideo"class="submit-qual">
-				<span class="glyphicon glyphicon-facetime-video"></span>
-				<span class="submit-text" type="submit" ng-click="submit()">Confirm video</span>
-			</button>
+				<button class="submit-qual" type="submit" ng-click="submit()">
+					<span class="glyphicon glyphicon-facetime-video"></span>
+					<span class="submit-text">Confirm video</span>
+				</button>
 			</form>
 		</div>
 	</div>

@@ -161,8 +161,8 @@ h1
 }
 
 .col-min {
-    /* custom max width */
-    min-width:320px;
+	/* custom max width */
+	min-width:320px;
 }
 
 .nav
@@ -424,29 +424,35 @@ input.search-query.form-control
 /* animation */
 .animate.ng-animate{
 	-webkit-transition: 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
-    -moz-transition: 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
-    -ms-transition: 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
-    -o-transition: 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
-    transition: 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
-    position: relative;
-    display: block;
+	-moz-transition: 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+	-ms-transition: 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+	-o-transition: 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+	transition: 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+	position: relative;
+	display: block;
 }
 
-.animate.ng-leave.ng-leave-active,
 .animate.ng-move,
 .animate.ng-enter {
-  opacity: 0;
-    left: -50px;
-    height: 50px;
+	opacity: 0;
+	left: 100px;
+	height: 65px;
 }
 
 .animate.ng-leave,
 .animate.ng-move.ng-move-active,
 .animate.ng-enter.ng-enter-active {
-  opacity: 1;
-    left: 0;
-    height: 64px;
+	opacity: 1;
+	left: 0;
+	height: 65px;
 }
+
+.animate.ng-leave.ng-leave-active {
+	opacity: 0;
+	left: -100px;
+	height: 65px;
+}
+
 
 /* video */
 .h_iframe        {position:relative;}

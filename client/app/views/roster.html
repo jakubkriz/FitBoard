@@ -51,17 +51,17 @@
 			<div class="row">
 				<!-- photo -->
 				<div ng-if="athlete.sex == 'male'" >
-					<div class="col-xs-2 photo"><img id="icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo||'img/man.png' }}"></div>
+					<div class="col-xs-3 photo"><img id="icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo||'img/man.png' }}"></div>
 				</div>
 				<div ng-if="athlete.sex == 'female'" >
-					<div class="col-xs-2 photo"><img id="icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ athlete.photo||'img/woman.png' }}"></div>
+					<div class="col-xs-3 photo"><img id="icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ athlete.photo||'img/woman.png' }}"></div>
 				</div>
 				<!-- name -->
 				<div class="col-xs-5 name">{{ athlete.lastName }} {{ athlete.firstName }}</div>
 				<!-- border -->
 				<div id="border"></div>
 				<!-- gym -->
-				<div class="col-xs-2 gym">{{ athlete.gym }}</div>
+				<div class="col-xs-4 gym">{{ athlete.gym }}</div>
 			</div>
 		</div>
 		<!-- ng-repeat -->

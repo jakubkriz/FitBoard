@@ -13,7 +13,6 @@ var app = angular.module('FitBoard', [
 	'ui.grid.exporter',
 	'ui.grid.importer',
 	'ngMessages',
-	'ngIframeResizer'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider) {

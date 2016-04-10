@@ -8,7 +8,7 @@ angular.module('FitBoard').controller('UserCtrl', function($scope) {
 	};
 
 //User
-	$scope.user = 
+	$scope.athlete = 
 		{
 					name: 'Michal Dovrtěl',
 					sex: 'default',
@@ -29,11 +29,10 @@ angular.module('FitBoard').controller('UserCtrl', function($scope) {
 					helen: '132',
 					grace: '2:15',
 					sprint: '1:30',
-					row: '4:00'
-				};
+					row: '4:00',
+					qual161: '',
+					score161: ''
 
-	$scope.status = {
-    isopen: false
-  };
+				};
 
 });
