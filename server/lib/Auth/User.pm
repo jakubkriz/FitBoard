@@ -45,15 +45,18 @@ sub GET {
 		}
 		
 		my $link = ();
+		my $qualFee; my $registred;
 		foreach my $u (@$users) {
 			push (@$link, {
 				href => '/api/v1/auth/user/'.($u->{login}||''),
 				title => $u->{login}.' - '.$u->{firstName}.' '.$u->{lastName},
 				rel => 'Auth::User::Id'
 			});
+			$qualFee++ if $u->{qualFee};
+			$registred++ if $u->{registred};
 		}
 	
-		return {link => $link, count=>scalar @$users};
+		return {link => $link, count=>scalar @$users, qualFee => $qualFee, registred => $registred};
 	}
 }
 
