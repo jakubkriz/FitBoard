@@ -48,7 +48,7 @@ sub GET {
 		foreach my $u (@$users) {
 			push (@$link, {
 				href => '/api/v1/auth/user/'.($u->{login}||''),
-				title => $u->{login},
+				title => $u->{login}.' - '.$u->{firstName}.' '.$u->{lastName},
 				rel => 'Auth::User::Id'
 			});
 		}
