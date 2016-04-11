@@ -15,10 +15,10 @@
 	</div>
 	<!-- navigation -->
 	<div class="user-name">
-		<h4>{{ athlete.name }}</h4>
+		<h4>{{ athlete.firstName }} {{ athlete.lastName }}</h4>
 	</div>
 
-		<div ng-if="athlete.sex == 'default'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
+		<div ng-if="athlete.sex == 'male'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
 			<img id="nav-icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo }}" uib-dropdown-toggle>
 
 			<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
