@@ -1,1 +1,20 @@
-<h1>Profile</h1>
+<div class="content-wrap">
+	<h1>Profile</h1>
+		<div class="col-md-10 col-md-offset-1 qual-wrap">
+			<div class="col-xs-3 col-md-offset-1">
+				<img ng-src="{{athlete.photo}}" width="100px">
+			</div>
+			<div class="col-xs-8" ng-hide="editName">
+			<h1>{{athlete.firstName}} {{athlete.lastName}}
+				  <a ng-click="enableEditName()"><span class="fa fa-pencil edit" aria-hidden="true"></span></a>
+			</h1>
+			</div>
+			<div ng-show="editName">
+				<input ng-model="editableFirstName" ng-show="editName">
+				<input ng-model="editableLastName" ng-show="editName">
+					<a ng-click="saveName()"><i class="fa fa-check save" aria-hidden="true"></i></a>
+					or
+					<a ng-click="disableEditName()"><i class="fa fa-times cancel" aria-hidden="true"></i></a>.
+			</div>
+		</div>
+</div>

@@ -44,4 +44,23 @@ angular.module('FitBoard').controller('UserCtrl', function($scope) {
 
 				};
 
+//my profile
+	$scope.editName = false;
+  
+	$scope.enableEditName = function() {
+		$scope.editName = true;
+		$scope.editableFirstName = $scope.athlete.firstName;
+		$scope.editableLastName = $scope.athlete.lastName;
+	};
+	  
+	$scope.disableEditName = function() {
+		$scope.editName = false;
+	};
+	  
+	$scope.saveName = function() {
+		$scope.athlete.firstName = $scope.editableFirstName;
+		$scope.athlete.lastName = $scope.editableLastName;
+		$scope.disableEditName();
+	};
+
 });
