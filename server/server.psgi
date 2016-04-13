@@ -87,13 +87,7 @@ builder {
 	$urlmap->mount('/favicon.ico' => Plack::App::File->new( file => "$myDir/static/favicon.ico" )->to_app );
 
 	### Set static directory
-	$urlmap->mount('/localstatic' => builder {
-		enable 'Plack::Middleware::ConditionalGET';
-		enable 'Plack::Middleware::ETag', cache_control => 'public, max-age=3600';
-		enable 'Plack::Middleware::Static',
-			path => qr/./,
-			root => "$myDir/static";
-	});
+	$urlmap->mount('/localstatic' => Plack::App::File->new(root => $myDir."/static")->to_app, const=>{nostrict=>1});
 
 	### Mount htmlvis static files
 	my $share = File::ShareDir::dist_dir('Rest-HtmlVis') || "../Rest-HtmlVis/share/";

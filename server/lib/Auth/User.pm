@@ -45,8 +45,22 @@ sub GET {
 		}
 		
 		my $link = ();
-		my $qualFee; my $registred;
+		my $qualFee; my $registred; my $user_list;
 		foreach my $u (@$users) {
+			push (@$user_list, {
+				href => '/api/v1/auth/user/'.($u->{login}||''),
+				firstName => $u->{firstName},
+				lastName => $u->{lastName},
+				login => $u->{login},
+				bDay => $u->{bDay},
+				qualFee => $u->{qualFee},
+				registred => $u->{registred},
+				gym => $u->{gym},
+				category => $u->{category},
+				phone => $u->{phone},
+				sex => $u->{sex},
+				shirt => $u->{shirt}
+			});
 			push (@$link, {
 				href => '/api/v1/auth/user/'.($u->{login}||''),
 				title => $u->{login}.' - '.$u->{firstName}.' '.$u->{lastName},
@@ -56,7 +70,7 @@ sub GET {
 			$registred++ if $u->{registred};
 		}
 	
-		return {link => $link, count=>scalar @$users, qualFee => $qualFee, registred => $registred};
+		return {link => $link, count=>scalar @$users, qualFee => $qualFee, registred => $registred, users=>$user_list};
 	}
 }
 
