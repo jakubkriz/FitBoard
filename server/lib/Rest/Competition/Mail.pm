@@ -83,6 +83,7 @@ sub POST {
 		my $u_info = $self->auth->getUser($env, $u);
 		HTTP::Exception::400->throw(message=>"User doesn't exists: ".$u) unless $u_info;
 		push @$mdata, join("::", $u, $u_info->{firstName}, $u_info->{lastName}, $u, $u_info->{phone}, $u_info->{bDay}, $u_info->{category}, $u_info->{sex}, $u_info->{shirt}, $u_info->{gym});
+		push @$mdata, join("::", $self->const->get("EmailBcc"), $u_info->{firstName}, $u_info->{lastName}, $u, $u_info->{phone}, $u_info->{bDay}, $u_info->{category}, $u_info->{sex}, $u_info->{shirt}, $u_info->{gym});
 	}
 
 	### Send mail
@@ -99,17 +100,16 @@ sub POST {
 
 	if ($data->{send}){
 		# BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}}
-		# my $rtrn = $mail->sendMail({
-		# 	merge_keys => [qw(BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}} {{athlete.gym}})],
-		# 	list => $mdata,
-		# 	from => $self->const->get("EmailBcc"),
-		# 	bcc => $self->const->get("EmailBcc"),
-		# 	subject => $subject,
-		# 	message => $msg
-		# });
-		# if (!$rtrn){
-		# 	HTTP::Exception::500->throw(message=>"Can't send email: ".$rtrn." WARNING: Some emails have been send.");
-		# }
+		my $rtrn = $mail->sendMail({
+			merge_keys => [qw(BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}} {{athlete.gym}})],
+			list => $mdata,
+			from => $self->const->get("EmailBcc"),
+			subject => $subject,
+			message => $msg
+		});
+		if (!$rtrn){
+			HTTP::Exception::500->throw(message=>"Can't send email: ".$rtrn." WARNING: Some emails have been send.");
+		}
 		### Update params
 		if ($data->{mail_id} eq 'qualFee'){
 			foreach my $u (@{$data->{users}}){
