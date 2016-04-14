@@ -66,11 +66,11 @@ sub GET {
 				title => $u->{login}.' - '.$u->{firstName}.' '.$u->{lastName},
 				rel => 'Auth::User::Id'
 			});
-			$qualFee++ if $u->{qualFee};
+			$qualFee++ if $u->{qualFee} && $u->{registred};
 			$registred++ if $u->{registred};
 		}
 	
-		return {link => $link, count=>scalar @$users, qualFee => $qualFee, registred => $registred, users=>$user_list};
+		return {link => $link, count=>scalar @$users, 'qualFee(registred)' => $qualFee, registred => $registred, users=>$user_list};
 	}
 }
 
