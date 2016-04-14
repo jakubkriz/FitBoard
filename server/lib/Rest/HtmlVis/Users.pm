@@ -44,9 +44,6 @@ sub html {
   my $struct = $self->getStruct;
   my $env = $self->getEnv;
 
-use Data::Dumper;
-print STDERR "ENV: ".Dumper($env->{'plack.request.query'});
-
   my @columns = qw/login gym bDay category phone sex shirt qualFee registred href/;
 
   my $table = '<table id="users" class="table table-striped table-bordered" order_column="1" cellspacing="2px" width="100%">';
