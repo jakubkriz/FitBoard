@@ -176,6 +176,8 @@ sub _prepareBulk {
 		"BAD"           => $badfile,
 		"GOOD"          => $goodfile,
 	);
+	$bulk->Trusting('email' => 1);
+	$bulk->Trusting('duplicates' => 1);
 
 	if (!$bulk){
 		return $self->setError($id, $data, Mail::Bulkmail::Dynamic->error())
