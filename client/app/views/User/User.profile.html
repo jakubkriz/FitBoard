@@ -1,20 +1,34 @@
 <div class="content-wrap">
 	<h1>Profile</h1>
+
+		<!-- basic info -->
 		<div class="col-md-10 col-md-offset-1 qual-wrap">
-			<div class="col-xs-3 col-md-offset-1">
-				<img ng-src="{{athlete.photo}}" width="100px">
+			<div class="col-md-3">
+				<div class="col-centered">
+					<img ng-src="{{athlete.photo}}" width="100px">
+				</div>
 			</div>
-			<div class="col-xs-8" ng-hide="editName">
-			<h1>{{athlete.firstName}} {{athlete.lastName}}
+			<div class="col-md-8" ng-hide="editName">
+			<h2>{{athlete.firstName}} {{athlete.lastName}}
 				  <a ng-click="enableEditName()"><span class="fa fa-pencil edit" aria-hidden="true"></span></a>
-			</h1>
+			</h2>
 			</div>
-			<div ng-show="editName">
-				<input ng-model="editableFirstName" ng-show="editName">
-				<input ng-model="editableLastName" ng-show="editName">
+			<div class="col-md-8" ng-hide="editName">
+				<h4>Birthday: {{athlete.bDay}}</h4>
+				<h4>Age: {{athlete.bday}}</h4>
+			</div>
+			<div class="row" ng-show="editName">
+				<div class="col-md-3">
+					<input class="form-control" ng-model="editableFirstName" ng-show="editName">
+				</div>
+				<div class="col-md-3">
+					<input class="form-control" ng-model="editableLastName" ng-show="editName">
+				</div>
+				<div class="col-md-2">
 					<a ng-click="saveName()"><i class="fa fa-check save" aria-hidden="true"></i></a>
 					or
 					<a ng-click="disableEditName()"><i class="fa fa-times cancel" aria-hidden="true"></i></a>.
+				</div>
 			</div>
 		</div>
 </div>
