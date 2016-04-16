@@ -13,17 +13,18 @@ var app = angular.module('FitBoard', [
 	'ui.grid.exporter',
 	'ui.grid.importer',
 	'ngMessages',
+	'xeditable'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 	'use strict';
 
 	$urlRouterProvider.otherwise('404');
-	//$urlRouterProvider.when('', 'reg');
+	$urlRouterProvider.when('', 'login');
 
 	$stateProvider
 	  .state('login', {
-		url: '',
+		url: '/login',
 		templateUrl: 'views/login.html',
 		controller: 'loginCtrl'
 	  });
@@ -106,4 +107,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 });
 
+// editable theme
+angular.module('FitBoard').run(function(editableOptions) {
+		'use strict';
+  editableOptions.theme = 'bs3';
+});
 

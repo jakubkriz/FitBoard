@@ -1,8 +1,8 @@
 angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 	'use strict';
 
-	$scope.sortType     = 'score'; // set the default sort type
-	$scope.sortReverse  = true;  // set the default sort order
+	$scope.sortType     = 'score'; // set the defaulr sort type
+	$scope.sortReverse  = true;  // set the defaulr sort order
 	$scope.searchName   = '';
 
 	// Colapse support
@@ -10,15 +10,15 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 
 	// Initialization
 	$scope.category 	 = 'elite';
-	$scope.sex				 = 'default';
-	$scope.scaleMale	 = false;
-	$scope.scaleFemale = true;
-	$scope.eliteCat 	 = true;
-	$scope.mastersCat  = false;
-	$scope.openCat 		 = false;
+	$scope.sex				 = 'male';
+	// $scope.scaleMale	 = false;
+	// $scope.scaleFemale = true;
+	// $scope.eliteCat 	 = true;
+	// $scope.mastersCat  = false;
+	// $scope.openCat 		 = false;
 
 	$scope.$watch('sex', function() {
-		if ($scope.sex === 'default') {
+		if ($scope.sex === 'male') {
 			$scope.sexHeaderHtml = 'MEN';
 		} else {
 			$scope.sexHeaderHtml = 'WOMEN';
@@ -62,9 +62,9 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 	$scope.athletes = [
 			{
 				name: 'Athlete Name',
-				sex: 'default',
+				sex: 'male',
 				category: 'elite',
-				photo: 'img/man.png',
+				photo: '',
 				gym: 'independent',
 				score: 125,
 				age: '24',
@@ -84,7 +84,7 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 			},
 			{
 				name: 'Michal Dovrtel',
-				sex: 'default',
+				sex: 'male',
 				category: 'elite',
 				gym: 'independent2',
 				photo: 'img/profile.jpg',
@@ -107,7 +107,7 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 			{
 				name: 'Aneta Velika',
 				sex: 'female',
-				photo: 'img/woman.png',
+				photo: '',
 				category: 'elite',
 				gym: 'independent',
 				score: 32
@@ -115,7 +115,7 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 			{
 				name: 'Aneta Mala',
 				sex: 'female',
-				photo: 'img/woman.png',
+				photo: '',
 				category: 'elite',
 				gym: 'independent',
 				score: 30
@@ -123,79 +123,79 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 			{
 				name: 'Aneta Druha',
 				sex: 'female',
-				photo: 'img/woman.png',
+				photo: '',
 				category: 'elite',
 				score: 28,
 				gym: 'independent'
 			},
 			{
-				sex: 'default',
+				sex: 'male',
 				name: 'Frantisek Heriban',
 				gym: 'The gym',
-				photo: 'img/man.png',
+				photo: '',
 				category: 'open',
 				score: 66
 			},
 			{
-				sex: 'default',
+				sex: 'male',
 				name: 'Michal Dovrtel',
 				gym: 'inependent',
 				category: 'open',
-				photo: 'img/man.png',
+				photo: '',
 				score: 125
 
 			},
 			{
-				sex: 'default',
+				sex: 'male',
 				name: 'Adam Ohral',
 				gym: 'Fit Monster Team',
 				category: 'open',
-				photo: 'img/man.png',
+				photo: '',
 				score: 82
 
 			},
 			{
-				sex: 'default',
+				sex: 'male',
 				name: 'Michal Dovrtel',
 				gym: 'inependent',
 				category: 'masters',
-				photo: 'img/man.png',
+				photo: '',
 				score: 125
 
 			},
 			{
-				sex: 'default',
+				sex: 'male',
 				name: 'Adam Ohral',
 				gym: 'Fit Monster Team',
 				category: 'masters',
-				photo: 'img/man.png',
+				photo: '',
 				score: 80
 
 			},
 			{
-				sex: 'default',
+				sex: 'male',
 				name: 'Frantisek Heriban',
 				gym: 'The gym',
 				category: 'masters',
-				photo: 'img/man.png',
+				photo: '',
 				score: 66
 
 			},
 			{
-				sex: 'default',
+				sex: 'male',
 				name: 'Michal Dovrtel',
 				gym: 'inependent',
 				category: 'masters',
-				photo: 'img/man.png',
+				photo: '',
 				score: 125
 
 			},
 			{
-				sex: 'default',
+				sex: 'male',
 				name: 'Adam Ohral',
 				gym: 'Fit Monster Team',
 				category: 'masters',
-				photo: 'img/man.png',
+				photo: '',
 				score: 80
 
 			}

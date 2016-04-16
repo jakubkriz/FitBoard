@@ -17,26 +17,26 @@
 	<div class="user-name">
 		<h4>{{ athlete.firstName }} {{ athlete.lastName }}</h4>
 	</div>
-
-		<div ng-if="athlete.sex == 'male'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
-			<img id="nav-icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo }}" uib-dropdown-toggle>
-
-			<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
-				<li><a ui-sref=".profile">My profile</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
-			</ul>
+	
+	<div class="nav-photo pointer" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
+	<!-- male -->
+		<div ng-if="athlete.sex == 'male'">
+			<span ng-hide="athlete.photo" class="male-sm marginzero" svg-man uib-dropdown-toggle></span>
+			<img ng-show="athlete.photo" id="nav-icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo }}" uib-dropdown-toggle>
 		</div>
 
-		<div ng-if="athlete.sex == 'female'" class="nav-photo" uib-dropdown is-open="status.isopen" ng-mouseenter="status.isopen = true">
-			<img id="nav-icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ athlete.photo }}" uib-dropdown-toggle>
-
-			<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
-				<li><a href="#">My profile</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
-		  </ul>
+	<!-- female -->
+		<div ng-if="athlete.sex == 'female'">
+			<span ng-hide="athlete.photo" class="female-sm marginzero" svg-woman uib-dropdown-toggle></span>
+			<img ng-show="athlete.photo" id="nav-icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ athlete.photo }}" uib-dropdown-toggle>
 		</div>
+
+		<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
+			<li><a ui-sref=".profile">My profile</a></li>
+			<li class="divider"></li>
+			<li><a ui-sref="login">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+		</ul>
+	</div>
 
 </div>
 

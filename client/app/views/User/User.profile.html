@@ -1,34 +1,134 @@
 <div class="content-wrap">
 	<h1>Profile</h1>
 
-		<!-- basic info -->
-		<div class="col-md-10 col-md-offset-1 qual-wrap">
-			<div class="col-md-3">
-				<div class="col-centered">
-					<img ng-src="{{athlete.photo}}" width="100px">
+<!-- basic info -->
+		<div class=" row col-md-8 col-md-offset-2 profile-wrap">
+
+			<a class="edit" uib-tooltip="edit" ng-click="editBasic.$show()" ng-show="!editBasic.$visible"><span class="fa fa-pencil" aria-hidden="true"></span></a>
+
+			<!-- athlete photo -->
+			<div class="col-md-6 padding400">
+			<!-- male -->
+				<div class="male-profile" ng-if="athlete.sex == 'male'">
+					<span ng-hide="athlete.photo" svg-man></span>
+					<img class="profile-pic" ng-show="athlete.photo" id="" ng-style="{border:'4px solid #20dd9b'}" ng-src="{{ athlete.photo }}">
+				</div>
+
+			<!-- female -->
+				<div class="female-profile" ng-if="athlete.sex == 'female'">
+					<span ng-hide="athlete.photo"></span>
+					<img class="profile-pic" ng-show="athlete.photo" ng-style="{border:'4px solid #f62459'}" ng-src="{{ athlete.photo }}">
+				</div>
+			<!-- uploud photo -->
+				<div class="col-md-6 col-md-offset-2 padding200">
+					<h6>Upload a different photo...</h6>
+						<input type="file"/>
+				</div>
+				<div class="col-md-6 col-md-offset-2 padding200">
+					<div class="h4">
+						<span>Height:</span>
+						<span class="marginleft" editable-range="athlete.height" e-name="height" e-step="5">{{ athlete.height }}cm</span><br>
+						<span>Weight:</span>
+						<span class="marginleft" editable-range="athlete.weight" e-name="weight" e-step="5">{{ athlete.weight }}kg</span><br>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-8" ng-hide="editName">
-			<h2>{{athlete.firstName}} {{athlete.lastName}}
-				  <a ng-click="enableEditName()"><span class="fa fa-pencil edit" aria-hidden="true"></span></a>
-			</h2>
-			</div>
-			<div class="col-md-8" ng-hide="editName">
-				<h4>Birthday: {{athlete.bDay}}</h4>
-				<h4>Age: {{athlete.bday}}</h4>
-			</div>
-			<div class="row" ng-show="editName">
-				<div class="col-md-3">
-					<input class="form-control" ng-model="editableFirstName" ng-show="editName">
-				</div>
-				<div class="col-md-3">
-					<input class="form-control" ng-model="editableLastName" ng-show="editName">
-				</div>
-				<div class="col-md-2">
-					<a ng-click="saveName()"><i class="fa fa-check save" aria-hidden="true"></i></a>
-					or
-					<a ng-click="disableEditName()"><i class="fa fa-times cancel" aria-hidden="true"></i></a>.
-				</div>
+			<!-- ahtlete basic info -->
+			<div class="col-md-6 padding400">
+				<form editable-form name="editBasic" onaftersave="saveBasic()">
+					<div class="col-md-12">
+						<div class="inline">
+							<h2 class="" editable-text="athlete.firstName" e-name="firstName">{{athlete.firstName}}</h2>
+						</div>
+						<div class="inline marginleft">
+							<h2 class="" editable-text="athlete.lastName" e-name="firstName"> {{athlete.lastName}}</h2>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="h4">
+							<span class="title">Email:</span>
+							<span class="marginleft"  editable-email="athlete.email" e-name="email">{{ athlete.email }}</span><br>
+							<span>Telephone:</span>
+							<span class="marginleft"  editable-text="athlete.phone" e-name="phone">{{ athlete.phone }}</span>
+						</div>
+
+						<div class="h4 margintop">
+							<span class="title">Birthday:</span>
+							<span class="marginleft"  editable-text="athlete.bDay" e-name="bDay">{{athlete.bDay}}</span><br>
+							<span class="title">Age:</span> <span>{{athlete.bDay | ageFilter}}</span><br>
+							<span class="title">Sex:</span>
+							<span class="marginleft" editable-select="athlete.sex" e-name="sex" e-ng-options="male">{{ athlete.sex }}</span>
+						</div>
+
+						<div class="h4 margintop">
+							<span class="title">Gym:</span>
+							<span class="marginleft"  editable-text="athlete.gym" e-name="gym">{{ athlete.gym }}</span><br>
+							<span class="title">Years in CrossFit:</span>
+							<span class="marginleft" editable-number="athlete.yInC" e-name="yInC" e-min="0">{{ athlete.yInC || 'empty' }}y</span>
+						</div>
+					</div>
+					<!-- buttons -->
+					<div ng-show="editBasic.$visible">
+						<button type="submit" class="btn btn-primary" ng-disabled="editBasic.$waiting">Save</button>
+						<button type="button" class="btn btn-default" ng-disabled="editBasic.$waiting" ng-click="editBasic.$cancel()">Cancel</button>
+					</div>
+				</form>
 			</div>
 		</div>
-</div>
+
+<!-- ahtlete password -->
+		<div class="col-md-8 col-md-offset-2 profile-wrap">
+			<div class="col-md-6 col-md-offset-3 text-align padding400">
+				<form editable-form name="editPass" onaftersave="savePass()">
+					<a class="h4 pointer" ng-click="editPass.$show()" ng-show="!editPass.$visible">Change your password<span class="fa fa-pencil" aria-hidden="true"></span></a>
+					<!-- Set password -->
+					<div ng-show="editPass.$visible">
+						<div class="col-md-12 wrap">
+							<label for="password">Set password</label>
+								<input type="password" id="password" name="password" ng-model="athlete.password" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required  />
+									<span class="msg-error" role="alert" ng-show="myForm.password.$error.required && editPass.password.$dirty">required</span>
+									<span class="msg-error" role="alert" ng-show="!editPass.password.$error.required && (editPass.password.$error.minlength || editPass.password.$error.maxlength) && editPass.password.$dirty">Passwords must be between 8 and 20 characters.</span>
+									<span class="msg-error" role="alert" ng-show="!editPass.password.$error.required && !editPass.password.$error.minlength && !editPass.password.$error.maxlength && editPass.password.$error.pattern && editPass.password.$dirty">Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</span>
+						</div>
+					<!-- confirm password -->
+						<div class="col-md-12 wrap">
+						<label for="password_c">Confirm Password</label>
+							<input type="password" id="password_c" name="password_c" ng-model="athlete.password_c" valid-password-c required/>
+							<span class="msg-error" role="alert" ng-show="editPass.password_c.$error.required && editPass.password_c.$dirty">Please confirm your password.</span>
+							<span class="msg-error" role="alert" ng-show="!editPass.password_c.$error.required && editPass.password_c.$error.noMatch && editPass.password.$dirty">Passwords do not match.</span>
+						</div>
+					</div>
+					<!-- buttons -->
+					<div class="margintop" ng-show="editPass.$visible">
+						<button type="submit" class="btn btn-primary" ng-disabled="editPass.$waiting">Save</button>
+						<button type="button" class="btn btn-default" ng-disabled="editPass.$waiting" ng-click="editPass.$cancel()">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+<!-- athlete more -->
+		<div class="col-md-8 col-md-offset-2 paddingzero"><h3 class="marginzero">MoreInfo</h3></div>
+		<div class="col-md-8 col-md-offset-2 profile-wrap">
+			<a class="edit" uib-tooltip="edit" ng-click="editMore.$show()" ng-show="!editMore.$visible"><span class="fa fa-pencil" aria-hidden="true"></span></a>
+
+			<!-- about athlete -->
+			<div class="col-md-12 padding400">
+				<div class="h4">
+					<form editable-form name="editMore" onaftersave="saveMore()">
+						<span>Sex:</span>
+						<span class="marginleft" editable-select="athlete.sex" e-name="sex" e-ng-options="male">{{ athlete.sex }}</span><br>
+						<span>Height:</span>
+						<span class="marginleft" editable-text="athlete.height" e-name="height">{{ athlete.height }}</span><br>
+						<span>Weight:</span>
+						<span class="marginleft" editable-text="athlete.weight" e-name="weight">{{ athlete.weight }}</span><br>
+						<span>Years in CrossFit:</span>
+						<span class="marginleft" editable-text="athlete.yInC" e-name="yInC">{{ athlete.yInC }}</span>
+					</form>
+				</div>
+				<div class="margintop" ng-show="editMore.$visible">
+						<button type="submit" class="btn btn-primary" ng-disabled="editMore.$waiting">Save</button>
+						<button type="button" class="btn btn-default" ng-disabled="editMore.$waiting" ng-click="editMore.$cancel()">Cancel</button>
+					</div>
+			</div>
+		</div>

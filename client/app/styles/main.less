@@ -158,7 +158,7 @@ h2
 	color: @blue;
 }
 
-h4
+.h4
 {
 	font-size: 2rem;
 
@@ -297,9 +297,10 @@ h4
 	padding: 0 !important;
 }
 
-#male
+.male
 {
-	position: absolute;
+	position: relative;
+	float: left;
 	left: 0;
 
 	width: 80px;
@@ -307,7 +308,7 @@ h4
 
 	cursor: pointer;
 
-	border: 5px solid @male;
+	fill: @male;
 	border-radius: 100%;
 	&:hover
 	{
@@ -315,7 +316,33 @@ h4
 	}
 }
 
-#female
+.male-sm
+{
+	position: relative;
+	float: left;
+	left: 0;
+
+	width: 40px;
+	height: 40px;
+	margin-top: -5px;
+
+	fill: @male;
+	border-radius: 100%;
+}
+
+.male-profile
+{
+	position: relative;
+	margin: auto;
+
+	width: 100px !important;
+	height: 100px !important;
+
+	fill: @male;
+	border-radius: 100%;
+}
+
+.female
 {
 	position: absolute;
 	left: 80px;
@@ -325,12 +352,39 @@ h4
 
 	cursor: pointer;
 
-	border: 5px solid @female;
+	fill: @female;
 	border-radius: 100%;
 	&:hover
 	{
 		opacity: .5;
 	}
+}
+
+.female-sm
+{
+	position: relative;
+	float: left;
+	left: 0;
+
+	width: 40px;
+	height: 40px;
+	margin-top: -5px;
+
+	fill: @female;
+	border-radius: 100%;
+}
+
+.female-profile
+{
+	position: relative;
+	float: left;
+	left: 0;
+
+	width: 100px;
+	height: 100px;
+
+	fill: @female;
+	border-radius: 100%;
 }
 
 /* workout */
