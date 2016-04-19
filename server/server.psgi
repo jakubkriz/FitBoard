@@ -32,6 +32,7 @@ use Rest::HtmlVis::Login;
 use Rest::HtmlVis::Logout;
 
 use Plack::App::URLMapMatch;
+use Storable qw(dclone);
 
 #----------------------------------------------------------------------
 ### Directory and config file
@@ -160,7 +161,7 @@ sub restMount {
 			my $path = $uri."".$key;
 
 			### Set format output by config
-			my $htmlvis_local = defined $htmlvis ? $htmlvis : {
+			my $htmlvis_local = defined $htmlvis ? dclone($htmlvis) : {
 				'default.baseurl' => '/cs/vendor/',
 			};
 			if (exists $rMap->{$key}{"~FormatOutput"}){
