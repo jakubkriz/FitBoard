@@ -2,83 +2,106 @@
 	<h1>Profile</h1>
 
 <!-- basic info -->
-		<div class=" row col-md-8 col-md-offset-2 profile-wrap">
+		<div class="col-md-12 profile-wrap">
 
 			<a class="edit" uib-tooltip="edit" ng-click="editBasic.$show()" ng-show="!editBasic.$visible"><span class="fa fa-pencil" aria-hidden="true"></span></a>
 
 			<!-- athlete photo -->
-			<div class="col-md-6 padding400">
-			<!-- male -->
-				<div class="male-profile" ng-if="athlete.sex == 'male'">
-					<span ng-hide="athlete.photo" svg-man></span>
-					<img class="profile-pic" ng-show="athlete.photo" id="" ng-style="{border:'4px solid #20dd9b'}" ng-src="{{ athlete.photo }}">
-				</div>
-
-			<!-- female -->
-				<div class="female-profile" ng-if="athlete.sex == 'female'">
-					<span ng-hide="athlete.photo"></span>
-					<img class="profile-pic" ng-show="athlete.photo" ng-style="{border:'4px solid #f62459'}" ng-src="{{ athlete.photo }}">
-				</div>
-			<!-- uploud photo -->
-				<div class="col-md-6 col-md-offset-2 padding200">
-					<h6>Upload a different photo...</h6>
-						<input type="file"/>
-				</div>
-				<div class="col-md-6 col-md-offset-2 padding200">
-					<div class="h4">
-						<span>Height:</span>
-						<span class="marginleft" editable-range="athlete.height" e-name="height" e-step="5">{{ athlete.height }}cm</span><br>
-						<span>Weight:</span>
-						<span class="marginleft" editable-range="athlete.weight" e-name="weight" e-step="5">{{ athlete.weight }}kg</span><br>
-					</div>
-				</div>
-			</div>
-			<!-- ahtlete basic info -->
-			<div class="col-md-6 padding400">
-				<form editable-form name="editBasic" onaftersave="saveBasic()">
-					<div class="col-md-12">
-						<div class="inline">
-							<h2 class="" editable-text="athlete.firstName" e-name="firstName">{{athlete.firstName}}</h2>
-						</div>
-						<div class="inline marginleft">
-							<h2 class="" editable-text="athlete.lastName" e-name="firstName"> {{athlete.lastName}}</h2>
+			<form editable-form name="editBasic" onaftersave="saveBasic()">
+				<div class="col-xs-12 col-md-6">
+					<div class="col-xs-10 col-md-10 col-centered">
+						<div class="h2 text-align">
+							<span editable-text="athlete.firstName" e-name="firstName">
+								{{athlete.firstName}}
+							</span>
+							<span editable-text="athlete.lastName" e-name="lasttName"> 
+								{{athlete.lastName}}
+							</span>
 						</div>
 					</div>
-					<div class="col-md-12">
-						<div class="h4">
-							<span class="title">Email:</span>
-							<span class="marginleft"  editable-email="athlete.email" e-name="email">{{ athlete.email }}</span><br>
-							<span>Telephone:</span>
-							<span class="marginleft"  editable-text="athlete.phone" e-name="phone">{{ athlete.phone }}</span>
+					<div class="col-xs-6 col-md-6 col-centered">
+					<!-- male -->
+						<div class="male-profile col-centered" ng-if="athlete.sex == 'male'">
+							<span ng-hide="athlete.photo" svg-man></span>
+							<img class="profile-pic" ng-show="athlete.photo" id="" ng-style="{border:'4px solid #20dd9b'}" ng-src="{{ athlete.photo }}">
 						</div>
 
-						<div class="h4 margintop">
-							<span class="title">Birthday:</span>
-							<span class="marginleft"  editable-text="athlete.bDay" e-name="bDay">{{athlete.bDay}}</span><br>
-							<span class="title">Age:</span> <span>{{athlete.bDay | ageFilter}}</span><br>
-							<span class="title">Sex:</span>
-							<span class="marginleft" editable-select="athlete.sex" e-name="sex" e-ng-options="male">{{ athlete.sex }}</span>
+					<!-- female -->
+						<div class="female-profile col-centered" ng-if="athlete.sex == 'female'">
+							<span ng-hide="athlete.photo" svg-woman></span>
+							<img class="profile-pic" ng-show="athlete.photo" ng-style="{border:'4px solid #f62459'}" ng-src="{{ athlete.photo }}">
 						</div>
 
-						<div class="h4 margintop">
-							<span class="title">Gym:</span>
-							<span class="marginleft"  editable-text="athlete.gym" e-name="gym">{{ athlete.gym }}</span><br>
-							<span class="title">Years in CrossFit:</span>
-							<span class="marginleft" editable-number="athlete.yInC" e-name="yInC" e-min="0">{{ athlete.yInC || 'empty' }}y</span>
+					<!-- uploud photo -->
+					<div ng-show="editBasic.$visible" class="col-xs-12 col-md-12 col-centered padding200">
+							<h6>Upload a different photo...</h6>
+							<input type="file" ng-model="athlete.photo"/>
 						</div>
 					</div>
-					<!-- buttons -->
-					<div ng-show="editBasic.$visible">
-						<button type="submit" class="btn btn-primary" ng-disabled="editBasic.$waiting">Save</button>
-						<button type="button" class="btn btn-default" ng-disabled="editBasic.$waiting" ng-click="editBasic.$cancel()">Cancel</button>
+
+					<!-- height/weight -->
+					<div class="col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2 col-lg-4 col-lg-offset-4 magintop">
+						<div class="row">
+							<div class="col-xs-6 col-md-6 h4">Height:</div>
+							<div class="col-xs-6 col-md-6 h4" editable-number="athlete.height" e-name="height" e-min="0" e-max="250">
+								{{ athlete.height }}cm
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6 col-md-6 h4">Weight:</div>
+							<div class="col-xs-6 col-md-6 h4" editable-number="athlete.weight" e-name="weight" e-min="0" e-max="300">
+								{{ athlete.weight }}kg
+							</div>
+						</div>
 					</div>
-				</form>
-			</div>
+				</div>
+				<!-- ahtlete basic info -->
+				<div class="col-xs-12 col-md-6 h4 padding200">
+						<div class="row">
+							<div class="col-xs-6 col-md-4">Email:</div>
+								<div class="col-xs-6 col-md-4" editable-email="athlete.email" e-name="email">{{ athlete.email }}</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-6 col-md-4">Telephone:</div>
+									<div class="col-xs-6 col-md-4"  editable-text="athlete.phone" e-name="phone" e-pattern="\+\d{3}\ \d{3}\ \d{3}\ \d{3}" e-title="+420 xxx xxx xxx">{{ athlete.phone }}</div>
+							</div>
+						
+
+						<div class="row margintop">
+							<div class="col-xs-6 col-md-4">Birthday:</div>
+							<div class="col-xs-6 col-md-4" editable-date="athlete.bDay" e-name="bDay">{{athlete.bDay | date:'MM/dd/yyyy' }}</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6 col-md-4">Age:</div>
+							<div class="col-xs-6 col-md-4">{{athlete.bDay | ageFilter}}</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6 col-md-4">Sex:</div>
+							<div class="col-xs-6 col-md-4" editable-select="athlete.sex" e-name="sex" e-ng-options="s.value as s.text for s in sex">{{ athlete.sex }}</div>
+						</div>
+
+						<div class="row margintop">
+							<div class="col-xs-6 col-md-4">Gym:</div>
+							<div class="col-xs-6 col-md-4"  editable-text="athlete.gym" e-name="gym">{{ athlete.gym }}</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6 col-md-4">Years in CrossFit:</div>
+							<div class="col-xs-6 col-md-4" editable-number="athlete.yInC" e-name="yInC" e-min="0" max="99">{{ athlete.yInC }}</div>
+						</div>
+					
+						<!-- buttons -->
+						<div ng-show="editBasic.$visible">
+							<button type="submit" class="btn btn-primary" ng-disabled="editBasic.$waiting">Save</button>
+							<button type="button" class="btn btn-default" ng-disabled="editBasic.$waiting" ng-click="editBasic.$cancel()">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 
 <!-- ahtlete password -->
-		<div class="col-md-8 col-md-offset-2 profile-wrap">
-			<div class="col-md-6 col-md-offset-3 text-align padding400">
+		<div class="col-md-12">
+			<div class="col-md-6 col-centered padding200">
 				<form editable-form name="editPass" onaftersave="savePass()">
 					<a class="h4 pointer" ng-click="editPass.$show()" ng-show="!editPass.$visible">Change your password<span class="fa fa-pencil" aria-hidden="true"></span></a>
 					<!-- Set password -->
@@ -92,7 +115,7 @@
 						</div>
 					<!-- confirm password -->
 						<div class="col-md-12 wrap">
-						<label for="password_c">Confirm Password</label>
+							<label for="password_c">Confirm Password</label>
 							<input type="password" id="password_c" name="password_c" ng-model="athlete.password_c" valid-password-c required/>
 							<span class="msg-error" role="alert" ng-show="editPass.password_c.$error.required && editPass.password_c.$dirty">Please confirm your password.</span>
 							<span class="msg-error" role="alert" ng-show="!editPass.password_c.$error.required && editPass.password_c.$error.noMatch && editPass.password.$dirty">Passwords do not match.</span>
