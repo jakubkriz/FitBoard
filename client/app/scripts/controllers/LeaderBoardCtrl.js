@@ -59,145 +59,145 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 
 ////////////////////////// Athletes  ////////////////////////////////////
 
-	$scope.athletes = [
-			{
-				name: 'Athlete Name',
-				sex: 'male',
-				category: 'elite',
-				photo: '',
-				gym: 'independent',
-				score: 125,
-				age: '24',
-				height: '175 cm',
-				weight: '80 kg',
-				yInC: '5y',
-				cj: '90 kg',
-				snatch: '75 kg',
-				deadlift: '150 kg',
-				frontSquat: '150 kg',
-				backSquat: '160 kg',
-				fran: '3:14',
-				helen: '132',
-				grace: '2:15',
-				sprint: '1:30',
-				row: '4:00'
-			},
-			{
-				name: 'Michal Dovrtel',
-				sex: 'male',
-				category: 'elite',
-				gym: 'independent2',
-				photo: 'img/profile.jpg',
-				score: 125,
-				age: '24',
-				height: '175 cm',
-				weight: '80 kg',
-				yInC: '5y',
-				cj: '90 kg',
-				snatch: '75 kg',
-				deadlift: '150 kg',
-				frontSquat: '150 kg',
-				backSquat: '160 kg',
-				fran: '3:14',
-				helen: '132',
-				grace: '2:15',
-				sprint: '1:30',
-				row: '4:00'
-			},
-			{
-				name: 'Aneta Velika',
-				sex: 'female',
-				photo: '',
-				category: 'elite',
-				gym: 'independent',
-				score: 32
-			},
-			{
-				name: 'Aneta Mala',
-				sex: 'female',
-				photo: '',
-				category: 'elite',
-				gym: 'independent',
-				score: 30
-			},
-			{
-				name: 'Aneta Druha',
-				sex: 'female',
-				photo: '',
-				category: 'elite',
-				score: 28,
-				gym: 'independent'
-			},
-			{
-				sex: 'male',
-				name: 'Frantisek Heriban',
-				gym: 'The gym',
-				photo: '',
-				category: 'open',
-				score: 66
-			},
-			{
-				sex: 'male',
-				name: 'Michal Dovrtel',
-				gym: 'inependent',
-				category: 'open',
-				photo: '',
-				score: 125
+	// $scope.athletes = [
+	// 		{
+	// 			name: 'Athlete Name',
+	// 			sex: 'male',
+	// 			category: 'elite',
+	// 			photo: '',
+	// 			gym: 'independent',
+	// 			score: 125,
+	// 			age: '24',
+	// 			height: '175 cm',
+	// 			weight: '80 kg',
+	// 			yInC: '5y',
+	// 			cj: '90 kg',
+	// 			snatch: '75 kg',
+	// 			deadlift: '150 kg',
+	// 			frontSquat: '150 kg',
+	// 			backSquat: '160 kg',
+	// 			fran: '3:14',
+	// 			helen: '132',
+	// 			grace: '2:15',
+	// 			sprint: '1:30',
+	// 			row: '4:00'
+	// 		},
+	// 		{
+	// 			name: 'Michal Dovrtel',
+	// 			sex: 'male',
+	// 			category: 'elite',
+	// 			gym: 'independent2',
+	// 			photo: 'img/profile.jpg',
+	// 			score: 125,
+	// 			age: '24',
+	// 			height: '175 cm',
+	// 			weight: '80 kg',
+	// 			yInC: '5y',
+	// 			cj: '90 kg',
+	// 			snatch: '75 kg',
+	// 			deadlift: '150 kg',
+	// 			frontSquat: '150 kg',
+	// 			backSquat: '160 kg',
+	// 			fran: '3:14',
+	// 			helen: '132',
+	// 			grace: '2:15',
+	// 			sprint: '1:30',
+	// 			row: '4:00'
+	// 		},
+	// 		{
+	// 			name: 'Aneta Velika',
+	// 			sex: 'female',
+	// 			photo: '',
+	// 			category: 'elite',
+	// 			gym: 'independent',
+	// 			score: 32
+	// 		},
+	// 		{
+	// 			name: 'Aneta Mala',
+	// 			sex: 'female',
+	// 			photo: '',
+	// 			category: 'elite',
+	// 			gym: 'independent',
+	// 			score: 30
+	// 		},
+	// 		{
+	// 			name: 'Aneta Druha',
+	// 			sex: 'female',
+	// 			photo: '',
+	// 			category: 'elite',
+	// 			score: 28,
+	// 			gym: 'independent'
+	// 		},
+	// 		{
+	// 			sex: 'male',
+	// 			name: 'Frantisek Heriban',
+	// 			gym: 'The gym',
+	// 			photo: '',
+	// 			category: 'open',
+	// 			score: 66
+	// 		},
+	// 		{
+	// 			sex: 'male',
+	// 			name: 'Michal Dovrtel',
+	// 			gym: 'inependent',
+	// 			category: 'open',
+	// 			photo: '',
+	// 			score: 125
 
-			},
-			{
-				sex: 'male',
-				name: 'Adam Ohral',
-				gym: 'Fit Monster Team',
-				category: 'open',
-				photo: '',
-				score: 82
+	// 		},
+	// 		{
+	// 			sex: 'male',
+	// 			name: 'Adam Ohral',
+	// 			gym: 'Fit Monster Team',
+	// 			category: 'open',
+	// 			photo: '',
+	// 			score: 82
 
-			},
-			{
-				sex: 'male',
-				name: 'Michal Dovrtel',
-				gym: 'inependent',
-				category: 'masters',
-				photo: '',
-				score: 125
+	// 		},
+	// 		{
+	// 			sex: 'male',
+	// 			name: 'Michal Dovrtel',
+	// 			gym: 'inependent',
+	// 			category: 'masters',
+	// 			photo: '',
+	// 			score: 125
 
-			},
-			{
-				sex: 'male',
-				name: 'Adam Ohral',
-				gym: 'Fit Monster Team',
-				category: 'masters',
-				photo: '',
-				score: 80
+	// 		},
+	// 		{
+	// 			sex: 'male',
+	// 			name: 'Adam Ohral',
+	// 			gym: 'Fit Monster Team',
+	// 			category: 'masters',
+	// 			photo: '',
+	// 			score: 80
 
-			},
-			{
-				sex: 'male',
-				name: 'Frantisek Heriban',
-				gym: 'The gym',
-				category: 'masters',
-				photo: '',
-				score: 66
+	// 		},
+	// 		{
+	// 			sex: 'male',
+	// 			name: 'Frantisek Heriban',
+	// 			gym: 'The gym',
+	// 			category: 'masters',
+	// 			photo: '',
+	// 			score: 66
 
-			},
-			{
-				sex: 'male',
-				name: 'Michal Dovrtel',
-				gym: 'inependent',
-				category: 'masters',
-				photo: '',
-				score: 125
+	// 		},
+	// 		{
+	// 			sex: 'male',
+	// 			name: 'Michal Dovrtel',
+	// 			gym: 'inependent',
+	// 			category: 'masters',
+	// 			photo: '',
+	// 			score: 125
 
-			},
-			{
-				sex: 'male',
-				name: 'Adam Ohral',
-				gym: 'Fit Monster Team',
-				category: 'masters',
-				photo: '',
-				score: 80
+	// 		},
+	// 		{
+	// 			sex: 'male',
+	// 			name: 'Adam Ohral',
+	// 			gym: 'Fit Monster Team',
+	// 			category: 'masters',
+	// 			photo: '',
+	// 			score: 80
 
-			}
-		];
+	// 		}
+	// 	];
 });

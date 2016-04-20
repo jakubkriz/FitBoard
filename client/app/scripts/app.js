@@ -77,17 +77,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			  });
 
 				$stateProvider
-				.state('user.qual', {
+				.state('qual', {
 				url: '/qual',
 				templateUrl: 'views/User/User.qual.html',
-				controller: 'UserCtrl'
+				controller: 'qualCtrl'
 			  });
 
 						$stateProvider
-						.state('user.submitvideo', {
+						.state('submitvideo', {
 						url: '/submitvideo',
 						templateUrl: 'views/User/User.submitvideo.html',
-						controller: 'UserCtrl'
+						controller: 'qualCtrl'
 					  });
 
 				$stateProvider
