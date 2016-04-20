@@ -24,7 +24,7 @@ use lib qw(./lib server/lib ../common/lib ./common/lib);
 use Const;
 use Log;
 use Version;
-use Auth::Store;
+use Store::Auth;
 use Event::Store;
 
 # Auth visualiser

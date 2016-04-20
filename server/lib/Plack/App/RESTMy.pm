@@ -7,14 +7,14 @@ use parent 'Plack::App::REST';
 
 use Plack::Util::Accessor qw(const rmap auth data);
 
-use Auth::Store;
+use Store::Auth;
 
 sub new {
 	my ($class, $const, $rmap) = @_;
 	my $self = $class->SUPER::new();
 
 	$self->{const} = $const;
-	$self->{auth} = Auth::Store->new( $const );
+	$self->{auth} = Store::Auth->new( $const );
 	$self->{data} = Event::Store->new( $const );
 	$self->{rmap} = $rmap;
 
