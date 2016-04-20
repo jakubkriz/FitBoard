@@ -5,9 +5,11 @@ use warnings;
 
 use parent 'Plack::App::REST';
 
-use Plack::Util::Accessor qw(const rmap auth data);
+use Plack::Util::Accessor qw(const rmap auth data comp qual);
 
 use Store::Auth;
+use Store::Comp;
+use Store::Qual;
 
 sub new {
 	my ($class, $const, $rmap) = @_;
@@ -16,6 +18,8 @@ sub new {
 	$self->{const} = $const;
 	$self->{auth} = Store::Auth->new( $const );
 	$self->{data} = Event::Store->new( $const );
+	$self->{comp} = Store::Comp->new( $const );
+	$self->{qual} = Store::Qual->new( $const );
 	$self->{rmap} = $rmap;
 
 	return $self;
