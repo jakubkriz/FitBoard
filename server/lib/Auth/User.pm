@@ -77,6 +77,10 @@ sub GET {
 sub PUT {
 	my ($self, $env, $params, $data) = @_;
 
+	### Get login user
+	my $login = $env->{'psgix.session'}{user_id};
+	my $login_info = $self->auth->getUser($env, $login);
+
 	my $userid = $env->{'rest.userid'};
 	return HTTP::Exception::405->throw(message=>"Bad request") unless $userid;
 
@@ -85,6 +89,13 @@ sub PUT {
 	}
 
 	my $pswd = delete $data->{password};
+
+	### Remove admin params
+	if (!defined $login_info->{admin}){
+		delete $data->{qualFee};
+		delete $data->{registred};
+		delete $data->{category};
+	}
 
 	### Update user data
 	$self->auth->updateUser($env, $userid, { '$set' => $data });
