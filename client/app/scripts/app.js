@@ -105,6 +105,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 			  });
 
+				$stateProvider
+				.state('user.judge', {
+				url: '/judge',
+				templateUrl: 'views/User/User.judge.html',
+				controller: 'UserCtrl'
+
+			  });
+
 });
 
 // editable theme
