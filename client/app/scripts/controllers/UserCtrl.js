@@ -61,6 +61,12 @@ $scope.opened = {};
 
 				};
 
+
+// Judge
+	
+	$scope.nextTo = true;
+
+
 //my profile
 
 // 	$scope.saveBasic = function() {
