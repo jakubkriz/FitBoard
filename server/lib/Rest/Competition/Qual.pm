@@ -13,6 +13,10 @@ use HTTP::Exception qw(5XX);
 
 use Store::Qual;
 
+use utf8;
+
+use open IO => ':encoding(utf8)';
+
 use YAML::Syck;
 $YAML::Syck::ImplicitUnicode = 1;
 
