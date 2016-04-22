@@ -41,23 +41,37 @@
 			<form id="submitvideo" name="qualvideoForm">
 				<div class="col-md-8 col-centered">
 					<label for="16.1" uib-tooltip="Must be the same as you put during registration!!!">Your e-mail</label>
-					<input type="email" ng-model="athlete.email" name="email" id="email" class="form-control" ng-required="true" autofocus="">
+					<input type="email" ng-model="athlete.login" name="login" id="login" class="form-control" ng-required="true" autofocus="">
 					<div role="alert">
-    					<span class="error" ng-show="qualvideoForm.email.$error.required">Required!</span>
-    					<span class="error" ng-show="qualvideoForm.email.$error.email">Bad email!</span>
- 					 </div>
+    					<span class="error" ng-show="qualvideoForm.login.$error.required">Required!</span>
+    					<span class="error" ng-show="qualvideoForm.login.$error.email">Bad email!</span>
+					</div>
+					<div ng-messages="errors" class="registration-messages" role="alert">
+						<div ng-message="emailAlreadyExists">This email address already send qualifications video</div>
+					</div>
 				</div>
 				<div class="col-md-10 col-centered">
 					<label for="16.1">Put the URL adress of your video here:</label>
-					<input type="url" ng-model="athlete.qual161" name="qual161" id="qual161" class="form-control" placeholder="http://" ng-required="true" autofocus="">
+					<input type="url" ng-model="athlete.video" name="video" id="video" class="form-control" placeholder="http://" ng-required="true" autofocus="">
 					<div role="alert">
-    					<span class="error" ng-show="qualvideoForm.qual161.$error.required">Required!</span>
-    					<span class="error" ng-show="qualvideoForm.qual161.$error.url">Not valid url!</span>
+    					<span class="error" ng-show="qualvideoForm.video.$error.required">Required!</span>
+    					<span class="error" ng-show="qualvideoForm.video.$error.url">Not valid url!</span>
  					 </div>
 				</div>
 				<div class="col-md-4 col-centered">
 					<label for="score_16.1" class=""></label>
-					<input type="text" ng-model="athlete.score161" id="score161" class="form-control" uib-tooltip="not required" placeholder="Your score" ng-required="false">
+					<input type="text" ng-model="athlete.points" id="points" class="form-control" uib-tooltip="not required" placeholder="Your score" ng-required="false">
+				</div>
+				<div ng-show="qualvideoForm.$submitted">
+					<div ng-messages="qualvideoForm.$error" class="registration-messages" role="alert">
+						<div ng-message="required">Please feel all required items.</div>
+					</div>
+					<div ng-messages="qualvideoForm" class="registration-messages" role="alert">
+						<div ng-message="$invalid">Please fix all error in form.</div>
+					</div>
+					<div ng-messages="errors" class="registration-messages" role="alert">
+						<div ng-message="emailAlreadyExists">This email address already send qualifications video</div>
+					</div>
 				</div>
 				<button class="submit-qual" type="submit" ng-click="submit()">
 					<span class="fa fa-video-camera"></span>
