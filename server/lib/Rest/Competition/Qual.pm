@@ -79,6 +79,9 @@ sub POST {
 	if (!$self->auth->checkUserExistence($env, $login)){
 		HTTP::Exception::400->throw(message=>"User doesn't exist");
 	}
+	if (!$self->auth->getUser($env, $login)->{registred}){
+		HTTP::Exception::400->throw(message=>"User doesn't exist");
+	}
 	if ($self->qual->checkUserExistence($env, $login)){
 		HTTP::Exception::400->throw(message=>"Qual for user exists");
 	}else{

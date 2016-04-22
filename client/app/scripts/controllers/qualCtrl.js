@@ -66,7 +66,7 @@ angular.module('FitBoard').controller('qualCtrl', function($scope, $uibModal, Ap
 				},
 				function(resp){ //ERROR
 
-					if (resp.status === 400 && resp.data[0] === 'Bad email'){
+					if (resp.status === 400 && resp.data[0] === 'User doesn\'t exist'){
 						qualvideoForm.$invalid = true;
 						$scope.errors.emailError = true;
 					}else if(resp.status === 400 && resp.data[0] === 'Qual for user exists'){
