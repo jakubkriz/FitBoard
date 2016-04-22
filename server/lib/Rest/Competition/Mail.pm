@@ -115,6 +115,10 @@ sub POST {
 			foreach my $u (@{$data->{users}}){
 				my $id = $self->auth->updateUser($env, $u, {'$set' => {'qualFee' => 1}});
 			}
+		}elsif($data->{mail_id} eq 'registrationCancel'){
+			foreach my $u (@{$data->{users}}){
+				my $id = $self->auth->updateUser($env, $u, {'$set' => {'registred' => 0}});
+			}
 		}
 		$data->{sended} = 1;
 
