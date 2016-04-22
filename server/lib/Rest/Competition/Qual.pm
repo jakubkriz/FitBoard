@@ -5,8 +5,6 @@ use warnings;
 
 use parent 'Plack::App::RESTMy';
 
-use Plack::Util::Accessor qw(auth);
-use Plack::Session;
 use MIME::Base64;
 
 use HTTP::Exception qw(3XX);
@@ -30,7 +28,7 @@ sub GET {
 	if ($userid){
 		my $user;
 		if (defined $login_info->{admin} || $userid eq $login){
-			$user = $self->auth->getUser($env, $userid);
+			$user = $self->qual->getUser($env, $userid);
 		}
 
 		if ($user){
@@ -42,39 +40,84 @@ sub GET {
 
 		my $users = [];
 		if ($login_info->{admin}){
-			$users = $self->auth->getAllUsers($env);
+			$users = $self->qual->getAllUsers($env);
 		}else{
-			$users = $self->auth->getAllUsers($env,{login=>$login});
+			$users = $self->qual->getAllUsers($env,{login=>$login});
 		}
 		
 		my $link = ();
 		my $qualFee; my $registred; my $user_list;
 		foreach my $u (@$users) {
 			push (@$user_list, {
-				href => '/api/v1/auth/user/'.($u->{login}||''),
-				firstName => $u->{firstName},
-				lastName => $u->{lastName},
+				href => $self->refToUrl($env, 'Rest::Competition::Qual::UserId', {'rest.userid'=>($u->{login}||'')}),
 				login => $u->{login},
-				bDay => $u->{bDay},
-				qualFee => $u->{qualFee},
-				registred => $u->{registred},
-				gym => $u->{gym},
-				category => $u->{category},
-				phone => $u->{phone},
-				sex => $u->{sex},
-				shirt => $u->{shirt}
+				video => $u->{video},
+				points => $u->{points}
 			});
 			push (@$link, {
-				href => '/api/v1/auth/user/'.($u->{login}||''),
-				title => $u->{login}.' - '.$u->{firstName}.' '.$u->{lastName},
-				rel => 'Auth::User::Id'
+				href => $self->refToUrl($env, 'Rest::Competition::Qual::UserId', {'rest.userid'=>($u->{login}||'')}),
+				title => $u->{login}.' - '.$u->{points},
+				rel => 'Rest::Competition::Qual::UserId'
 			});
-			$qualFee++ if $u->{qualFee} && $u->{registred};
-			$registred++ if $u->{registred};
 		}
 	
-		return {link => $link, count=>scalar @$users, 'qualFee(registred)' => $qualFee, registred => $registred, users=>$user_list};
+		return {link => $link, count=>scalar @$users, users=>$user_list};
 	}
+}
+
+sub POST {
+	my ($self, $env, $params, $data) = @_;
+
+	if (!$data || ref $data ne 'HASH'){
+		HTTP::Exception::400->throw(message=>"Bad request");
+	}
+
+	### Clean email
+	my $login = $data->{login};
+
+	### Check if usr exists
+	if (!$self->auth->checkUserExistence($env, $login)){
+		HTTP::Exception::400->throw(message=>"User doesn't exist");
+	}
+	if ($self->qual->checkUserExistence($env, $login)){
+		HTTP::Exception::400->throw(message=>"Qual for user exists");
+	}else{
+		### Create user
+		my $id = $self->qual->addUser($env, $login, $data );
+
+		### Check if user created
+		if (!$id){
+			HTTP::Exception::500->throw(message=>"Can't add qual to user.");
+		}else{
+			# ### Send email
+			# my $mail = Mail->new( $self->const );
+			# open FILE, $self->const->get("EmailReg");
+			# my $msg;
+			# foreach (<FILE>){
+			# 	$msg .= $_;
+			# }
+
+			# # BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}}
+			# my $rtrn = $mail->sendMail({
+			# 	merge_keys => [qw(BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}} {{athlete.gym}})],
+			# 	list => [
+			# 		join("::", $email, $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}, $data->{gym}),
+			# 		join("::", $self->const->get("EmailBcc"), $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}, $data->{gym}),
+			# 	],
+			# 	from => $self->const->get("EmailBcc"),
+			# 	subject => 'Registrace Fit Monster 2016',
+			# 	message => $msg
+			# });
+			# if (!$rtrn){
+			# 	my $id = $self->auth->updateUser($env, $email, {'$set' => {emailStatus=>0}});
+			# }
+
+			### Return ok
+			return { qual => $id };
+		}
+	}
+
+	return { qual => undef };
 }
 
 sub PUT {
@@ -84,15 +127,11 @@ sub PUT {
 	return HTTP::Exception::405->throw(message=>"Bad request") unless $userid;
 
 	if ($data->{login} ne $userid){
-		HTTP::Exception::400->throw(message=>"Login can't be changed. Drop and create new user.");
+		HTTP::Exception::400->throw(message=>"Login can't be changed. Drop and create new qual.");
 	}
 
-	my $pswd = delete $data->{password};
-
 	### Update user data
-	$self->auth->updateUser($env, $userid, { '$set' => $data });
-
-	$data->{password} = $pswd;
+	$self->qual->updateUser($env, $userid, { '$set' => $data });
 	return $data
 }
 
@@ -102,7 +141,7 @@ sub DELETE {
 	my $userid = $env->{'rest.userid'};
 	return HTTP::Exception::405->throw(message=>"Bad request") unless $userid;
 
-	my $ret = $self->auth->removeUser($env, $userid);
+	my $ret = $self->qual->removeUser($env, $userid);
 
 	return $ret;
 }
@@ -126,6 +165,13 @@ sub GET_FORM {
 					}
 				}
 			}
+		}
+	}else{
+		return {
+			get => undef,
+			post => {
+				default => "---\nlogin: email"."\nvideo: url"."\npoints: number"
+			},
 		}
 	}
 }
