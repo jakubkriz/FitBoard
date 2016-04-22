@@ -79,7 +79,8 @@ sub POST {
 	if (!$self->auth->checkUserExistence($env, $login)){
 		HTTP::Exception::400->throw(message=>"User doesn't exist");
 	}
-	if (!$self->auth->getUser($env, $login)->{registred}){
+	my $user = $self->auth->getUser($env, $login);
+	if (!$user->{registred}){
 		HTTP::Exception::400->throw(message=>"User doesn't exist");
 	}
 	if ($self->qual->checkUserExistence($env, $login)){
@@ -92,28 +93,28 @@ sub POST {
 		if (!$id){
 			HTTP::Exception::500->throw(message=>"Can't add qual to user.");
 		}else{
-			# ### Send email
-			# my $mail = Mail->new( $self->const );
-			# open FILE, $self->const->get("EmailReg");
-			# my $msg;
-			# foreach (<FILE>){
-			# 	$msg .= $_;
-			# }
+			### Send email
+			my $mail = Mail->new( $self->const );
+			open FILE, $self->const->get("EmailQual");
+			my $msg;
+			foreach (<FILE>){
+				$msg .= $_;
+			}
 
-			# # BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}}
-			# my $rtrn = $mail->sendMail({
-			# 	merge_keys => [qw(BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}} {{athlete.gym}})],
-			# 	list => [
-			# 		join("::", $email, $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}, $data->{gym}),
-			# 		join("::", $self->const->get("EmailBcc"), $data->{firstName}, $data->{lastName}, $email, $data->{phone}, $data->{bDay}, $data->{category}, $data->{sex}, $data->{shirt}, $data->{gym}),
-			# 	],
-			# 	from => $self->const->get("EmailBcc"),
-			# 	subject => 'Registrace Fit Monster 2016',
-			# 	message => $msg
-			# });
-			# if (!$rtrn){
-			# 	my $id = $self->auth->updateUser($env, $email, {'$set' => {emailStatus=>0}});
-			# }
+			# BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}}
+			my $rtrn = $mail->sendMail({
+				merge_keys => [qw(BULK_EMAIL {{athlete.firstName}} {{athlete.lastName}} {{athlete.email}} {{athlete.phone}} {{athlete.bDay}} {{athlete.category}} {{athlete.sex}} {{athlete.shirt}} {{athlete.gym}})],
+				list => [
+					join("::", $login, $user->{firstName}, $user->{lastName}, $login, $user->{phone}, $user->{bDay}, $user->{category}, $user->{sex}, $user->{shirt}, $user->{gym}),
+					join("::", $self->const->get("EmailBcc"), $user->{firstName}, $user->{lastName}, $login, $user->{phone}, $user->{bDay}, $user->{category}, $user->{sex}, $user->{shirt}, $user->{gym}),
+				],
+				from => $self->const->get("EmailBcc"),
+				subject => 'FM2016 qualification',
+				message => $msg
+			});
+			if (!$rtrn){
+				my $id = $self->auth->updateUser($env, $login, {'$set' => {emailStatus=>0}});
+			}
 
 			### Return ok
 			return { qual => $id };
