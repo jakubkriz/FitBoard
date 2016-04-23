@@ -64,7 +64,7 @@ $scope.opened = {};
 
 // Judge
 	
-	$scope.nextTo = true;
+	$scope.nextToJudge = true;
 
 
 //my profile
