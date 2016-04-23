@@ -99,13 +99,30 @@ sub clean_email {
 ### Return form for gray pages
 sub GET_FORM {
 	my ($class, $env, $params) = @_;
+	my $def = <<END;
+--- 
+bDay: 29/05/2016
+category: elite
+firstName: First
+gym: Crossfit XYZ
+lastName: Last
+email: user\@mail.cz
+phone: '+420603969896'
+qualFee: '0'
+qualified: '1'
+registred: '0'
+sex: male
+shirt: l
+startFee: '0'
+terms: '1'
+END
 	return {
-		GET => undef,
+		get => undef,
 #		PUT => {
 #			default => $params->get('content')
 #		},
-		POST => {
-			default => "---\nemail: email"."\nxyz: xyz"
+		post => {
+			default => $def
 		}
 	}
 }
