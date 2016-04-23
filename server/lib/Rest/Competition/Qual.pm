@@ -24,6 +24,7 @@ sub GET {
 	my ($self, $env, $id) = @_;
 
 	my $login = $env->{'psgix.session'}{user_id};
+	HTTP::Exception::403->throw(message=>"Forbidden") unless $login;
 	my $login_info = $self->auth->getUser($env, $login);
 
 	my $userid = $env->{'rest.userid'};
