@@ -68,7 +68,7 @@ sub GET {
 			});
 			$count->{qualFee}++ if $u->{qualFee} && $u->{registred};
 			$count->{registred}++ if $u->{registred};
-			$count->{$u->{category}.'_'.$u->{sex}}++;
+			$count->{$u->{category}.'_'.$u->{sex}}++ if $u->{qualFee} && $u->{registred};
 		}
 		$count->{count} = scalar @$users;
 	
