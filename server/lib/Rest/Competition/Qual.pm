@@ -50,9 +50,10 @@ sub GET {
 			$users = $self->qual->getAllUsers($env,{login=>$login});
 		}
 		
-		my $link = ();
+		my $link = (); my $count;
 		my $qualFee; my $registred; my $user_list;
 		foreach my $u (@$users) {
+			my $user_info = $self->auth->getUser($env, $login);
 			push (@$user_list, {
 				href => $self->refToUrl($env, 'Rest::Competition::Qual::UserId', {'rest.userid'=>($u->{login}||'')}),
 				login => $u->{login},
@@ -64,9 +65,11 @@ sub GET {
 				title => $u->{login}.' - '.$u->{points},
 				rel => 'Rest::Competition::Qual::UserId'
 			});
+			$count->{$user_info->{category}.'_'.$user_info->{sex}}++;
 		}
+		$count->{count} = scalar @$users;
 	
-		return {link => $link, count=>scalar @$users, users=>$user_list};
+		return {link => $link, count=>$count, users=>$user_list};
 	}
 }
 

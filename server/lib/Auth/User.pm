@@ -44,7 +44,7 @@ sub GET {
 			$users = $self->auth->getAllUsers($env,{login=>$login});
 		}
 		
-		my $link = ();
+		my $link = (); my $count;
 		my $qualFee; my $registred; my $user_list;
 		foreach my $u (@$users) {
 			push (@$user_list, {
@@ -66,11 +66,13 @@ sub GET {
 				title => $u->{login}.' - '.$u->{firstName}.' '.$u->{lastName},
 				rel => 'Auth::User::Id'
 			});
-			$qualFee++ if $u->{qualFee} && $u->{registred};
-			$registred++ if $u->{registred};
+			$count->{qualFee}++ if $u->{qualFee} && $u->{registred};
+			$count->{registred}++ if $u->{registred};
+			$count->{$u->{category}.'_'.$u->{sex}}++;
 		}
+		$count->{count} = scalar @$users;
 	
-		return {link => $link, count=>scalar @$users, 'qualFee(registred)' => $qualFee, registred => $registred, users=>$user_list};
+		return {link => $link, count=>$count, users=>$user_list};
 	}
 }
 
