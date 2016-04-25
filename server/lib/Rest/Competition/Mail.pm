@@ -60,8 +60,14 @@ sub POST {
 
 	return HTTP::Exception::403->throw(message=>"Forbidden") unless defined $login_info->{admin};
 
-	if (!exists $data->{users} || !exists $data->{mail_id}){
-		HTTP::Exception::400->throw(message=>"mail_id, users should be set.");
+	if ((!$data->{users} && !$data->{allusers}) || !exists $data->{mail_id}){
+		HTTP::Exception::400->throw(message=>"mail_id, users or allusers should be set.");
+	}
+
+	if ($data->{allusers}){
+		if ($data->{allusers} eq 'registred'){
+			$data->{users} = [map $_->{login}, @{$self->auth->getAllUsers($env, {'$or' => [{"registred" => 1}, {"registred" => '1'}, {"registred" => boolean::true}]})}];
+		}
 	}
 
 	if (ref $data->{users} ne 'ARRAY' && $data->{users}){
@@ -132,7 +138,7 @@ sub POST {
 sub GET_FORM {
 	my ($class, $env, $content, $par) = @_;
 
-	my $data = "---\nmail_id: id\nusers:\n  - name\nsend: 1\n";
+	my $data = "---\nmail_id: id\nusers:\n  - name\nallusers:registred\nsend: 1\n";
 	if ($par && $env->{REQUEST_METHOD} eq 'POST' && exists $par->{DATA}){
 		$data = $par->{DATA};
 	}

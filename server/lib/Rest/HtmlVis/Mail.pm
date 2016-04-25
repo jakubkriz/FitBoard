@@ -84,6 +84,11 @@ sub html {
   $msg .= $users;
   $msg .= '
   </select></fieldset>
+  <fieldset class="form-group">
+  <select name="allusers" id="allusers" class="chosen-select1" data-placeholder="Choose group of users..." style="width:350px;" tabindex="1">
+  <option value=""></option>
+  <option value="registred">All registred users</option>
+  </select></fieldset>
   <div class="checkbox">
     <label>
       <input type="checkbox" name="send" id="send"> Send
