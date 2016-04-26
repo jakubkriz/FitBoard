@@ -61,9 +61,11 @@
     					<span class="error" ng-show="qualvideoForm.video.$error.url">Not valid url!</span>
  					 </div>
 				</div>
-				<div class="col-md-4 col-centered">
-					<label for="score_16.1" class=""></label>
-					<input type="text" ng-model="athlete.points" id="points" class="form-control" uib-tooltip="not required" placeholder="Your score" ng-required="false">
+				<div class="col-md-6 col-centered">
+					<label for="score_16.1A" class="">Your score or time for WOD A</label>
+					<input type="text" ng-model="athlete.pointsA" id="pointsA" class="form-control" uib-tooltip="not required" placeholder="score/time" ng-required="false">
+					<label for="score_16.1B" class="">Your score for WOD B</label>
+					<input type="text" ng-model="athlete.pointsB" id="pointsB" class="form-control" uib-tooltip="not required" placeholder="Kg" ng-required="false">
 				</div>
 				<div ng-show="qualvideoForm.$submitted">
 					<div ng-messages="qualvideoForm.$error" class="registration-messages" role="alert">
