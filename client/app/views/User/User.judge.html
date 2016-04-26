@@ -6,9 +6,52 @@
 		<div class="col-xs-12 placeholder text-align padding200" ng-show="!nextToJudge">
 		Nothing to judge
 		</div>
-		<div class="col-xs-12 placeholder text-align padding200" ng-show="nextToJudge">
-			
+		<div class="col-xs-11 tH paddingtop" ng-show="nextToJudge">
+			<div class="row text-align">
+				<div class="col-xs-2">Name</div>
+				<div class="col-xs-2">
+					<div class="col-xs-6">Cat.</div>
+					<div class="col-xs-6">Sex</div>
+				</div>
+				<div class="col-xs-3">WOD A
+					<div class="glyph1rem row">
+						<div class="col-xs-4">Score:</div>
+						<div class="col-xs-4">No reps:</div>
+						<div class="col-xs-4">Overall:</div>
+					</div></div>
+				<div class="col-xs-2">WOD B
+				</div>
+				<div class="col-xs-1">Link</div>
+			</div>
 		</div>
+		<div class="col-xs-11 judgerow text-align" ng-show="nextToJudge">
+				<div class="row col-xs-12">
+					<!-- name -->
+					<div class="col-xs-2">{{athlete.firstName}} {{athlete.lastName}}</div>
+					<div class="col-xs-2">
+						<div class="col-xs-6">{{athlete.category}}</div>
+						<div class="col-xs-6">{{athlete.sex}}</div>
+					</div>
+					<div class="col-xs-3">
+						<div class="glyph1rem row">
+							<div class="col-xs-4" editable-text="athlete.pointsA">
+								{{athlete.pointsA}}
+							</div>
+							<div class="col-xs-4" editable-text="athlete.norepA">
+								{{athlete.norepA}}
+							</div>
+							<div class="col-xs-4">
+								{{athlete.overallA}}
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-2" editable-text="athlete.pointsB">{{athlete.pointsB}}</div>
+					<div class="col-xs-1"></div>
+				</div>
+		</div>
+		<div class="col-xs-1">
+					<a href="#" class="button next">Next</a>
+				</div>
 	</div>
 
 	<div class="col-md-10 col-md-offset-1 paddingzero"><h3 class="marginzero">My judged athletes:</h3></div>

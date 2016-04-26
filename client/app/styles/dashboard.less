@@ -279,7 +279,7 @@ h4
 
 .qual-wrap
 {
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 30px;
 
     border: 1px solid @grey;
@@ -336,8 +336,9 @@ h4
 
 .submit-text
 {
-    left: 40%;
     font-size: 1.5rem;
+
+    left: 40%;
 
     .vertical-align;
 }
@@ -355,11 +356,11 @@ h4
 .infobox-qual
 {
     position: relative;
+    top: -20px;
 
-   	margin-left: 30px;
-   	top: -20px;
+    margin-left: 30px;
 
-   	text-align: center;
+    text-align: center;
 }
 
 .standarts
@@ -381,8 +382,9 @@ h4
     }
 }
 
-.tickets {
-	cursor: pointer;
+.tickets
+{
+    cursor: pointer;
 
     color: @grey;
     border: 0;
@@ -397,7 +399,6 @@ h4
     {
         outline: 0 none;
     }
-
 }
 
 .labeltext
@@ -411,8 +412,6 @@ h4
 .edit
 {
     font-size: 3rem;
-    background-color: transparent;
-    border: none;
 
     position: absolute;
     z-index: 2;
@@ -424,6 +423,8 @@ h4
     cursor: pointer;
 
     color: @colorYellow;
+    border: none;
+    background-color: transparent;
     &:hover,
     &:active,
     &:focus
@@ -477,10 +478,12 @@ h4
 
     border-radius: 100%;
 }
-.value-text {
-	border-bottom: 1px dotted @blue-pastel;
-	color: @blue-pastel;
+.value-text
+{
     text-decoration: none;
+
+    color: @blue-pastel;
+    border-bottom: 1px dotted @blue-pastel;
 }
 
 // edit password
@@ -500,4 +503,34 @@ h4
     margin-left: 5px;
 
     color: @colorYellow;
+}
+
+/* Judge */
+.tH
+{
+    font-size: 1.4rem;
+
+    text-align: center;
+
+    color: @grey;
+    @media only screen and (max-width: 425px)
+    {
+        font-size: .9rem;
+    }
+}
+
+.judgerow
+{
+    margin: 5px 0 20px 0;
+    padding: 20px 0 20px 0;
+    background-color: @grey;
+    color: @body;
+    // border: 1px dashed @grey;
+
+    .border-radius;
+}
+
+.wodTh
+{
+    margin-top: -10px;
 }
