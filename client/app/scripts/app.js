@@ -1,5 +1,6 @@
 /* exported app*/
 var app = angular.module('FitBoard', [
+    'http-auth-interceptor',
 	'ngAnimate', 
 	'ui.bootstrap', 
 	'ngSanitize', 
@@ -20,14 +21,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	'use strict';
 
 	$urlRouterProvider.otherwise('404');
-	$urlRouterProvider.when('', 'login');
+	$urlRouterProvider.when('', 'user');
 
-	$stateProvider
-	  .state('login', {
-		url: '/login',
-		templateUrl: 'views/login.html',
-		controller: 'loginCtrl'
-	  });
+	// $stateProvider
+	//   .state('login', {
+	// 	url: '/login',
+	// 	templateUrl: 'views/login.html',
+	// 	controller: 'LoginCtrl'
+	//   });
 
 	$stateProvider
 	 .state('reg', {

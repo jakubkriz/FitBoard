@@ -34,9 +34,9 @@
 		</div>
 
 		<ul uib-dropdown-menu class="dropdown-nav" role="menu" aria-labelledby="nav-icon" ng-mouseleave="status.isopen = false">
-			<li><a ui-sref=".profile">My profile</a></li>
-			<li class="divider"></li>
-			<li><a ui-sref="login">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+			<!--li><a ui-sref=".profile">My profile</a></li>
+			<li class="divider"></li-->
+			<li><a ng-click="logout()">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
 		</ul>
 	</div>
 
@@ -50,11 +50,11 @@
 	<div class="btn-wrapper">
 		<!-- <button class="menu-btn" ui-sref=".dashboard"><span class="icon glyphicon glyphicon-dashboard"></span>Dashboard</button>
 		<button class="menu-btn" ui-sref=".events"><span class="icon glyphicon glyphicon-calendar"></span>Events</button> -->
-		<button class="menu-btn" ui-sref-active="menu-btn-active" ui-sref=".qual"><span class="icon glyphicon glyphicon-check"></span>Qualification</button>
-		<button class="menu-btn" ui-sref-active="menu-btn-active" ui-sref=".profile"><span class="icon glyphicon glyphicon-user"></span>
-		My profile</button>
-		<button class="menu-btn" ui-sref-active="menu-btn-active" ui-sref=".admin"><span class="icon glyphicon glyphicon-king"></span>
-		Admin</button>
+		<!--button class="menu-btn" ui-sref-active="menu-btn-active" ui-sref=".qual"><span class="icon glyphicon glyphicon-check"></span>Qualification</button-->
+		<!--button class="menu-btn" ui-sref-active="menu-btn-active" ui-sref=".profile"><span class="icon glyphicon glyphicon-user"></span>
+		My profile</button-->
+		<!--button class="menu-btn" ui-sref-active="menu-btn-active" ui-sref=".admin"><span class="icon glyphicon glyphicon-king"></span>
+		Admin</button-->
 		<button class="menu-btn" ui-sref-active="menu-btn-active" ui-sref=".judge"><i class="icon fa fa-gavel" aria-hidden="true"></i></span>
 		Judge</button>
 	</div>

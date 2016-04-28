@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="FitBoard">
   <head>
     <meta charset="utf-8">
     <title>FIT Monster LeaderBoard</title>
@@ -43,17 +43,52 @@
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
       display: none !important;
     }
+    .waiting-for-angular {
+        display: none !important;
+    };
     </style>
 
   </head>
-  <body ng-app="FitBoard">
-    <div ng-controller="MainCtrl">
-        <div ng-messages="errors" class="registration-messages ng-cloak"  role="alert">
-            <div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
-            <div ng-message="badRequest">Empty form. Try again.</div>
-            <div ng-message="internal">Internal server error.</div>
+  <body ng-controller="MainCtrl" class="auth-application waiting-for-angular">
+    <div >
+
+        <div id="content-outer">
+            <div id="login-holder"  ng-controller="LoginCtrl">
+                <form class="form-signin" ng-submit="submit()">
+                    <h2 class="form-signin-heading">Please sign in</h2>
+                    
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <label for="loginEmail" class="sr-only">Email address</label>
+                            <input type="email" id="loginEmail" class="form-control" ng-model="username" placeholder="Email address" required="" autofocus="">
+                        </div>
+                    
+                            <label for="password" class="sr-only">Password</label>
+                            <input type="password" id="password" class="form-control" ng-model="password" placeholder="Password" required="">
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" value="remember-me"  ng-model="remember"> Remember me
+                      </label>
+                    </div>
+                    <div ng-messages="errors" class="registration-messages ng-cloak"  role="alert">
+                        <div ng-message="forbidden">Bad login or password.</div>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+
+                <div ng-messages="errors" class="registration-messages ng-cloak"  role="alert">
+                    <div ng-message="unavailable">The server is currenty unavailable. Try again later.</div>
+                    <div ng-message="internal">Internal server error.</div>
+                </div>
+
+            </div>
         </div>
-        <div ui-view></div>
+
+
+        <div id="content">
+            <div ui-view></div>
+        </div>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -87,6 +122,7 @@
     <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -96,17 +132,19 @@
     
     <!-- Controllers -->
     <script src="scripts/controllers/MainCtrl.js"></script>
+    <script src="scripts/controllers/LoginCtrl.js"></script>
     <script src="scripts/controllers/LeaderBoardCtrl.js"></script>
     <script src="scripts/controllers/UserCtrl.js"></script>
     <script src="scripts/controllers/AdminCtrl.js"></script>
     <script src="scripts/controllers/registrationCtrl.js"></script>
     <script src="scripts/controllers/rosterCtrl.js"></script>
-     <script src="scripts/controllers/qualCtrl.js"></script>
+    <script src="scripts/controllers/qualCtrl.js"></script>
 
     <!-- Directives -->
     <script src="scripts/directives/svgShirt.js"></script>
     <script src="scripts/directives/svgMan.js"></script>
     <script src="scripts/directives/svgWoman.js"></script>
+    <script src="scripts/directives/auth.js"></script>
 
     <!-- Utilities -->
     <script src="scripts/services/api.js"></script>

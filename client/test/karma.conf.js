@@ -40,6 +40,7 @@ module.exports = function(config) {
       'bower_components/pdfmake/build/vfs_fonts.js',
       'bower_components/angular-messages/angular-messages.js',
       'bower_components/angular-xeditable/dist/js/xeditable.js',
+      'bower_components/angular-http-auth/src/http-auth-interceptor.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/api-check/dist/api-check.js',
       'bower_components/angular-formly/dist/formly.js',

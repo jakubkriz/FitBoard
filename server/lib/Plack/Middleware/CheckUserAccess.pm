@@ -38,7 +38,7 @@ sub call {
 	}
 
 	# Unauthorized
-	return [403, ['Content-Type', 'text/plain']];
+	return [401, ['Content-Type', 'text/plain']];
 }
 
 1;
