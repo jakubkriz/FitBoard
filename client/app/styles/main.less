@@ -58,80 +58,44 @@ h2
 }
 
 /* buttons */
-/* General */
-@general-spacer: 20px;
-@h1-size: 22px;
-
-/* Button Bar */
-@button-bar-width: 200px;
-@button-bar-bg-color: #ededed;
-
-/* Button */
-@button-bg-color: #0d5287;
-@button-bg-hover-color: #0585e8;
-@button-text-padding: 14px;
-@button-text-color: white;
-@button-height: 22px;
-@button-text-size: 14px;
-
-/* Elements */
-/* -------- */
-
-.button-bar {
-  background: @button-bar-bg-color;
-  padding: @general-spacer * 2;
+.next {
+  display: inline-block;
+  .border-radius;
+  .categoryBtn;
+  border: none;
+  color: @body;
+  text-align: center;
+  font-size: 18px;
+  padding: 5px;
+  width: 100%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
 }
 
-/* General Button */
-/* -------------- */
-.button {
+.next span {
+  cursor: pointer;
+  display: inline-block;
   position: relative;
-  margin: 0;
-  padding-left: @button-text-padding;
-  padding-right: @button-text-padding;
-  padding-top: (@button-text-padding / 5);
-  padding-bottom: (@button-text-padding / 5);
-  background: @button-bg-color;
-  color: @button-text-color;
-  font-size: @button-text-size;
+  transition: 0.5s;
 }
 
-.button::after {
-  content: '';
+.next span:after {
+  content: '»';
   position: absolute;
+  opacity: 0;
   top: 0;
-  width: 0;
-  height: 0;
+  right: -20px;
+  transition: 0.5s;
 }
 
-.button:hover { background: @button-bg-hover-color; }
-
-/* Arrow Buttons */
-/* ------------- */
-.next::after, .prev::after { border-style: solid; }
-
-/* Next Button */
-/* ----------- */
-.next::after {
-  right: -@button-height;
-  border-width: @button-height / 2;
-  border-color: transparent transparent transparent @button-bg-color;
+.next:hover span {
+  padding-right: 25px;
 }
 
-.next:hover::after {
-  border-left-color: @button-bg-hover-color;
-}
-
-/* Prev Button */
-/* ----------- */
-.prev::after {
-  left: -@button-height;
-  border-color: transparent @button-bg-color transparent transparent;
-  border-width: @button-height / 2;
-}
-
-.prev:hover::after {
-  border-right-color: @button-bg-hover-color;
+.next:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 /* angular-bootsrap */
@@ -692,3 +656,5 @@ input.search-query.form-control
     width: 100%;
     height: 100%;
 }
+
+

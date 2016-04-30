@@ -33,14 +33,15 @@ $scope.opened = {};
 	};
 
 // overall score
-// if ($scope.athlete.pointsA.split(':').length === 2) { // score is time
-//     	$scope.athlete.overallA = $scope.athlete.pointsA.split(':')[0] + ':' + (parseInt($scope.athlete.pointsA.split(':')[1]) + $scope.athlete.norepA * 5).toString();
-// 		} else { // score is a number
-//     	$scope.athlete.overallA = parseInt($scope.athlete.pointsA) + $scope.athlete.norepA;
-//     }
+ if ($scope.athlete.pointsA.split(':').length === 2) { // score is time
+    	$scope.athlete.overallA = $scope.athlete.pointsA.split(':')[0] + ':' + (parseInt($scope.athlete.pointsA.split(':')[1]) + $scope.athlete.norepsA * 5).toString();
+		} else { // score is a number
+    	$scope.athlete.overallA = parseInt($scope.athlete.pointsA) - $scope.athlete.norepsA;
+    }
 
 // Judge
 	
 	$scope.nextToJudge = true;
+	$scope.judgeEdit = true;
 
 });

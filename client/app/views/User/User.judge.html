@@ -3,61 +3,141 @@
 
 	<div class="col-md-10 col-md-offset-1 paddingzero"><h3 class="marginzero">Next to judge:</h3></div>
 	<div class="col-md-10 col-md-offset-1 qual-wrap">
-		<div class="col-xs-12 placeholder text-align padding200" ng-show="!nextToJudge">
+		<!-- placeholder -->
+		<div class="col-md-12 placeholder text-align padding200" ng-show="!nextToJudge">
 		Nothing to judge
 		</div>
-		<div class="col-xs-11 tH paddingtop" ng-show="nextToJudge">
-			<div class="row text-align">
-				<div class="col-xs-2">Name</div>
-				<div class="col-xs-2">
-					<div class="col-xs-6">Cat.</div>
-					<div class="col-xs-6">Sex</div>
-				</div>
-				<div class="col-xs-3">WOD A
-					<div class="glyph1rem row">
-						<div class="col-xs-4">Score:</div>
-						<div class="col-xs-4">No reps:</div>
-						<div class="col-xs-4">Overall:</div>
-					</div></div>
-				<div class="col-xs-2">WOD B
-				</div>
-				<div class="col-xs-1">Link</div>
-			</div>
-		</div>
-		<div class="col-xs-11 judgerow text-align" ng-show="nextToJudge">
-				<div class="row col-xs-12">
-					<!-- name -->
-					<div class="col-xs-2">{{athlete.firstName}} {{athlete.lastName}}</div>
-					<div class="col-xs-2">
-						<div class="col-xs-6">{{athlete.category}}</div>
-						<div class="col-xs-6">{{athlete.sex}}</div>
+		<!-- to judge row -->
+		<form editable-form name="judged" onaftersave="savejudged()" ng-show="nextToJudge">
+			<div class="col-md-11 tH">
+				<div class="row clearfix">
+					<div class="col-md-3 column">Name</div>
+					<div class="col-md-2 column">
+						<div class="row clearfix">
+							<div class="col-md-6 column">Cat.</div>
+							<div class="col-md-6 column">Sex</div>
+						</div>
 					</div>
-					<div class="col-xs-3">
-						<div class="glyph1rem row">
-							<div class="col-xs-4" editable-text="athlete.pointsA">
-								{{athlete.pointsA}}
+					<div class="col-md-4 column text-align">WOD A
+						<div class="row clearfix glyph1rem">
+							<div class="col-md-4 column">Score</div>
+							<div class="col-md-4 column">No reps</div>
+							<div class="col-md-4 column">Overall</div>
+						</div>
+					</div>
+					<div class="col-md-2 column text-align">WOD B</div>
+					<div class="col-md-1 column">Link</div>
+				</div>
+				<div class="row clearfix judgerow" ng-class="{'judgerow-active' : !judgeEdit}">
+					<div class="col-md-3 column">{{athlete.firstName}} {{athlete.lastName}}</div>
+					<div class="col-md-2 column">
+						<div class="row clearfix">
+							<div class="col-md-6 column borderleft">{{athlete.category}}</div>
+							<div class="col-md-6 column borderleft">{{athlete.sex}}</div>
+						</div>
+					</div>
+					<div class="col-md-4 column text-align">
+						<div class="row clearfix">
+							<div class="col-md-4 column borderleft">
+								<span editable-text="athlete.pointsA">{{athlete.pointsA}}</span>
 							</div>
-							<div class="col-xs-4" editable-text="athlete.norepA">
-								{{athlete.norepA}}
+							<div class="col-md-4 column borderleft">
+								<span editable-number="athlete.norepsA">{{athlete.norepsA}}</span>
 							</div>
-							<div class="col-xs-4">
+							<div class="col-md-4 column borderleft">
 								{{athlete.overallA}}
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-2" editable-text="athlete.pointsB">{{athlete.pointsB}}</div>
-					<div class="col-xs-1"></div>
+					<div class="col-md-2 column borderleft text-align">
+						<span editable-number="athlete.pointsB">{{athlete.pointsB}}</span>
+					</div>
+					<div class="col-md-1 column borderleft">.
+						<a type="button" a-Disabled="judgeEdit" ng-class="{'videolink' : !judgeEdit}" ng-href="{{athlete.video}}" class="videolink-disable fa fa-video-camera" target="_blank"></a>
+					</div>
 				</div>
+			</div>
+		</form>
+		<!-- buttons -->
+		<div class="col-md-1 navNext paddingzero" ng-show="nextToJudge">
+		<!-- judge/next -->
+			<button href="#" class="judgeBtn marginzero" ng-click="judged.$show(); judgeEdit = !judgeEdit" ng-show="!judged.$visible" >
+				<span class="icon fa fa-gavel" id="judgeGavel" aria-hidden="true"></span>
+				<span>Judge</span>
+			</button>
+			<button href="#" class="next marginzero" ng-show="!judged.$visible">
+				<span>Next</span>
+			</button>
+			<!-- save/cancel -->
+			<button ng-show="judged.$visible" type="submit" class="btn btn-primary" ng-disabled="judged.$waiting">Save</button>
+			<button ng-show="judged.$visible" type="button" class="btn btn-default" ng-disabled="judged.$waiting" ng-click="judged.$cancel();judgeEdit = !judgeEdit">Cancel</button>
 		</div>
-		<div class="col-xs-1">
-					<a href="#" class="button next">Next</a>
-				</div>
 	</div>
 
 	<div class="col-md-10 col-md-offset-1 paddingzero"><h3 class="marginzero">My judged athletes:</h3></div>
 	<div class="col-md-10 col-md-offset-1 qual-wrap">
-		<div class="col-xs-12 placeholder text-align padding200">
-		Nobody yet judged
+		<div class="col-md-12 placeholder text-align padding200" ng-show="!nextToJudge">
+			Nobody yet judged
+		</div>
+		<div class="table-responsive" ng-show="nextToJudge">
+			<table class="table table-striped">
+				<thead class="tH">
+					<tr>
+						<th>
+							Name
+						</th>
+						<th>
+							Cat.
+						</th>
+						<th>
+							Sex
+						</th>
+						<th>
+							WOD A - score
+						</th>
+						<th>
+							WOD A - no reps
+						</th>
+						<th>
+							WOD A - overall score
+						</th>
+						<th>
+							WOD B
+						</th>
+						<th>
+							Link
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="athlete in athletes">
+						<td>
+							{{athlete.firstName}} {{athlete.lastName}}
+						</td>
+						<td>
+							{{athlete.category}}
+						</td>
+						<td>
+							{{athlete.sex}}
+						</td>
+						<td>
+							{{athlete.pointsA}}
+						</td>
+						<td>
+							{{athlete.norepsA}}
+						</td>
+						<td>
+							{{athlete.overallA}}
+						</td>
+						<td>
+							{{athlete.pointsB}}
+						</td>
+						<td>
+							<a type="button" ng-href="{{athlete.video}}" class="videolink fa fa-video-camera" target="_blank"></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

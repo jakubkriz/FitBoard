@@ -510,27 +510,153 @@ h4
 {
     font-size: 1.4rem;
 
-    text-align: center;
+    text-align: left;
 
     color: @grey;
-    @media only screen and (max-width: 425px)
-    {
-        font-size: .9rem;
-    }
+
+    margin-top: 20px;
+
+    // @media only screen and (max-width: 425px)
+    // {
+    //     font-size: .9rem;
+    // }
 }
 
 .judgerow
 {
     margin: 5px 0 20px 0;
     padding: 20px 0 20px 0;
-    background-color: @grey;
-    color: @body;
+    background-color: @grey65;
+    color: @brown-grey;
+    cursor: not-allowed;
     // border: 1px dashed @grey;
 
     .border-radius;
+
+    &:hover {
+        background-color: @grey60;
+    }
+}
+
+.judgerow-active
+{
+    margin: 5px 0 20px 0;
+    padding: 20px 0 20px 0;
+    background-color: @downy;
+    color: @body;
+    cursor: default;
+    // border: 1px dashed @grey;
+
+    .border-radius;
+
+    &:hover {
+        background-color: @downy-hover;
+    }
 }
 
 .wodTh
 {
     margin-top: -10px;
+}
+
+.videolink-disable {
+    margin: auto;
+    font-size: 2.1rem;
+    color: @brown-grey;
+    cursor: not-allowed;
+    background-color: transparent;
+    border: none;
+
+    &:hover, &:active, &:focus {
+        color: @brown-grey;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        underline: none;
+
+    }
+
+}
+
+.videolink {
+    margin: auto;
+    font-size: 2.1rem;
+    color: @blue-pastel;
+    cursor: pointer;
+
+    &:hover, &:active, &:focus {
+        color: @blue-pastel-gradient;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        underline: none;
+    }
+
+    &:visited {
+        color: @hoki;
+    }
+
+}
+
+.judgeBtn {
+    display: inline-block;
+    .border-radius;
+    .judgeBtn;
+    border: none;
+    color: @body;
+    text-align: center;
+    font-size: 18px;
+    padding: 5px;
+    width: 100%;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.judgeBtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.judgeBtn span:after {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -20px;
+  transition: 0.5s;
+}
+
+.judgeBtn:hover span {
+  padding-left: 25px;
+}
+
+.judgeBtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#judgeGavel {
+    display: none;
+}
+
+#judgeGavel span:after {
+    display: inline;
+    position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -20px;
+  transition: 0.5s;
+  color: @body;
+}
+
+.navNext {
+    margin-top: 50px;
+}
+
+// table judged
+
+.judged {
+    color: @grey;
 }
