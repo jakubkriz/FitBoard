@@ -13,6 +13,8 @@ use HTTP::Exception qw(3XX);
 use HTTP::Exception qw(4XX);
 use HTTP::Exception qw(5XX);
 
+use Auth::Register;
+
 use YAML::Syck;
 $YAML::Syck::ImplicitUnicode = 1;
 
@@ -76,6 +78,41 @@ sub GET {
 	}
 }
 
+sub POST {
+	my ($self, $env, $params, $data) = @_;
+
+	if (!$data || ref $data ne 'HASH'){
+		HTTP::Exception::400->throw(message=>"Bad request");
+	}
+
+	### Clean email
+	my $login = Auth::Register::clean_email($data->{login});
+
+	### Check if usr exists
+	if ($self->auth->checkUserExistence($env, $data->{login})){
+		HTTP::Exception::400->throw(message=>"User exists");
+	}else{
+		### Gen id as password if not exists
+		if (!defined $data->{password}){
+			$data->{password} = 'fitmonster2016';
+		}
+
+		### Create user
+		my $id = $self->auth->addUser($env, $login, delete $data->{password}, $data );
+
+		### Check if user created
+		if (!$id){
+			HTTP::Exception::500->throw(message=>"Can't add user.");
+		}else{
+
+			### Return ok
+			return { added => 1 };
+		}
+	}
+
+	return { added => undef };
+}
+
 sub PUT {
 	my ($self, $env, $params, $data) = @_;
 
@@ -135,6 +172,31 @@ sub GET_FORM {
 						default => $content
 					}
 				}
+			}
+		}
+	}else{
+		my $def = <<END;
+--- 
+bDay: 29/05/2016
+category: elite
+firstName: First
+gym: Crossfit XYZ
+lastName: Last
+login: user\@mail.cz
+phone: '+420603969896'
+qualFee: '0'
+qualified: '1'
+registred: '0'
+sex: male
+shirt: l
+startFee: '0'
+terms: '1'
+judge: '1'
+END
+		return {
+			get => undef,
+			post => {
+				default => $def
 			}
 		}
 	}
