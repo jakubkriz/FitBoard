@@ -27,6 +27,7 @@
     </div>
 <!-- Workout -->
 	<div class="workout-list">
+
 	</div>
 </div>
 
@@ -49,11 +50,30 @@
 
 	<!-- Table -->
 	<div class="col-lg-7 col-centered" id="leaderBoard">
+		<!-- th -->
+		<div class="row text-align tH">
+			<div class="col-xs-1">
+			place
+			</div>
+			<div class="col-xs-2">
+			photo
+			</div>
+			<div class="col-xs-5">
+			name
+			</div>
+			<div class="col-xs-2">
+			gym
+			</div>
+			<div class="col-xs-2">
+			score
+			</div>
+		</div>
 		<!-- ng-repeat -->
-		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}">
+		<!-- <div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}"> -->
+		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-class='rowClass(item, $index)'>
 			<div class="row">
 				<!-- place -->
-				<div class="col-xs-1 place">#{{$index + 1}}</div>
+				<div class="col-xs-1 place">{{athlete.placeA}}</div>
 				<!-- photo -->
 				<div ng-if="athlete.sex == 'male'" >
 					<div class="col-xs-2 photo">
@@ -68,16 +88,16 @@
 					</div>
 				</div>
 				<!-- name -->
-				<div class="col-xs-5 name">{{ athlete.name }}</div>
+				<div class="col-xs-5 name">{{athlete.firstName}} {{athlete.lastName}}</div>
 				<!-- border -->
 				<div id="border"></div>
 				<!-- gym -->
-				<div class="col-xs-2 gym">{{ athlete.gym }}</div>
+				<div class="col-xs-2 gym">{{athlete.gym}}</div>
 				<!-- score -->
-				<div class="col-xs-2 score">{{ athlete.score }}</div>
+				<div class="col-xs-2 score">{{athlete.pointsA}}</div>
 			</div>
 			<!-- bio -->
-			<div uib-collapse="isCollapsed">
+			<!-- <div uib-collapse="isCollapsed">
 				<div class="row bio">
 					<div col-xs-12>
 						<b>ATHLETE BIO</b>
@@ -157,7 +177,7 @@
 						</table>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<!-- ng-repeat -->
 	</div>

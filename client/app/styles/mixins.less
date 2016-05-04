@@ -5,6 +5,7 @@
 @niagara: #20dd9b;
 @radical-red: #f62459;
 @easy-red: #eb5055;
+@easy-red-gradient: #ea484e;
 @white: white;
 @light-grey: #ecf0f1;
 @grey: #909090;
@@ -64,6 +65,22 @@
     background:         linear-gradient(@top-button 50%, @btm-button 50%); /* Standard syntax (must be last) */
     background-color: @top-button;
 }
+.easyRedRow(@top-button: @easy-red, @btm-button: @easy-red-gradient)
+{
+    background: -webkit-linear-gradient(@top-button 50%, @btm-button 50%); /* For Safari 5.1 to 6.0 */
+    background:      -o-linear-gradient(@top-button 50%, @btm-button 50%); /* For Opera 11.1 to 12.0 */
+    background:    -moz-linear-gradient(@top-button 50%, @btm-button 50%); /* For Firefox 3.6 to 15 */
+    background:         linear-gradient(@top-button 50%, @btm-button 50%); /* Standard syntax (must be last) */
+    background-color: @top-button;
+}
+.easyRedRow-hover(@top-button: @easy-red-gradient, @btm-button: @easy-red)
+{
+    background: -webkit-linear-gradient(@top-button 50%, @btm-button 50%); /* For Safari 5.1 to 6.0 */
+    background:      -o-linear-gradient(@top-button 50%, @btm-button 50%); /* For Opera 11.1 to 12.0 */
+    background:    -moz-linear-gradient(@top-button 50%, @btm-button 50%); /* For Firefox 3.6 to 15 */
+    background:         linear-gradient(@top-button 50%, @btm-button 50%); /* Standard syntax (must be last) */
+    background-color: @top-button;
+}
 .judgeBtn(@top-button: @yellow, @btm-button: @yellow-gradient)
 {
     background: -webkit-linear-gradient(@top-button 50%, @btm-button 50%); /* For Safari 5.1 to 6.0 */
@@ -72,7 +89,7 @@
     background:         linear-gradient(@top-button 50%, @btm-button 50%); /* Standard syntax (must be last) */
     background-color: @top-button;
 }
-.judgeBtn-hover(@top-button: @yellow, @btm-button: @yellow-gradient)
+.judgeBtn-hover(@top-button: @yellow-gradient, @btm-button: @yellow)
 {
     background: -webkit-linear-gradient(@top-button 50%, @btm-button 50%); /* For Safari 5.1 to 6.0 */
     background:      -o-linear-gradient(@top-button 50%, @btm-button 50%); /* For Opera 11.1 to 12.0 */

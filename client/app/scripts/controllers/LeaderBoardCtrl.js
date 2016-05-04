@@ -1,8 +1,8 @@
 angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 	'use strict';
 
-	$scope.sortType     = 'score'; // set the defaulr sort type
-	$scope.sortReverse  = true;  // set the defaulr sort order
+	$scope.sortType     = 'placeA'; // set the defaulr sort type
+	$scope.sortReverse  = false;  // set the defaulr sort order
 	$scope.searchName   = '';
 
 	// Colapse support
@@ -26,7 +26,17 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 	}, 'true');
 
 
+	$scope.rowClass = function(item, index, qf){
+         if(index === 0){
+             return 'mainRowFirst';
+         }
+        else if ($scope.athletes.qualified === 0){
+        	return 'mainRowDNQ';
+        } else {
+        	return 'mainRow';
+        }
 
+    };
 
 // division toggle
  // $(document).ready(function () {
@@ -59,145 +69,201 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 
 ////////////////////////// Athletes  ////////////////////////////////////
 
-	// $scope.athletes = [
-	// 		{
-	// 			name: 'Athlete Name',
-	// 			sex: 'male',
-	// 			category: 'elite',
-	// 			photo: '',
-	// 			gym: 'independent',
-	// 			score: 125,
-	// 			age: '24',
-	// 			height: '175 cm',
-	// 			weight: '80 kg',
-	// 			yInC: '5y',
-	// 			cj: '90 kg',
-	// 			snatch: '75 kg',
-	// 			deadlift: '150 kg',
-	// 			frontSquat: '150 kg',
-	// 			backSquat: '160 kg',
-	// 			fran: '3:14',
-	// 			helen: '132',
-	// 			grace: '2:15',
-	// 			sprint: '1:30',
-	// 			row: '4:00'
-	// 		},
-	// 		{
-	// 			name: 'Michal Dovrtel',
-	// 			sex: 'male',
-	// 			category: 'elite',
-	// 			gym: 'independent2',
-	// 			photo: 'img/profile.jpg',
-	// 			score: 125,
-	// 			age: '24',
-	// 			height: '175 cm',
-	// 			weight: '80 kg',
-	// 			yInC: '5y',
-	// 			cj: '90 kg',
-	// 			snatch: '75 kg',
-	// 			deadlift: '150 kg',
-	// 			frontSquat: '150 kg',
-	// 			backSquat: '160 kg',
-	// 			fran: '3:14',
-	// 			helen: '132',
-	// 			grace: '2:15',
-	// 			sprint: '1:30',
-	// 			row: '4:00'
-	// 		},
-	// 		{
-	// 			name: 'Aneta Velika',
-	// 			sex: 'female',
-	// 			photo: '',
-	// 			category: 'elite',
-	// 			gym: 'independent',
-	// 			score: 32
-	// 		},
-	// 		{
-	// 			name: 'Aneta Mala',
-	// 			sex: 'female',
-	// 			photo: '',
-	// 			category: 'elite',
-	// 			gym: 'independent',
-	// 			score: 30
-	// 		},
-	// 		{
-	// 			name: 'Aneta Druha',
-	// 			sex: 'female',
-	// 			photo: '',
-	// 			category: 'elite',
-	// 			score: 28,
-	// 			gym: 'independent'
-	// 		},
-	// 		{
-	// 			sex: 'male',
-	// 			name: 'Frantisek Heriban',
-	// 			gym: 'The gym',
-	// 			photo: '',
-	// 			category: 'open',
-	// 			score: 66
-	// 		},
-	// 		{
-	// 			sex: 'male',
-	// 			name: 'Michal Dovrtel',
-	// 			gym: 'inependent',
-	// 			category: 'open',
-	// 			photo: '',
-	// 			score: 125
-
-	// 		},
-	// 		{
-	// 			sex: 'male',
-	// 			name: 'Adam Ohral',
-	// 			gym: 'Fit Monster Team',
-	// 			category: 'open',
-	// 			photo: '',
-	// 			score: 82
-
-	// 		},
-	// 		{
-	// 			sex: 'male',
-	// 			name: 'Michal Dovrtel',
-	// 			gym: 'inependent',
-	// 			category: 'masters',
-	// 			photo: '',
-	// 			score: 125
-
-	// 		},
-	// 		{
-	// 			sex: 'male',
-	// 			name: 'Adam Ohral',
-	// 			gym: 'Fit Monster Team',
-	// 			category: 'masters',
-	// 			photo: '',
-	// 			score: 80
-
-	// 		},
-	// 		{
-	// 			sex: 'male',
-	// 			name: 'Frantisek Heriban',
-	// 			gym: 'The gym',
-	// 			category: 'masters',
-	// 			photo: '',
-	// 			score: 66
-
-	// 		},
-	// 		{
-	// 			sex: 'male',
-	// 			name: 'Michal Dovrtel',
-	// 			gym: 'inependent',
-	// 			category: 'masters',
-	// 			photo: '',
-	// 			score: 125
-
-	// 		},
-	// 		{
-	// 			sex: 'male',
-	// 			name: 'Adam Ohral',
-	// 			gym: 'Fit Monster Team',
-	// 			category: 'masters',
-	// 			photo: '',
-	// 			score: 80
-
-	// 		}
-	// 	];
+	$scope.athletes = [
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 1',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '06:50',
+				pointsB: '100',
+				pointsO: 3,
+				placeA: 1,
+				placeB: 1,
+				placeOV: 1,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 2',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '07:00',
+				pointsB: '90',
+				pointsO: 4,
+				placeA: 2,
+				placeB: 2,
+				placeOV: 2,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 3',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '90',
+				pointsB: '80',
+				pointsO: 6,
+				placeA: 3,
+				placeB: 3,
+				placeOV: 3,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 4',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '80',
+				pointsB: '70',
+				pointsO: 8,
+				placeA: 4,
+				placeB: 4,
+				placeOV: 4,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 5',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '70',
+				pointsB: '60',
+				pointsO: 10,
+				placeA: 5,
+				placeB: 5,
+				placeOV: 5,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 6',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '60',
+				pointsB: '50',
+				pointsO: 12,
+				placeA: 6,
+				placeB: 6,
+				placeOV: 6,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 7',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '50',
+				pointsB: '40',
+				pointsO: 14,
+				placeA: 7,
+				placeB: 7,
+				placeOV: 7,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 8',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '40',
+				pointsB: '30',
+				pointsO: 16,
+				placeA: 8,
+				placeB: 8,
+				placeOV: 8,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 9',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '30',
+				pointsB: '20',
+				pointsO: 18,
+				placeA: 9,
+				placeB: 9,
+				placeOV: 9,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 10',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '20',
+				pointsB: '10',
+				pointsO: 20,
+				placeA: 10,
+				placeB: 10,
+				placeOV: 10,
+				qualified: 1
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 11',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: '10',
+				pointsB: '0',
+				pointsO: 22,
+				placeA: 11,
+				placeB: 11,
+				placeOV: 11,
+				qualified: 0
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 12',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: 0,
+				pointsB: 0,
+				pointsO: 0,
+				placeA: 12,
+				placeB: 12,
+				placeOV: 12,
+				qualified: 0
+			},
+			{
+				firstName: 'Athlete',
+				lastName: 'Name 13',
+				sex: 'male',
+				gym: 'independent',
+				category: 'elite',
+				photo: '',
+				pointsA: 0,
+				pointsB: 0,
+				pointsO: 0,
+				placeA: 13,
+				placeB: 13,
+				placeOV: 13,
+				qualified: 0
+			},
+		];
 });
