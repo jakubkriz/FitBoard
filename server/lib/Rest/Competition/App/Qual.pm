@@ -41,23 +41,33 @@ sub GET {
 		if($login_info->{judge}){
 			$users = $self->qual->getAllUsers($env,{judge=>$login});
 			$users_reserved = $self->qual->getAllUsers($env,{reserved=>$login});
+
+			if ($users_reserved && @$users_reserved && $users_reserved->[0]{judge}){
+				$users_reserved = [];
+			}
+
 			if (!@$users_reserved){
-				my $all = $self->qual->getAllUsers($env, {
-					'$and' => [{
-						'$or'=>[
-							{judge=>''},
-							{judge=>'null'}, 
-							{judge=>{'$exists'=>'false'}},
-						]},
+				my $all = $self->qual->getAllUsers($env, 
 						{'$or'=>[
 							{reserved=>''},
 							{reserved=>'null'}, 
 							{reserved=>{'$exists'=>'false'}}
 						]
-					}]
 				});
-				my $pos = int(rand(scalar @$all - 1));
-				$users_reserved = [$all->[$pos]];
+				my $users_cat1 = [];
+				foreach my $q (@$all){
+					next if $q->{judge} || $q->{reserved};
+					my $u = $self->auth->getUser($env, $q->{login});
+					if ($login_info->{judge} eq 'em'){
+						push (@$users_cat1, $q) if ($u->{category} eq 'masters' || $u->{category} eq 'elite');
+					}elsif($login_info->{judge} eq 'o'){
+						push (@$users_cat1, $q) if ($u->{category} eq 'open');
+					}
+				}
+				if (@$users_cat1){
+					my $pos = int(rand(scalar @$users_cat1 - 1));
+					$users_reserved = [$users_cat1->[$pos]];
+				}
 			}
 		}elsif ($login_info->{admin}){
 			$users = $self->qual->getAllUsers($env, {
@@ -80,26 +90,42 @@ sub GET {
 		
 		my $user_qual;
 		foreach my $u (@$users) {
+			my $u_info = $self->auth->getUser($env, $u->{login});
 			push (@$user_qual, {
 				href => $self->refToUrl($env, 'Rest::Competition::Qual::UserId', {'rest.userid'=>($u->{login}||'')}),
 				login => $u->{login},
 				video => $u->{video},
-				points => $u->{points},
 				pointsA => $u->{pointsA},
 				pointsB => $u->{pointsB},
-				judge => ($u->{judge}||'')
+				pointsA_j => $u->{pointsA_j},
+				pointsA_j_norep => $u->{pointsA_j_norep},
+				pointsB_j => $u->{pointsB_j},
+				overallA => $u->{overallA},
+				judge => ($u->{judge}||''),
+				firstName => $u_info->{firstName},
+				lastName => $u_info->{lastName},
+				category => $u_info->{category},
+				sex => $u_info->{sex},
 			});
 		}
 		my $users_res;
 		foreach my $u (@$users_reserved) {
+			my $u_info = $self->auth->getUser($env, $u->{login});
 			push (@$users_res, {
 				href => $self->refToUrl($env, 'Rest::Competition::Qual::UserId', {'rest.userid'=>($u->{login}||'')}),
 				login => $u->{login},
 				video => $u->{video},
-				points => $u->{points},
 				pointsA => $u->{pointsA},
 				pointsB => $u->{pointsB},
-				reserved => ($u->{reserved}||'')
+				pointsA_j => $u->{pointsA_j},
+				pointsA_j_norep => $u->{pointsA_j_norep},
+				pointsB_j => $u->{pointsB_j},
+				overallA => $u->{overallA},
+				reserved => ($u->{reserved}||''),
+				firstName => $u_info->{firstName},
+				lastName => $u_info->{lastName},
+				category => $u_info->{category},
+				sex => $u_info->{sex},
 			});
 		}
 		my $link = ();
@@ -115,7 +141,7 @@ sub GET {
 			rel => 'Rest::Competition::App::Qual::Type'
 		});
 
-		return {link => $link, users_qual=>$user_qual, users_reserved=>$users_res};
+		return {link => $link, usersQual=>$user_qual, usersReserved=>$users_res};
 	}
 }
 
@@ -146,9 +172,9 @@ sub POST {
 		my $qual_login = $data->{login};
 		if ($self->qual->checkUserExistence($env, $qual_login)){
 			my $user = $self->qual->getUser($env, $qual_login);
-			if (!$user->{reserved}){
+			if (!$user->{reserved} && !$user->{judge}){
 				### Update user
-				$self->qual->updateUser($env, $qual_login, { '$set' => {'reserved' => $qual_login} });
+				$self->qual->updateUser($env, $qual_login, { '$set' => {'reserved' => $login} });
 			}else{
 				HTTP::Exception::400->throw(message=>"Qual taken by another judge");
 			}
@@ -160,14 +186,14 @@ sub POST {
 		my $qual_login = $data->{login};
 		if ($self->qual->checkUserExistence($env, $qual_login)){
 			my $user = $self->qual->getUser($env, $qual_login);
-			if ($user->{reserved} eq $qual_login){
+			if ($user->{reserved} eq $login){
 				$data->{'reserved'} = '';
-				$data->{'judge'} = $qual_login;
+				$data->{'judge'} = $login;
 
 				### Update user
 				$self->qual->updateUser($env, $qual_login, { '$set' => $data });
 			}else{
-				HTTP::Exception::400->throw(message=>"Judge not reserved qual");
+				HTTP::Exception::400->throw(message=>"Judge not reserved for this qual");
 			}
 		}else{
 			HTTP::Exception::400->throw(message=>"Qual for user doesn't exists");
@@ -192,13 +218,13 @@ sub DELETE {
 		HTTP::Exception::403->throw(message=>"Forbidden");
 	}
 
-	if ($env->{'rest.qualtype'} eq 'reserve' && $data->{login}){
-		my $user = $self->qual->getUser($env, $data->{login});
-		if ($user && $user->{reserved} && $user->{reserved} eq $login){
-			my $ret = $self->qual->removeUser($env, $data->{login});
+	if ($env->{'rest.qualtype'} eq 'reserve'){
+		my $users = $self->qual->getAllUsers($env, {reserved => $login});
+		if ($users && @$users && $users->[0]->{reserved} && $users->[0]->{reserved} eq $login){
+			my $ret = $self->qual->updateUser($env, $users->[0]->{login}, {'$set'=>{reserved=>''}});
 			return $ret;
 		}else{
-			return HTTP::Exception::405->throw(message=>"Login not reserved for this judge");
+			return {};
 		}
 
 	}else{
@@ -213,15 +239,26 @@ sub GET_FORM {
 	if ($env->{'rest.qualtype'} eq 'reserve'){
 		return {
 			get => undef,
-			delete => {
-				params => {}
-			},
+			delete => { params => {} },
 			post => {
 				params => {
-					login => {
-						type => 'text',
-						name => 'login',
-						default => ''
+					DATA => {
+						type => 'textarea',
+						name => 'DATA',
+						default => join("\n", '---',"login: login")
+					}					
+				}
+			}
+		}
+	}elsif ($env->{'rest.qualtype'} eq 'judge'){
+		return {
+			get => undef,
+			post => {
+				params => {
+					DATA => {
+						type => 'textarea',
+						name => 'DATA',
+						default => join("\n", '---',"login: login","pointsA_j: 0","pointsA_j_norep: 0","pointsB_j: 0")
 					}					
 				}
 			}

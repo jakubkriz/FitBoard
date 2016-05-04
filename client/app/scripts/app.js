@@ -110,7 +110,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				.state('user.judge', {
 				url: '/judge',
 				templateUrl: 'views/User/User.judge.html',
-				controller: 'UserCtrl'
+				controller: 'UserJudgeCtrl'
 
 			  });
 

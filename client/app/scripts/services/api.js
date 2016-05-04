@@ -36,6 +36,18 @@ angular.module('FitBoard')
 			logout: function (callback, callbackErr) {
 				$http.get('/api/v1/auth/logout').then(callback, callbackErr);
 			},
+			getQual: function (compet, callback, callbackErr) {
+				$http.get('/api/v1/competition/'+compet+'/app/qual').then(callback, callbackErr);
+			},
+			reserveQual: function (compet, qual, callback, callbackErr) {
+				$http.post('/api/v1/competition/'+compet+'/app/qual/reserve', {'login':qual}).then(callback, callbackErr);
+			},
+			cancelQual: function (compet, callback, callbackErr) {
+				$http.delete('/api/v1/competition/'+compet+'/app/qual/reserve').then(callback, callbackErr);
+			},
+			judgeQual: function (compet, qual, callback, callbackErr) {
+				$http.post('/api/v1/competition/'+compet+'/app/qual/judge', qual).then(callback, callbackErr);
+			},
 		};
 
 	}
