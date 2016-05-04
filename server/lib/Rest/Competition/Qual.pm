@@ -53,12 +53,14 @@ sub GET {
 		my $link = (); my $count;
 		my $qualFee; my $registred; my $user_list;
 		foreach my $u (@$users) {
-			my $user_info = $self->auth->getUser($env, $login);
+			my $user_info = $self->auth->getUser($env, $u->{login});
 			push (@$user_list, {
 				href => $self->refToUrl($env, 'Rest::Competition::Qual::UserId', {'rest.userid'=>($u->{login}||'')}),
 				login => $u->{login},
 				video => $u->{video},
-				points => $u->{points}
+				points => $u->{points},
+				pointsA => $u->{pointsA},
+				pointsB => $u->{pointsB}
 			});
 			push (@$link, {
 				href => $self->refToUrl($env, 'Rest::Competition::Qual::UserId', {'rest.userid'=>($u->{login}||'')}),
@@ -182,7 +184,7 @@ sub GET_FORM {
 		return {
 			get => undef,
 			post => {
-				default => "---\nlogin: email"."\nvideo: url"."\npoints: number"
+				default => "---\nlogin: email"."\nvideo: url"."\npoints: number"."\npointsA: number"."\npointsB: number"
 			},
 		}
 	}
