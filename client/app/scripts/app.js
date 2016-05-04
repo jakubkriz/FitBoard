@@ -87,7 +87,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 						$stateProvider
 						.state('submitvideo', {
 						url: '/submitvideo',
-						templateUrl: 'views/User/User.submitvideo.html',
+						templateUrl: 'views/User/qualover.html',
 						controller: 'qualCtrl'
 					  });
 
