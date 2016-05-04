@@ -70,7 +70,7 @@
 		</div>
 		<!-- ng-repeat -->
 		<!-- <div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}"> -->
-		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-class='rowClass(item, $index)'>
+		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-class="rowClass(item, $index)">
 			<div class="row">
 				<!-- place -->
 				<div class="col-xs-1 place">{{athlete.placeA}}</div>

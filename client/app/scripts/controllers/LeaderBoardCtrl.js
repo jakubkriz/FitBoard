@@ -25,18 +25,18 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 		}
 	}, 'true');
 
+	// rowClass
+	$scope.rowClass = function(item, index){
+		if(index === 0){
+			return 'mainRowFirst';
+		 }
+		else if ($scope.athletes.qualified === 0){
+			return 'mainRowDNQ';
+		} else {
+			return 'mainRow';
+		}
 
-	$scope.rowClass = function(item, index, qf){
-         if(index === 0){
-             return 'mainRowFirst';
-         }
-        else if ($scope.athletes.qualified === 0){
-        	return 'mainRowDNQ';
-        } else {
-        	return 'mainRow';
-        }
-
-    };
+	};
 
 // division toggle
  // $(document).ready(function () {
