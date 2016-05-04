@@ -47,13 +47,7 @@ sub GET {
 			}
 
 			if (!@$users_reserved){
-				my $all = $self->qual->getAllUsers($env, 
-						{'$or'=>[
-							{reserved=>''},
-							{reserved=>'null'}, 
-							{reserved=>{'$exists'=>'false'}}
-						]
-				});
+				my $all = $self->qual->getAllUsers($env);
 				my $users_cat1 = [];
 				foreach my $q (@$all){
 					next if $q->{judge} || $q->{reserved};
