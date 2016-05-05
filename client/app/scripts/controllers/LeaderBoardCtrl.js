@@ -1,9 +1,11 @@
 angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 	'use strict';
 
-	$scope.sortType     = 'placeA'; // set the defaulr sort type
+	$scope.sortType     = 'placeOV'; // set the defaulr sort type
 	$scope.sortReverse  = false;  // set the defaulr sort order
 	$scope.searchName   = '';
+
+	$scope.placeText = 'Overall';
 
 	// Colapse support
 	$scope.isCollapsed = true;
@@ -26,20 +28,29 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 	}, 'true');
 
 	// rowClass
-	$scope.rowClass = function(item, index){
+	$scope.rowClass = function(athlete, index){
 		if(index === 0){
 			return 'mainRowFirst';
 		 }
 		// else if (index === 1){
 		// 	return 'mainRowSecond';
 		// }
-		else if ($scope.athletes.qualified === 0){
+		else if (athlete.qualified === 0){
 			return 'mainRowDNQ';
 		} else {
 			return 'mainRow';
 		}
-
 	};
+
+	$scope.showPlace = function(athlete) {
+		if($.sortType === 'placeA') {
+			return athlete.placeA;
+		} else if($.sortType === 'placeB') {
+			return athlete.placeB;
+		} else {
+			return athlete.placeOV;
+		}
+ 	};
 
 // division toggle
  // $(document).ready(function () {
@@ -70,6 +81,7 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 	// };
 
 
+
 ////////////////////////// Athletes  ////////////////////////////////////
 
 	$scope.athletes = [
@@ -83,9 +95,9 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 				pointsA: '06:50',
 				pointsB: '100',
 				pointsO: 3,
-				placeA: 1,
+				placeA: 4,
 				placeB: 1,
-				placeOV: 1,
+				placeOV: 2,
 				qualified: 1
 			},
 			{
@@ -98,9 +110,9 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 				pointsA: '07:00',
 				pointsB: '90',
 				pointsO: 4,
-				placeA: 2,
+				placeA: 1,
 				placeB: 2,
-				placeOV: 2,
+				placeOV: 1,
 				qualified: 1
 			},
 			{
@@ -128,7 +140,7 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 				pointsA: '80',
 				pointsB: '70',
 				pointsO: 8,
-				placeA: 4,
+				placeA: 2,
 				placeB: 4,
 				placeOV: 4,
 				qualified: 1

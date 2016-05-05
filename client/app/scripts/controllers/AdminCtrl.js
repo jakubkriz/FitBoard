@@ -66,11 +66,13 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
 			type:'number',
 			enableFiltering:false
 		},
-		{ 	name: 'edit',
+		{ 	name: 'action',
  				enableCellEdit: false,
-				cellTemplate: '<button class="btn primary" ng-click="grid.appScope.deleteRow(row)">Delete</button>'
-
+				cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn primary glyphicon glyphicon-pencil" ng-click="grid.appScope.editRow(row)"></button><button class="btn primary glyphicon glyphicon-trash" ng-click="grid.appScope.deleteRow(row)"></button></div>'
 		}
+    //TODO: budu potrebovat editableCellTemplate -> cell template to be used when editing this column.
+    // http://ui-grid.info/docs/#/api/ui.grid.rowEdit.service:uiGridRowEditService
+    // http://ui-grid.info/docs/#/api/ui.grid.edit.directive:uiGridCell
   ];
 
   // $scope.callsPending = 0;

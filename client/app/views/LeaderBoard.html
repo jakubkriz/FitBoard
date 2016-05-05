@@ -1,12 +1,12 @@
 <div class="body">
 <!-- header -->
-<header class="header" >	
+<header class="header" >
 	<a href="http://www.fitmonster.cz">
 		<div class="logo" id="nav">
 			<div class="shing">
 				<img src="img/monster.png" width="160px"></img>
 			</div>
-		</div>		
+		</div>
 	</a>
 </header>
 
@@ -45,8 +45,21 @@
 					<span class="glyphicon glyphicon-search"></span>
 				</div>
 		</div>
+		<!-- dropdown button -->
+	  <div class="btn-group" uib-dropdown>
+	    <button id="split-button" type="button" class="btn btn-primary">{{placeText}}</button>
+	    <button type="button" class="btn btn-primary" uib-dropdown-toggle>
+	      <span class="caret"></span>
+	      <span class="sr-only">Split button!</span>
+	    </button>
+	    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+	      <li role="menuitem"><a ng-click="sortType = 'placeA'; placeText = 'WOD A'">WOD A</a></li>
+	      <li role="menuitem"><a ng-click="sortType = 'placeB'; placeText = 'WOD B'">WOD B</a></li>
+	      <li class="divider"></li>
+	      <li role="menuitem"><a ng-click="sortType = 'placeOV'; placeText = 'Overall'">Overall</a></li>
+	    </ul>
+	  </div>
 	</div>
-
 
 	<!-- Table -->
 	<div class="col-lg-7 col-centered" id="leaderBoard">
@@ -70,10 +83,11 @@
 		</div>
 		<!-- ng-repeat -->
 		<!-- <div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}"> -->
-		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-class="rowClass(item, $index)">
-			<div class="row">
+		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex">
+			<div class="row" ng-class="rowClass(athlete, $index)">
 				<!-- place -->
-				<div class="col-xs-1 place">{{athlete.placeA}}</div>
+				<!-- <div class="col-xs-1 place">{{athlete.placeA}}</div> -->
+				<div class="col-xs-1 place">{{showPlace(athlete)}}</div>
 				<!-- photo -->
 				<div ng-if="athlete.sex == 'male'" >
 					<div class="col-xs-2 photo">
