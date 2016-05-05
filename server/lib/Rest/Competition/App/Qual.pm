@@ -155,7 +155,7 @@ sub POST {
 	HTTP::Exception::403->throw(message=>"Forbidden") unless $login;
 	my $login_info = $self->auth->getUser($env, $login);
 
-	if (!$login_info->{admin} || !$login_info->{judge}){
+	if (!($login_info->{admin} || $login_info->{judge})){
 		HTTP::Exception::403->throw(message=>"Forbidden");
 	}
 
@@ -208,7 +208,7 @@ sub DELETE {
 	HTTP::Exception::403->throw(message=>"Forbidden") unless $login;
 	my $login_info = $self->auth->getUser($env, $login);
 
-	if (!$login_info->{admin} || !$login_info->{judge}){
+	if (!($login_info->{admin} || $login_info->{judge})){
 		HTTP::Exception::403->throw(message=>"Forbidden");
 	}
 
