@@ -68,6 +68,7 @@ sub GET {
 				rel => 'Rest::Competition::Qual::UserId'
 			});
 			$count->{$user_info->{category}.'_'.$user_info->{sex}}++;
+			$count->{$user_info->{shirt}.'_'.$user_info->{sex}}++;
 		}
 		$count->{count} = scalar @$users;
 	
