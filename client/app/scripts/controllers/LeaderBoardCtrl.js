@@ -5,7 +5,7 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 	$scope.sortReverse  = false;  // set the defaulr sort order
 	$scope.searchName   = '';
 
-	$scope.placeText = 'Overall';
+	$scope.placeText = 'OVERALL';
 
 	// Colapse support
 	$scope.isCollapsed = true;
@@ -42,13 +42,22 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 		}
 	};
 
-	$scope.showPlace = function(athlete) {
-		if($.sortType === 'placeA') {
+	$scope.getPlace = function(athlete, place) {
+		if(place === 'placeA') {
 			return athlete.placeA;
-		} else if($.sortType === 'placeB') {
+		} else if(place === 'placeB') {
 			return athlete.placeB;
 		} else {
 			return athlete.placeOV;
+		}
+ 	};
+	$scope.getPoints = function(athlete, place) {
+		if(place === 'placeA') {
+			return athlete.pointsA;
+		} else if(place === 'placeB') {
+			return athlete.pointsB;
+		} else {
+			return athlete.pointsO;
 		}
  	};
 
