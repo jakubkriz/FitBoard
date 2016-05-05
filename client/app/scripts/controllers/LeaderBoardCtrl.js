@@ -30,6 +30,9 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope) {
 		if(index === 0){
 			return 'mainRowFirst';
 		 }
+		// else if (index === 1){
+		// 	return 'mainRowSecond';
+		// }
 		else if ($scope.athletes.qualified === 0){
 			return 'mainRowDNQ';
 		} else {

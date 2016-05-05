@@ -23,8 +23,10 @@
 @blue-pastel: #3779be;
 @blue-pastel-gradient: #3471b2;
 @flash-green: #24f657;
-@yellow: #f6c124;
-@yellow-gradient: #f8cf54;
+@yellow: #f8cf54;
+@yellow-gradient: #f6c124;
+@yellow70: #ddb43c;
+@yellow70-gradient: #d9ac26;
 @downy: #65C6BB;
 @downy-hover:  #7dcfc5;
 
@@ -48,6 +50,14 @@
     background:    -moz-linear-gradient(@top-mR 50%, @btm-mR 50%); /* For Firefox 3.6 to 15 */
     background:         linear-gradient(@top-mR 50%, @btm-mR 50%); /* Standard syntax (must be last) */
     background-color: @top-mR;
+}
+.yellow70Row(@top-button: @yellow70, @btm-button: @yellow70-gradient)
+{
+    background: -webkit-linear-gradient(@top-button 50%, @btm-button 50%); /* For Safari 5.1 to 6.0 */
+    background:      -o-linear-gradient(@top-button 50%, @btm-button 50%); /* For Opera 11.1 to 12.0 */
+    background:    -moz-linear-gradient(@top-button 50%, @btm-button 50%); /* For Firefox 3.6 to 15 */
+    background:         linear-gradient(@top-button 50%, @btm-button 50%); /* Standard syntax (must be last) */
+    background-color: @top-button;
 }
 .categoryBtn(@top-button: @blue-pastel-gradient, @btm-button: @blue-pastel)
 {
