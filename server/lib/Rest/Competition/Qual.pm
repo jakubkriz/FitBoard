@@ -69,6 +69,8 @@ sub GET {
 			});
 			$count->{$user_info->{category}.'_'.$user_info->{sex}}++;
 			$count->{$user_info->{shirt}.'_'.$user_info->{sex}}++;
+			$count->{judged}++ if $u->{judge};
+			$count->{reserved}++ if $u->{reserved};
 		}
 		$count->{count} = scalar @$users;
 	
