@@ -52,6 +52,7 @@ sub GET {
 		
 		my $link = (); my $count;
 		my $qualFee; my $registred; my $user_list;
+		my $judge;
 		foreach my $u (@$users) {
 			my $user_info = $self->auth->getUser($env, $u->{login});
 			push (@$user_list, {
@@ -67,14 +68,16 @@ sub GET {
 				title => $u->{login}.' - '.$u->{points},
 				rel => 'Rest::Competition::Qual::UserId'
 			});
-			$count->{$user_info->{category}.'_'.$user_info->{sex}}++;
-			$count->{$user_info->{shirt}.'_'.$user_info->{sex}}++;
-			$count->{judged}++ if $u->{judge};
-			$count->{reserved}++ if $u->{reserved};
+			$count->{$user_info->{sex}}{$user_info->{category}}++;
+			$count->{$user_info->{sex}}{$user_info->{shirt}}++;
+			$judge->{judged}{suma}++ if $u->{judge};
+			$judge->{reserved}{suma}++ if $u->{reserved};
+			$judge->{judged}{$u->{judge}}++ if $u->{judge};
+			$judge->{reserved}{$u->{reserved}}++ if $u->{reserved};
 		}
 		$count->{count} = scalar @$users;
 	
-		return {link => $link, count=>$count, users=>$user_list};
+		return {link => $link, count=>$count, judge_count=>$judge, users=>$user_list};
 	}
 }
 
