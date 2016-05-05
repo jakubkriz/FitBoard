@@ -61,7 +61,13 @@ sub GET {
 				video => $u->{video},
 				points => $u->{points},
 				pointsA => $u->{pointsA},
-				pointsB => $u->{pointsB}
+				pointsB => $u->{pointsB},
+				overallA => $u->{overallA},
+				pointsA_j => $u->{pointsA_j},
+				pointsA_j_norep => $u->{pointsA_j_norep},
+				pointsB_j => $u->{pointsB_j},
+				judge => $u->{judge},
+				reserved => $u->{reserved}
 			});
 			push (@$link, {
 				href => $self->refToUrl($env, 'Rest::Competition::Qual::UserId', {'rest.userid'=>($u->{login}||'')}),
