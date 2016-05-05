@@ -68,6 +68,7 @@ angular.module('FitBoard').controller('UserJudgeCtrl', function($scope, Api) {
 		data.pointsA_j = $scope.nextToJudge.pointsA_j;
 		data.pointsA_j_norep = $scope.nextToJudge.pointsA_j_norep;
 		data.pointsB_j = $scope.nextToJudge.pointsB_j;
+		data.overallA = $scope.nextToJudge.overallA;
 		Api.judgeQual('fitmonster2016', data, function(){
 			$scope.reload();
 		},function(err){
