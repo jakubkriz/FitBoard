@@ -73,18 +73,18 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope, Api) {
 
 	$scope.athletes = [];
 
-	// Api.getLb('fitmonster2016', 
-	// 	function(data){
-	// 		$scope.athletes = data.data.lb;
-	// 	},
-	// 	function(resp){ //ERROR
-	// 		if(resp.status === 503){
-	// 			$scope.errors.unavailable = true;
-	// 		}else{
-	// 			$scope.errors.internal =  true;
-	// 		}
-	// 	}
-	// );
+	Api.getLb('fitmonster2016', 
+		function(data){
+			$scope.athletes = data.data.lb;
+		},
+		function(resp){ //ERROR
+			if(resp.status === 503){
+				$scope.errors.unavailable = true;
+			}else{
+				$scope.errors.internal =  true;
+			}
+		}
+	);
 
 	// {
 	// 	firstName: 'Athlete',
