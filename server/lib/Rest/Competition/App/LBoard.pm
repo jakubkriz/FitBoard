@@ -38,12 +38,21 @@ sub GET {
 	foreach my $u (@$users){
 		my $u_info = $self->auth->getUser($env, $u->{login});
 
+		$u->{firstName} = $u_info->{firstName};
+		$u->{lastName} = $u_info->{lastName};
+		$u->{gym} = $u_info->{gym};
+		$u->{category} = $u_info->{category};
+		$u->{sex} = $u_info->{sex};
+
 		# Clean
-		if ( ($u->{pointsA_j} !~ /(?:[\d+:\d+]|[\d+])/) || 
-			($u->{pointsB_j} !~ /(?:[\d+:\d+]|[\d+])/) || 
-			($u->{pointsA_j_norep} !~ /\d+/)
+		$u->{pointsA_j} =~ s/,/./g;
+		$u->{pointsB_j} =~ s/,/./g;
+		$u->{pointsA_j_norep} =~ s/,/./g;
+		if ( !($u->{pointsA_j} =~ /^(\d+:\d+|[\d\.]+)$/) || 
+			!($u->{pointsB_j} =~ /^[\d\.]+$/) || 
+			!($u->{pointsA_j_norep} =~ /^[\d\.]+$/)
 		){
-			$resp->{err} = $u;
+			$u->{err} = 1;
 			next;
 		}
 
@@ -58,11 +67,6 @@ sub GET {
 
 		# B
 		$u->{overallB} = $u->{pointsB_j};
-		$u->{firstName} = $u_info->{firstName};
-		$u->{lastName} = $u_info->{lastName};
-		$u->{gym} = $u_info->{gym};
-		$u->{category} = $u_info->{category};
-		$u->{sex} = $u_info->{sex};
 		push @{$users_cat->{$u_info->{category}}{$u_info->{sex}}}, $u;
 	}
 
@@ -133,7 +137,21 @@ sub GET {
 	}
 
 	my $user_qual;
+	my $user_err;
 	foreach my $u (@$users) {
+		if (exists $u->{err}){
+			push (@$user_err, {
+				firstName => $u->{firstName},
+				lastName => $u->{lastName},
+				category => $u->{category},
+				sex => $u->{sex},
+				gym => $u->{gym},
+				pointsA_j => $u->{pointsA_j},
+				pointsA_j_norep => $u->{pointsA_j_norep},
+				pointsB_j => $u->{pointsB_j},
+			});
+			next;
+		}
 #		my $u_info = $self->auth->getUser($env, $u->{login});
 		push (@$user_qual, {
 			pointsA_j => $u->{pointsA_j},
@@ -158,7 +176,7 @@ sub GET {
 	}
 
 	my $link = ();
-	return {link => $link, lb=>$user_qual};
+	return {link => $link, lb=>$user_qual, err=>$user_err};
 }
 
 sub POST {
