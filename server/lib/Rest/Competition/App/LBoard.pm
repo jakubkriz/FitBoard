@@ -25,7 +25,6 @@ sub GET {
 
 	# get login
 	my $login = $env->{'psgix.session'}{user_id};
-	HTTP::Exception::403->throw(message=>"Forbidden") unless $login;
 	my $login_info = $self->auth->getUser($env, $login);
 
 	my $users = $self->qual->getAllUsers($env);
