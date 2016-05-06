@@ -27,13 +27,7 @@
     </div>
 <!-- Workout -->
 	<div class="workout-list">
-
-	</div>
-</div>
-
-<div id="container">
-	<!-- Info -->
-	<div class="col-centered">
+		<h3>Qualification</h3>
 		<!-- dropdown button -->
 	  <div class="btn-group" uib-dropdown>
 	    <button type="button" id="dropdown-button" class="btn button-label btn-info cat-button">{{placeText}}</button>
@@ -47,6 +41,12 @@
 	      <li role="menuitem"><a id="workout-item" ng-click="sortType = 'placeOV'; placeText = 'OVERALL'">OVERALL</a></li>
 	    </ul>
 	  </div>
+	</div>
+</div>
+
+<div id="container">
+	<!-- Info -->
+	<div class="col-centered">
 		<div class="animate" id="sexHeader">
 		<!-- Sex Header -->
 			<h1 ng-bind-html="sexHeaderHtml"></h1>
