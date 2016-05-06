@@ -35,6 +35,7 @@ sub GET {
 	my $users_cat = {};
 
 	### Clean time
+	my $qual_u = {};
 	foreach my $u (@$users){
 		my $u_info = $self->auth->getUser($env, $u->{login});
 
@@ -68,7 +69,31 @@ sub GET {
 		# B
 		$u->{overallB} = $u->{pointsB_j};
 		push @{$users_cat->{$u_info->{category}}{$u_info->{sex}}}, $u;
+		$qual_u->{$u->{login}} = undef;
 	}
+
+	### Add users
+	my $all_users = $self->auth->getAllUsers($env);
+	foreach my $u_info (@$all_users){
+		my $u;
+		next if (exists $qual_u->{$u_info->{login}} || !$u_info->{registred});
+
+		$u->{firstName} = $u_info->{firstName};
+		$u->{lastName} = $u_info->{lastName};
+		$u->{gym} = $u_info->{gym};
+		$u->{category} = $u_info->{category};
+		$u->{sex} = $u_info->{sex};
+		$u->{pointsA_j} = 0;
+		$u->{pointsB_j} = 0;
+		$u->{pointsA_j_norep} = 0;
+		$u->{overallA} = 0;
+		$u->{overallB} = 0;
+		$u->{qualified} = 0;
+
+		push @$users, $u;
+		push @{$users_cat->{$u_info->{category}}{$u_info->{sex}}}, $u;
+	}
+
 
 	my $points = {};
 
@@ -124,7 +149,7 @@ sub GET {
 			foreach my $u (@{$points->{$t}}){
 				$p = $b if ($last != $u->{scoreOV});
 				$u->{"placeOV"} = $p;
-				if ($limit->{$cat}{$sex} < $b){
+				if ($limit->{$cat}{$sex} < $b || (defined $u->{qualified} && $u->{qualified} == 0)){
 					$u->{qualified} = 0;
 				}else{
 					$u->{qualified} = 1;
