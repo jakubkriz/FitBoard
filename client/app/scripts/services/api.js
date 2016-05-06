@@ -27,6 +27,9 @@ angular.module('FitBoard')
 			getRoster: function (compet, callback, callbackErr) {
 				$http.get('/api/v1/competition/'+compet+'/roster').then(callback, callbackErr);
 			},
+			getLb: function (compet, callback, callbackErr) {
+				$http.get('/api/v1/competition/'+compet+'/app/lb').then(callback, callbackErr);
+			},
 			getUser: function (login, callback, callbackErr) {
 				$http.get('/api/v1/auth/user'+'/'+login).then(callback, callbackErr);
 			},
