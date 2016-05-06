@@ -98,6 +98,36 @@ h2
   right: 0;
 }
 
+.cat-button
+{
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    position: absolute;
+    top: 0;
+
+    width: 120px;
+    height: 50px;
+
+    cursor: pointer;
+    text-align: center;
+
+    color: @dark-grey;
+    border: 1px solid @dark-grey;
+    background-color: transparent;
+
+    .border-radius;
+    &:hover,
+    &:focus,
+    &:active
+    {
+        color: @silver;
+        outline: 0 none;
+
+        .categoryBtn-hover;
+    }
+}
+
 /* angular-bootsrap */
 .nav,
 .pagination,
@@ -296,36 +326,6 @@ footer
     height: 50px;
 
     color: @silver;
-}
-
-.cat-button
-{
-    font-size: 1.5rem;
-    font-weight: 600;
-
-    position: absolute;
-    top: 0;
-
-    width: 120px;
-    height: 50px;
-
-    cursor: pointer;
-    text-align: center;
-
-    color: @dark-grey;
-    border: 1px solid @dark-grey;
-    background-color: transparent;
-
-    .border-radius;
-    &:hover,
-    &:focus,
-    &:active
-    {
-        color: @silver;
-        outline: 0 none;
-
-        .categoryBtn-hover;
-    }
 }
 
 .transformable
