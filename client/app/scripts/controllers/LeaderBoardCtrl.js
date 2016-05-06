@@ -12,7 +12,7 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope, Api) {
 
 	// Initialization
 	$scope.category 	 = 'elite';
-	$scope.sex				 = 'male';
+	$scope.sex		     = 'male';
 
 	$scope.$watch('sex', function() {
 		if ($scope.sex === 'male') {

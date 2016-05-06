@@ -88,7 +88,7 @@
 		</div>
 		<!-- ng-repeat -->
 		<!-- <div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}"> -->
-		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex:true">
+		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:{category:category} | filter:{sex:sex}:true">
 			<div class="row" ng-class="rowClass(athlete, sortType)">
 				<!-- place -->
 				<!-- <div class="col-xs-1 place">{{athlete.placeA}}</div> -->
@@ -97,7 +97,7 @@
 				<div ng-if="athlete.sex == 'male'" >
 					<div class="col-xs-2 photo">
 						<span ng-hide="athlete.photo" class="male-sm" svg-man></span>
-						<img ng-show="athlete.photo" id="icon" ng-style="{border:'2px solid #20dd9b'}" ng-src="{{ athlete.photo }}">
+						<img ng-show="athlete.photo" id="icon" style="border:2px solid #20dd9b;" ng-src="{{ athlete.photo }}">
 					</div>
 				</div>
 				<div ng-if="athlete.sex == 'female'" >
@@ -108,7 +108,7 @@
 						<div ng-if="athlete.qualified != '0'">
 							<span ng-hide="athlete.photo" class="female-sm" svg-woman></span>
 						</div>
-						<img ng-show="athlete.photo" id="icon" ng-style="{border:'2px solid #f62459'" ng-src="{{ athlete.photo }}">
+						<img ng-show="athlete.photo" id="icon" style="border:2px solid #f62459;" ng-src="{{ athlete.photo }}">
 					</div>
 				</div>
 				<!-- name -->

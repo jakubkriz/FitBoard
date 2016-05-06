@@ -93,9 +93,6 @@ sub GET {
 		push @{$users_cat->{$u_info->{category}}{$u_info->{sex}}}, $u;
 	}
 
-
-	my $points = {};
-
 	my $limit = {
 		elite => {
 			male => 50,
@@ -111,8 +108,13 @@ sub GET {
 		},
 	};
 
+	my $user_qual;
+	my $user_err;
+
 	foreach my $cat ('elite', 'masters', 'open'){
 		foreach my $sex ('male','female'){
+
+			my $points = {};
 
 			next unless (defined $users_cat->{$cat} && defined $users_cat->{$cat}{$sex} && @{$users_cat->{$cat}{$sex}});
 
@@ -157,46 +159,45 @@ sub GET {
 
 				$b++;
 			}
-		}
-	}
 
-	my $user_qual;
-	my $user_err;
-	foreach my $u (@$users) {
-		if (exists $u->{err}){
-			push (@$user_err, {
-				firstName => $u->{firstName},
-				lastName => $u->{lastName},
-				category => $u->{category},
-				sex => $u->{sex},
-				gym => $u->{gym},
-				pointsA_j => $u->{pointsA_j},
-				pointsA_j_norep => $u->{pointsA_j_norep},
-				pointsB_j => $u->{pointsB_j},
-			});
-			next;
+			foreach my $u (@{$points->{$t}}) {
+				if (exists $u->{err}){
+					push (@$user_err, {
+						firstName => $u->{firstName},
+						lastName => $u->{lastName},
+						category => $u->{category},
+						sex => $u->{sex},
+						gym => $u->{gym},
+						pointsA_j => $u->{pointsA_j},
+						pointsA_j_norep => $u->{pointsA_j_norep},
+						pointsB_j => $u->{pointsB_j},
+					});
+					next;
+				}
+		#		my $u_info = $self->auth->getUser($env, $u->{login});
+				push (@$user_qual, {
+					pointsA_j => $u->{pointsA_j},
+					pointsA_j_norep => $u->{pointsA_j_norep},
+					pointsB_j => $u->{pointsB_j},
+					pointsB => $u->{overallB},
+					pointsA => $u->{overallA},
+					pointsO => $u->{scoreOV},
+					firstName => $u->{firstName},
+					lastName => $u->{lastName},
+					category => $u->{category},
+					sex => $u->{sex},
+					gym => $u->{gym},
+					scoreA => $u->{scoreA},
+					scoreB => $u->{scoreB},
+					scoreOV => $u->{scoreOV},
+					placeA => $u->{scoreA},
+					placeB => $u->{scoreB},
+					placeOV => $u->{placeOV},
+					qualified => $u->{qualified}
+				});
+			}
+
 		}
-#		my $u_info = $self->auth->getUser($env, $u->{login});
-		push (@$user_qual, {
-			pointsA_j => $u->{pointsA_j},
-			pointsA_j_norep => $u->{pointsA_j_norep},
-			pointsB_j => $u->{pointsB_j},
-			pointsB => $u->{overallB},
-			pointsA => $u->{overallA},
-			pointsO => $u->{scoreOV},
-			firstName => $u->{firstName},
-			lastName => $u->{lastName},
-			category => $u->{category},
-			sex => $u->{sex},
-			gym => $u->{gym},
-			scoreA => $u->{scoreA},
-			scoreB => $u->{scoreB},
-			scoreOV => $u->{scoreOV},
-			placeA => $u->{scoreA},
-			placeB => $u->{scoreB},
-			placeOV => $u->{placeOV},
-			qualified => $u->{qualified}
-		});
 	}
 
 	my $link = ();
