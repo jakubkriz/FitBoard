@@ -50,7 +50,7 @@
 		</div>
 		<!-- search -->
 		<div class="col-md-1" id="custom-search-input">
-				<input type="text" class="search-query form-control" placeholder="Search" ng-model="searchName"/>
+				<input type="text" class="search-query form-control" placeholder="Search" ng-model="query"/>
 				<div id="search-icon">
 					<span class="glyphicon glyphicon-search"></span>
 				</div>
@@ -87,8 +87,8 @@
 		</div>
 		<!-- ng-repeat -->
 		<!-- <div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}"> -->
-		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex">
-			<div class="row" ng-class="rowClass(athlete, $index)">
+		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex:true">
+			<div class="row" ng-class="rowClass(athlete, sortType)">
 				<!-- place -->
 				<!-- <div class="col-xs-1 place">{{athlete.placeA}}</div> -->
 				<div class="col-xs-1 place">{{getPlace(athlete, sortType)}}</div>
@@ -101,8 +101,13 @@
 				</div>
 				<div ng-if="athlete.sex == 'female'" >
 					<div class="col-xs-2 photo">
-					<span ng-hide="athlete.photo" class="female-sm" svg-woman></span>
-					<img ng-show="athlete.photo" id="icon" ng-style="{border:'2px solid #f62459'}" ng-src="{{ athlete.photo }}">
+						<div ng-if="athlete.qualified == '0'">
+							<span ng-hide="athlete.photo" class="female-sm-gray" svg-woman></span>
+						</div>
+						<div ng-if="athlete.qualified != '0'">
+							<span ng-hide="athlete.photo" class="female-sm" svg-woman></span>
+						</div>
+						<img ng-show="athlete.photo" id="icon" ng-style="{border:'2px solid #f62459'" ng-src="{{ athlete.photo }}">
 					</div>
 				</div>
 				<!-- name -->
