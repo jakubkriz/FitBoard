@@ -19,6 +19,8 @@ use HTTP::Exception qw(3XX);
 use HTTP::Exception qw(4XX);
 use HTTP::Exception qw(5XX);
 
+use Rest::Competition::App::LBoard;
+
 sub GET {
 	my ($self, $env) = @_;
 
@@ -67,6 +69,12 @@ sub POST {
 	if ($data->{allusers}){
 		if ($data->{allusers} eq 'registred'){
 			$data->{users} = [map $_->{login}, @{$self->auth->getAllUsers($env, {'$or' => [{"registred" => 1}, {"registred" => '1'}, {"registred" => boolean::true}]})}];
+		}elsif ($data->{allusers} eq 'notqualified'){
+			my $rtrn = Rest::Competition::App::LBoard::GET($self, $env);
+			$data->{users} = [map $_->{login}, (grep(!$_->{qualified} && $_->{login}, @{$rtrn->{lb}}))];
+		}elsif ($data->{allusers} eq 'qualified'){
+			my $rtrn = Rest::Competition::App::LBoard::GET($self, $env);
+			$data->{users} = [map $_->{login}, (grep($_->{qualified} && $_->{login}, @{$rtrn->{lb}}))];
 		}
 	}
 

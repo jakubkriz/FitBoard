@@ -88,6 +88,8 @@ sub html {
   <select name="allusers" id="allusers" class="chosen-select1" data-placeholder="Choose group of users..." style="width:350px;" tabindex="1">
   <option value=""></option>
   <option value="registred">All registred users</option>
+  <option value="qualified">All qualified users</option>
+  <option value="notqualified">All not qualified users</option>
   </select></fieldset>
   <div class="checkbox">
     <label>

@@ -43,6 +43,7 @@ sub GET {
 		$u->{gym} = $u_info->{gym};
 		$u->{category} = $u_info->{category};
 		$u->{sex} = $u_info->{sex};
+		$u->{login} = $u_info->{login};
 
 		# Clean
 		$u->{pointsA_j} =~ s/,/./g;
@@ -82,6 +83,7 @@ sub GET {
 		$u->{gym} = $u_info->{gym};
 		$u->{category} = $u_info->{category};
 		$u->{sex} = $u_info->{sex};
+		$u->{login} = $u_info->{login};
 		$u->{pointsA_j} = 0;
 		$u->{pointsB_j} = 0;
 		$u->{pointsA_j_norep} = 0;
@@ -176,6 +178,7 @@ sub GET {
 				}
 		#		my $u_info = $self->auth->getUser($env, $u->{login});
 				push (@$user_qual, {
+					login => ($login_info && $login_info->{admin} ?  $u->{login} : ''),
 					pointsA_j => $u->{pointsA_j},
 					pointsA_j_norep => $u->{pointsA_j_norep},
 					pointsB_j => $u->{pointsB_j},
