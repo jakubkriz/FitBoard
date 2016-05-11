@@ -56,6 +56,7 @@ sub GET {
 				login => $u->{login},
 				bDay => $u->{bDay},
 				qualFee => $u->{qualFee},
+				startFee => $u->{startFee},
 				registred => $u->{registred},
 				gym => $u->{gym},
 				category => $u->{category},
@@ -69,6 +70,7 @@ sub GET {
 				rel => 'Auth::User::Id'
 			});
 			$count->{qualFee}++ if $u->{qualFee} && $u->{registred};
+			$count->{startFee}++ if $u->{startFee} && $u->{registred};
 			$count->{registred}++ if $u->{registred};
 			$count->{$u->{category}.'_'.$u->{sex}}++ if $u->{qualFee} && $u->{registred};
 		}
