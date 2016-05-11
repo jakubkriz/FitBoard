@@ -90,6 +90,7 @@ sub html {
   <option value="registred">All registred users</option>
   <option value="qualified">All qualified users</option>
   <option value="notqualified">All not qualified users</option>
+  <option value="qualified_notPaid">All qualified - not paid users</option>
   </select></fieldset>
   <div class="checkbox">
     <label>

@@ -20,6 +20,7 @@ use HTTP::Exception qw(4XX);
 use HTTP::Exception qw(5XX);
 
 use Rest::Competition::App::LBoard;
+use Auth::User;
 
 sub GET {
 	my ($self, $env) = @_;
@@ -75,6 +76,15 @@ sub POST {
 		}elsif ($data->{allusers} eq 'qualified'){
 			my $rtrn = Rest::Competition::App::LBoard::GET($self, $env);
 			$data->{users} = [map $_->{login}, (grep($_->{qualified} && $_->{login}, @{$rtrn->{lb}}))];
+		}elsif ($data->{allusers} eq 'qualified_notPaid'){
+			my $rtrn = Rest::Competition::App::LBoard::GET($self, $env);
+			$data->{users} = [map $_->{login}, (grep($_->{qualified} && $_->{login}, @{$rtrn->{lb}}))];
+
+			my $rtrn1 = Auth::User::GET($self, $env);
+			my @logins = map $_->{login}, (grep($_->{registred} && $_->{login} && $_->{startFee}, @{$rtrn1->{users}}));
+			my $startFee = {};
+			map $startFee->{$_} = undef, @logins;
+			$data->{users} = [grep(!exists $startFee->{$_}, @{$data->{users}})];
 		}
 	}
 
@@ -131,6 +141,7 @@ sub POST {
 			}
 		}elsif ($data->{mail_id} eq 'startFee'){
 			foreach my $u (@{$data->{users}}){
+
 				my $id = $self->auth->updateUser($env, $u, {'$set' => {'startFee' => 1}});
 			}
 		}elsif($data->{mail_id} eq 'registrationCancel'){
