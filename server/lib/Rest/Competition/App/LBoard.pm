@@ -152,6 +152,7 @@ sub GET {
 			foreach my $u (@{$points->{$t}}){
 				$p = $b if ($last != $u->{scoreOV});
 				$u->{"placeOV"} = $p;
+				$u->{"position"} = $b;
 				if ($limit->{$cat}{$sex} < $b || (defined $u->{qualified} && $u->{qualified} == 0)){
 					$u->{qualified} = 0;
 				}else{
@@ -196,7 +197,8 @@ sub GET {
 					placeA => $u->{scoreA},
 					placeB => $u->{scoreB},
 					placeOV => $u->{placeOV},
-					qualified => $u->{qualified}
+					qualified => $u->{qualified},
+					position => $u->{position}
 				});
 			}
 
