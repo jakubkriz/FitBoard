@@ -113,6 +113,7 @@ sub GET {
 	my $user_qual;
 	my $user_err;
 
+	my $start_number_ov = 0;
 	foreach my $cat ('elite', 'masters', 'open'){
 		foreach my $sex ('male','female'){
 
@@ -152,7 +153,7 @@ sub GET {
 			foreach my $u (@{$points->{$t}}){
 				$p = $b if ($last != $u->{scoreOV});
 				$u->{"placeOV"} = $p;
-				$u->{"position"} = $b;
+				$u->{"startN"} = $b+$start_number_ov;
 				if ($limit->{$cat}{$sex} < $b || (defined $u->{qualified} && $u->{qualified} == 0)){
 					$u->{qualified} = 0;
 				}else{
@@ -198,10 +199,10 @@ sub GET {
 					placeB => $u->{scoreB},
 					placeOV => $u->{placeOV},
 					qualified => $u->{qualified},
-					position => $u->{position}
+					startN => sprintf("%03s", $u->{startN})
 				});
 			}
-
+		$start_number_ov += 100;
 		}
 	}
 

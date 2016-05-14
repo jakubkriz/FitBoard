@@ -56,7 +56,7 @@ sub html {
   my $struct = $self->getStruct;
   my $env = $self->getEnv;
 
-  my @columns = qw/login gym category sex position placeOV/;
+  my @columns = qw/login gym category sex startN placeOV/;
 
   my $table = '<table id="users" class="table table-striped table-bordered" order_column="1" cellspacing="2px" width="100%">';
   if (@$struct){
