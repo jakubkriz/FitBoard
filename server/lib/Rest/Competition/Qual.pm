@@ -108,13 +108,16 @@ sub POST {
 	if ($self->qual->checkUserExistence($env, $login)){
 		HTTP::Exception::400->throw(message=>"Qual for user exists");
 	}else{
+		my $send = delete $data->{send};
+
 		### Create user
 		my $id = $self->qual->addUser($env, $login, $data );
 
 		### Check if user created
 		if (!$id){
-			HTTP::Exception::500->throw(message=>"Can't add qual to user.");
-		}else{
+			HTTP::Exception::500->throw(message=>"Can't add qual for user.");
+		}
+		if($send){
 			### Send email
 			my $mail = Mail->new( $self->const );
 			open FILE, $self->const->get("EmailQual");
@@ -137,10 +140,9 @@ sub POST {
 			if (!$rtrn){
 				my $id = $self->auth->updateUser($env, $login, {'$set' => {emailStatus=>0}});
 			}
-
-			### Return ok
-			return { qual => $id };
 		}
+		### Return ok
+		return { qual => $id };
 	}
 
 	return { qual => undef };
