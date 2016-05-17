@@ -2,10 +2,44 @@
 
 @import (less) 'mixins.less';
 
+.search-table {
+  width: 90%;
+  height: 120px;
+  border: 1px solid @grey;
+}
+
+.blue-button {
+  background: @blue-pastel;
+  color: @white;
+  font-weight: 600;
+
+  cursor: pointer;
+  text-align: center;
+
+  color: @white;
+  background-color: @blue-pastel;
+
+  .border-radius;
+  &:hover,
+  &:focus,
+  &:active
+  {
+    color: @silver;
+    .categoryBtn-hover;
+  }
+}
+
+.header {
+  font-weight: 600;
+  font-size: 56px;
+}
 
 
 /* UI grid */
 .athletesGrid {
-    width: 90%;
-    height: 500px;
-  }
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+  width: 90%;
+  height: 500px;
+}
