@@ -12,11 +12,25 @@ body {
 
 ';
 
+sub setStruct {
+  my ($self, $key, $struct, $env) = @_;
+  if ($struct && ref $struct eq 'HASH' && exists $struct->{$key}){
+    $self->{struct} = $struct->{$key};
+    $self->{env} = $env;
+    $self->{key} = $key;
+    return 1;
+  }else{
+    $self->{struct} = undef;
+  }
+  return undef;
+}
+
 sub head {
 	my ($self, $local) = @_;
 
 	my $static = $self->baseurl;
   my $title = $self->{env}{'REST.class'};
+  my $key = $self->{key};
 	return '
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,7 +51,7 @@ sub head {
 	</style>
   <script>
     $(document).ready(function() {
-      var table = $(\'#users\').DataTable({
+      var table = $(\'#'.$key.'\').DataTable({
         buttons: [
             \'copyHtml5\',
             \'excelHtml5\',
@@ -56,10 +70,12 @@ sub html {
 
   my $struct = $self->getStruct;
   my $env = $self->getEnv;
+  my $key = $self->{key};
+
 
   my @columns = sort keys %{$struct->[0]} if $struct && @$struct;
 
-  my $table = '<table id="users" class="table table-striped table-bordered" order_column="1" cellspacing="2px" width="100%">';
+  my $table = '<h2>'.$key.'</h2><table id="'.$key.'" class="table table-striped table-bordered" order_column="1" cellspacing="2px" width="100%">';
   if (@$struct){
     $table .= '<thead>';
     foreach my $col (@columns) {

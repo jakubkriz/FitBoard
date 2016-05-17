@@ -50,6 +50,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller: 'LeaderBoardCtrl'
 	  });
 
+	$stateProvider
+	  .state('sb', {
+		url: '/sb',
+		templateUrl: 'views/StartBoard.html',
+		controller: 'StartBoardCtrl'
+	  });
+
 	  $stateProvider
 	  .state('roster', {
 		url: '/roster',
