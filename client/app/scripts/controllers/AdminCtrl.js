@@ -154,7 +154,8 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
         placeA: 4,
         placeB: 1,
         placeOV: 2,
-        qualified: 1
+        qualified: 1,
+        scoreWod1: 2
       },
       {
         firstName: 'Adam',

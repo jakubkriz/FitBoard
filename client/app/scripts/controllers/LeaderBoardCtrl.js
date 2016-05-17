@@ -59,7 +59,7 @@ angular.module('FitBoard').controller('LeaderBoardCtrl', function($scope, Api) {
  //Search by firstName and lastName at the same time
  $scope.searchName = function(item) {
  		// to search by full name as well as only by first name or last name
- 		var name = item.firstName.toLowerCase() + " " + item.lastName.toLowerCase();
+ 		var name = item.firstName.toLowerCase() + '' + item.lastName.toLowerCase();
     if (!$scope.query ||
     	(item.firstName.toLowerCase().indexOf($scope.query.toLowerCase()) > -1) ||
     	(item.lastName.toLowerCase().indexOf($scope.query.toLowerCase()) > -1) ||
