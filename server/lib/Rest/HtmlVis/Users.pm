@@ -44,12 +44,11 @@ sub html {
   my $struct = $self->getStruct;
   my $env = $self->getEnv;
 
-  my @columns = qw/login gym bDay category phone sex shirt qualFee registred href/;
+  my @columns = sort keys %{$struct->[0]} if $struct && @$struct;
 
   my $table = '<table id="users" class="table table-striped table-bordered" order_column="1" cellspacing="2px" width="100%">';
   if (@$struct){
     $table .= '<thead>';
-    $table .= '<th>Name</th>';
     foreach my $col (@columns) {
       $table .= '<th>'.$col.'</th>';
     }
@@ -58,9 +57,6 @@ sub html {
     $table .= '<tbody>';
     foreach my $user (@$struct) {
       $table .= '<tr>';
-      my $fn = delete $user->{firstName};
-      my $ln = delete $user->{lastName};
-      $table .= '<td>'.$fn.' '.$ln.'</td>';
       foreach my $c (@columns){
         my $v = $user->{$c};
         if ($c eq 'href'){
