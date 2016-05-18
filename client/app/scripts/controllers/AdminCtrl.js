@@ -14,6 +14,7 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
   $scope.gridOptions.enableFiltering = false;
   $scope.gridOptions.enableCellEdit = false;
   $scope.gridOptions.enableGridMenu = true;
+  $scope.gridOptions.rowHeight = 38;
   // $scope.gridOptions.showGridFooter = true;
   // $scope.gridOptions.showColumnFooter = true;
   // $scope.gridOptions.fastWatch = true;
@@ -39,8 +40,8 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
                 'name': athlete.firstName,
                 'category': athlete.category,
                 'sex': athlete.sex,
-                'score': athlete.pointsA,
-                'Judge number': 10
+                'score': athlete.scoreWod1,
+                'Judge number': $scope.judgeNo
               });
   };
 
@@ -54,8 +55,8 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
   // http://ui-grid.info/docs/#/api/ui.grid.rowEdit.service:uiGridRowEditService
   // http://ui-grid.info/docs/#/api/ui.grid.edit.directive:uiGridCell
   $scope.editButtonHtml = '<div class="ui-grid-cell-contents">' +
-                          '<button class="blue-button glyphicon glyphicon-pencil" ng-click="grid.appScope.editRow(row)">' +
-                          ' Edit' +
+                          '<button id="edit-btn" class="btn primary blue-button glyphicon glyphicon-pencil" ng-click="grid.appScope.editRow(row)">' +
+                          // ' Edit' +
                           '</button>' +
                           '</div>';
 
@@ -95,7 +96,7 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
       type: 'number',
       enableFiltering: true
 		},
-		{ 	name: 'Action',
+		{ 	name: 'Edit',
 				cellTemplate: $scope.editButtonHtml
 		}
   ];
