@@ -12,38 +12,13 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
   // $scope.gridOptions.data = $scope.athletes;
   $scope.gridOptions.data = [];
   $scope.gridOptions.enableColumnResizing = true;
-  $scope.gridOptions.enableFiltering = false;
+  $scope.gridOptions.enableFiltering = true;
   $scope.gridOptions.enableCellEdit = false;
   $scope.gridOptions.enableGridMenu = true;
   $scope.gridOptions.rowHeight = 38;
-  // $scope.gridOptions.showGridFooter = true;
-  // $scope.gridOptions.showColumnFooter = true;
-  // $scope.gridOptions.fastWatch = true;
-
-  // $scope.gridOptions.rowIdentity = function(row) {
-  //   return row.id;
-  // };
-  // $scope.gridOptions.getRowIdentity = function(row) {
-  //   return row.id;
-  // };
-
-  // $scope.getScore = function(athlete) {
-  //   if($scope.wod === 'wod1') {
-  //     return ;
-  //   } else if($scope.wod === 'wod2') {
-
-  //   } else if($scope.wod === 'wod3') {
-
-  //   } else if($scope.wod === 'wod4') {
-
-  //   } else if($scope.wod === 'wod5') {
-
-  //   } else if($scope.wod === 'wod6') {
-
-  //   } else {
-
-  //   }
-  // }
+  $scope.gridOptions.onRegisterApi = function(gridApi) {
+    $scope.gridApi = gridApi;
+  };
 
   $scope.search = function(athlete) {
     if (athlete.startNo === parseInt($scope.query)) {
@@ -51,6 +26,10 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
     }
     return false;
   };
+
+  $scope.refresh = function() {
+    $scope.gridApi.core.clearAllFilters();
+  }
 
   $scope.updateJudgeNo = function(judgeNo) {
     $scope.judgeNo = judgeNo;
@@ -74,7 +53,6 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
   $scope.editRow = function(row) {
     var index = $scope.gridOptions.data.indexOf(row.entity);
     // $scope.gridOptions.data.splice(index, 1); //DELETE
-
   };
 
   //TODO: budu potrebovat editableCellTemplate -> cell template to be used when editing this column.
@@ -92,7 +70,8 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
 		{
       name: 'Place',
       // field: $scope.place
-      field: 'place'
+      field: 'place',
+      enableFiltering: false
     },
     {
       name:'Start number',
@@ -106,67 +85,52 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
 		},
     {
       name:'Category',
-      field: 'category'
+      field: 'category',
+      enableFiltering: false,
+      filter: {
+        noTerm: true,
+        condition: function(searchTerm, cellValue) {
+          return cellValue === $scope.category;
+        }
+      }
     },
 		{
       name:'Sex',
-			field: 'sex'
+			field: 'sex',
+      enableFiltering: false,
+      filter: {
+        noTerm: true,
+        condition: function(searchTerm, cellValue) {
+          return cellValue === $scope.sex;
+        }
+      }
 		},
 		{
       name:'Score',
       // field: $scope.score
-      field: 'score'
+      field: 'score',
+      enableFiltering: false
+      // enableFiltering: false,
+      // filter: {
+      //   noTerm: true,
+      //   condition: function(searchTerm, cellValue) {
+      //     return cellValue === $scope.sex;
+      //   }
+      // }
 		},
 		{
       name:'Judge number',
       type: 'number',
       enableFiltering: true
 		},
-		{ 	name: 'Edit',
-				cellTemplate: $scope.editButtonHtml
+		{
+      name: 'Edit',
+			cellTemplate: $scope.editButtonHtml,
+      enableFiltering: false
 		}
   ];
 
-  // $scope.callsPending = 0;
-
-  // var i = 0;
-  // $scope.refreshData = function(){
-  //   $scope.myData = [];
-
-  //   var start = new Date();
-  //   var sec = $interval(function () {
-  //     $scope.callsPending++;
-
-  //     $http.get('/data/500_complex.json')
-  //       .success(function(data) {
-  //         $scope.callsPending--;
-
-  //         data.forEach(function(row){
-  //           row.id = i;
-  //           i++;
-  //           row.registered = new Date(row.registered)
-  //           $scope.myData.push(row);
-  //         });
-  //       })
-  //       .error(function() {
-  //         $scope.callsPending--
-  //       });
-  //   }, 200, 10);
-
-
-  //   var timeout = $timeout(function() {
-  //      $interval.cancel(sec);
-  //      $scope.left = '';
-  //   }, 2000);
-
-  //   $scope.$on('$destroy', function(){
-  //     $timeout.cancel(timeout);
-  //     $interval.cancel(sec);
-  //   });
-
-  // };
-
-////////////////////////// Athletes  ////////////////////////////////////
+ ////////////////////////// Athletes  ////////////////////////////////////
   $scope.athletes = [
       {
         firstName: 'Pepa',
@@ -371,7 +335,7 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
         sex: 'female',
         gym: 'independent',
         category: 'elite',
-        startNo: 12,
+        startNo: 1,
         pointsA: '06:50',
         pointsB: '100',
         pointsO: 3,
@@ -567,7 +531,7 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
         sex: 'male',
         gym: 'independent',
         category: 'open',
-        startNo: 12,
+        startNo: 1,
         pointsA: '06:50',
         pointsB: '100',
         pointsO: 3,
@@ -763,7 +727,7 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
         sex: 'female',
         gym: 'independent',
         category: 'open',
-        startNo: 12,
+        startNo: 1,
         pointsA: '06:50',
         pointsB: '100',
         pointsO: 3,
@@ -959,7 +923,7 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
         sex: 'male',
         gym: 'independent',
         category: 'masters',
-        startNo: 12,
+        startNo: 1,
         pointsA: '06:50',
         pointsB: '100',
         pointsO: 3,
@@ -1155,7 +1119,7 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
         sex: 'female',
         gym: 'independent',
         category: 'masters',
-        startNo: 12,
+        startNo: 1,
         pointsA: '06:50',
         pointsB: '100',
         pointsO: 3,
