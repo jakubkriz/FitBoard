@@ -29,18 +29,45 @@
   }
 }
 
-.wod-buttons-group {
+.search {
+  width: 90%;
+}
+
+/* WOD Buttons */
+
+.wod-buttons {
+  width: 90%;
+  margin: auto;
+}
+
+.wod-cut {
   text-align: center;
+  padding: 10px 0px;
+  margin: 5px 1px;
+  border: 3px dashed @dark-grey;
+}
+
+.wod-final {
+  text-align: center;
+  padding: 10px 0px;
+  margin: 10px 0px;
+}
+
+.wod-button.current
+{
+  color: @white;
+  background-color: @blue-pastel;
 }
 
 .wod-button {
     font-size: 1.5rem;
     font-weight: 600;
+    margin: 5px 2px;
 
     position: relative;
     top: 0;
 
-    width: 120px;
+    width: 100px;
     height: 50px;
 
     cursor: pointer;

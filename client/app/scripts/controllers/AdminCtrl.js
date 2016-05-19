@@ -2,10 +2,11 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
 	'use strict';
 
   // Initialization
-  $scope.category    = 'elite';
-  $scope.sex         = 'male';
-  $scope.place       = 'placeA';
-  $scope.score       = 'pointsA';
+  $scope.category = 'elite';
+  $scope.sex      = 'male';
+  $scope.place    = 'placeA';
+  $scope.score    = 'pointsA';
+  $scope.wod      = 'wod1';
 
   $scope.gridOptions = {};
   // $scope.gridOptions.data = $scope.athletes;
@@ -26,8 +27,26 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
   //   return row.id;
   // };
 
-  $scope.search = function(item) {
-    if (item.startNo === parseInt($scope.query)) {
+  // $scope.getScore = function(athlete) {
+  //   if($scope.wod === 'wod1') {
+  //     return ;
+  //   } else if($scope.wod === 'wod2') {
+
+  //   } else if($scope.wod === 'wod3') {
+
+  //   } else if($scope.wod === 'wod4') {
+
+  //   } else if($scope.wod === 'wod5') {
+
+  //   } else if($scope.wod === 'wod6') {
+
+  //   } else {
+
+  //   }
+  // }
+
+  $scope.search = function(athlete) {
+    if (athlete.startNo === parseInt($scope.query)) {
         return true;
     }
     return false;
@@ -35,6 +54,9 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
 
   $scope.updateJudgeNo = function(judgeNo) {
     $scope.judgeNo = judgeNo;
+  };
+  $scope.updateScore = function(scoreWod) {
+    $scope.scoreWod = scoreWod;
   };
 
   $scope.addData = function(athlete) {
@@ -44,7 +66,7 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
                 'name': athlete.firstName,
                 'category': athlete.category,
                 'sex': athlete.sex,
-                'score': athlete.scoreWod1,
+                'score': $scope.scoreWod,
                 'Judge number': $scope.judgeNo
               });
   };
