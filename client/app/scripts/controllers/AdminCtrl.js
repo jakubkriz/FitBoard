@@ -33,6 +33,10 @@ angular.module('FitBoard').controller('AdminCtrl', function($scope) {
     return false;
   };
 
+  $scope.updateJudgeNo = function(judgeNo) {
+    $scope.judgeNo = judgeNo;
+  };
+
   $scope.addData = function(athlete) {
     $scope.gridOptions.data.push({
                 'place': athlete.placeA,

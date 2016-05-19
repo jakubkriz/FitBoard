@@ -4,11 +4,15 @@
     </header>
 
     <!-- Workouts -->
-<!--     <div class="toggle_radio">
+<!--     <div class="wod-buttons-group">
         <div id="toggle_slider"></div>
-        <button class="cat-button transformable" ng-class="{'current':category==='elite'}" id="elite" ng-click="category = 'elite'">ELITE</button>
-        <button class="cat-button transformable" ng-class="{'current':category==='masters'}" id="masters" ng-click="category = 'masters'">MASTERS</button>
-        <button class="cat-button transformable" ng-class="{'current':category==='open'}" id="open" ng-click="category = 'open'">OPEN</button>
+        <button class="wod-button transformable" ng-class="{'current':wod==='wod1'}" ng-click="wod = 'wod1'">WOD1</button>
+        <button class="wod-button transformable" ng-class="{'current':wod==='wod2'}" ng-click="wod = 'wod2'">WOD2</button>
+        <button class="wod-button transformable" ng-class="{'current':wod==='wod3'}" ng-click="wod = 'wod3'">WOD3</button>
+        <button class="wod-button transformable" ng-class="{'current':wod==='wod4'}" ng-click="wod = 'wod4'">WOD4</button>
+        <button class="wod-button transformable" ng-class="{'current':wod==='wod5'}" ng-click="wod = 'wod5'">WOD5</button>
+        <button class="wod-button transformable" ng-class="{'current':wod==='wod6'}" ng-click="wod = 'wod6'">WOD6</button>
+        <button class="wod-button transformable"  id="elite" ng-click="">OVERALL</button>
     </div> -->
     <!-- <div>
         <button type="button" id="dropdown-button" class="btn button-label btn-info cat-button">{{placeText}}</button>
@@ -25,7 +29,7 @@
 
     <!-- Search -->
     <div class="col-md-1" id="custom-search-input">
-        <input type="text" class="search-query form-control" placeholder="Start number" ng-model="query"/>
+        <input type="text" class="search-query form-control" placeholder="Start no." ng-model="query"/>
         <div id="search-icon">
             <span class="glyphicon glyphicon-search"></span>
         </div>
@@ -74,7 +78,7 @@
                 </div>
                 <!-- judge no. -->
                 <div class="col-xs-1">
-                    <input type="text" class="form-control" ng-model="judgeNo"/>
+                    <input type="text" class="form-control" ng-model="judgeNo" ng-change="updateJudgeNo(judgeNo)"/>
                 </div>
                 <!-- button -->
                 <div class="col-xs-1"><button class="btn primary blue-button" ng-click="addData(athlete)">PUT</button></div>
