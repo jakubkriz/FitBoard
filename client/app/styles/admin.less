@@ -29,6 +29,66 @@
   }
 }
 
+.search {
+  width: 90%;
+}
+
+/* WOD Buttons */
+
+.wod-buttons {
+  width: 90%;
+  margin: auto;
+}
+
+.wod-cut {
+  text-align: center;
+  padding: 10px 0px;
+  margin: 5px 1px;
+  border: 3px dashed @dark-grey;
+}
+
+.wod-final {
+  text-align: center;
+  padding: 10px 0px;
+  margin: 10px 0px;
+}
+
+.wod-button.current
+{
+  color: @white;
+  background-color: @blue-pastel;
+}
+
+.wod-button {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 5px 2px;
+
+    position: relative;
+    top: 0;
+
+    width: 100px;
+    height: 50px;
+
+    cursor: pointer;
+    text-align: center;
+
+    color: @dark-grey;
+    border: 1px solid @dark-grey;
+    background-color: transparent;
+
+    .border-radius;
+    &:hover,
+    &:focus,
+    &:active
+    {
+        color: @silver;
+        outline: 0 none;
+
+        .categoryBtn-hover;
+    }
+}
+
 /*
 .ui-grid-cell-contents {
   vertical-align: middle;
