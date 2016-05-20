@@ -1,138 +1,162 @@
 <div ng-controller="AdminCtrl">
-   <header class="header" >
-        <p>FM 2016</p>
-    </header>
+   <h1>FM 2016</h1>
 
 <!-- Navigation -->
 <div class="nav">
-    <!-- Workouts -->
-    <div class="wod-buttons">
-        <div id="toggle_slider"></div>
-        <div class="col-xs-4 wod-cut">
-            <div class="row">
-                <button class="wod-button transformable" ng-class="{'current':wod==='wod1'}" ng-click="wod='wod1'; refresh()">WOD1</button>
-                <button class="wod-button transformable" ng-class="{'current':wod==='wod2'}" ng-click="wod='wod2'; refresh()">WOD2</button>
-                <button class="wod-button transformable" ng-class="{'current':wod==='wod3'}" ng-click="wod='wod3'; refresh()">WOD3</button>
-            </div>
-            <div class="row">
-                <button class="wod-button transformable" ng-class="{'current':wod==='overallCut1'}" ng-click="wod='overallCut1'; refresh()">Overall</button>
-            </div>
-        </div>
-        <div class="col-xs-2 wod-cut">
-            <div class="row">
-                <button class="wod-button transformable" ng-class="{'current':wod==='wod4'}" ng-click="wod='wod4'; refresh()">WOD4</button>
-            </div>
-            <div class="row">
-                <button class="wod-button transformable" ng-class="{'current':wod==='overallCut2'}" ng-click="wod='overallCut2'; refresh()">Overall</button>
-            </div>
-        </div>
-        <div class="col-xs-2 wod-cut">
-            <div class="row">
-                <button class="wod-button transformable" ng-class="{'current':wod==='wod5'}" ng-click="wod='wod5'; refresh()">WOD5</button>
-            </div>
-            <div class="row">
-                <button class="wod-button transformable" ng-class="{'current':wod==='overallCut3'}" ng-click="wod='overallCut3'; refresh()">Overall</button>
-            </div>
-        </div>
-        <div class="col-xs-3 wod-final">
-            <div class="row">
-                <button class="wod-button transformable" ng-class="{'current':wod==='wod6'}" ng-click="wod='wod6'; refresh()">WOD6</button>
-                <button class="wod-button transformable" ng-class="{'current':wod==='overall'}" ng-click="wod='overall'; refresh()">OVERALL</button>
-            </div>
-        </div>
-    </div>
+	<!-- Workouts -->
+	<div class="wod-buttons">
+		<div id="toggle_slider"></div>
+		<div class="col-xs-4 wod-cut">
+			<div class="row">
+				<button class="wod-button transformable" ng-class="{'current':wod==='wod1'}" ng-click="wod='wod1'; refresh()">WOD1</button>
+				<button class="wod-button transformable" ng-class="{'current':wod==='wod2'}" ng-click="wod='wod2'; refresh()">WOD2</button>
+				<button class="wod-button transformable" ng-class="{'current':wod==='wod3'}" ng-click="wod='wod3'; refresh()">WOD3</button>
+			</div>
+			<div class="row">
+				<button class="wod-button transformable" ng-class="{'current':wod==='overallCut1'}" ng-click="wod='overallCut1'; refresh()">Overall</button>
+			</div>
+		</div>
+		<div class="col-xs-2 wod-cut">
+			<div class="row">
+				<button class="wod-button transformable" ng-class="{'current':wod==='wod4'}" ng-click="wod='wod4'; refresh()">WOD4</button>
+			</div>
+			<div class="row">
+				<button class="wod-button transformable" ng-class="{'current':wod==='overallCut2'}" ng-click="wod='overallCut2'; refresh()">Overall</button>
+			</div>
+		</div>
+		<div class="col-xs-2 wod-cut">
+			<div class="row">
+				<button class="wod-button transformable" ng-class="{'current':wod==='wod5'}" ng-click="wod='wod5'; refresh()">WOD5</button>
+			</div>
+			<div class="row">
+				<button class="wod-button transformable" ng-class="{'current':wod==='overallCut3'}" ng-click="wod='overallCut3'; refresh()">Overall</button>
+			</div>
+		</div>
+		<div class="col-xs-3 wod-final">
+			<div class="row">
+				<button class="wod-button transformable" ng-class="{'current':wod==='wod6'}" ng-click="wod='wod6'; refresh()">WOD6</button>
+				<button class="wod-button transformable" ng-class="{'current':wod==='overall'}" ng-click="wod='overall'; refresh()">OVERALL</button>
+			</div>
+		</div>
+	</div>
 </div>
 <div id="container">
-    <!-- Search -->
-    <div class="search">
-        <div class="col-md-2" id="custom-search-input">
-            <input type="text" class="search-query form-control" placeholder="Start no." ng-model="query"/>
-            <!-- <div id="search-icon">
-                <span class="glyphicon glyphicon-search"></span>
-            </div> -->
-        </div>
-    </div>
+	<h3 class="text-align placeholder">score input</h4>
+	<!-- Search -->
+	<!-- div class="search">
+		<div class="col-md-2" id="custom-search-input">
+			<input type="text" class="search-query form-control" placeholder="Start no." ng-model="query"/> -->
+			<!-- <div id="search-icon">
+				<span class="glyphicon glyphicon-search"></span>
+			</div> -->
+		<!-- </div> -->
+	</div>
 
-    <!-- Table -->
-    <div class="col-lg-7 col-centered search-table">
-        <!-- th -->
-        <div class="row text-align tH">
-            <div class="col-xs-1">
-            Start no.
-            </div>
-            <div class="col-xs-3">
-            Full Name
-            </div>
-            <div class="col-xs-2">
-            Category
-            </div>
-            <div class="col-xs-2">
-            Sex
-            </div>
-            <div class="col-xs-2">
-            Score
-            </div>
-            <div class="col-xs-1">
-            Judge no.
-            </div>
-            <div class="col-xs-1">
-            Action
-            </div>
-        </div>
-        <!-- ng-repeat -->
-        <div class="animate" ng-repeat="athlete in athletes | filter:search">
-            <div class="row">
-                <!-- start no. -->
-                <div class="col-xs-1">{{athlete.startNo}}</div>
-                <!-- name -->
-                <div class="col-xs-3">{{athlete.firstName}} {{athlete.lastName}}</div>
-                <!-- category -->
-                <div class="col-xs-2">{{athlete.category}}</div>
-                <!-- sex -->
-                <div class="col-xs-2">{{athlete.sex}}</div>
-                <!-- score -->
-                <div class="col-xs-2">
-                    <input type="text" class="form-control" ng-model="scoreWod" ng-change="updateScore(scoreWod)"/>
-                </div>
-                <!-- judge no. -->
-                <div class="col-xs-1">
-                    <input type="text" class="form-control" ng-model="judgeNo" ng-change="updateJudgeNo(judgeNo)"/>
-                </div>
-                <!-- button -->
-                <div class="col-xs-1"><button class="btn primary blue-button" ng-click="addData(athlete)">PUT</button></div>
-            </div>
-        </div>
-        <!-- ng-repeat -->
-    </div>
-    <!-- Table -->
+	<!-- Table -->
+	<div class="col-lg-7 col-centered search-table">
+		<!-- th -->
+		<div class="row text-align tH">
+			<div class="col-xs-8 col-xs-offset-2">
+				<div class="col-xs-3">Start no.</div>
+				<div class="col-xs-3">judge no.</div>
+				<div class="col-xs-3">score</div>
+				<div class="col-xs-1"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2">
+				<div class="col-xs-3" id="">
+					<input type="text" class="form-control" placeholder="000" ng-model="query"/>
+				</div>
+				<div class="col-xs-3">
+					<input type="text" class="form-control" ng-model="scoreWod" placeholder="1-20" ng-change="updateScore(scoreWod)"/>
+				</div>
+				<!-- judge no. -->
+				<div class="col-xs-3">
+					<input type="text" class="form-control" ng-model="judgeNo" ng-change="updateJudgeNo(judgeNo)"/>
+				</div>
+				<!-- button -->
+				<div class="col-xs-1"><button class="btn primary blue-button" ng-click="addData(athlete)">PUT</button></div>
+			</div>
+		</div>
+	</div>
+		<!-- <div class="row text-align tH">
+			<div class="col-xs-1">
+			Start no.
+			</div>
+			<div class="col-xs-3">
+			Full Name
+			</div>
+			<div class="col-xs-2">
+			Category
+			</div>
+			<div class="col-xs-2">
+			Sex
+			</div>
+			<div class="col-xs-2">
+			Score
+			</div>
+			<div class="col-xs-1">
+			Judge no.
+			</div>
+			<div class="col-xs-1">
+			Action
+			</div>
+		</div> -->
+		<!-- ng-repeat -->
+		<!-- <div class="animate" ng-repeat="athlete in athletes | filter:search">
+			<div class="row"> -->
+				<!-- start no. -->
+			  <!--   <div class="col-xs-1">{{athlete.startNo}}</div> -->
+				<!-- name -->
+				<!-- <div class="col-xs-3">{{athlete.firstName}} {{athlete.lastName}}</div> -->
+				<!-- category -->
+				<!-- <div class="col-xs-2">{{athlete.category}}</div> -->
+				<!-- sex -->
+				<!-- <div class="col-xs-2">{{athlete.sex}}</div> -->
+				<!-- score -->
+				<!-- <div class="col-xs-2">
+					<input type="text" class="form-control" ng-model="scoreWod" ng-change="updateScore(scoreWod)"/>
+				</div> -->
+				<!-- judge no. -->
+				<!-- <div class="col-xs-1">
+					<input type="text" class="form-control" ng-model="judgeNo" ng-change="updateJudgeNo(judgeNo)"/>
+				</div> -->
+				<!-- button -->
+				<!-- <div class="col-xs-1"><button class="btn primary blue-button" ng-click="addData(athlete)">PUT</button></div>
+			</div>
+		</div> -->
+		<!-- ng-repeat -->
+	<!-- </div> -->
+	<!-- Table -->
 
-    <!-- Category -->
-    <div class="toggle_radio">
-        <div id="toggle_slider"></div>
-        <button class="cat-button transformable" ng-class="{'current':category==='elite'}" id="elite" ng-click="category = 'elite'; refresh()">ELITE</button>
-        <button class="cat-button transformable" ng-class="{'current':category==='masters'}" id="masters" ng-click="category = 'masters'; refresh()">MASTERS</button>
-        <button class="cat-button transformable" ng-class="{'current':category==='open'}" id="open" ng-click="category = 'open'; refresh()">OPEN</button>
-    </div>
-    <!-- Sex -->
-    <div class="sex-radio">
-        <span class="transformable male" ng-class="{'scale':sex!=='male'}" id="male" ng-click="sex = 'male'; refresh()" svg-man></span>
-        <span class="transformable female" ng-class="{'scale':sex!=='female'}" id="female" ng-click="sex = 'female'; refresh()" svg-woman></span>
-    </div>
+	<!-- Category -->
+	<div class="toggle_radio">
+		<div id="toggle_slider"></div>
+		<button class="cat-button transformable" ng-class="{'current':category==='elite'}" id="elite" ng-click="category = 'elite'; refresh()">ELITE</button>
+		<button class="cat-button transformable" ng-class="{'current':category==='masters'}" id="masters" ng-click="category = 'masters'; refresh()">MASTERS</button>
+		<button class="cat-button transformable" ng-class="{'current':category==='open'}" id="open" ng-click="category = 'open'; refresh()">OPEN</button>
+	</div>
+	<!-- Sex -->
+	<div class="sex-radio">
+		<span class="transformable male" ng-class="{'scale':sex!=='male'}" id="male" ng-click="sex = 'male'; refresh()" svg-man></span>
+		<span class="transformable female" ng-class="{'scale':sex!=='female'}" id="female" ng-click="sex = 'female'; refresh()" svg-woman></span>
+	</div>
 
 </div>
 
 
-    <div class="content-wrap">
-      <div class="athletesGrid"
-        ui-grid="gridOptions"
-        ui-grid-cellNav
-        ui-grid-edit
-        ui-grid-resize-columns
-        ui-grid-pinning
-        ui-grid-move-columns
-        ui-grid-importer
-        ui-grid-exporter
-        ui-grid-grouping>
-      </div>
-    </div>
+	<div class="content-wrap">
+	  <div class="athletesGrid"
+		ui-grid="gridOptions"
+		ui-grid-cellNav
+		ui-grid-edit
+		ui-grid-resize-columns
+		ui-grid-pinning
+		ui-grid-move-columns
+		ui-grid-importer
+		ui-grid-exporter
+		ui-grid-grouping>
+	  </div>
+	</div>
 </div>
