@@ -291,9 +291,15 @@ table
 
 #dropdown-button
 {
-    background-color: @blue-pastel;
-    color: white;
+    background-color: @white;
+    color: @dark-grey;
 }
+#dropdown-button:hover, #dropdown-button.current
+{
+    background-color: @blue-pastel;
+    color: @white;
+}
+
 #dropdown-button.dropdown-toggle
 {
     width: 30px;
@@ -301,4 +307,14 @@ table
 
 .dropdown-menu {
     position: static;
+}
+
+.wod-buttons {
+    margin: 0 auto;
+    width: 890px;
+    padding: 0 !important;
+}
+
+.no-padding {
+    padding: 0;
 }

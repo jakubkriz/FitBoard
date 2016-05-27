@@ -26,19 +26,94 @@
     	<span class="transformable female" ng-class="{'scale':sex!=='female'}" id="female" ng-click="sex = 'female'" svg-woman></span>
     </div>
 <!-- Workout -->
-	<h3 class="text-align placeholder">Qualification</h3>
-	<div class="workout-list btn-group" uib-dropdown>
-		<!-- dropdown button -->
-	    <button type="button" id="dropdown-button" class="btn button-label btn-info cat-button">{{placeText}}</button>
-	    <button type="button" id="dropdown-button"  class="btn btn-info dropdown-toggle cat-button" uib-dropdown-toggle>
-	      <span class="caret"></span>
-	    </button>
-	    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-	      <li role="menuitem"><a id="workout-item" ng-click="sortType = 'placeA'; placeText = 'WOD A'">WOD A</a></li>
-	      <li role="menuitem"><a id="workout-item" ng-click="sortType = 'placeB'; placeText = 'WOD B'">WOD B</a></li>
-	      <li class="divider"></li>
-	      <li role="menuitem"><a id="workout-item" ng-click="sortType = 'placeOV'; placeText = 'OVERALL'">OVERALL</a></li>
-	    </ul>
+	<div class="wod-buttons" id="container">
+		<div class="row">
+			<div class="col-xs-1"></div>
+			<div class="col-xs-2 no-padding"><h3 class="text-align placeholder">Qualification</h3></div>
+			<div class="col-xs-2 no-padding"><h3 class="text-align placeholder">CUT 1</h3></div>
+			<div class="col-xs-2 no-padding"><h3 class="text-align placeholder">CUT 2</h3></div>
+			<div class="col-xs-2 no-padding"><h3 class="text-align placeholder">CUT 3</h3></div>
+			<div class="col-xs-2 no-padding"><h3 class="text-align placeholder">Finals</h3></div>
+			<div class="col-xs-1"></div>
+		</div>
+		<div id="toggle_slider"></div>
+		<div class="row">
+			<div class="col-xs-1"></div>
+			<div class="col-xs-2 no-padding">
+				<div class="workout-list btn-group" uib-dropdown>
+					<!-- dropdown button -->
+				    <button type="button" id="dropdown-button" ng-click="changeWodbyText(placeText1, 'qual')" ng-class="{'current':(wod==='qualA' || wod==='qualB' || wod==='qualOV')}" class="btn button-label btn-info cat-button transformable">{{placeText1}}</button>
+				    <button type="button" id="dropdown-button" ng-class="{'current':(wod==='qualA' || wod==='qualB' || wod==='qualOV')}" class="btn btn-info dropdown-toggle cat-button transformable" uib-dropdown-toggle>
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('qualA');">WOD A</a></li>
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('qualB');">WOD B</a></li>
+				      <li class="divider"></li>
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('qualOV');">OVERALL</a></li>
+				    </ul>
+				</div>
+			</div>
+			<div class="col-xs-2 no-padding">
+				<div class="workout-list btn-group" uib-dropdown>
+					<!-- CUT 1 -->
+				    <button type="button" id="dropdown-button" ng-click="changeWodbyText(placeText2, 'cut1')" ng-class="{'current':(wod==='wod1' || wod==='wod2' || wod==='wod3' || wod==='OV_1')}" class="btn button-label btn-info cat-button transformable">{{placeText2}}</button>
+				    <button type="button" id="dropdown-button" ng-class="{'current':(wod==='wod1' || wod==='wod2' || wod==='wod3' || wod==='OV_1')}" class="btn btn-info dropdown-toggle cat-button transformable" uib-dropdown-toggle>
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('wod1');">WOD 1</a></li>
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('wod2');">WOD 2</a></li>
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('wod3');">WOD 3</a></li>
+				      <li class="divider"></li>
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('OV_1');">Overall</a></li>
+				    </ul>
+				</div>
+			</div>
+			<div class="col-xs-2 no-padding">
+				<div class="workout-list btn-group" uib-dropdown>
+				    <!-- CUT 2 -->
+				    <button type="button" id="dropdown-button" ng-click="changeWodbyText(placeText3, 'cut2')" ng-class="{'current':(wod==='wod4' || wod==='OV_2')}" class="btn button-label btn-info cat-button transformable">{{placeText3}}</button>
+				    <button type="button" id="dropdown-button" ng-class="{'current':(wod==='wod4' || wod==='OV_2')}" class="btn btn-info dropdown-toggle cat-button transformable" uib-dropdown-toggle>
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+				      <li role="menuitem"><a id="workout-item" ng-class="{'current':wod==='wod4'}"ng-click="wodSwitch('wod4');">WOD 4</a></li>
+				      <li class="divider"></li>
+				      <li role="menuitem"><a id="workout-item" ng-class="{'current':wod==='OV_2'}"ng-click="wodSwitch('OV_2');">Overall</a></li>
+				    </ul>
+				</div>
+			</div>
+			<div class="col-xs-2 no-padding">
+				<div class="workout-list btn-group" uib-dropdown>
+				    <!-- CUT 3 -->
+				    <button type="button" id="dropdown-button" ng-click="changeWodbyText(placeText4, 'cut3')" ng-class="{'current':(wod==='wod5' || wod==='OV_3')}" class="btn button-label btn-info cat-button transformable">{{placeText4}}</button>
+				    <button type="button" id="dropdown-button" ng-class="{'current':(wod==='wod5' || wod==='OV_3')}" class="btn btn-info dropdown-toggle cat-button transformable" uib-dropdown-toggle>
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('wod5');">WOD 5</a></li>
+				      <li class="divider"></li>
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('OV_3');">Overall</a></li>
+				    </ul>
+				</div>
+			</div>
+			<div class="col-xs-2 no-padding">
+				<div class="workout-list btn-group" uib-dropdown>
+				    <!-- Overall -->
+				    <button type="button" id="dropdown-button" ng-click="changeWodbyText(placeText5, 'finals')" ng-class="{'current':(wod==='wod6' || wod==='OV_4')}" class="btn button-label btn-info cat-button transformable">{{placeText5}}</button>
+				    <button type="button" id="dropdown-button" ng-class="{'current':(wod==='wod6' || wod==='OV_4')}" class="btn btn-info dropdown-toggle cat-button transformable" uib-dropdown-toggle>
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('wod6');">WOD 6</a></li>
+				      <li class="divider"></li>
+				      <li role="menuitem"><a id="workout-item" ng-click="wodSwitch('OV_4');">OVERALL</a></li>
+				    </ul>
+				</div>
+			</div>
+			<div class="col-xs-1"></div>
+		</div>
 	</div>
 </div>
 
@@ -88,11 +163,11 @@
 		</div>
 		<!-- ng-repeat -->
 		<!-- <div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:category | filter:sex" ng-click="isCollapsed = !isCollapsed" ng-class="{'mainRow': isCollapsed, 'mainRowActive': !isCollapsed}"> -->
-		<div class="animate" ng-repeat="athlete in athletes | orderBy:sortType:sortReverse | filter:searchName | filter:{category:category} | filter:{sex:sex}:true">
-			<div class="row" ng-class="rowClass(athlete, sortType)">
+		<div class="animate" ng-repeat="athlete in athletes | orderBy:place:false | filter:searchName | filter:{category:category} | filter:{sex:sex}:true">
+			<div class="row" ng-class="rowClass(athlete)">
 				<!-- place -->
 				<!-- <div class="col-xs-1 place">{{athlete.placeA}}</div> -->
-				<div class="col-xs-1 place">{{getPlace(athlete, sortType)}}</div>
+				<div class="col-xs-1 place">{{getPlace(athlete)}}</div>
 				<!-- photo -->
 				<div ng-if="athlete.sex == 'male'" >
 					<div class="col-xs-2 photo">
@@ -118,7 +193,7 @@
 				<!-- gym -->
 				<div class="col-xs-2 gym">{{athlete.gym}}</div>
 				<!-- score -->
-				<div class="col-xs-2 score">{{getPoints(athlete, sortType)}}</div>
+				<div class="col-xs-2 score">{{getPoints(athlete)}}</div>
 			</div>
 		</div>
 		<!-- ng-repeat -->
