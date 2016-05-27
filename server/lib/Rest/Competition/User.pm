@@ -109,7 +109,7 @@ sub GET {
 						$u->{"scoreOV_1"} += $p if $t <= 3;
 						$u->{"scoreOV_2"} += $p if $t <= 4;
 						$u->{"scoreOV_3"} += $p if $t <= 5;
-						$u->{"scoreOV_4"} += $p if $t <= 6;
+						$u->{"scoreOV_4"} += $p*2 if $t <= 6;
 
 						$last = $u->{"overall_wod".$t};
 
