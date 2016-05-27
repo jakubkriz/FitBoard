@@ -33,6 +33,9 @@ angular.module('FitBoard')
 			getSb: function (compet, callback, callbackErr) {
 				$http.get('/api/v1/competition/'+compet+'/app/sb').then(callback, callbackErr);
 			},
+			getAdmin: function (compet, callback, callbackErr) {
+				$http.get('/api/v1/competition/'+compet+'/user').then(callback, callbackErr);
+			},
 			getUser: function (login, callback, callbackErr) {
 				$http.get('/api/v1/auth/user'+'/'+login).then(callback, callbackErr);
 			},
@@ -53,6 +56,9 @@ angular.module('FitBoard')
 			},
 			judgeQual: function (compet, qual, callback, callbackErr) {
 				$http.post('/api/v1/competition/'+compet+'/app/qual/judge', qual).then(callback, callbackErr);
+			},
+			saveScore: function (compet, id, data, callback, callbackErr) {
+				$http.put('/api/v1/competition/'+compet+'/user/'+id, data).then(callback, callbackErr);
 			},
 		};
 

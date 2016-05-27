@@ -1,6 +1,4 @@
 <div ng-controller="AdminCtrl">
-   <h1>FM 2016</h1>
-
 <!-- Navigation -->
 <div class="nav">
 	<!-- Workouts -->
@@ -40,9 +38,22 @@
 		</div>
 	</div>
 </div>
+<<<<<<< HEAD
+<div id="container">
+	<h3 class="text-align placeholder">score input</h3>
+	<!-- Search -->
+	<!-- div class="search">
+		<div class="col-md-2" id="custom-search-input">
+			<input type="text" class="search-query form-control" placeholder="Start no." ng-model="query"/> -->
+			<!-- <div id="search-icon">
+				<span class="glyphicon glyphicon-search"></span>
+			</div> -->
+		<!-- </div> -->
+=======
 
 	<div id="container">
 		<h3 class="text-align placeholder">score input</h3>
+>>>>>>> 64251245bf9635d2939eade249dd2c2402bc25e6
 	</div>
 
 	<!-- Table -->
@@ -59,6 +70,19 @@
 		<div class="row">
 			<div class="col-xs-8 col-xs-offset-2">
 				<div class="col-xs-3" id="">
+<<<<<<< HEAD
+					<input type="text" class="form-control" placeholder="000" ng-model="startNo"/>
+				</div>
+				<div class="col-xs-3">
+					<input type="text" class="form-control" ng-model="scoreWod" placeholder="1-20"/>
+				</div>
+				<!-- judge no. -->
+				<div class="col-xs-3">
+					<input type="text" class="form-control" ng-model="judgeNo"/>
+				</div>
+				<!-- button -->
+				<div class="col-xs-1"><button class="btn primary blue-button" ng-click="editAthlete(startNo, judgeNo, scoreWod)">SUBMIT</button></div>
+=======
 					<input type="text" class="form-control" placeholder="000" ng-model="query" ng-change="querysn();"/>
 				</div>
 				<div class="col-xs-3">
@@ -70,6 +94,7 @@
 				</div>
 				<!-- button -->
 				<div class="col-xs-1"><button ng-show="putshow" class="btn primary blue-button" ng-click="submit()">PUT</button></div>
+>>>>>>> 64251245bf9635d2939eade249dd2c2402bc25e6
 			</div>
 		</div>
 		<div ng-messages="errors" class="registration-messages" role="alert">
@@ -83,28 +108,13 @@
 			<div ng-message="internal">Internal Server Error.</div>
 		</div>
 
-	<!-- Category -->
-	<div class="toggle_radio">
-		<div id="toggle_slider"></div>
-		<button class="cat-button transformable" ng-class="{'current':category==='elite'}" id="elite" ng-click="category = 'elite'; refresh()">ELITE</button>
-		<button class="cat-button transformable" ng-class="{'current':category==='masters'}" id="masters" ng-click="category = 'masters'; refresh()">MASTERS</button>
-		<button class="cat-button transformable" ng-class="{'current':category==='open'}" id="open" ng-click="category = 'open'; refresh()">OPEN</button>
 	</div>
-	<!-- Sex -->
-	<div class="sex-radio">
-		<span class="transformable male" ng-class="{'scale':sex!=='male'}" id="male" ng-click="sex = 'male'; refresh()" svg-man></span>
-		<span class="transformable female" ng-class="{'scale':sex!=='female'}" id="female" ng-click="sex = 'female'; refresh()" svg-woman></span>
-	</div>
-
-</div>
-
 
 	<div class="content-wrap">
 	  <div class="athletesGrid"
 		ui-grid="gridOptions"
 		id="grid1"
 		ui-grid-cellNav
-		ui-grid-edit
 		ui-grid-resize-columns
 		ui-grid-pinning
 		ui-grid-move-columns
