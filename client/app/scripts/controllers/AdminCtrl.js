@@ -1,1312 +1,244 @@
-angular.module('FitBoard').controller('AdminCtrl', function($scope) {
+angular.module('FitBoard').controller('AdminCtrl', function($scope, uiGridConstants, Api) {
 	'use strict';
 
   // Initialization
-  $scope.category = 'elite';
-  $scope.sex      = 'male';
-  $scope.place    = 'placeA';
-  $scope.score    = 'pointsA';
-  $scope.wod      = 'wod1';
+  $scope.wod      = 'wod1'; //wod1, wod2, wod3, OV_1, wod4, OV_2 ....
+  
+  $scope.columns = [
+    {
+      name: 'Place wod1',
+      field: 'score_wod1',
+      enableFiltering: false,
+    },
+    {
+      name:'Start number',
+      field: 'startN',
+      enableFiltering: true,
+      headerCellClass: $scope.highlightFilteredHeader,
+      filter: {
+        condition: function(searchTerm, cellValue) {
+          var pattern = new RegExp("^"+searchTerm+"$","i");
+          return cellValue.match(pattern);
+        }
+      }
+    },
+    {
+      name:'First name',
+      field: 'firstName',
+      enableFiltering: true,
+      headerCellClass: $scope.highlightFilteredHeader
+    },
+    {
+      name:'Last name',
+      field: 'lastName',
+      enableFiltering: true,
+      headerCellClass: $scope.highlightFilteredHeader
+    },
+    {
+      name:'Category',
+      field: 'category',
+      headerCellClass: $scope.highlightFilteredHeader,
+      filter: {
+        type: uiGridConstants.filter.SELECT,
+        selectOptions: [ { value: 'elite', label: 'elite' }, { value: 'masters', label: 'masters' }, { value: 'open', label: 'open'} ]
+      },
+    },
+    {
+      name:'Sex',
+      field: 'sex',
+      headerCellClass: $scope.highlightFilteredHeader,
+      filter: {
+        type: uiGridConstants.filter.SELECT,
+        selectOptions: [ { value: 'male', label: 'male' }, { value: 'female', label: 'female' } ],
+        condition: function(searchTerm, cellValue) {
+          var pattern = new RegExp("^"+searchTerm,"i");
+          return cellValue.match(pattern);
+        }
+      },
+    },
+    {
+      name:'Score wod1',
+      field: 'points_wod1_j',
+      enableFiltering: false
+    },
+    {
+      name:'Judge wod1',
+      type: 'number',
+      field: 'judgeN_wod1',
+      enableFiltering: false
+    },
+    {
+      name:'Modified',
+      field: 'modified',
+      enableFiltering: false,
+      sort: {
+          direction: uiGridConstants.DESC,
+          priority: 10
+        }
+    },
+  ];
 
-  $scope.gridOptions = {};
-  // $scope.gridOptions.data = $scope.athletes;
-  $scope.gridOptions.data = [];
-  $scope.gridOptions.enableColumnResizing = true;
-  $scope.gridOptions.enableFiltering = true;
-  $scope.gridOptions.enableCellEdit = false;
-  $scope.gridOptions.enableGridMenu = true;
-  $scope.gridOptions.rowHeight = 38;
+  $scope.gridOptions = {
+    enableColumnResizing: true,
+    enableFiltering: true,
+    enableGridMenu: true,
+    rowHeight: 38,
+    columnDefs: $scope.columns
+  };
+
   $scope.gridOptions.onRegisterApi = function(gridApi) {
     $scope.gridApi = gridApi;
   };
 
-  $scope.search = function(athlete) {
-    if (athlete.startNo === parseInt($scope.query)) {
-        return true;
-    }
-    return false;
+  $scope.gridOptions.importerDataAddCallback = function(grid, newObjects) {
+      $scope.data = $scope.data.concat(newObjects);
+  };
+
+  $scope.querysn = function(){
+    $scope.gridApi.grid.columns[1].filters[0].term = $scope.query;
   };
 
   $scope.refresh = function() {
     $scope.gridApi.core.clearAllFilters();
-  }
-
-  $scope.updateJudgeNo = function(judgeNo) {
-    $scope.judgeNo = judgeNo;
-  };
-  $scope.updateScore = function(scoreWod) {
-    $scope.scoreWod = scoreWod;
   };
 
-  $scope.addData = function(athlete) {
-    $scope.gridOptions.data.push({
-                'place': athlete.placeA,
-                'startNo': athlete.startNo,
-                'name': athlete.firstName,
-                'category': athlete.category,
-                'sex': athlete.sex,
-                'score': $scope.scoreWod,
-                'Judge number': $scope.judgeNo
-              });
+  $scope.highlightFilteredHeader = function( row, rowRenderIndex, col, colRenderIndex ) {
+    if( col.filters[0].term ){
+      return 'header-filtered';
+    } else {
+      return '';
+    }
   };
 
-  $scope.editRow = function(row) {
-    var index = $scope.gridOptions.data.indexOf(row.entity);
-    // $scope.gridOptions.data.splice(index, 1); //DELETE
-  };
+  $scope.$watch('gridApi.grid.columns[1].filters[0].term', function(newValue, oldValue) {
+     $scope.counter = $scope.counter + 1;
+  });
 
-  //TODO: budu potrebovat editableCellTemplate -> cell template to be used when editing this column.
-  // http://ui-grid.info/docs/#/api/ui.grid.rowEdit.service:uiGridRowEditService
-  // http://ui-grid.info/docs/#/api/ui.grid.edit.directive:uiGridCell
-  $scope.editButtonHtml = '<div class="ui-grid-cell-contents">' +
-                          '<button id="edit-btn" class="btn primary blue-button glyphicon glyphicon-pencil" ng-click="grid.appScope.editRow(row)">' +
-                          // ' Edit' +
-                          '</button>' +
-                          '</div>';
-
-
-
-  $scope.gridOptions.columnDefs = [
-		{
-      name: 'Place',
-      // field: $scope.place
-      field: 'place',
-      enableFiltering: false
-    },
-    {
-      name:'Start number',
-      field: 'startNo',
-      enableFiltering: true
-    },
-    {
-      name:'Full name',
-      field: 'name',
-      enableFiltering: true
-		},
-    {
-      name:'Category',
-      field: 'category',
-      enableFiltering: false,
-      filter: {
-        noTerm: true,
-        condition: function(searchTerm, cellValue) {
-          return cellValue === $scope.category;
-        }
+  $scope.putshow = 1;
+  $scope.wodSwitch = function(newValue) {
+      if (newValue.match(/OV_/)){
+        $scope.points = 'score'+newValue;
+        $scope.place = 'place'+newValue;
+        $scope.putshow = 0;
+      }else{
+        $scope.points = 'points_'+newValue+'_j';
+        $scope.place = 'score_'+newValue;
+        $scope.putshow = 1;
+        $scope.judge = 'judgeN_'+newValue;
       }
-    },
-		{
-      name:'Sex',
-			field: 'sex',
-      enableFiltering: false,
-      filter: {
-        noTerm: true,
-        condition: function(searchTerm, cellValue) {
-          return cellValue === $scope.sex;
-        }
-      }
-		},
-		{
-      name:'Score',
-      // field: $scope.score
-      field: 'score',
-      enableFiltering: false
-      // enableFiltering: false,
-      // filter: {
-      //   noTerm: true,
-      //   condition: function(searchTerm, cellValue) {
-      //     return cellValue === $scope.sex;
-      //   }
-      // }
-		},
-		{
-      name:'Judge number',
-      type: 'number',
-      enableFiltering: true
-		},
-		{
-      name: 'Edit',
-			cellTemplate: $scope.editButtonHtml,
-      enableFiltering: false
-		}
-  ];
 
+      $scope.columns[0] = {
+        name: 'Place '+newValue,
+        field: $scope.place,
+        enableFiltering: false,
+      };
+
+      $scope.columns[6] = {
+        name: 'Score '+newValue,
+        field: $scope.points,
+        enableFiltering: false,
+      };
+
+      $scope.columns[7] = {
+        name: 'Judge '+newValue,
+        type: 'number',
+        field: $scope.judge,
+        enableFiltering: false,
+      };
+
+      $scope.wod = newValue;
+  };
+ 
  ////////////////////////// Athletes  ////////////////////////////////////
-  $scope.athletes = [
-      {
-        firstName: 'Pepa',
-        lastName: 'Veliky 1',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 1,
-        pointsA: '06:50',
-        pointsB: '100',
-        pointsO: 3,
-        placeA: 4,
-        placeB: 1,
-        placeOV: 2,
-        qualified: 1,
-        scoreWod1: 2
-      },
-      {
-        firstName: 'Adam',
-        lastName: 'Zeleny 2',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 2,
-        pointsA: '07:00',
-        pointsB: '90',
-        pointsO: 4,
-        placeA: 1,
-        placeB: 2,
-        placeOV: 1,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 3',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 3,
-        pointsA: '90',
-        pointsB: '80',
-        pointsO: 6,
-        placeA: 3,
-        placeB: 3,
-        placeOV: 3,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 4',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '80',
-        pointsB: '70',
-        pointsO: 8,
-        placeA: 2,
-        placeB: 4,
-        placeOV: 4,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 5',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '70',
-        pointsB: '60',
-        pointsO: 10,
-        placeA: 5,
-        placeB: 5,
-        placeOV: 5,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 6',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '60',
-        pointsB: '50',
-        pointsO: 12,
-        placeA: 6,
-        placeB: 6,
-        placeOV: 6,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 7',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '50',
-        pointsB: '40',
-        pointsO: 14,
-        placeA: 7,
-        placeB: 7,
-        placeOV: 7,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 8',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '40',
-        pointsB: '30',
-        pointsO: 16,
-        placeA: 8,
-        placeB: 8,
-        placeOV: 8,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 9',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '30',
-        pointsB: '20',
-        pointsO: 18,
-        placeA: 9,
-        placeB: 9,
-        placeOV: 9,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 10',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '20',
-        pointsB: '10',
-        pointsO: 20,
-        placeA: 10,
-        placeB: 10,
-        placeOV: 10,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 11',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '10',
-        pointsB: '0',
-        pointsO: 22,
-        placeA: 11,
-        placeB: 11,
-        placeOV: 11,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 12',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 12,
-        placeB: 12,
-        placeOV: 12,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 13',
-        sex: 'male',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 13,
-        placeB: 13,
-        placeOV: 13,
-        qualified: 0
-      },
-//// WOMEN
-{
-        firstName: 'Athlete',
-        lastName: 'Name 1',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 1,
-        pointsA: '06:50',
-        pointsB: '100',
-        pointsO: 3,
-        placeA: 4,
-        placeB: 1,
-        placeOV: 2,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 2',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '07:00',
-        pointsB: '90',
-        pointsO: 4,
-        placeA: 1,
-        placeB: 2,
-        placeOV: 1,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 3',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '90',
-        pointsB: '80',
-        pointsO: 6,
-        placeA: 3,
-        placeB: 3,
-        placeOV: 3,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 4',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '80',
-        pointsB: '70',
-        pointsO: 8,
-        placeA: 2,
-        placeB: 4,
-        placeOV: 4,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 5',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '70',
-        pointsB: '60',
-        pointsO: 10,
-        placeA: 5,
-        placeB: 5,
-        placeOV: 5,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 6',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '60',
-        pointsB: '50',
-        pointsO: 12,
-        placeA: 6,
-        placeB: 6,
-        placeOV: 6,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 7',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '50',
-        pointsB: '40',
-        pointsO: 14,
-        placeA: 7,
-        placeB: 7,
-        placeOV: 7,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 8',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '40',
-        pointsB: '30',
-        pointsO: 16,
-        placeA: 8,
-        placeB: 8,
-        placeOV: 8,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 9',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '30',
-        pointsB: '20',
-        pointsO: 18,
-        placeA: 9,
-        placeB: 9,
-        placeOV: 9,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 10',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '20',
-        pointsB: '10',
-        pointsO: 20,
-        placeA: 10,
-        placeB: 10,
-        placeOV: 10,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 11',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: '10',
-        pointsB: '0',
-        pointsO: 22,
-        placeA: 11,
-        placeB: 11,
-        placeOV: 11,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 12',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 12,
-        placeB: 12,
-        placeOV: 12,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 13',
-        sex: 'female',
-        gym: 'independent',
-        category: 'elite',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 13,
-        placeB: 13,
-        placeOV: 13,
-        qualified: 0
-      },
-//// OPEN
-{
-        firstName: 'Athlete',
-        lastName: 'Name 1',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 1,
-        pointsA: '06:50',
-        pointsB: '100',
-        pointsO: 3,
-        placeA: 4,
-        placeB: 1,
-        placeOV: 2,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 2',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '07:00',
-        pointsB: '90',
-        pointsO: 4,
-        placeA: 1,
-        placeB: 2,
-        placeOV: 1,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 3',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '90',
-        pointsB: '80',
-        pointsO: 6,
-        placeA: 3,
-        placeB: 3,
-        placeOV: 3,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 4',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '80',
-        pointsB: '70',
-        pointsO: 8,
-        placeA: 2,
-        placeB: 4,
-        placeOV: 4,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 5',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '70',
-        pointsB: '60',
-        pointsO: 10,
-        placeA: 5,
-        placeB: 5,
-        placeOV: 5,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 6',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '60',
-        pointsB: '50',
-        pointsO: 12,
-        placeA: 6,
-        placeB: 6,
-        placeOV: 6,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 7',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '50',
-        pointsB: '40',
-        pointsO: 14,
-        placeA: 7,
-        placeB: 7,
-        placeOV: 7,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 8',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '40',
-        pointsB: '30',
-        pointsO: 16,
-        placeA: 8,
-        placeB: 8,
-        placeOV: 8,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 9',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '30',
-        pointsB: '20',
-        pointsO: 18,
-        placeA: 9,
-        placeB: 9,
-        placeOV: 9,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 10',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '20',
-        pointsB: '10',
-        pointsO: 20,
-        placeA: 10,
-        placeB: 10,
-        placeOV: 10,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 11',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '10',
-        pointsB: '0',
-        pointsO: 22,
-        placeA: 11,
-        placeB: 11,
-        placeOV: 11,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 12',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 12,
-        placeB: 12,
-        placeOV: 12,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 13',
-        sex: 'male',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 13,
-        placeB: 13,
-        placeOV: 13,
-        qualified: 0
-      },
-/// OPEN WOMEN
-{
-        firstName: 'Athlete',
-        lastName: 'Name 1',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 1,
-        pointsA: '06:50',
-        pointsB: '100',
-        pointsO: 3,
-        placeA: 4,
-        placeB: 1,
-        placeOV: 2,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 2',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '07:00',
-        pointsB: '90',
-        pointsO: 4,
-        placeA: 1,
-        placeB: 2,
-        placeOV: 1,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 3',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '90',
-        pointsB: '80',
-        pointsO: 6,
-        placeA: 3,
-        placeB: 3,
-        placeOV: 3,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 4',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '80',
-        pointsB: '70',
-        pointsO: 8,
-        placeA: 2,
-        placeB: 4,
-        placeOV: 4,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 5',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '70',
-        pointsB: '60',
-        pointsO: 10,
-        placeA: 5,
-        placeB: 5,
-        placeOV: 5,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 6',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '60',
-        pointsB: '50',
-        pointsO: 12,
-        placeA: 6,
-        placeB: 6,
-        placeOV: 6,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 7',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '50',
-        pointsB: '40',
-        pointsO: 14,
-        placeA: 7,
-        placeB: 7,
-        placeOV: 7,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 8',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '40',
-        pointsB: '30',
-        pointsO: 16,
-        placeA: 8,
-        placeB: 8,
-        placeOV: 8,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 9',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '30',
-        pointsB: '20',
-        pointsO: 18,
-        placeA: 9,
-        placeB: 9,
-        placeOV: 9,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 10',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '20',
-        pointsB: '10',
-        pointsO: 20,
-        placeA: 10,
-        placeB: 10,
-        placeOV: 10,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 11',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: '10',
-        pointsB: '0',
-        pointsO: 22,
-        placeA: 11,
-        placeB: 11,
-        placeOV: 11,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 12',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 12,
-        placeB: 12,
-        placeOV: 12,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 13',
-        sex: 'female',
-        gym: 'independent',
-        category: 'open',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 13,
-        placeB: 13,
-        placeOV: 13,
-        qualified: 0
-      },
-// MASTERS
-{
-        firstName: 'Athlete',
-        lastName: 'Name 1',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 1,
-        pointsA: '06:50',
-        pointsB: '100',
-        pointsO: 3,
-        placeA: 4,
-        placeB: 1,
-        placeOV: 2,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 2',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '07:00',
-        pointsB: '90',
-        pointsO: 4,
-        placeA: 1,
-        placeB: 2,
-        placeOV: 1,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 3',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '90',
-        pointsB: '80',
-        pointsO: 6,
-        placeA: 3,
-        placeB: 3,
-        placeOV: 3,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 4',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '80',
-        pointsB: '70',
-        pointsO: 8,
-        placeA: 2,
-        placeB: 4,
-        placeOV: 4,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 5',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '70',
-        pointsB: '60',
-        pointsO: 10,
-        placeA: 5,
-        placeB: 5,
-        placeOV: 5,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 6',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '60',
-        pointsB: '50',
-        pointsO: 12,
-        placeA: 6,
-        placeB: 6,
-        placeOV: 6,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 7',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '50',
-        pointsB: '40',
-        pointsO: 14,
-        placeA: 7,
-        placeB: 7,
-        placeOV: 7,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 8',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '40',
-        pointsB: '30',
-        pointsO: 16,
-        placeA: 8,
-        placeB: 8,
-        placeOV: 8,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 9',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '30',
-        pointsB: '20',
-        pointsO: 18,
-        placeA: 9,
-        placeB: 9,
-        placeOV: 9,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 10',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '20',
-        pointsB: '10',
-        pointsO: 20,
-        placeA: 10,
-        placeB: 10,
-        placeOV: 10,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 11',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '10',
-        pointsB: '0',
-        pointsO: 22,
-        placeA: 11,
-        placeB: 11,
-        placeOV: 11,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 12',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 12,
-        placeB: 12,
-        placeOV: 12,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 13',
-        sex: 'male',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 13,
-        placeB: 13,
-        placeOV: 13,
-        qualified: 0
-      },
-// MASTERS WOMEN
-{
-        firstName: 'Athlete',
-        lastName: 'Name 1',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 1,
-        pointsA: '06:50',
-        pointsB: '100',
-        pointsO: 3,
-        placeA: 4,
-        placeB: 1,
-        placeOV: 2,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 2',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '07:00',
-        pointsB: '90',
-        pointsO: 4,
-        placeA: 1,
-        placeB: 2,
-        placeOV: 1,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 3',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '90',
-        pointsB: '80',
-        pointsO: 6,
-        placeA: 3,
-        placeB: 3,
-        placeOV: 3,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 4',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '80',
-        pointsB: '70',
-        pointsO: 8,
-        placeA: 2,
-        placeB: 4,
-        placeOV: 4,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 5',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '70',
-        pointsB: '60',
-        pointsO: 10,
-        placeA: 5,
-        placeB: 5,
-        placeOV: 5,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 6',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '60',
-        pointsB: '50',
-        pointsO: 12,
-        placeA: 6,
-        placeB: 6,
-        placeOV: 6,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 7',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '50',
-        pointsB: '40',
-        pointsO: 14,
-        placeA: 7,
-        placeB: 7,
-        placeOV: 7,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 8',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '40',
-        pointsB: '30',
-        pointsO: 16,
-        placeA: 8,
-        placeB: 8,
-        placeOV: 8,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 9',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '30',
-        pointsB: '20',
-        pointsO: 18,
-        placeA: 9,
-        placeB: 9,
-        placeOV: 9,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 10',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '20',
-        pointsB: '10',
-        pointsO: 20,
-        placeA: 10,
-        placeB: 10,
-        placeOV: 10,
-        qualified: 1
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 11',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: '10',
-        pointsB: '0',
-        pointsO: 22,
-        placeA: 11,
-        placeB: 11,
-        placeOV: 11,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 12',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 12,
-        placeB: 12,
-        placeOV: 12,
-        qualified: 0
-      },
-      {
-        firstName: 'Athlete',
-        lastName: 'Name 13',
-        sex: 'female',
-        gym: 'independent',
-        category: 'masters',
-        startNo: 12,
-        pointsA: 0,
-        pointsB: 0,
-        pointsO: 0,
-        placeA: 13,
-        placeB: 13,
-        placeOV: 13,
-        qualified: 0
+  $scope.athletes = [];
+  $scope.reload = function(){
+    Api.getAdmin('fitmonster2016', 
+      function(data){
+        $scope.athletes = data.data.users;
+        $scope.gridOptions.data = $scope.athletes;
+      },
+      function(resp){ //ERROR
+        if(resp.status === 503){
+          $scope.errors.unavailable = true;
+        }else{
+          $scope.errors.internal =  true;
+        }
       }
-    ];
+    );
+  };
+
+  $scope.cleanErrors = function(){
+    // Clean errors
+    $scope.errors = {};
+    $scope.errors.notExistsUser = false;
+    $scope.errors.notExists = false;
+    $scope.errors.cantChangeLogin = false;
+    $scope.errors.badRequest = false;
+    $scope.errors.unavailable = false;
+    $scope.errors.internal =  false;
+    $scope.errors.notExistsJudge = false;
+    $scope.errors.notExistsScore = false;
+  };
+
+  $scope.cleanErrors();
+  $scope.reload();
+
+  function getAthlete(item) {
+      return item.startN === $scope.query;
+  }
+  $scope.submit = function() {
+    $scope.cleanErrors();
+    if ($scope.query && !$scope.wod.match(/OV_/)) {
+        if (!$scope.judgeN){
+          $scope.errors.notExistsJudge = true;
+          return;
+        }
+        if (!$scope.scoreWod){
+          $scope.errors.notExistsScore = true;
+          return;
+        }
+
+        var val = $scope.athletes.find(getAthlete);
+        if (!val){
+          $scope.errors.notExists = true;
+          return;
+        }
+        var athl = {};
+        athl['judgeN_'+$scope.wod] = $scope.judgeN;
+        athl.login = val.login;
+        athl['points_'+$scope.wod+'_j'] = $scope.scoreWod;
+
+       Api.saveScore('fitmonster2016', val.login,
+         athl,
+        function(resp){ // OK
+          if (resp){
+            $scope.reload();
+            $scope.judgeN = null;
+            $scope.scoreWod = null;
+            $scope.query = null;
+            $scope.querysn();
+          }
+        },
+        function(resp){ //ERROR
+
+          if (resp.status === 400 && resp.data[0] === 'User doesn\'t exist'){
+            $scope.errors.notExistsUser = true;
+          }else if(resp.status === 400 && resp.data[0] === 'StartN doesn\'t exist'){
+            $scope.errors.notExists = true;
+          }else if (resp.status === 400 && resp.data[0] === 'Login can\'t be changed. Drop and create new start.'){
+            $scope.errors.cantChangeLogin = true;
+          }else if(resp.status === 400 && resp.data[0] === 'Bad request'){
+            $scope.errors.badRequest = true;
+          }else if(resp.status === 503){
+            $scope.errors.unavailable = true;
+          }else{
+            $scope.errors.internal =  true;
+          }
+        }
+      );
+    }else{
+      $scope.errors.notExists = true;
+    }
+  };
+
 });
